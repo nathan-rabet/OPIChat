@@ -1,1 +1,5 @@
 *.pdf
+.vscode/*
+*.o
+basic_client
+basic_server
