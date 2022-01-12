@@ -113,8 +113,7 @@ void _read_from_server(int server_socket)
 
 void communicate(int server_socket)
 {
-    ssize_t buf_mult_factor = 1; // Number of times the buffer has been
-                                 // reallocated (+ 1) // ! FIXME shitty comment
+    ssize_t buf_mult_factor = 1; // buf[DEFAULT_BUFFER_SIZE * buf_mult_factor]
 
     char *buf = malloc(DEFAULT_BUFFER_SIZE);
     if (!buf)

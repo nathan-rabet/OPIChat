@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-#define DEFAULT_BUFFER_SIZE 10
+#define DEFAULT_BUFFER_SIZE 1024
 
 /**
  * \brief Iterate over the struct addrinfo elements to connect to the server
