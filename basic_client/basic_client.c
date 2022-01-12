@@ -50,64 +50,82 @@ int prepare_socket(const char *ip, const char *port)
  * @param server_socket The socket server
  * @return int 0 if successfull, 1 if not
  */
-int _read_from_server(int server_socket)
+void _read_from_server(int server_socket)
 {
     char buf[DEFAULT_BUFFER_SIZE] = { 0 };
 
     ssize_t read_len = 0;
+    ssize_t msg_len = 0;
     char hasLF = 0;
     while (!hasLF
-           && (read_len = recv(server_socket, &buf, DEFAULT_BUFFER_SIZE, 0))
+           && (read_len =
+                   recv(server_socket, &buf, DEFAULT_BUFFER_SIZE - msg_len, 0))
                != 0)
     {
         if (read_len == -1)
-            return 1;
-        // For the exercise, the server output is considered as valid
-        for (int i = 0; i < read_len && !hasLF; i++)
-            hasLF = (buf[i] == '\n');
+        {
+            fprintf(stderr, "Error while reading server response\n");
+            close(server_socket);
+            exit(1);
+        }
+
+        for (; buf[msg_len] != '\0' && msg_len < DEFAULT_BUFFER_SIZE && !hasLF;
+             msg_len++)
+            hasLF = (buf[msg_len] == '\n');
 
         if (hasLF)
+        {
+            buf[msg_len] = '\0';
             printf("Server answered with: %s", buf);
+        }
     }
-    return 0;
 }
 
 void communicate(int server_socket)
 {
     char buf[DEFAULT_BUFFER_SIZE] = { 0 };
+    fprintf(stderr, "Enter your message:\n");
 
     ssize_t read_len = 0;
-    ssize_t error = 0;
-    fprintf(stderr, "Enter your message:\n");
+    ssize_t msg_len = 0;
     char hasLF = 0;
-    while (!hasLF
-           && (read_len = read(STDIN_FILENO, &buf, DEFAULT_BUFFER_SIZE)) != 0)
+    while ((read_len = read(STDIN_FILENO, buf + msg_len,
+                            DEFAULT_BUFFER_SIZE - msg_len))
+           != 0)
     {
         if (read_len == -1)
-            exit(1);
-
-        ssize_t i = 0;
-        for (; i < read_len && !hasLF; i++)
-            hasLF = (buf[i] == '\n');
-
-        ssize_t send_len = 0;
-        while ((error = send(server_socket, buf + send_len,
-                             read_len - send_len - hasLF, MSG_MORE))
-               != 0)
         {
-            if (error == -1)
-                exit(1);
-            send_len += error;
+            fprintf(stderr, "Error while reading STDIN data\n");
+            close(server_socket);
+            exit(1);
         }
+
+        for (; buf[msg_len] != '\0' && msg_len < DEFAULT_BUFFER_SIZE && !hasLF;
+             msg_len++)
+            hasLF = (buf[msg_len] == '\n');
 
         if (hasLF)
         {
-            error = send(server_socket, "\n", 1, MSG_EOR) < 1
-                || _read_from_server(server_socket);
+            ssize_t send_len = 0;
+            ssize_t error = 0;
+            while ((error = send(server_socket, buf + send_len,
+                                 msg_len - send_len, MSG_EOR))
+                   > 0)
+                send_len += error;
+
+            if (error == -1)
+            {
+                fprintf(stderr, "Error while sending STDIN to the server\n");
+                close(server_socket);
+                exit(1);
+            }
+
+            _read_from_server(server_socket);
+            msg_len = 0;
+            hasLF = 0;
         }
     }
     close(server_socket);
-    exit(error); // 1 ERROR, 0 OK
 }
 
 int main(int argc, char *argv[])
