@@ -85,8 +85,7 @@ void _read_from_server(int server_socket)
         }
 
         // Determines real message length (must end with a '\n)
-        for (; buf[msg_len] != '\0'
-             && msg_len < buf_mult_factor * DEFAULT_BUFFER_SIZE && !hasLF;
+        for (; msg_len < buf_mult_factor * DEFAULT_BUFFER_SIZE && !hasLF;
              msg_len++)
             hasLF = (buf[msg_len] == '\n');
 
