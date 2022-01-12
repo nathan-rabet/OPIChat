@@ -65,17 +65,17 @@ void communicate(int client_socket)
 {
     char buf[DEFAULT_BUFFER_SIZE] = { 0 };
 
-    ssize_t read_len = 0;
-    ssize_t error = 0;
+    bool hasLF = 0; // Has any '\n' ?
+    bool isNewMessage = 1; // Is first loop tour ?
 
-    bool hasLF = 0;
-    bool isNewMessage = 1;
-
-    ssize_t msg_len = 0;
+    ssize_t msg_len = 0; // Total request length (can be higher than `read_len`
+                         // in case of multiple loop)
+    ssize_t read_len = 0; // Number returned by read
     while ((read_len = read(client_socket, buf + msg_len,
                             DEFAULT_BUFFER_SIZE - msg_len))
            != 0)
     {
+        // If any client reading error
         if (read_len == -1)
         {
             fprintf(stderr, "Error while reading client data\n");
@@ -84,8 +84,6 @@ void communicate(int client_socket)
             exit(1);
         }
 
-        // Add an offset for next read (if no '\n')
-
         // Print new message intro
         if (isNewMessage)
         {
@@ -93,7 +91,7 @@ void communicate(int client_socket)
             isNewMessage = 0;
         }
 
-        // Determines real message len
+        // Determines real message length (must end with a '\n)
         for (; buf[msg_len] != '\0' && msg_len < DEFAULT_BUFFER_SIZE && !hasLF;
              msg_len++)
             hasLF = (buf[msg_len] == '\n');
@@ -105,13 +103,15 @@ void communicate(int client_socket)
         // If '\n' detected
         if (hasLF)
         {
-            // Send message back
+            // Send message back to client
+            ssize_t error = 0;
             ssize_t send_len = 0;
-
             while ((error = send(client_socket, buf + send_len,
                                  msg_len - send_len, MSG_EOR))
                    > 0)
                 send_len += error;
+
+            // If any client sending error
             if (error == -1)
             {
                 fprintf(stderr, "Error while sending back data\n");
@@ -119,7 +119,7 @@ void communicate(int client_socket)
                 exit(1);
             }
 
-            // Reset for next message
+            // Reset variables for next message
             msg_len = 0;
             hasLF = 0;
             isNewMessage = 1;

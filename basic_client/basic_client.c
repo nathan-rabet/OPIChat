@@ -1,5 +1,6 @@
 #include "basic_client.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -54,14 +55,19 @@ void _read_from_server(int server_socket)
 {
     char buf[DEFAULT_BUFFER_SIZE] = { 0 };
 
-    ssize_t read_len = 0;
-    ssize_t msg_len = 0;
-    char hasLF = 0;
+    bool hasLF = 0; // Has any '\n' ?
+
+    ssize_t msg_len = 0; // Total request length (can be higher than `read_len`
+                         // in case of multiple loop)
+    ssize_t read_len = 0; // Number returned by read
+
+    // While no '\n' and server is up
     while (!hasLF
            && (read_len =
                    recv(server_socket, &buf, DEFAULT_BUFFER_SIZE - msg_len, 0))
                != 0)
     {
+        // If error on reading from server
         if (read_len == -1)
         {
             fprintf(stderr, "Error while reading server response\n");
@@ -69,10 +75,12 @@ void _read_from_server(int server_socket)
             exit(1);
         }
 
+        // Determines real message length (must end with a '\n)
         for (; buf[msg_len] != '\0' && msg_len < DEFAULT_BUFFER_SIZE && !hasLF;
              msg_len++)
             hasLF = (buf[msg_len] == '\n');
 
+        // If '\n' detected, print message
         if (hasLF)
         {
             buf[msg_len] = '\0';
@@ -86,13 +94,16 @@ void communicate(int server_socket)
     char buf[DEFAULT_BUFFER_SIZE] = { 0 };
     fprintf(stderr, "Enter your message:\n");
 
-    ssize_t read_len = 0;
-    ssize_t msg_len = 0;
-    char hasLF = 0;
+    bool hasLF = 0; // Has any '\n' ?
+
+    ssize_t msg_len = 0; // Total request length (can be higher than `read_len`
+                         // in case of multiple loop)
+    ssize_t read_len = 0; // Number returned by read
     while ((read_len = read(STDIN_FILENO, buf + msg_len,
                             DEFAULT_BUFFER_SIZE - msg_len))
            != 0)
     {
+        // Has any STDIN reading error
         if (read_len == -1)
         {
             fprintf(stderr, "Error while reading STDIN data\n");
@@ -100,12 +111,15 @@ void communicate(int server_socket)
             exit(1);
         }
 
+        // Determines real message length (must end with a '\n)
         for (; buf[msg_len] != '\0' && msg_len < DEFAULT_BUFFER_SIZE && !hasLF;
              msg_len++)
             hasLF = (buf[msg_len] == '\n');
 
+        // If '\n' detected
         if (hasLF)
         {
+            // Sending buffer to server
             ssize_t send_len = 0;
             ssize_t error = 0;
             while ((error = send(server_socket, buf + send_len,
@@ -113,6 +127,7 @@ void communicate(int server_socket)
                    > 0)
                 send_len += error;
 
+            // If any server sending error
             if (error == -1)
             {
                 fprintf(stderr, "Error while sending STDIN to the server\n");
@@ -120,7 +135,10 @@ void communicate(int server_socket)
                 exit(1);
             }
 
+            // Read (and print) server response
             _read_from_server(server_socket);
+
+            // Reset variables for next message
             msg_len = 0;
             hasLF = 0;
         }
