@@ -53,8 +53,8 @@ int prepare_socket(const char *ip, const char *port)
  */
 void _read_from_server(int server_socket)
 {
-    //char buf[DEFAULT_BUFFER_SIZE];
-
+    ssize_t buf_mult_factor = 1; // Number of times the buffer has been
+                                 // reallocated (+ 1) // ! FIXME shitty comment
     char *buf = malloc(DEFAULT_BUFFER_SIZE);
     if (!buf)
     {
@@ -63,17 +63,17 @@ void _read_from_server(int server_socket)
         exit(1);
     }
 
-    bool hasLF = 0; // Has any '\n' ?
-
+    ssize_t read_len = 0; // Number returned by read
     ssize_t msg_len = 0; // Total request length (can be higher than `read_len`
                          // in case of multiple loop)
-    ssize_t read_len = 0; // Number returned by read
-    //While no '\n' and server is up
-    for (int i = 4;
-         (!hasLF && (read_len =
-                   recv(server_socket, &buf, DEFAULT_BUFFER_SIZE - msg_len, 0))
-         != 0);
-        i++ )
+
+    bool hasLF = 0; // Has any '\n' ?
+    // While no '\n' and server is up
+    // TODO SIGPIPE
+    while ((!hasLF
+            && (read_len =
+                    recv(server_socket, buf + msg_len, DEFAULT_BUFFER_SIZE, 0))
+                != 0))
     {
         // If error on reading from server
         if (read_len == -1)
@@ -83,22 +83,23 @@ void _read_from_server(int server_socket)
             close(server_socket);
             exit(1);
         }
+
         // Determines real message length (must end with a '\n)
-        printf("msg_len = %ld\n", msg_len);
-        for (; buf[msg_len] != '\0' && msg_len < i * DEFAULT_BUFFER_SIZE
-             && !hasLF;
+        for (; buf[msg_len] != '\0'
+             && msg_len < buf_mult_factor * DEFAULT_BUFFER_SIZE && !hasLF;
              msg_len++)
             hasLF = (buf[msg_len] == '\n');
 
         // If '\n' detected, print message
-        printf("before the if\n");
         if (hasLF)
         {
             buf[msg_len] = '\0';
+            printf("Server answered with: %s", buf);
         }
-        else
+        else if (msg_len + DEFAULT_BUFFER_SIZE
+                 > buf_mult_factor * DEFAULT_BUFFER_SIZE)
         {
-            buf = realloc(buf, i * DEFAULT_BUFFER_SIZE);
+            buf = realloc(buf, (++buf_mult_factor) * DEFAULT_BUFFER_SIZE);
             if (!buf)
             {
                 fprintf(stderr, "Error while reallocating memory\n");
@@ -112,6 +113,9 @@ void _read_from_server(int server_socket)
 
 void communicate(int server_socket)
 {
+    ssize_t buf_mult_factor = 1; // Number of times the buffer has been
+                                 // reallocated (+ 1) // ! FIXME shitty comment
+
     char *buf = malloc(DEFAULT_BUFFER_SIZE);
     if (!buf)
     {
@@ -120,16 +124,16 @@ void communicate(int server_socket)
         exit(1);
     }
 
+    // User entrypoint
     fprintf(stderr, "Enter your message:\n");
-
-    bool hasLF = 0; // Has any '\n' ?
 
     ssize_t read_len; // Number returned by read
     ssize_t msg_len = 0; // Total request length (can be higher than
-    for (int i = 2;
-         (read_len = read(STDIN_FILENO, buf + msg_len, DEFAULT_BUFFER_SIZE))
-         != 0;
-         i++)
+                         // `read_len` in case of multiple loop)
+
+    bool hasLF = 0; // Has any '\n' ?
+    while ((read_len = read(STDIN_FILENO, buf + msg_len, DEFAULT_BUFFER_SIZE))
+           != 0)
     {
         // Has any STDIN reading error
         if (read_len == -1)
@@ -141,11 +145,9 @@ void communicate(int server_socket)
             exit(1);
         }
 
-        // `read_len` in case of multiple loop)
-
         // Determines real message length (must end with a '\n)
-        for (; buf[msg_len] != '\0' && msg_len < i * DEFAULT_BUFFER_SIZE
-             && !hasLF;
+        for (; buf[msg_len] != '\0'
+             && msg_len < buf_mult_factor * DEFAULT_BUFFER_SIZE && !hasLF;
              msg_len++)
             hasLF = (buf[msg_len] == '\n');
 
@@ -168,18 +170,22 @@ void communicate(int server_socket)
                 close(server_socket);
                 exit(1);
             }
-            buf = realloc(buf, DEFAULT_BUFFER_SIZE); // Memory optimization
-            i = 1; // Loop trick u know
 
             // Read (and print) server response
             _read_from_server(server_socket);
 
-            // Reset variable for next message
+            // Reset states for next message
+            buf = realloc(buf, DEFAULT_BUFFER_SIZE); // Memory optimization
+            buf_mult_factor = 1;
             hasLF = 0;
+            msg_len = 0;
         }
-        else
+
+        // If next loop can overflow the buffer
+        else if (msg_len + DEFAULT_BUFFER_SIZE
+                 > buf_mult_factor * DEFAULT_BUFFER_SIZE)
         {
-            buf = realloc(buf, i * DEFAULT_BUFFER_SIZE);
+            buf = realloc(buf, (++buf_mult_factor) * DEFAULT_BUFFER_SIZE);
             if (!buf)
             {
                 fprintf(stderr, "Error while reallocating memory\n");
@@ -189,7 +195,6 @@ void communicate(int server_socket)
         }
     }
     free(buf);
-
     close(server_socket);
 }
 
