@@ -53,40 +53,61 @@ int prepare_socket(const char *ip, const char *port)
  */
 void _read_from_server(int server_socket)
 {
-    char buf[DEFAULT_BUFFER_SIZE] = { 0 };
+    //char buf[DEFAULT_BUFFER_SIZE];
+
+    char *buf = malloc(DEFAULT_BUFFER_SIZE);
+    if (!buf)
+    {
+        fprintf(stderr, "Error while allocating memory\n");
+        close(server_socket);
+        exit(1);
+    }
 
     bool hasLF = 0; // Has any '\n' ?
 
     ssize_t msg_len = 0; // Total request length (can be higher than `read_len`
                          // in case of multiple loop)
     ssize_t read_len = 0; // Number returned by read
-
-    // While no '\n' and server is up
-    while (!hasLF
-           && (read_len =
+    //While no '\n' and server is up
+    for (int i = 4;
+         (!hasLF && (read_len =
                    recv(server_socket, &buf, DEFAULT_BUFFER_SIZE - msg_len, 0))
-               != 0)
+         != 0);
+        i++ )
     {
         // If error on reading from server
         if (read_len == -1)
         {
+            free(buf);
             fprintf(stderr, "Error while reading server response\n");
             close(server_socket);
             exit(1);
         }
-
         // Determines real message length (must end with a '\n)
-        for (; buf[msg_len] != '\0' && msg_len < DEFAULT_BUFFER_SIZE && !hasLF;
+        printf("msg_len = %ld\n", msg_len);
+        for (; buf[msg_len] != '\0' && msg_len < i * DEFAULT_BUFFER_SIZE
+             && !hasLF;
              msg_len++)
             hasLF = (buf[msg_len] == '\n');
 
         // If '\n' detected, print message
+        printf("before the if\n");
         if (hasLF)
         {
             buf[msg_len] = '\0';
-            printf("Server answered with: %s", buf);
+        }
+        else
+        {
+            buf = realloc(buf, i * DEFAULT_BUFFER_SIZE);
+            if (!buf)
+            {
+                fprintf(stderr, "Error while reallocating memory\n");
+                close(server_socket);
+                exit(1);
+            }
         }
     }
+    free(buf);
 }
 
 void communicate(int server_socket)
