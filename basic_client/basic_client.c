@@ -91,28 +91,40 @@ void _read_from_server(int server_socket)
 
 void communicate(int server_socket)
 {
-    char buf[DEFAULT_BUFFER_SIZE] = { 0 };
+    char *buf = malloc(DEFAULT_BUFFER_SIZE);
+    if (!buf)
+    {
+        fprintf(stderr, "Error while allocating memory\n");
+        close(server_socket);
+        exit(1);
+    }
+
     fprintf(stderr, "Enter your message:\n");
 
     bool hasLF = 0; // Has any '\n' ?
 
-    ssize_t msg_len = 0; // Total request length (can be higher than `read_len`
-                         // in case of multiple loop)
-    ssize_t read_len = 0; // Number returned by read
-    while ((read_len = read(STDIN_FILENO, buf + msg_len,
-                            DEFAULT_BUFFER_SIZE - msg_len))
-           != 0)
+    ssize_t read_len; // Number returned by read
+    ssize_t msg_len = 0; // Total request length (can be higher than
+    for (int i = 2;
+         (read_len = read(STDIN_FILENO, buf + msg_len, DEFAULT_BUFFER_SIZE))
+         != 0;
+         i++)
     {
         // Has any STDIN reading error
         if (read_len == -1)
         {
+            free(buf);
+
             fprintf(stderr, "Error while reading STDIN data\n");
             close(server_socket);
             exit(1);
         }
 
+        // `read_len` in case of multiple loop)
+
         // Determines real message length (must end with a '\n)
-        for (; buf[msg_len] != '\0' && msg_len < DEFAULT_BUFFER_SIZE && !hasLF;
+        for (; buf[msg_len] != '\0' && msg_len < i * DEFAULT_BUFFER_SIZE
+             && !hasLF;
              msg_len++)
             hasLF = (buf[msg_len] == '\n');
 
@@ -120,8 +132,8 @@ void communicate(int server_socket)
         if (hasLF)
         {
             // Sending buffer to server
-            ssize_t send_len = 0;
             ssize_t error = 0;
+            ssize_t send_len = 0;
             while ((error = send(server_socket, buf + send_len,
                                  msg_len - send_len, MSG_EOR))
                    > 0)
@@ -130,19 +142,33 @@ void communicate(int server_socket)
             // If any server sending error
             if (error == -1)
             {
+                free(buf);
                 fprintf(stderr, "Error while sending STDIN to the server\n");
                 close(server_socket);
                 exit(1);
             }
+            buf = realloc(buf, DEFAULT_BUFFER_SIZE); // Memory optimization
+            i = 1; // Loop trick u know
 
             // Read (and print) server response
             _read_from_server(server_socket);
 
-            // Reset variables for next message
-            msg_len = 0;
+            // Reset variable for next message
             hasLF = 0;
         }
+        else
+        {
+            buf = realloc(buf, i * DEFAULT_BUFFER_SIZE);
+            if (!buf)
+            {
+                fprintf(stderr, "Error while reallocating memory\n");
+                close(server_socket);
+                exit(1);
+            }
+        }
     }
+    free(buf);
+
     close(server_socket);
 }
 
