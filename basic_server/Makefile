@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS = -Wextra -Wall -g -std=gnu99
+CFLAGS = -Wextra -Wall -Werror -pedantic -g -std=c99 -D_GNU_SOURCE
 
 OBJS = basic_server.o
 
