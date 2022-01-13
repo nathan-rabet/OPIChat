@@ -68,7 +68,7 @@ void communicate(int client_socket)
     char *buf = malloc(DEFAULT_BUFFER_SIZE);
     if (!buf)
     {
-        fprintf(stderr, "Error while allocating memory\n");
+        fprintf(stdout, "Error while allocating memory\n");
         close(client_socket);
         exit(1);
     }
@@ -84,7 +84,7 @@ void communicate(int client_socket)
         // If any client reading error
         if (read_len == -1)
         {
-            fprintf(stderr, "Error while reading client data\n");
+            fprintf(stdout, "Error while reading client data\n");
             close(client_socket);
             free(buf);
             exit(1);
@@ -112,7 +112,7 @@ void communicate(int client_socket)
             // If any client sending error
             if (error == -1)
             {
-                fprintf(stderr, "Error while sending back data\n");
+                fprintf(stdout, "Error while sending back data\n");
                 close(client_socket);
                 exit(1);
             }
@@ -132,7 +132,7 @@ void communicate(int client_socket)
             if (!buf)
             {
                 free(buf);
-                fprintf(stderr, "Error while reallocating memory\n");
+                fprintf(stdout, "Error while reallocating memory\n");
                 close(client_socket);
                 exit(1);
             }
