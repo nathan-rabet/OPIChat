@@ -105,7 +105,7 @@ void communicate(int client_socket)
             ssize_t error = 0;
             ssize_t send_len = 0;
             while ((error = send(client_socket, buf + send_len,
-                                 msg_len - send_len, MSG_EOR))
+                                 msg_len - send_len, 0))
                    > 0)
                 send_len += error;
 
