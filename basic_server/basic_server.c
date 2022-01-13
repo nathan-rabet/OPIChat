@@ -105,17 +105,13 @@ void communicate(int client_socket)
             ssize_t error = 0;
             ssize_t send_len = 0;
             while ((error = send(client_socket, buf + send_len,
-                                 msg_len - send_len, 0))
+                                 msg_len - send_len, MSG_NOSIGNAL))
                    > 0)
                 send_len += error;
 
             // If any client sending error
             if (error == -1)
-            {
-                fprintf(stderr, "Error while sending back data\n");
-                close(client_socket);
-                exit(1);
-            }
+                break;
 
             // Reset states for next message
             buf = realloc(buf, DEFAULT_BUFFER_SIZE); // Memory optimization
