@@ -104,14 +104,16 @@ void communicate(int client_socket)
             // Send message back to client
             ssize_t error = 0;
             ssize_t send_len = 0;
-            while ((error = send(client_socket, buf + send_len,
-                                 msg_len - send_len, MSG_NOSIGNAL))
-                   > 0)
-                send_len += error;
+            while (send_len != msg_len)
+            {
+                error = send(client_socket, buf + send_len, msg_len - send_len,
+                             MSG_NOSIGNAL);
 
-            // If any client sending error
-            if (error == -1)
-                break;
+                // If any client sending error (e.g. client disconnected)
+                if (error == -1)
+                    break;
+                send_len += error;
+            }
 
             // Reset states for next message
             buf = realloc(buf, DEFAULT_BUFFER_SIZE); // Memory optimization
