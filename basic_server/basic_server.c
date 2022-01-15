@@ -106,7 +106,7 @@ void communicate(int client_socket)
             while (send_len != msg_len)
             {
                 error =
-                    send(client_socket, buf + send_len, msg_len - send_len, 0);
+                    send(client_socket, buf + send_len, msg_len - send_len, MSG_NOSIGNAL);
 
                 // If any client sending error (e.g. client disconnected)
                 if (error == -1)
