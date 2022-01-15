@@ -105,8 +105,8 @@ void communicate(int client_socket)
             ssize_t send_len = 0;
             while (send_len != msg_len)
             {
-                error = send(client_socket, buf + send_len, msg_len - send_len,
-                             MSG_NOSIGNAL);
+                error =
+                    send(client_socket, buf + send_len, msg_len - send_len, 0);
 
                 // If any client sending error (e.g. client disconnected)
                 if (error == -1)
@@ -126,8 +126,8 @@ void communicate(int client_socket)
                  > buf_mult_factor * DEFAULT_BUFFER_SIZE)
         {
             while (msg_len + DEFAULT_BUFFER_SIZE
-                 > buf_mult_factor * DEFAULT_BUFFER_SIZE)
-                buf_mult_factor++; //if message is way bigger than buffer size
+                   > buf_mult_factor * DEFAULT_BUFFER_SIZE)
+                buf_mult_factor++; // if message is way bigger than buffer size
             buf = realloc(buf, buf_mult_factor * DEFAULT_BUFFER_SIZE + 1);
             if (!buf)
             {
