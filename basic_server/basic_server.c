@@ -65,7 +65,7 @@ void communicate(int client_socket)
 {
     ssize_t buf_mult_factor = 1; // buf[DEFAULT_BUFFER_SIZE * buf_mult_factor]
 
-    char *buf = malloc(DEFAULT_BUFFER_SIZE);
+    char *buf = malloc(DEFAULT_BUFFER_SIZE + 1);
     if (!buf)
     {
         fprintf(stderr, "Error while allocating memory\n");
@@ -76,7 +76,6 @@ void communicate(int client_socket)
     ssize_t read_len; // Number returned by read
     ssize_t msg_len = 0; // Total request length (can be higher than
                          // `read_len` in case of multiple loop)
-
     bool hasLF = 0; // Has any '\n' ?
     while ((read_len = read(client_socket, buf + msg_len, DEFAULT_BUFFER_SIZE))
            != 0)
@@ -116,7 +115,7 @@ void communicate(int client_socket)
             }
 
             // Reset states for next message
-            buf = realloc(buf, DEFAULT_BUFFER_SIZE); // Memory optimization
+            buf = realloc(buf, DEFAULT_BUFFER_SIZE + 1); // Memory optimization
             buf_mult_factor = 1;
             hasLF = 0;
             msg_len = 0;
@@ -126,7 +125,10 @@ void communicate(int client_socket)
         else if (msg_len + DEFAULT_BUFFER_SIZE
                  > buf_mult_factor * DEFAULT_BUFFER_SIZE)
         {
-            buf = realloc(buf, (++buf_mult_factor) * DEFAULT_BUFFER_SIZE);
+            while (msg_len + DEFAULT_BUFFER_SIZE
+                 > buf_mult_factor * DEFAULT_BUFFER_SIZE)
+                buf_mult_factor++; //if message is way bigger than buffer size
+            buf = realloc(buf, buf_mult_factor * DEFAULT_BUFFER_SIZE + 1);
             if (!buf)
             {
                 free(buf);
