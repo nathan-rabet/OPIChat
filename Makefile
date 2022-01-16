@@ -1,11 +1,14 @@
 CC=gcc
-CFLAGS = -Wextra -Wall -Werror -pedantic -g -std=c99 -D_GNU_SOURCE -Iinclude
+CFLAGS = -Wextra -Wall -Werror -pedantic -g -std=c99 
+CFLAGS += -D_GNU_SOURCE
+CFLAGS += -Iinclude
+
 LDFLAGS = -fsanitize=address
 
 SRC = $(shell find src -name '*.c')
 OBJS = $(SRC:.c=.o)
 
-TEST_SRC = $(shell find tests -name '*.c')
+TEST_SRC = $(shell find tests/unit_testing -name '*.c')
 TEST_OBJS = $(TEST_SRC:.c=.o)
 TEST_LDFLAGS = -fsanitize=address -lcriterion
 
@@ -23,6 +26,9 @@ check: tests
 
 tests: $(TEST_OBJS) $(OBJS)
 	$(CC) $(TEST_LDFLAGS) -DDEBUG -o tests_suite $^
+
+test_main: $(OBJS) tests/test_main.o
+	$(CC) $(CFLAGS) $(LDFLAGS) -o test_main $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

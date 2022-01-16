@@ -7,37 +7,39 @@
 
 struct request *parse_request(char *request_string)
 {
-    struct request *r = xmalloc(1, sizeof(struct request));
+    struct request *r = xcalloc(1, sizeof(struct request));
+
+    char *req_str_dup = strdup(request_string);
 
     char *line;
     char *saveptr;
-    line = strtok_r(request_string, "\n", &saveptr);
-    r->payload_size = atoi(line);
+    line = strtok_r(req_str_dup, "\n", &saveptr);
+    r->payload_size = atoll(line);
 
     line = strtok_r(NULL, "\n", &saveptr);
-    r->status_code = atoi(line);
+    r->status_code = atoll(line);
 
     line = strtok_r(NULL, "\n", &saveptr);
     r->command = strdup(line);
 
-    line = strtok_r(NULL, "\n", &saveptr);
-    r->nb_parameters = atoi(line);
+    // Determine the number of parameters
+    char *token;
+    line = strtok_r(NULL, "\n\n", &saveptr);
+    char *save_payload_ptr = saveptr;
 
-    r->command_parameters =
-        xmalloc(r->nb_parameters, sizeof(struct command_parameter));
-
-    for (uint64_t i; i < r->nb_parameters; i++)
+    while (*saveptr != '\0')
     {
-        char *token;
+        r->command_parameters =
+            xrealloc(r->command_parameters, ++(r->nb_parameters),
+                     sizeof(struct command_parameter));
 
-        line = strtok_r(NULL, "\n", &saveptr);
         token = strtok_r(line, "=", &saveptr);
-        r->command_parameters[i].key = strdup(token);
-        token = strtok_r(NULL, "=", &saveptr);
-        r->command_parameters[i].value = strdup(token);
+        r->command_parameters[r->nb_parameters].key = strdup(token);
+        token = strtok_r(NULL, "\n", &saveptr);
+        r->command_parameters[r->nb_parameters].value = strdup(token);
     }
 
-    line = strtok_r(NULL, "\n", &saveptr);
+    line = strtok_r(NULL, "\n", &save_payload_ptr);
     r->payload = strdup(line);
 
     return r;

@@ -5,5 +5,6 @@ basic_client/basic_client
 basic_server/basic_server
 epoll_server/epoll_server
 tests_suite
+test_main
 opichat_client
 opichat_server
