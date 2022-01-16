@@ -60,7 +60,7 @@ int accept_client(int socket)
 
     return client_socket;
 }
-
+/*
 void communicate(int client_socket)
 {
     ssize_t buf_mult_factor = 1; // buf[DEFAULT_BUFFER_SIZE * buf_mult_factor]
@@ -141,7 +141,101 @@ void communicate(int client_socket)
     printf("Client disconnected\n");
     free(buf);
     close(client_socket);
+}*/
+
+void communicate(int client_socket)
+{
+    ssize_t buf_mult_factor = 1; // How many times the buffer has been expanded
+    char *buf = malloc(DEFAULT_BUFFER_SIZE + 1);
+    if (!buf)
+    {
+        fprintf(stderr, "Error while allocating memory\n");
+        close(client_socket);
+        exit(1);
+    }
+
+    bool hasLF = 0; // Has any '\n' ?
+    bool isNewMessage = 1; // Is first loop tour ?
+    ssize_t msg_len = 0; // Total request length (can be higher than `read_len`
+                         // in case of multiple loop)
+    ssize_t read_len = 0; // Number returned by read
+    while ((read_len = read(client_socket, buf + msg_len,
+                            DEFAULT_BUFFER_SIZE))
+           != 0)
+    {
+        // If any client reading error
+        if (read_len == -1)
+        {
+            fprintf(stderr, "Error while reading client data\n");
+            close(client_socket);
+            free(buf);
+            exit(1);
+        }
+
+        // Print new message intro
+        if (isNewMessage)
+        {
+            fputs("Received Body: ", stdout);
+            isNewMessage = 0;
+        }
+
+        // Determines real message length (must end with a '\n)
+        for (; msg_len < buf_mult_factor * DEFAULT_BUFFER_SIZE && !hasLF;
+             msg_len++)
+            hasLF = (buf[msg_len] == '\n');
+
+        // Print (partial) received message
+        buf[msg_len] = '\0';
+        printf("%s", buf + msg_len - read_len);
+        // If '\n' detected
+        if (hasLF)
+        {
+            // Send message back to client
+            ssize_t error = 0;
+            ssize_t send_len = 0;
+            while ((error = send(client_socket, buf + send_len,
+                                 msg_len - send_len, MSG_NOSIGNAL))
+                   > 0)
+                send_len += error;
+
+            // If any client sending error
+            if (error == -1)
+            {
+                fprintf(stderr, "Error while sending back data\n");
+                close(client_socket);
+                free(buf);
+                exit(1);
+            }
+            //printf("%s", buf);
+            // Reset variables for next message
+            buf = realloc(buf, DEFAULT_BUFFER_SIZE + 1);
+            buf_mult_factor = 1;
+            msg_len = 0;
+            hasLF = 0;
+            isNewMessage = 1;
+        }
+        // If next loop can overflow the buffer
+        else if (msg_len + DEFAULT_BUFFER_SIZE
+                 > buf_mult_factor * DEFAULT_BUFFER_SIZE)
+        {
+            while (msg_len + DEFAULT_BUFFER_SIZE
+                   > buf_mult_factor * DEFAULT_BUFFER_SIZE)
+                buf_mult_factor++; // if message is way bigger than buffer size
+            buf = realloc(buf, buf_mult_factor * DEFAULT_BUFFER_SIZE + 1);
+            if (!buf)
+            {
+                free(buf);
+                fprintf(stderr, "Error while reallocating memory\n");
+                close(client_socket);
+                exit(1);
+            }
+        }
+    }
+    printf("Client disconnected\n");
+    free(buf);
+    close(client_socket);
 }
+
 
 int main(int argc, char *argv[])
 {
