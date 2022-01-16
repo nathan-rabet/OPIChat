@@ -1,5 +1,6 @@
 #include "epoll-server.h"
 
+#include <errno.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -138,8 +139,9 @@ struct connection_t *communicate(int epoll_instance, int client_socket,
 
         while (send_len != client->nb_read)
         {
-            int error = send(parser->client_socket, client->buffer + send_len,
-                             client->nb_read - send_len, MSG_NOSIGNAL);
+            int error = 0;
+            error = send(parser->client_socket, client->buffer + send_len,
+                         client->nb_read - send_len, MSG_NOSIGNAL & 0);
 
             // If any client sending error (e.g. client disconnected)
             if (error == -1)
