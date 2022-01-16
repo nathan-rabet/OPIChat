@@ -106,7 +106,8 @@ void communicate(int client_socket)
             while (send_len != msg_len)
             {
                 error =
-                    send(client_socket, buf + send_len, msg_len - send_len, MSG_NOSIGNAL);
+                    send(client_socket, buf + send_len, msg_len - send_len,
+MSG_NOSIGNAL);
 
                 // If any client sending error (e.g. client disconnected)
                 if (error == -1)
@@ -151,6 +152,7 @@ void communicate(int client_socket)
     {
         fprintf(stderr, "Error while allocating memory\n");
         close(client_socket);
+        free(buf);
         exit(1);
     }
 
@@ -159,8 +161,7 @@ void communicate(int client_socket)
     ssize_t msg_len = 0; // Total request length (can be higher than `read_len`
                          // in case of multiple loop)
     ssize_t read_len = 0; // Number returned by read
-    while ((read_len = read(client_socket, buf + msg_len,
-                            DEFAULT_BUFFER_SIZE))
+    while ((read_len = read(client_socket, buf + msg_len, DEFAULT_BUFFER_SIZE))
            != 0)
     {
         // If any client reading error
@@ -180,13 +181,13 @@ void communicate(int client_socket)
         }
 
         // Determines real message length (must end with a '\n)
-        for (; msg_len < buf_mult_factor * DEFAULT_BUFFER_SIZE && !hasLF;
+        for (; buf[msg_len] != '\0'
+             && msg_len < buf_mult_factor * DEFAULT_BUFFER_SIZE && !hasLF;
              msg_len++)
             hasLF = (buf[msg_len] == '\n');
 
         // Print (partial) received message
         buf[msg_len] = '\0';
-        printf("%s", buf + msg_len - read_len);
         // If '\n' detected
         if (hasLF)
         {
@@ -197,7 +198,6 @@ void communicate(int client_socket)
                                  msg_len - send_len, MSG_NOSIGNAL))
                    > 0)
                 send_len += error;
-
             // If any client sending error
             if (error == -1)
             {
@@ -206,7 +206,7 @@ void communicate(int client_socket)
                 free(buf);
                 exit(1);
             }
-            //printf("%s", buf);
+            printf("%s", buf);
             // Reset variables for next message
             buf = realloc(buf, DEFAULT_BUFFER_SIZE + 1);
             buf_mult_factor = 1;
@@ -235,7 +235,6 @@ void communicate(int client_socket)
     free(buf);
     close(client_socket);
 }
-
 
 int main(int argc, char *argv[])
 {
