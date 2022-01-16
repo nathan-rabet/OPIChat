@@ -180,12 +180,13 @@ void communicate(int client_socket)
         // If '\n' detected
         if (hasLF)
         {
+            // Print message to stdout
+            buf[msg_len] = '\0';
+            printf("Received Body: %s", buf);
+
             // Send message back to client
             ssize_t error = 0;
             ssize_t send_len = 0;
-
-            buf[msg_len] = '\0';
-            printf("Received Body: %s", buf);
             while ((error = send(client_socket, buf + send_len,
                                  msg_len - send_len, MSG_NOSIGNAL))
                    > 0)
