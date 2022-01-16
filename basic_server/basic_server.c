@@ -187,7 +187,7 @@ void communicate(int client_socket)
             buf[msg_len] = '\0';
             printf("Received Body: %s", buf);
             while ((error = send(client_socket, buf + send_len,
-                                 send_len != msg_len, MSG_NOSIGNAL))
+                                 msg_len - send_len, MSG_NOSIGNAL))
                    > 0)
                 send_len += error;
 
