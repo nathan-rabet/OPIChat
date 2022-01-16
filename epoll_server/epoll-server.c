@@ -107,8 +107,7 @@ struct connection_t *communicate(int epoll_instance, int client_socket,
         }
 
         // Determines real message length (must end with a '\n)
-        for (ssize_t i = client->nb_read;
-             !hasLF && i < client->nb_read + read_len; i++)
+        for (ssize_t i = 0; !hasLF && i < read_len; i++)
             hasLF = (client->buffer[client->nb_read++] == '\n');
 
         // If '\n' detected
