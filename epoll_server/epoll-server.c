@@ -107,18 +107,16 @@ struct connection_t *communicate(int epoll_instance, int client_socket,
         }
 
         // Determines real message length (must end with a '\n)
-        for (;
-             client->nb_read < buf_mult_factor * DEFAULT_BUFFER_SIZE && !hasLF;
-             client->nb_read++)
-            hasLF = (client->buffer[client->nb_read] == '\n');
+        for (ssize_t i = client->nb_read;
+             !hasLF && i < client->nb_read + read_len; i++)
+            hasLF = (client->buffer[client->nb_read++] == '\n');
 
         // If '\n' detected
         if (hasLF)
             break;
 
-        // If next loop can overflow the buffer
-        else if (client->nb_read + DEFAULT_BUFFER_SIZE
-                 > buf_mult_factor * DEFAULT_BUFFER_SIZE)
+        // The next loop can overflow the buffer
+        else
         {
             client->buffer = realloc(client->buffer,
                                      (++buf_mult_factor) * DEFAULT_BUFFER_SIZE);
@@ -131,7 +129,7 @@ struct connection_t *communicate(int epoll_instance, int client_socket,
         }
     }
 
-    if (read_len == 0 && !hasLF)
+    if (!hasLF)
         return delete_epoll_client(connections, epoll_instance, client_socket);
     // Broadcast to all clients
     struct connection_t *parser = connections;
