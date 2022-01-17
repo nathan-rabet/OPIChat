@@ -10,7 +10,9 @@ OBJS = $(SRC:.c=.o)
 
 TEST_SRC = $(shell find tests/unit_testing -name '*.c')
 TEST_OBJS = $(TEST_SRC:.c=.o)
-TEST_LDFLAGS = -fsanitize=address -lcriterion
+TEST_LDFLAGS = -lcriterion
+
+DYN_LIB = libmalloc.so
 
 # OPIchat
 all: opichat_server opichat_client
@@ -25,10 +27,21 @@ check: tests
 	./tests_suite
 
 tests: $(TEST_OBJS) $(OBJS)
+	$(CC) $(TEST_LDFLAGS) -fsanitize=address -DDEBUG -o tests_suite $^
+
+
+check_no_asan: tests_no_asan
+	./tests_suite
+
+tests_no_asan: $(TEST_OBJS) $(OBJS)
 	$(CC) $(TEST_LDFLAGS) -DDEBUG -o tests_suite $^
 
 test_main: $(OBJS) tests/test_main.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o test_main $^
+
+# dynamic libraries
+%.so: src/library/%.o
+	$(CC) -shared -fPIC -o $@ $<
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
