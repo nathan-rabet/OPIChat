@@ -31,9 +31,9 @@ void *xcalloc(size_t nmemb, size_t size)
 void *xrealloc(void *ptr, size_t nmemb, size_t size)
 {
     size_t total_size = 0;
-    if (__builtin_umull_overflow(nmemb, total_size, &total_size))
+    if (__builtin_umull_overflow(nmemb, size, &total_size))
         errx(1, "xrealoc: overflow detected : %zu * %zu", nmemb, size);
-    void *res = realloc(ptr, size);
+    void *res = realloc(ptr, nmemb * size);
     if (!res)
         err(1, "xrealloc: realloc failed, size: %zu", total_size);
 

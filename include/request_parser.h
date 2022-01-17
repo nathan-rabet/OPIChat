@@ -2,6 +2,13 @@
 #define REQUEST_PARSER_H
 
 #include <stdint.h>
+enum
+{
+    REQUEST_CODE = 0,
+    RESPONSE_CODE = 1,
+    NOTIFICATION_CODE = 2,
+    ERROR_CODE = 3
+};
 
 /**
  * @brief Structure to store the parsed request
