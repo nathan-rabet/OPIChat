@@ -1,4 +1,4 @@
-# OPIchat coding style
+# OPIchat bible
 
 The following project is organised in a certain way (and must stay like this!!) in order to keep it reliable, secure and maintainable.
 
