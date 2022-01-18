@@ -1,13 +1,18 @@
 CC=gcc
-CFLAGS = -Wextra -Wall -Werror -pedantic -g -std=c99 -D_GNU_SOURCE
+CFLAGS = -Wextra -Wall -Werror -pedantic -g -std=c99 
+CFLAGS += -D_GNU_SOURCE
+CFLAGS += -Iinclude
+
 LDFLAGS = -fsanitize=address
 
-SRC = $(shell find . -name '*.c')
+SRC = $(shell find src -name '*.c')
 OBJS = $(SRC:.c=.o)
 
-TEST_SRC = $(shell find tests -name '*.c')
+TEST_SRC = $(shell find tests/unit_testing -name '*.c')
 TEST_OBJS = $(TEST_SRC:.c=.o)
-TEST_LDFLAGS = -fsanitize=address -lcriterion
+TEST_LDFLAGS = -lcriterion
+
+DYN_LIB = libmalloc.so
 
 # OPIchat
 all: opichat_server opichat_client
@@ -19,10 +24,24 @@ opichat_client: $(OBJS) src/opichat_client.o
 	$(CC) $(LDFLAGS) -o opichat_client $^
 
 check: tests
-	./tests
+	./tests_suite
 
 tests: $(TEST_OBJS) $(OBJS)
-	$(CC) $(TEST_LDFLAGS) -o tests $^
+	$(CC) $(TEST_LDFLAGS) -fsanitize=address -DDEBUG -o tests_suite $^
+
+
+check_no_asan: tests_no_asan
+	./tests_suite
+
+tests_no_asan: $(TEST_OBJS) $(OBJS)
+	$(CC) $(TEST_LDFLAGS) -DDEBUG -o tests_suite $^
+
+test_main: $(OBJS) tests/test_main.o
+	$(CC) $(CFLAGS) $(LDFLAGS) -o test_main $^
+
+# dynamic libraries
+%.so: src/library/%.o
+	$(CC) -shared -fPIC -o $@ $<
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
