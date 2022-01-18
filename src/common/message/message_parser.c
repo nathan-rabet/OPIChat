@@ -43,12 +43,12 @@ struct message *parse_message(const char *request_string)
     r->command = strdup(line);
 
     // Determine the number of parameters
-    char *key;
-    char *value;
+    char *key = NULL;
+    char *value = NULL;
 
-    // Get all key value pairs using message_next_key_value
+    // Get all key value pairs using get_message_next_parameter_kv
     int offset;
-    while ((offset = message_next_key_value(saveptr, &key, &value)) != 0)
+    while ((offset = get_message_next_parameter_kv(saveptr, &key, &value)) != 0)
     {
         r->command_parameters =
             xrealloc(r->command_parameters, (r->nb_parameters + 1),
@@ -57,6 +57,11 @@ struct message *parse_message(const char *request_string)
         r->command_parameters[r->nb_parameters].value = strdup(value);
         r->nb_parameters++;
         saveptr += offset;
+    }
+
+    if (value && *(saveptr - 1) == '\0')
+    {
+        FREETURN(NULL); // invalid message
     }
 
     line = strtok_r(NULL, "\n", &saveptr);

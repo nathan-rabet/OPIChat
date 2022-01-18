@@ -218,6 +218,44 @@ Test(requests_parsing, huge_llong)
     cr_assert_eq(r, NULL);
 }
 
+Test(requests_parsing, huge_llong_2)
+{
+    char req[] = "4\n9223372036854775807\nSEND-DM\nUser="
+                 "acu\nFrom=ING1\n\ntest";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_eq(r, NULL);
+}
+
+Test(requests_parsing, huge_llong_3)
+{
+    char req[] = "4n9223372036854775807\n0\nSEND-DM\nUser="
+                 "acu\nFrom=ING1\n\ntest";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_eq(r, NULL);
+}
+
+Test(command_parameter, only_one_LF)
+{
+    char req[] = "7\n2\nSEND-DM\nUser=acu\nYolerap";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_eq(r, NULL);
+}
+
+Test(command_parameter, end_LFLF)
+{
+    char req[] = "7\n2\nSEND-DM\nUser=acu\nYolerap\n\n";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_eq(r, NULL);
+}
+
 Test(command_parameter, only_one_LF_with_kv_as_payload)
 {
     char req[] = "4\n2\nSEND-DM\nUser=acu\nFrom=ING1";

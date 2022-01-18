@@ -2,24 +2,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int message_next_key_value(char *params_start, char **key, char **value)
-{
-    *key = NULL;
-    *value = NULL;
+#include "message.h"
 
+int get_message_next_parameter_kv(char *params_start, char **key, char **value)
+{
     regex_t regex;
-    regmatch_t match[3]; // [0] = whole match, [1] = key, [2] = value,
+    regmatch_t match[4]; // [0] = whole match, [1] = key, [2] = value,
                          // [3] = end of line
-    int ret = regcomp(&regex, "([^=]+)=([^\n]+)(\n\n|\n)", REG_EXTENDED);
+    int ret = regcomp(&regex, "^([^=]+)=([^\n]+)(\n\n|\n)", REG_EXTENDED);
     if (ret != 0)
     {
         fprintf(stderr, "Error compiling regex\n");
         exit(1);
     }
 
-    ret = regexec(&regex, params_start, 3, match, 0);
+    ret = regexec(&regex, params_start, 4, match, 0);
     regfree(&regex);
-    if (ret != 0 || match[1].rm_so != 0)
+    if (ret != 0)
         return 0;
 
     *key = params_start;

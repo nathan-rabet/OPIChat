@@ -73,6 +73,6 @@ void free_partial_message(struct message *message);
  * @param value The value of the object, NULL if no value
  * @return offset to the next object, 0 if no more object
  */
-int message_next_key_value(char *params_start, char **key, char **value);
+int get_message_next_parameter_kv(char *params_start, char **key, char **value);
 
 #endif /* MESSAGE_H */
