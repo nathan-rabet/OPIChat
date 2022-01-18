@@ -7,9 +7,12 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  unit_testing:
+    
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: install criterion
+      run: apt-get install libcriterion-dev
     - name: make check
       run: make check
