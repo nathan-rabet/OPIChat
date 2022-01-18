@@ -18,7 +18,7 @@ enum message_status_code
 struct message
 {
     uint64_t payload_size; // size of the payload
-    uint8_t status_code : 2; // enum message_status_code (aligned to 2 bits)
+    uint8_t status_code : 2; // enum message_status_code (aligned on 2 bits)
     char *command; // command name
     uint64_t nb_parameters; // number of parameters
     struct command_parameter *command_parameters; // array of parameters
