@@ -282,3 +282,12 @@ Test(command_parameter, invalid_value)
 
     cr_assert_eq(r, NULL);
 }
+
+Test(command_parameter, duplicate_key)
+{
+    char req[] = "4\n2\nSEND-DM\nUser=A\nUser=B\n\n2022";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_eq(r, NULL);
+}

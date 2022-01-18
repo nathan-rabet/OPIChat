@@ -50,6 +50,13 @@ struct message *parse_message(const char *request_string)
     int offset;
     while ((offset = get_message_next_parameter_kv(saveptr, &key, &value)) != 0)
     {
+        // Check if duplicate keys
+        for (uint64_t i = 0; i < r->nb_parameters; i++)
+            if (strcmp(r->command_parameters[i].key, key) == 0)
+            {
+                FREETURN(NULL); // invalid message
+            }
+
         r->command_parameters =
             xrealloc(r->command_parameters, (r->nb_parameters + 1),
                      sizeof(struct command_parameter));
