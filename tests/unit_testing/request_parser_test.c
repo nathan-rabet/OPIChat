@@ -1,12 +1,12 @@
 #include <criterion/criterion.h>
 
-#include "request_parser.h"
+#include "message.h"
 
 Test(requests_parsing, subject_client_request)
 {
     char req[] = "4\n0\nSEND-DM\nUser=acu\n\n2022";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r->payload_size, 4, "r->payload_size = %d", r->payload_size);
     cr_assert_eq(r->status_code, 0, "r->status_code = %d", r->status_code);
@@ -21,14 +21,14 @@ Test(requests_parsing, subject_client_request)
                      r->command_parameters[0].value);
     cr_assert_str_eq(r->payload, "2022", "r->payload = %s", r->payload);
 
-    free_request(r);
+    free_message(r);
 }
 
 Test(requests_parsing, subject_server_response)
 {
     char req[] = "0\n1\nSEND-DM\nUser=acu\n\n";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r->payload_size, 0, "r->payload_size = %d", r->payload_size);
     cr_assert_eq(r->status_code, 1, "r->status_code = %d", r->status_code);
@@ -43,14 +43,14 @@ Test(requests_parsing, subject_server_response)
                      r->command_parameters[0].value);
     cr_assert_eq(r->payload, NULL);
 
-    free_request(r);
+    free_message(r);
 }
 
 Test(requests_parsing, subject_server_notification)
 {
     char req[] = "4\n2\nSEND-DM\nUser=acu\nFrom=ING1\n\n2022";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r->payload_size, 4, "r->payload_size = %d", r->payload_size);
     cr_assert_eq(r->status_code, 2, "r->status_code = %d", r->status_code);
@@ -71,14 +71,14 @@ Test(requests_parsing, subject_server_notification)
                      r->command_parameters[1].value);
     cr_assert_str_eq(r->payload, "2022");
 
-    free_request(r);
+    free_message(r);
 }
 
 Test(requests_parsing, key_value_is_payload)
 {
     char req[] = "9\n2\nSEND-DM\nUser=acu\n\nFrom=ING1";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r->payload_size, 9, "r->payload_size = %d", r->payload_size);
     cr_assert_eq(r->status_code, 2, "r->status_code = %d", r->status_code);
@@ -93,14 +93,14 @@ Test(requests_parsing, key_value_is_payload)
                      r->command_parameters[0].value);
     cr_assert_str_eq(r->payload, "From=ING1");
 
-    free_request(r);
+    free_message(r);
 }
 
 Test(requests_parsing, no_command_parameter)
 {
     char req[] = "9\n2\nSEND-DM\nFrom=ING1";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r->payload_size, 9, "r->payload_size = %d", r->payload_size);
     cr_assert_eq(r->status_code, 2, "r->status_code = %d", r->status_code);
@@ -110,14 +110,14 @@ Test(requests_parsing, no_command_parameter)
     cr_assert_eq(r->command_parameters, NULL);
     cr_assert_str_eq(r->payload, "From=ING1");
 
-    free_request(r);
+    free_message(r);
 }
 
 Test(requests_parsing, multiple_command_parameters)
 {
     char req[] = "4\n2\nSEND-DM\na=aa\nb=bb\nc=cc\nd=dd\n\n2022";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r->payload_size, 4, "r->payload_size = %d", r->payload_size);
     cr_assert_eq(r->status_code, 2, "r->status_code = %d", r->status_code);
@@ -151,14 +151,14 @@ Test(requests_parsing, multiple_command_parameters)
 
     cr_assert_str_eq(r->payload, "2022");
 
-    free_request(r);
+    free_message(r);
 }
 
 Test(requests_parsing, empty_request)
 {
     char req[] = "";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }
@@ -167,7 +167,7 @@ Test(requests_parsing, wrong_payload_size)
 {
     char req[] = "69\n2\nSEND-DM\nUser=acu\nFrom=ING1\n\n2022";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }
@@ -176,7 +176,7 @@ Test(requests_parsing, byte_instead_of_char)
 {
     char req[] = "\x04\n\x02\nSEND-DM\nUser=acu\nFrom=ING1\n\n2\022";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }
@@ -185,7 +185,7 @@ Test(requests_parsing, bad_input)
 {
     char req[] = "quatre\ndeux\nexecvp\nUser=/bin/sh\nnotkvpair\n\n";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }
@@ -194,7 +194,7 @@ Test(requests_parsing, no_line_feed)
 {
     char req[] = "42SEND-DMUser=acuFrom=ING12022";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }
@@ -203,7 +203,7 @@ Test(requests_parsing, random_request)
 {
     char req[] = "iaohfifhaofihaofh ofh ozehf zoh fozei fhzo i";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }
@@ -213,7 +213,7 @@ Test(requests_parsing, huge_llong)
     char req[] = "9223372036854775807\n9223372036854775807\nSEND-DM\nUser="
                  "acu\nFrom=ING1\n\n";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }
@@ -222,7 +222,7 @@ Test(command_parameter, only_one_LF_with_kv_as_payload)
 {
     char req[] = "4\n2\nSEND-DM\nUser=acu\nFrom=ING1";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }
@@ -231,7 +231,7 @@ Test(command_parameter, invalid_key)
 {
     char req[] = "4\n2\nSEND-DM\n=acu\nFrom=ING1\n\n2022";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }
@@ -240,7 +240,7 @@ Test(command_parameter, invalid_value)
 {
     char req[] = "4\n2\nSEND-DM\nUser=\nFrom=ING1\n\n2022";
 
-    struct request *r = parse_request(req);
+    struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
 }

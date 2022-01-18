@@ -1,8 +1,8 @@
-#include "request_parser.h"
+#include "message.h"
 int main(void)
 {
-    struct request *r =
-        parse_request("4\n2\nSEND-DM\na=aa\nb=bb\nc=cc\nd=dd\n\n2022");
-    free_request(r);
+    struct message *r = parse_message("9223372036854775807\n9223372036854775807"
+                                      "\nSEND-DM\nUser=acu\nFrom=ING1\n\n");
+    free_message(r);
     return 0;
 }
