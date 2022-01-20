@@ -73,6 +73,15 @@ void free_partial_message(struct message *message);
  * @param value The value of the object, NULL if no value
  * @return offset to the next object, 0 if no more object
  */
-int get_message_next_parameter_kv(char *params_start, char **key, char **value);
+int message_next_key_value(char *params_start, char **key, char **value);
 
+/**
+ * @brief Takes a message struct and composes it
+ * into a struct
+ *
+ * @param message The message as a message struct
+ * 
+ * @return char pointer
+ */
+char *compose_message(struct message *);
 #endif /* MESSAGE_H */
