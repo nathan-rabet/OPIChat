@@ -3,10 +3,12 @@ CFLAGS = -Wextra -Wall -Werror -pedantic -g -std=c99
 CFLAGS += -D_GNU_SOURCE
 CFLAGS += -Iinclude
 
+BUILD = build
+
 LDFLAGS = -fsanitize=address
 
 SRC = $(shell find src -name '*.c')
-OBJS = $(SRC:.c=.o)
+OBJS = $(SRC:%.c=$(BUILD)/%.o)
 
 TEST_SRC = $(shell find tests/unit_testing -name '*.c')
 TEST_OBJS = $(TEST_SRC:.c=.o)
@@ -17,39 +19,43 @@ DYN_LIB = libmalloc.so
 # OPIchat
 all: opichat_server opichat_client
 	
-opichat_server: $(OBJS) src/opichat_server.o
+# Compile server and client
+opichat_server: $(OBJS) src/server_main.o
 	$(CC) $(LDFLAGS) -o opichat_server $^
 
-opichat_client: $(OBJS) src/opichat_client.o
+opichat_client: $(OBJS) src/client_main.o
 	$(CC) $(LDFLAGS) -o opichat_client $^
 
+# Run test suite
 check: tests
-	./tests_suite
+	./$(BUILD)/tests_suite
 
 tests: $(TEST_OBJS) $(OBJS)
-	$(CC) $(TEST_LDFLAGS) -fsanitize=address -DDEBUG -o tests_suite $^
+	$(CC) $(TEST_LDFLAGS) -fsanitize=address -DDEBUG -o $(BUILD)/tests_suite $^
 
-
+# Disable ASAN logs
 check_no_asan: tests_no_asan
-	./tests_suite
+	./$(BUILD)/tests_suite
 
 tests_no_asan: $(TEST_OBJS) $(OBJS)
-	$(CC) $(TEST_LDFLAGS) -DDEBUG -o tests_suite $^
+	$(CC) $(TEST_LDFLAGS) -DDEBUG -o $(BUILD)/tests_suite $^
 
 test_main: $(OBJS) tests/test_main.o
-	$(CC) $(CFLAGS) $(LDFLAGS) -o test_main $^
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BUILD)/test_main $^
 
 # dynamic libraries
-%.so: src/library/%.o
+$(BUILD)/%.so: src/library/%.o $(BUILD)
 	$(CC) -shared -fPIC -o $@ $<
 
-%.o: %.c
+# object files
+$(BUILD)/%.o: %.c $(BUILD)
+	mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(TEST_OBJS) src/*.o
+	rm -f $(BUILD)
 
-.PHONY: clean check
+.PHONY: clean check check_no_asan
 
 # basics
 basic_client:
