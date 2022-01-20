@@ -27,18 +27,16 @@ opichat_client: $(OBJS) src/client_main.o
 	$(CC) $(LDFLAGS) -o opichat_client $^
 
 # Run test suite
-check: tests
+check: 
+	$(MAKE) ADD_COMPIL="-DDEBUG tests"
+	./$(BUILD)/tests_suite
+
+check_no_asan: 
+	$(MAKE) CFLAGS="$(CFLAGS) -DDEBUG" LDFLAGS="" tests
 	./$(BUILD)/tests_suite
 
 tests: $(TEST_OBJS) $(OBJS)
-	$(CC) $(TEST_LDFLAGS) -fsanitize=address -DDEBUG -o $(BUILD)/tests_suite $^
-
-# Disable ASAN logs
-check_no_asan: tests_no_asan
-	./$(BUILD)/tests_suite
-
-tests_no_asan: $(TEST_OBJS) $(OBJS)
-	$(CC) $(TEST_LDFLAGS) -DDEBUG -o $(BUILD)/tests_suite $^
+	$(CC) $(TEST_LDFLAGS) $(LDFLAGS) -o $(BUILD)/tests_suite $^
 
 test_main: $(OBJS) tests/test_main.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BUILD)/test_main $^
@@ -50,7 +48,7 @@ $(BUILD)/%.so: src/library/%.o $(BUILD)
 # object files
 $(BUILD)/%.o: %.c $(BUILD)
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(ADD_COMPIL) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(BUILD)
