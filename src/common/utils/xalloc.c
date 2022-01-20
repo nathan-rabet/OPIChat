@@ -18,7 +18,8 @@ void *xmalloc(size_t nmemb, size_t size)
 void *xcalloc(size_t nmemb, size_t size)
 {
 #ifdef DEBUG // Disabled in production for performance reasons
-    if (__builtin_umull_overflow(nmemb, size, NULL))
+    size_t useless;
+    if (__builtin_umull_overflow(nmemb, size, &useless))
         errx(1, "xmalloc: overflow detected : %zu * %zu", nmemb, size);
 #endif
     void *res = calloc(nmemb, size);
