@@ -75,4 +75,15 @@ void free_partial_message(struct message *message);
  */
 int get_message_next_parameter_kv(char *params_start, char **key, char **value);
 
+/**
+ * @brief Takes a message struct and serializes it
+ * to a string
+ *
+ * @param message The message as a message struct
+ * 
+ * @return char pointer
+ */
+char *compose_message(struct message *);
+
+
 #endif /* MESSAGE_H */
