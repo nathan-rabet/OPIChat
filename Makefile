@@ -1,3 +1,8 @@
+RM=rm -rf
+
+CLIENT_EXE=client_main
+SERVER_EXE=server_main
+
 CC=gcc
 CFLAGS = -Wextra -Wall -Werror -pedantic -g -std=c99 
 CFLAGS += -D_GNU_SOURCE
@@ -7,7 +12,7 @@ BUILD = build
 
 LDFLAGS = -fsanitize=address
 
-SRC = $(shell find src -name '*.c')
+SRC = $(shell find src -name '*.c' ! -name '$(CLIENT_EXE).c' ! -name '$(SERVER_EXE).c')
 OBJS = $(SRC:%.c=$(BUILD)/%.o)
 
 TEST_SRC = $(shell find tests/unit_testing -name '*.c')
@@ -42,12 +47,12 @@ $(BUILD)/%.so: src/library/%.o $(BUILD)
 	$(CC) -shared -fPIC -o $@ $<
 
 # object files
-$(BUILD)/%.o: %.c $(BUILD)
+$(BUILD)/%.o: %.c
 	mkdir -p $(dir $@)
 	$(CC) $(ADD_COMPIL) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(BUILD)
+	$(RM) $(BUILD)
 
 .PHONY: clean check check_no_asan
 
