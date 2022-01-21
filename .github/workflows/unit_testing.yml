@@ -12,11 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Update version
-      run: sudo apt-get update
-    - name: Install Homebrew
-      run: sudo apt-get install build-essential procps curl file git
+    - name: Downloading criterion package
+      uses: actions/download-artifact@v1
+      with:
+        name: criterion
+        version: "{{ github.event.pull_request.head.repo.name }}"
+        url: "https://github.com/Snaipe/Criterion/releases/download/v2.3.3/criterion-v2.3.3-linux-x86_64.tar.bz2"
+        path: "/tmp/criterion-v2.3.3-linux-x86_64.tar.bz2"
+    
     - name: Install criterion
-      run: brew install snaipe/soft/criterion
+      run:
+        mkdir -p /tmp/criterion-v2.3.3-linux-x86_64
+        tar -xjf /tmp/criterion-v2.3.3-linux-x86_64.tar.bz2 -C /tmp/criterion-v2.3.3-linux-x86_64
+        cp /tmp/criterion-v2.3.3-linux-x86_64/bin/criterion /usr/local/bin/
     - name: make check
       run: make check
