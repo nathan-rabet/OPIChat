@@ -12,7 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: install criterion
-      run: sudo apt-get install libcriterion-dev
+    - name: Update version
+      run: sudo apt-get update
+    - name: Install Homebrew
+      run: sudo apt-get install build-essential procps curl file git
+    - name: Install criterion
+      run: brew install snaipe/soft/criterion
     - name: make check
       run: make check
