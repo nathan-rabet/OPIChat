@@ -27,11 +27,7 @@ opichat_client: $(OBJS) src/client_main.o
 	$(CC) $(LDFLAGS) -o opichat_client $^
 
 # Run test suite
-check: 
-	$(MAKE) ADD_COMPIL="-DDEBUG tests"
-	./$(BUILD)/tests_suite
-
-check_no_asan: 
+check:
 	$(MAKE) CFLAGS="$(CFLAGS) -DDEBUG" LDFLAGS="" tests
 	./$(BUILD)/tests_suite
 
