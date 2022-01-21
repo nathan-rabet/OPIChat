@@ -29,7 +29,7 @@ static int message_size(struct message *message)
         for (unsigned j = 0; j < message->nb_parameters; j++)
         {
             i += strlen(message->command_parameters[j].key) + 1;
-            i += 64; // Must be changed to optimize memory and for long messages
+            i += strlen((char *) message->command_parameters[j].value) + 1;
         }
     }
     if (message->payload_size != 0 && message->payload != NULL)
