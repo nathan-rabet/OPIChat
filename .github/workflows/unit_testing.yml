@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Downloading criterion package
-        run: wget https://github.com/Snaipe/Criterion/releases/download/v2.3.3/criterion-v2.3.3-linux-x86_64.tar.bz2 -O /tmp/criterion.tar.bz2
+        run: wget https://github.com/Snaipe/Criterion/releases/download/v2.3.3/criterion-v2.3.3-linux-x86_64.tar.bz2 -O tmp/criterion.tar.bz2
 
       - name: Initializing tmp directory
         run: mkdir -p tmp/criterion
