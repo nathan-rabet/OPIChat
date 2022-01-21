@@ -14,12 +14,16 @@ jobs:
       - name: Downloading criterion package
         run: wget https://github.com/Snaipe/Criterion/releases/download/v2.3.3/criterion-v2.3.3-linux-x86_64.tar.bz2 -O /tmp/criterion.tar.bz2
 
-      - name: Install criterion
-        run: mkdir -p /tmp/criterion &&
-          tar -xjf /tmp/criterion.tar.bz2 -C /tmp/criterion &&
-          cp -r /tmp/criterion/criterion-v2.3.3/share/* /usr/local/share &&
-          cp -r /tmp/criterion/criterion-v2.3.3/bin/* /usr/local/lib &&
-          cp -r /tmp/criterion/criterion-v2.3.3/include/* /usr/local/include
+      - name: Initializing tmp directory
+        run: mkdir -p tmp/criterion
+        
+      - name: Extracting criterion package
+        run: tar -xjf tmp/criterion.tar.bz2 -C tmp/criterion
+
+      - name: Installing criterion package
+        run: sudo cp -r tmp/criterion/criterion-v2.3.3/share/* /usr/local/share &&
+          sudo cp -r tmp/criterion/criterion-v2.3.3/bin/* /usr/local/lib &&
+          sudo cp -r tmp/criterion/criterion-v2.3.3/include/* /usr/local/include
 
       - name: make check
         run: make check
