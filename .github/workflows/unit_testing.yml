@@ -2,26 +2,24 @@ name: Run test suite
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   unit_testing:
-    
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Downloading criterion package
-      run: wget https://github.com/Snaipe/Criterion/releases/download/v2.3.3/criterion-v2.3.3-linux-x86_64.tar.bz2 -O criterion.tar.bz2
-      
-    - name: Install criterion
-      run:
-        mkdir -p /tmp/criterion
-        tar -xjf /tmp/criterion.tar.bz2 -C /tmp/criterion
-        cp -r /tmp/criterion/criterion-v2.3.3/share/* /usr/local/share
-        cp -r /tmp/criterion/criterion-v2.3.3/bin/* /usr/local/lib
-        cp -r /tmp/criterion/criterion-v2.3.3/include/* /usr/local/include
+      - uses: actions/checkout@v2
+      - name: Downloading criterion package
+        run: wget https://github.com/Snaipe/Criterion/releases/download/v2.3.3/criterion-v2.3.3-linux-x86_64.tar.bz2 -O criterion.tar.bz2
 
-    - name: make check
-      run: make check
+      - name: Install criterion
+        run: mkdir -p /tmp/criterion &&
+          tar -xjf /tmp/criterion.tar.bz2 -C /tmp/criterion &&
+          cp -r /tmp/criterion/criterion-v2.3.3/share/* /usr/local/share &&
+          cp -r /tmp/criterion/criterion-v2.3.3/bin/* /usr/local/lib &&
+          cp -r /tmp/criterion/criterion-v2.3.3/include/* /usr/local/include
+
+      - name: make check
+        run: make check
