@@ -43,7 +43,7 @@ Test(client, find_client)
         .sa_family = AF_INET,
     };
 
-    client = add_client(client, 1, addr, sizeof(addr));
+    client = add_client(NULL, 1, addr, sizeof(addr));
     client = add_client(client, 2, addr, sizeof(addr));
 
     found_client = find_client(client, 1);
@@ -56,8 +56,8 @@ Test(client, find_client)
     cr_assert_eq(found_client->client_socket, 2);
     cr_assert_eq(found_client->client_sockaddr->ss_family, AF_INET);
 
-    found_client = remove_client(found_client, 1);
-    found_client = remove_client(found_client, 2);
+    client = remove_client(client, 1);
+    client = remove_client(client, 2);
 
-    cr_assert_null(found_client);
+    cr_assert_null(client, "Found client is not null: %p", found_client);
 }

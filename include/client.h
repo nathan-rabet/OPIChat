@@ -4,8 +4,6 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-#define CLIENT_DEFAULT_BUFFER_SIZE 2048
-
 /**
  * @brief Contain all the information about all clients (linked list)
  *

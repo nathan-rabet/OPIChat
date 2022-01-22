@@ -66,27 +66,24 @@ static void __free_client(struct client *client)
 
 struct client *remove_client(struct client *client, int client_socket)
 {
-    if (client)
+    struct client *prev = NULL;
+    struct client *parser = client;
+    while (parser)
     {
-        if (client->client_socket == client_socket)
+        if (parser->client_socket == client_socket)
         {
-            struct client *client_connection = client->next;
-            __free_client(client);
-            return client_connection;
-        }
+            if (prev) // If the client is not the first one
+                prev->next = parser->next;
+            else // If the client is the first one
+                client = parser->next;
 
-        struct client *tmp = client;
-        while (tmp->next)
-        {
-            if (tmp->next->client_socket == client_socket)
-            {
-                __free_client(tmp->next);
-                break;
-            }
-            tmp = tmp->next;
+            __free_client(parser);
+            break;
         }
+        prev = parser;
+        parser = parser->next;
     }
-    return NULL;
+    return client;
 }
 
 struct client *find_client(struct client *client, int client_socket)

@@ -16,10 +16,10 @@ SRC = $(shell find src -name '*.c' ! -name '$(CLIENT_EXE).c' ! -name '$(SERVER_E
 OBJS = $(SRC:%.c=$(BUILD)/%.o)
 
 TEST_SRC = $(shell find tests/unit_testing -name '*.c')
-TEST_OBJS = $(TEST_SRC:.c=.o)
+TEST_OBJS = $(TEST_SRC:%.c=$(BUILD)/%.o)
 TEST_LDFLAGS = -lcriterion
 
-DYN_LIB = libmalloc.so
+DYN_LIB = $(BUILD)/libmalloc.so
 
 # OPIchat
 all: opichat_server opichat_client
@@ -52,9 +52,9 @@ $(BUILD)/%.o: %.c
 	$(CC) $(ADD_COMPIL) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(BUILD)
+	$(RM) $(BUILD) $(DYN_LIB)
 
-.PHONY: clean check check_no_asan
+.PHONY: clean check
 
 # basics
 basic_client:
