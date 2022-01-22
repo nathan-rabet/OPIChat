@@ -8,6 +8,9 @@
  * @brief Contain all the information about all clients (linked list)
  *
  */
+
+struct client *clients;
+
 struct client
 {
     int client_socket; // Socket FD of the client

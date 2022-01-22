@@ -4,8 +4,13 @@
 #include <stdlib.h>
 #include <sys/epoll.h>
 
+#include "client.h"
 #include "epoll_handler.h"
 #include "logger.h"
+#include "xalloc.h"
+
+//! GLOBAL VARIABLE : Hard to understand the first time
+extern struct client *clients;
 
 int main(int argc, char *argv[])
 {
@@ -30,8 +35,8 @@ int main(int argc, char *argv[])
                     "Impossible to add server socket to epoll instance : %s",
                     strerror(errno));
 
-    struct connection_t *connections = NULL;
     struct epoll_event events[MAX_EVENTS] = { 0 };
+
     while (true)
     {
         int nb_events = epoll_wait(epoll_instance, events, 1, -1);
@@ -41,11 +46,9 @@ int main(int argc, char *argv[])
         for (int i = 0; i < nb_events; i++)
         {
             if (events[i].data.fd == server_socket)
-                connections =
-                    accept_client(epoll_instance, server_socket, connections);
+                clients = accept_client(epoll_instance, server_socket);
             else
-                connections =
-                    communicate(epoll_instance, events[i].data.fd, connections);
+                clients = communicate(epoll_instance, events[i].data.fd);
         }
     }
     return 0;

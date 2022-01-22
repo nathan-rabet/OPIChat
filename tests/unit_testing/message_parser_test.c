@@ -291,3 +291,12 @@ Test(command_parameter, duplicate_key)
 
     cr_assert_eq(r, NULL);
 }
+
+Test(command_parameter, incomplete_request)
+{
+    char req[] = "4\n2\nSEND-D";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_eq(r, NULL);
+}

@@ -1,11 +1,13 @@
 #include "epoll-server.h"
 
 #include <errno.h>
+#include <netdb.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/epoll.h>
-#include <unistd.h>
+#include <sys/socket.h>
+#include <sys/types.h>
 
 #include "utils/xalloc.h"
 
