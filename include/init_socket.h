@@ -8,14 +8,6 @@
 #define BACKLOG 16
 
 /**
- * @brief Init the socket system and bind it
- *
- * @param addrinfo The address info to use
- * @return The created socket, exit on error
- */
-int setup_socket_basis(struct addrinfo *addrinfo);
-
-/**
  * @brief Create a listening socket
  *
  * @param ip The ip to listen on
