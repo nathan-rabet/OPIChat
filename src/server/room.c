@@ -103,5 +103,5 @@ struct room *find_room(struct room *room, const char *room_name)
     }
 
     errno = ROOM_ERROR_NOT_FOUND;
-    return room;
+    return NULL;
 }

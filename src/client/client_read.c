@@ -9,8 +9,7 @@
 
 #define DEFAULT_BUFFER_SIZE 1
 
-
-int create_and_connect(struct addrinfo *addrinfo)
+static int create_and_connect(struct addrinfo *addrinfo)
 {
     for (; addrinfo != NULL; addrinfo = addrinfo->ai_next)
     {
@@ -31,7 +30,7 @@ int create_and_connect(struct addrinfo *addrinfo)
     exit(1);
 }
 
-int prepare_socket(const char *ip, const char *port)
+int setup_client_socket(const char *ip, const char *port)
 {
     struct addrinfo hints;
     struct addrinfo *addrinfo;

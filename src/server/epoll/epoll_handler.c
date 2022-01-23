@@ -1,3 +1,6 @@
+#include "epoll_handler.h"
+
+#include <errno.h>
 #include <netdb.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -13,47 +16,11 @@
 #include "safe_io.h"
 #include "xalloc.h"
 
+extern int epoll_instance;
 extern struct client *clients;
 extern struct room *rooms;
 
-void send_invalid_message_error(int client_socket)
-{
-    // Send an error message to the client
-    struct message error_response = { 0 };
-
-    error_response.status_code = ERROR_MESSAGE_CODE;
-    error_response.command = "INVALID";
-    error_response.payload = "Bad request";
-
-    char *encoded_response = compose_message(&error_response);
-
-    if (safe_send(client_socket, encoded_response, strlen(encoded_response),
-                  MSG_EOR)
-        == -1)
-        write_warning("Failed to send error message to client %d",
-                      client_socket);
-}
-
-struct client *accept_client(int epoll_instance, int server_socket)
-{
-    struct sockaddr client_sockaddr;
-    socklen_t sockaddr_len;
-
-    int client_socket = accept(server_socket, &client_sockaddr, &sockaddr_len);
-
-    if (client_socket == -1)
-        return clients;
-
-    struct epoll_event event;
-    event.events = EPOLLIN;
-    event.data.fd = client_socket;
-    if (epoll_ctl(epoll_instance, EPOLL_CTL_ADD, client_socket, &event) == -1)
-        write_error("Impossible to add the client to the epoll instance");
-
-    return add_client(clients, client_socket, client_sockaddr, sockaddr_len);
-}
-
-struct client *delete_epoll_client(int epoll_instance, int client_socket)
+static struct client *_delete_epoll_client(int client_socket)
 {
     struct epoll_event event;
     event.events = EPOLLIN;
@@ -66,24 +33,69 @@ struct client *delete_epoll_client(int epoll_instance, int client_socket)
     return remove_client(clients, client_socket);
 }
 
-struct client *communicate(int epoll_instance, int client_socket)
+static void _send_invalid_message_error(struct client *client)
+{
+    // Send an error message to the client
+    struct message error_response = { 0 };
+
+    error_response.status_code = ERROR_MESSAGE_CODE;
+    error_response.command = "INVALID";
+    error_response.payload = "Bad request";
+
+    char *encoded_response = compose_message(&error_response);
+
+    safe_send(client->client_socket, encoded_response, strlen(encoded_response),
+              MSG_EOR);
+    if (errno = ECONNRESET)
+    {
+        write_warning("Client %s with socket %d has disconnected",
+                      get_client_ip(client), client->client_socket);
+        clients = _delete_epoll_client(client->client_socket);
+    }
+}
+
+void accept_client(int server_socket)
+{
+    struct sockaddr client_sockaddr;
+    socklen_t sockaddr_len;
+
+    int client_socket = accept(server_socket, &client_sockaddr, &sockaddr_len);
+
+    if (client_socket != -1)
+    {
+        struct epoll_event event;
+        event.events = EPOLLIN;
+        event.data.fd = client_socket;
+        if (epoll_ctl(epoll_instance, EPOLL_CTL_ADD, client_socket, &event)
+            == -1)
+            write_error("Impossible to add the client to the epoll instance");
+
+        clients =
+            add_client(clients, client_socket, client_sockaddr, sockaddr_len);
+
+        write_info("Client %s with socket %d has connected",
+                   get_client_ip(clients), clients);
+    }
+
+    else
+        write_error("Impossible to accept a new client");
+}
+
+void communicate(int client_socket)
 {
     struct client *client = find_client(clients, client_socket);
 
-    client->nb_read = safe_recv(client_socket, (void *)&client->buffer, 0);
-    if (client->nb_read == -1)
+    struct message *m = safe_recv(client_socket, 0);
+
+    if (errno != 0 && errno != ECONNRESET)
     {
         write_warning("Impossible to read from the client %s with socket %d",
                       get_client_ip(client), client_socket);
-        return delete_epoll_client(epoll_instance, client_socket);
+        clients = _delete_epoll_client(client_socket);
     }
 
-    struct message *m = parse_message(client->buffer);
-    if (!m)
-    {
-        send_invalid_message_error(client_socket);
-        return clients;
-    }
+    else if (!m)
+        _send_invalid_message_error(client);
 
     else
     {
@@ -132,7 +144,7 @@ struct client *communicate(int epoll_instance, int client_socket)
             write_warning("Client %s with socket %d sent a message with an "
                           "unsupported command",
                           get_client_ip(client), client_socket);
-            send_invalid_message_error(client_socket);
+            _send_invalid_message_error(client);
         }
 
         if (response)
@@ -147,6 +159,4 @@ struct client *communicate(int epoll_instance, int client_socket)
             free(response);
         }
     }
-
-    return clients;
 }

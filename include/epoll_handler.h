@@ -7,50 +7,32 @@
 
 #include "client.h"
 
+int epoll_instance;
+
 /**
  * @brief The length of the event array, must be greater than zero
  */
 #define MAX_EVENTS 64
 
 /**
- * @brief Iterate over the struct addrinfo elements to create and bind a socket
+ * @brief Accept a new client and add it to the `struct client`
  *
- * @param addrinfo struct addrinfo elements
+ * @warning The gloal `struct client` may be modified
  *
- * @return The created socket or exit with 1 if there is an error
- *
- * Try to create and connect a socket with every addrinfo element until it
- * succeeds
- *
- */
-int create_and_bind(struct addrinfo *addrinfo);
-
-/**
- * @brief Initialize the Addrinfo struct and call create_and bind() and
- * listen(2)
- *
- * @param ip IP address of the server
- * @param port Port of the server
- *
- * @return The created socket
- *
- * Initialize the struct addrinfo needed by create_and_bind() before calling
- * it. When create_and_bind() returns a valid socket, set the socket to
- * listening and return it.
- */
-int prepare_socket(const char *ip, const char *port);
-
-/**
- * @brief Accept a new client and add it to the connection_t struct
- *
- * @param epoll_instance the epoll instance
- * @param server_socket listening socket
- * @param connection the connection linked list with all the current
- * connections
+ * @param server_socket Listening socket
  *
  * @return The connection struct with the new client added
  */
-struct client *accept_client(int epoll_instance, int server_socket);
+void accept_client(int server_socket);
+
+/**
+ * @brief Establish recv/send communication with the client
+ *
+ * @warning The gloal `struct client` may be modified
+ *
+ * @param client_socket The socket of the client
+ */
+void communicate(int client_socket);
 
 #endif /* EPOLL_SERVER_H_ */
 
