@@ -9,7 +9,6 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-#include "safe_io.h"
 #include "xalloc.h"
 
 /**
@@ -53,3 +52,4 @@ ssize_t safe_recv(int sockfd, void **buf, int flags);
 ssize_t safe_read(int fd, void **buf);
 
 #endif /* SAFE_IO_H */
+

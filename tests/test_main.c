@@ -3,17 +3,19 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "room.h"
+#include "message.h"
+#include "read_from_stdin.h"
+#include "client_read.h"
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    struct room *room1 = NULL;
-    struct room *room2 = NULL;
+    if (argc != 3)
+    {
+        fprintf(stderr, "Usage: %s SERVER_IP SERVER_PORT\n", argv[0]);
+        exit(1);
+    }
 
-    room1 = add_room(room1, "Room 1", 1);
-    room2 = add_room(room1, "Room 1", 2);
-
-    room1 = remove_room(room2, "Room 1", 1);
-
-    printf("%s\n", room1->name);
+    int socket = prepare_socket(argv[1], argv[2]);
+    read_from_stdin(socket);
 }
+
