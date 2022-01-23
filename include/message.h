@@ -26,6 +26,15 @@ struct message
 };
 
 /**
+ * @brief Initializes a struct message with the param status code affected
+ * 
+ * 
+ * @param status_code 
+ * @return struct message* 
+ */
+struct message *init_message(uint8_t status_code);
+
+/**
  * @brief Structure to store a command parameter
  *
  */

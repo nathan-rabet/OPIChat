@@ -28,8 +28,8 @@ static int message_size(struct message *message)
     {
         for (unsigned j = 0; j < message->nb_parameters; j++)
         {
-            i += strlen(message->command_parameters[j].key) + 1;
-            i += strlen((char *) message->command_parameters[j].value) + 1;
+            i += strlen(message->command_parameters[j].key) + 2;
+            i += strlen((char *) message->command_parameters[j].value) + 2;
         }
     }
     if (message->payload_size != 0 && message->payload != NULL)
@@ -46,28 +46,27 @@ char *compose_message(struct message *message)
     char *ret = xmalloc(1, message_size(message)); // Compute expected length of message
     char *tmp; // Values that we will concatenate to our main mesage
     ret[0] = '\0';
+
     //strcat(ret, payload_size)
-    if (message->payload_size != 0) // if payload is not empty
-    {
-        tmp = xmalloc(number_of_decimal(message->payload_size) + 1, sizeof(char));
-        strcat(ret, my_itoa(message->payload_size, tmp));
-        free(tmp);
-        strcat(ret, "\n");
-    }
+    tmp = xmalloc(number_of_decimal(message->payload_size) + 1, sizeof(char));
+    strcat(ret, my_itoa(message->payload_size, tmp));
+    free(tmp);
+    strcat(ret, "\n");
+
     //strcat(ret, status_code)
     tmp = xmalloc(number_of_decimal(message->status_code) + 1, sizeof(char));
     strcat(ret, my_itoa(message->status_code, tmp));
     free(tmp);
     strcat(ret, "\n");
 
+    if(message->command != NULL && strcmp(message->command, "") != 0)
+    {
+        strcat(ret, message->command);
+        strcat(ret, "\n");
+    }
     //strcat(ret, command) and command parameters
     if ( message->command != NULL && strcmp(message->command, "SEND-DM") == 0)
     {
-        if(strcmp(message->command, "") != 0)
-        {
-            strcat(ret, message->command);
-            strcat(ret, "\n");
-        }
         unsigned i;
         for (i = 0; i < message->nb_parameters; i++)
         {
@@ -76,11 +75,15 @@ char *compose_message(struct message *message)
             strcat(ret, message->command_parameters[i].value);
             strcat(ret, "\n");
         }
-        if (i != 0)
-            strcat(ret, "\n");
-
     }
-    strcat(ret, message->payload);
+    ret = xrealloc(ret, strlen(ret) + 2, sizeof(char));
+    strcat(ret, "\n");
+
+    if (message->payload_size != 0)
+    {
+        ret = xrealloc(ret, strlen(ret) + strlen(message->payload) + 3, sizeof(char));
+        strcat(ret, message->payload);
+    }
     ret = xrealloc(ret, strlen(ret) + 1,  sizeof(char)); // In case too much memory was allocated
     return ret;
 }

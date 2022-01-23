@@ -20,7 +20,18 @@ Test(message_serializing, subject_server_notification)
 
     struct message *r = parse_message(req);
     char *serialized = compose_message(r);
-    cr_assert_str_eq(serialized, "4\n2\nSEND-DM\nUser=acu\nFrom=ING1\n\n2022");
+    cr_assert_str_eq(serialized, req);
+    free_message(r);
+    free(serialized);
+}
+
+Test(message_serializing, basic_ping)
+{
+    char req[] = "1\n0\nPING\n\na";
+
+    struct message *r = parse_message(req);
+    char *serialized = compose_message(r);
+    cr_assert_str_eq(serialized, req);
     free_message(r);
     free(serialized);
 }
@@ -35,17 +46,6 @@ Test(message_serializing, key_value_is_payload)
     free_message(r);
     free(serialized);
 
-}
-
-Test(message_serializing, no_command_parameter)
-{
-    char req[] = "9\n2\nSEND-DM\nFrom=ING1";
-
-    struct message *r = parse_message(req);
-    char *serialized = compose_message(r);
-    cr_assert_str_eq(serialized, req);
-    free_message(r);
-    free(serialized);
 }
 
 Test(message_serializing, multiple_command_parameters)

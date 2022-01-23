@@ -1,7 +1,16 @@
 #include "message.h"
-int main(void)
+#include "read_from_stdin.h"
+#include "client_read.h"
+
+int main(int argc, char *argv[])
 {
-    struct message *r = parse_message("7\n2\nSEND-DM\nUser=acu\nYolerap");
-    free_partial_message(r);
-    return 0;
+    if (argc != 3)
+    {
+        fprintf(stderr, "Usage: %s SERVER_IP SERVER_PORT\n", argv[0]);
+        exit(1);
+    }
+
+    int socket = prepare_socket(argv[1], argv[2]);
+    read_from_stdin(socket);
 }
+
