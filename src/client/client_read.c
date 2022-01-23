@@ -10,8 +10,7 @@
 
 #define DEFAULT_BUFFER_SIZE 1
 
-
-int create_and_connect(struct addrinfo *addrinfo)
+static int create_and_connect(struct addrinfo *addrinfo)
 {
     for (; addrinfo != NULL; addrinfo = addrinfo->ai_next)
     {

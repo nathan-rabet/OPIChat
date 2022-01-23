@@ -2,39 +2,43 @@
 #include <stdio.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <pthread.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
-#include "message.h"
-#include "read_from_stdin.h"
 #include "client_read.h"
+#include "init_socket.h"
+#include "message.h"
+#include "safe_io.h"
 
-/*int main(int argc, char *argv[])
+
+int main(void)
 {
-    if (argc != 3)
+    struct message *m = NULL;
+    char buf_in[] = "4\n0\nSEND-DM\nUser=acu\n\n2022";
+
+    // Fork a child process to send data and another to receive it
+    pid_t pid = fork();
+    if (pid == 0)
     {
-        fprintf(stderr, "Usage: %s SERVER_IP SERVER_PORT\n", argv[0]);
-        exit(1);
+        // H4ck3r man
+        // Init a socket with the server
+        usleep(100 * 1000);
+        int s_clientfd = setup_client_socket("127.0.0.1", "8082");
+
+        send(s_clientfd, buf_in, 10, MSG_MORE);
+        sleep(3);
+        send(s_clientfd, buf_in + 10, 10, MSG_MORE);
+        sleep(7);
+        send(s_clientfd, buf_in + 20, 5, MSG_MORE);
+        sleep(20);
+        send(s_clientfd, buf_in + 25, 2, MSG_EOR);
+        close(s_clientfd);
+        exit(0);
     }
-
-    int socket = setup_client_socket(argv[1], argv[2]);
-    pthread_t *send_message = NULL;
-    pthread_t *receive_from_server = NULL;
-    int ret_send =  pthread_create (send_message, NULL, &read_from_stdin_thread, &socket);
-    int ret_recv = pthread_create (receive_from_server, NULL, &read_thread, &socket);
-    pthread_join(ret_send, NULL);
-    printf("ret_recv = %d\n", ret_recv);
-    printf("ret_send = %d\n", ret_send);
-    return 0;
-}*/
-
-int main(int argc, char *argv[])
-{
-    if (argc != 3)
+    else
     {
-        fprintf(stderr, "Usage: %s SERVER_IP SERVER_PORT\n", argv[0]);
-        exit(1);
-    }
-
-    int socket = setup_client_socket(argv[1], argv[2]);
-    read_from_stdin(socket);
+        // Server process
+        // Init a socket with the client
+        int s_listenfd = setup_server_socket("127.0.0.1", "8082");
+        int s_clientfd = accept(s_listenfd, NULL, NULL);
 }

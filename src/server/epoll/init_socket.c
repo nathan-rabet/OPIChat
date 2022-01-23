@@ -7,7 +7,13 @@
 
 #include "logger.h"
 
-int setup_socket_basis(struct addrinfo *addrinfo)
+/**
+ * @brief Init the socket system and bind it
+ *
+ * @param addrinfo The address info to use
+ * @return The created socket, exit on error
+ */
+static int _setup_socket_basis(struct addrinfo *addrinfo)
 {
     for (; addrinfo != NULL; addrinfo = addrinfo->ai_next)
     {
@@ -31,7 +37,7 @@ int setup_socket_basis(struct addrinfo *addrinfo)
     return -1;
 }
 
-int setup_socket(const char *ip, const char *port)
+int setup_server_socket(const char *ip, const char *port)
 {
     struct addrinfo hints = { 0 };
     struct addrinfo *addrinfo;
@@ -42,7 +48,7 @@ int setup_socket(const char *ip, const char *port)
         raise_panic(EXIT_FAILURE, "Could not get address info for %s:%s", ip,
                     port);
 
-    int server_socket = setup_socket_basis(addrinfo);
+    int server_socket = _setup_socket_basis(addrinfo);
 
     freeaddrinfo(addrinfo);
 

@@ -50,16 +50,19 @@ static void __write_logger(const char *str, const char *banner,
 #else
     fprintf(logger_file, "[%s][%s] ", time_str, banner);
 #endif
-    vfprintf(logger_file, str, args);
-
+    va_list apcpy;
+    va_copy(apcpy, args);
     if (cp_on_file)
     {
         fprintf(cp_on_file, "[%s] ", banner);
-        vfprintf(cp_on_file, str, args);
+        vfprintf(cp_on_file, str, apcpy);
         fprintf(cp_on_file, "\n");
+        fflush(cp_on_file);
     }
 
+    vfprintf(logger_file, str, args);
     fprintf(logger_file, "\n");
+    fflush(logger_file);
 }
 
 void write_logger(const char *banner, FILE *cp_on_file, const char *str, ...)
