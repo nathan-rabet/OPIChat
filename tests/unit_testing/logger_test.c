@@ -1,4 +1,5 @@
 #include <criterion/criterion.h>
+#include <criterion/redirect.h>
 #include <unistd.h>
 
 #include "logger.h"
@@ -14,7 +15,7 @@ Test(logger, logger_init)
     unlink("logger_test_init.log");
 }
 
-Test(logger, log_info)
+Test(logger, log_info, .init = cr_redirect_stdout)
 {
     logger_init("logger_test_info.log");
     write_info("Hello world");
@@ -31,7 +32,7 @@ Test(logger, log_info)
     unlink("logger_test_info.log");
 }
 
-Test(logger, log_warning)
+Test(logger, log_warning, .init = cr_redirect_stderr)
 {
     logger_init("logger_test_warning.log");
     write_warning("Hello world");
@@ -48,7 +49,7 @@ Test(logger, log_warning)
     unlink("logger_test_warning.log");
 }
 
-Test(logger, log_error)
+Test(logger, log_error, .init = cr_redirect_stderr)
 {
     logger_init("logger_test_error.log");
     write_error("Hello world");

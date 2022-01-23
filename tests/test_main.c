@@ -3,13 +3,17 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "message.h"
+#include "room.h"
 
 int main(void)
 {
-    char req[] = "0\n1\nSEND-DM\nUser=acu\n\n";
+    struct room *room1 = NULL;
+    struct room *room2 = NULL;
 
-    struct message *r = parse_message(req);
+    room1 = add_room(room1, "Room 1", 1);
+    room2 = add_room(room1, "Room 1", 2);
 
-    printf("%s\n", r->payload);
+    room1 = remove_room(room2, "Room 1", 1);
+
+    printf("%s\n", room1->name);
 }
