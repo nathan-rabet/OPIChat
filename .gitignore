@@ -8,3 +8,6 @@ tests_suite
 test_main
 opichat_client
 opichat_server
+!.vscode/launch.json
+!.vscode/tasks.json
+*.log

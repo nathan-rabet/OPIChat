@@ -1,0 +1,49 @@
+{
+    "tasks": [
+        {
+            "label": "make test suite",
+            "type": "shell",
+            "command": "/usr/bin/make",
+            "args": [
+                "tests",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "make test_main",
+            "type": "shell",
+            "command": "/usr/bin/make",
+            "args": [
+                "test_main",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "make opichat_server",
+            "type": "shell",
+            "command": "/usr/bin/make",
+            "args": [
+                "opichat_server",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        },
+        {
+            "label": "make opichat_client",
+            "type": "shell",
+            "command": "/usr/bin/make",
+            "args": [
+                "opichat_client",
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}
