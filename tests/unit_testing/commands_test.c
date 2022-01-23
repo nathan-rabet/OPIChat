@@ -45,7 +45,7 @@ Test(commands, dup_true)
     client1->username = NULL;
     client2->username = NULL;
     client1->next = client2;
-    client2->next = client1;
+    client2->next = NULL;
     client1->username = xmalloc(strlen("bonjour") + 1, sizeof(char));
     client2->username = xmalloc(strlen("bonj") + 1, sizeof(char));
     strcpy(client1->username, "bonjour");
@@ -61,7 +61,7 @@ Test(commands, dup_false)
     client1->username = NULL;
     client2->username = NULL;
     client1->next = client2;
-    client2->next = client1;
+    client2->next = NULL;
     client1->username = xmalloc(strlen("bonjour") + 1, sizeof(char));
     client2->username = xmalloc(strlen("b") + 1, sizeof(char));
     strcpy(client1->username, "bonjour");
@@ -77,7 +77,7 @@ Test(commands, login_valid_username)
     client1->username = NULL;
     client2->username = NULL;
     client1->next = client2;
-    client2->next = client1;
+    client2->next = NULL;
     client1->username = xmalloc(strlen("bonjour") + 1, sizeof(char));
     client2->username = xmalloc(strlen("b") + 1, sizeof(char));
     strcpy(client1->username, "bonjour");
@@ -103,7 +103,7 @@ Test(commands, login_duplicate_username)
     client1->username = NULL;
     client2->username = NULL;
     client1->next = client2;
-    client2->next = client1;
+    client2->next = NULL;
     client1->username = xmalloc(strlen("bonjour") + 1, sizeof(char));
     client2->username = xmalloc(strlen("b") + 1, sizeof(char));
     strcpy(client1->username, "bonjour");
@@ -128,7 +128,7 @@ Test(commands, login_invalid_username)
     client1->username = NULL;
     client2->username = NULL;
     client1->next = client2;
-    client2->next = client1;
+    client2->next = NULL;
     client1->username = xmalloc(strlen("bonjour") + 1, sizeof(char));
     client2->username = xmalloc(strlen("b") + 1, sizeof(char));
     strcpy(client1->username, "bonjour");
@@ -144,7 +144,6 @@ Test(commands, login_invalid_username)
     cr_assert_eq(strcmp(response->payload, "Bad username"), 0);
     cr_assert_eq(response->status_code, ERROR_MESSAGE_CODE);
 }
-
 
 /*
 Test(commands, list_users, .disabled = true)

@@ -26,20 +26,14 @@ int username_is_valid(char *s)
 
 int username_not_duplicate(char *name, struct client *client)
 {
-
     struct client *current = client;
-
-    if(client->username != NULL && strcmp(client->username, name) == 0)
-        return 0;
-    current = current->next;
-    while(current != client)
+    while(current != NULL)
     {
         if(strcmp(current->username, name) == 0)
             return 0;
         current = current->next;
     }
     return 1;
-
 }
 
 struct message *handle_login(struct message *msg, struct client *client)
