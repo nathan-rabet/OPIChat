@@ -31,7 +31,7 @@ int setup_socket_basis(struct addrinfo *addrinfo)
     return -1;
 }
 
-int setup_socket_parameters(const char *ip, const char *port)
+int setup_socket(const char *ip, const char *port)
 {
     struct addrinfo hints = { 0 };
     struct addrinfo *addrinfo;

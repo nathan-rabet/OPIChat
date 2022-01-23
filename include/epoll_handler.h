@@ -53,3 +53,4 @@ int prepare_socket(const char *ip, const char *port);
 struct client *accept_client(int epoll_instance, int server_socket);
 
 #endif /* EPOLL_SERVER_H_ */
+
