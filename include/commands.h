@@ -8,7 +8,7 @@ struct message *handle_ping(struct message *msg, struct client *client);
 
 struct message *handle_login(struct message *msg, struct client *client);
 
-struct message *handle_list_users(struct message *msg);
+struct message *handle_list_users(struct message *msg, struct client *client);
 
 struct message *handle_send_dm(struct message *msg, struct client *client);
 
@@ -27,5 +27,7 @@ struct message *handle_send_room(struct message *msg, struct client *client);
 struct message *handle_delete_room(struct message *msg, struct client *client);
 
 struct message *handle_profile(struct message *msg, struct client *client);
+
+int username_not_duplicate(char *name, struct client *client);
 
 #endif /* COMMANDS_H */

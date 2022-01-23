@@ -33,6 +33,8 @@ static int message_size(struct message *message)
     }
     if (message->payload_size != 0 && message->payload != NULL)
         i += strlen(message->payload) + 1;
+    i += 1;  // If we do not have a payload
+
     return i + 3;
 }
 
@@ -63,6 +65,7 @@ char *compose_message(struct message *message)
         strcat(ret, message->command);
         strcat(ret, "\n");
     }
+
     // strcat(ret, command) and command parameters
     if (message->command != NULL && strcmp(message->command, "SEND-DM") == 0)
     {
@@ -75,14 +78,14 @@ char *compose_message(struct message *message)
             strcat(ret, "\n");
         }
     }
-    ret = xrealloc(ret, strlen(ret) + 2, sizeof(char));
-    strcat(ret, "\n");
 
+    strcat(ret, "\n");
     if (message->payload_size != 0)
     {
         ret = xrealloc(ret, strlen(ret) + strlen(message->payload) + 3,
                        sizeof(char));
         strcat(ret, message->payload);
+
     }
     ret = xrealloc(ret, strlen(ret) + 1,
                    sizeof(char)); // In case too much memory was allocated

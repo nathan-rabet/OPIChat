@@ -109,7 +109,7 @@ void communicate(int client_socket)
             response = handle_login(m, client);
 
         else if (strcmp(m->command, "LIST-USERS"))
-            response = handle_list_users(m);
+            response = handle_list_users(m, client);
 
         else if (strcmp(m->command, "SEND-DM"))
             response = handle_send_dm(m, client);
@@ -156,7 +156,7 @@ void communicate(int client_socket)
                 write_warning("Failed to send a response to client %d",
                               client_socket);
             free(encoded_response);
-            free(response);
+            free_partial_message(response);
         }
     }
 }
