@@ -21,8 +21,8 @@ int safe_send(int sockfd, const void *buf, size_t count, int flags)
 
     while (offset < count)
     {
-        ssize_t sent =
-            send(sockfd, (char *)buf + offset, count - offset, flags);
+        ssize_t sent = send(sockfd, (char *)buf + offset, count - offset,
+                            flags | MSG_NOSIGNAL);
         if (sent == -1)
             return -1;
 
@@ -90,9 +90,8 @@ static void *_thread_safe_recv(void *arg)
     {
         // If any client reading error
         if (read_len == -1)
-        {
             return NULL;
-        }
+
         nb_read += read_len;
 
         buf[nb_read] = '\0';
