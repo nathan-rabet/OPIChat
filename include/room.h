@@ -37,11 +37,12 @@ struct room
  *
  * @param room The room linked list with all the rooms
  * @param room_name The name of the room to add
+ * must be alphanumeric, else errno is set to ROOM_ERROR_BAD_NAME
+ * must be unique (not already in linked list), else errno is set to
+ * ROOM_ERROR_DUPPLICATE_NAME
  * @param owner_socket The socket FD of the room owner
  *
  * @return The room linked list with the element added
- *
- * Add the new room element with a head insert
  */
 struct room *add_room(struct room *room, const char *room_name,
                       int owner_socket);
@@ -50,13 +51,13 @@ struct room *add_room(struct room *room, const char *room_name,
  * @brief Remove the room room from the linked list room
  *
  * @param room The room linked list with all the rooms
- * @param room_name The room name to remove
+ * @param room_name The room name to remove,
+ * must be included in the linked list else errno is set to ROOM_ERROR_NOT_FOUND
  * @param demander_socket The socket FD of the client
- * who wants to remove the room
+ * who wants to remove the room, must be the owner of the room else errno is set
+ * to ROOM_ERROR_UNAUTHORIZED
  *
- * @return The room linked list with element removed
- *
- * Iterate over the linked list to find the right room and remove it
+ * @return The room linked list with the element removed
  */
 struct room *remove_room(struct room *room, const char *room_name,
                          int demander_socket);
@@ -67,10 +68,8 @@ struct room *remove_room(struct room *room, const char *room_name,
  * @param room The room linked list with all the rooms
  * @param room_name The room name to find
  *
- * @return The room element of the specific room
- *
- * Iterate over the linked list until it finds the room. If the room
- * is not in the linked list returns NULL
+ * @return The room element of the specific room, if not found errno is set to
+ * ROOM_ERROR_NOT_FOUND
  */
 struct room *find_room(struct room *room, const char *room_name);
 
