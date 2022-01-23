@@ -14,6 +14,7 @@
 #include "xalloc.h"
 
 extern struct client *clients;
+extern struct room *rooms;
 
 void send_invalid_message_error(int client_socket)
 {
