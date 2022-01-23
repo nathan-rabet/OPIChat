@@ -35,7 +35,7 @@ static int message_size(struct message *message)
     if (message->payload_size != 0 && message->payload != NULL)
         i += strlen(message->payload) + 1;
     i += 1;  // If we do not have a payload
-    return i + 2;
+    return i + 3;
 }
 
 
