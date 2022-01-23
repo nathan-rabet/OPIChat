@@ -1,4 +1,3 @@
-
 #ifndef SAFE_IO_H
 #define SAFE_IO_H
 
@@ -53,3 +52,4 @@ ssize_t safe_recv(int sockfd, void **buf, int flags);
 ssize_t safe_read(int fd, void **buf);
 
 #endif /* SAFE_IO_H */
+

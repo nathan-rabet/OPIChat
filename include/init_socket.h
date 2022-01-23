@@ -16,11 +16,11 @@
 int setup_socket_basis(struct addrinfo *addrinfo);
 
 /**
- * @brief Add options to the socket and listen on it
+ * @brief Create a listening socket
  *
  * @param ip The ip to listen on
  * @param port The port to listen on
  * @return The created socket, exit on error
  */
-int setup_socket_parameters(const char *ip, const char *port);
+int setup_socket(const char *ip, const char *port);
 #endif

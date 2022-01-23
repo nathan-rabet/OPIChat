@@ -1,3 +1,8 @@
+#include <fcntl.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #include "message.h"
 #include "read_from_stdin.h"
 #include "client_read.h"
