@@ -56,7 +56,6 @@ int prepare_socket(const char *ip, const char *port)
  * @return int 0 if successfull, 1 if not
  *
  */
-/*
 void _read_from_server(int server_socket)
 {
     ssize_t buf_mult_factor = 1; // Number of times the buffer has been
@@ -115,7 +114,7 @@ void _read_from_server(int server_socket)
     }
     free(buf);
 }
-
+/*
 void communicate(int server_socket)
 {
     ssize_t buf_mult_factor = 1; // buf[DEFAULT_BUFFER_SIZE * buf_mult_factor]
