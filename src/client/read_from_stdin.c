@@ -46,8 +46,11 @@ static int regular_payload(struct message *message, int server_socket)
     {
         strcpy(message->payload, payload); // store the payload in struct message
         message->payload_size = strlen(payload); // Store the payload size in struct message
-        safe_send(server_socket, compose_message(message), strlen(payload) + 1,
-                  MSG_EOR); // send the serialized message to the server :WIP:
+
+        char *encoded_message = compose_message(message);
+        safe_send(server_socket, encoded_message, strlen(encoded_message),
+                  MSG_EOR); // send the serialized message to
+                            // the server :WIP:
         return 1;
     }
 
