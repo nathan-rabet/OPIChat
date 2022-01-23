@@ -89,7 +89,7 @@
             "name": "test_main",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/test_main",
+            "program": "${workspaceFolder}/test_main",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

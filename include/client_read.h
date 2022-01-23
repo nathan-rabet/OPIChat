@@ -13,5 +13,6 @@
  * @return The created socket, exit on error
  */
 int setup_client_socket(const char *ip, const char *port);
+void *read_thread(void *socket);
 
 #endif /* CLIENT_READ_H */
