@@ -7,6 +7,8 @@
 #include <netdb.h>
 #include <sys/socket.h>
 #include <sys/types.h>
+#include <pthread.h>
+
 
 
 
@@ -24,6 +26,9 @@ void read_from_stdin(int server_socket);
  * @return int 
  */
 int command_is_valid(char *command);
+
+void *read_from_stdin_thread(void *server_socket);
+
 
 
 #endif /* READ_FROM_STDIN_H */

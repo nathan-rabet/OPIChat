@@ -84,9 +84,9 @@ static void treat_commands(struct message *message, char *command, int server_so
     if(strcmp(command, "BROADCAST") == 0)
         looping_payload(message, server_socket);
 }
+
 void read_from_stdin(int server_socket)
 {
-    server_socket = server_socket;
     while(1)
     {
         struct message *message = init_message(REQUEST_MESSAGE_CODE); // Initializing struct message
@@ -122,4 +122,11 @@ void read_from_stdin(int server_socket)
             free_partial_message(message);
         }
     }
+}
+
+void *read_from_stdin_thread(void *server_socket)
+{
+    int *s = server_socket;
+    read_from_stdin(*s);
+    return s;
 }

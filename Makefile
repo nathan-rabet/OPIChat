@@ -4,13 +4,13 @@ CLIENT_EXE=client_main
 SERVER_EXE=server_main
 
 CC=gcc
-CFLAGS = -Wextra -Wall -Werror -pedantic -g -std=c99 
+CFLAGS = -Wextra -Wall -Werror -pedantic -g -std=c99
 CFLAGS += -D_GNU_SOURCE
 CFLAGS += -Iinclude
 
 BUILD = build
 
-LDFLAGS = -fsanitize=address
+LDFLAGS = -fsanitize=address -pthread -D_REENTRANT
 
 SRC = $(shell find src -name '*.c' ! -name '$(CLIENT_EXE).c' ! -name '$(SERVER_EXE).c')
 OBJS = $(SRC:%.c=$(BUILD)/%.o)
@@ -40,8 +40,7 @@ tests: $(TEST_OBJS) $(OBJS)
 	$(CC) $(TEST_LDFLAGS) $(LDFLAGS) -o $(BUILD)/tests_suite $^
 
 test_main: $(OBJS) tests/test_main.o
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BUILD)/test_main $^
-
+	$(CC) $(CFLAGS) $(LDFLAGS) -o test_main $^
 # dynamic libraries
 $(BUILD)/%.so: src/library/%.o $(BUILD)
 	$(CC) -shared -fPIC -o $@ $<
