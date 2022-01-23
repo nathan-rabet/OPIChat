@@ -2,6 +2,7 @@
 #define SAFE_IO_H
 
 #define DEFAULT_BUFFER_SIZE 2048
+#define RECV_TIMEOUT 5
 
 #include <stdbool.h>
 #include <stdio.h>
@@ -36,20 +37,20 @@ int safe_write(int fd, const void *buf, size_t count);
  * @brief Receive a message from a client safely.
  *
  * @param sockfd The file descriptor of the client.
- * @param buf The reference to the buffer where the message will be stored.
  * @param flags the recv() flags.
- * @return The number of bytes received, -1 if an error occured.
+ * @return The message received, NULL if an error occured.
  */
-ssize_t safe_recv(int sockfd, void **buf, int flags);
+struct message *safe_recv(int sockfd, int flags);
 
 /**
  * @brief Read a message from a file descriptor safely.
+ *
+ * @warning MUST NOT BE USED FOR SOCKETS.
  *
  * @param fd The file descriptor of the client.
  * @param buf The reference to the buffer where the message will be stored.
  * @return The number of bytes read, -1 if an error occured.
  */
 ssize_t safe_read(int fd, void **buf);
-
 #endif /* SAFE_IO_H */
 

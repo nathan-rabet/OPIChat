@@ -5,7 +5,7 @@
 
 Test(socket, init_socket)
 {
-    int fd = setup_socket("127.0.0.1", "8080");
+    int fd = setup_server_socket("127.0.0.1", "8090");
     cr_assert_neq(fd, -1);
     close(fd);
 }

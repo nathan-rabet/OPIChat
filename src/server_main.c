@@ -6,10 +6,11 @@
 
 #include "client.h"
 #include "epoll_handler.h"
+#include "init_socket.h"
 #include "logger.h"
 #include "xalloc.h"
 
-//! GLOBAL VARIABLE : Hard to understand the first time
+extern int epoll_instance;
 extern struct client *clients;
 
 int main(int argc, char *argv[])
@@ -20,9 +21,11 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    int server_socket = prepare_socket(argv[1], argv[2]);
+    logger_init("server.log");
 
-    int epoll_instance = epoll_create1(0);
+    int server_socket = setup_server_socket(argv[1], argv[2]);
+
+    epoll_instance = epoll_create1(0);
     if (epoll_instance == -1)
         raise_panic(EXIT_FAILURE, "Impossible to create epoll instance");
 
@@ -33,7 +36,7 @@ int main(int argc, char *argv[])
     if (epoll_ctl(epoll_instance, EPOLL_CTL_ADD, server_socket, &event) == -1)
         raise_panic(EXIT_FAILURE,
                     "Impossible to add server socket to epoll instance : %s",
-                    strerror(errno));
+                    hstrerror(errno));
 
     struct epoll_event events[MAX_EVENTS] = { 0 };
 
@@ -41,15 +44,17 @@ int main(int argc, char *argv[])
     {
         int nb_events = epoll_wait(epoll_instance, events, 1, -1);
         if (nb_events == -1)
-            write_error("Impossible to wait for events : %s", strerror(errno));
+            write_error("Impossible to wait for events : %s", hstrerror(errno));
 
         for (int i = 0; i < nb_events; i++)
         {
             if (events[i].data.fd == server_socket)
-                clients = accept_client(epoll_instance, server_socket);
+                accept_client(server_socket);
             else
-                clients = communicate(epoll_instance, events[i].data.fd);
+                communicate(events[i].data.fd);
         }
     }
     return 0;
+    /* NOTE : The global struct client is handled inside the
+    `accept_client` & `communicate functions */
 }

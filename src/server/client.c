@@ -59,7 +59,6 @@ static void __free_client(struct client *client)
     if (close(client->client_socket) == -1)
         write_error("Failed to close socket for client %s",
                     get_client_ip(client));
-    free(client->buffer);
     free(client->client_sockaddr);
     free(client);
 }
