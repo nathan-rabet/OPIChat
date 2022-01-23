@@ -16,9 +16,6 @@ struct client
     int client_socket; // Socket FD of the client
     struct sockaddr_storage *client_sockaddr; // Client address
 
-    ssize_t nb_read; // Number of bytes read (also size of the buffer)
-    char *buffer; // Buffer containing all the data received by this client
-
     char *username; // Username of the client
 
     size_t nb_rooms; // Number of rooms the client is in

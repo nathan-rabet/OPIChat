@@ -10,7 +10,7 @@ CFLAGS += -Iinclude
 
 BUILD = build
 
-LDFLAGS = -fsanitize=address
+LDFLAGS = -fsanitize=address -pthread
 
 SRC = $(shell find src -name '*.c' ! -name '$(CLIENT_EXE).c' ! -name '$(SERVER_EXE).c')
 OBJS = $(SRC:%.c=$(BUILD)/%.o)
@@ -33,7 +33,11 @@ opichat_client: $(OBJS) src/client_main.o
 
 # Run test suite
 check:
-	$(MAKE) CFLAGS="$(CFLAGS) -DDEBUG" LDFLAGS="" tests
+	$(MAKE) CFLAGS="$(CFLAGS) -DDEBUG" LDFLAGS="-pthread" tests
+	./$(BUILD)/tests_suite
+
+check_asan:
+	$(MAKE) CFLAGS="$(CFLAGS) -DDEBUG" tests
 	./$(BUILD)/tests_suite
 
 tests: $(TEST_OBJS) $(OBJS)
@@ -52,7 +56,7 @@ $(BUILD)/%.o: %.c
 	$(CC) $(ADD_COMPIL) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(BUILD) $(DYN_LIB)
+	$(RM) $(BUILD) $(DYN_LIB) $(TEST_OBJS) $(OBJS) tests/test_main.o src/server_main.o src/client_main.o
 
 .PHONY: clean check
 

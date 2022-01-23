@@ -21,7 +21,9 @@ int main(int argc, char *argv[])
         exit(EXIT_FAILURE);
     }
 
-    int server_socket = setup_socket(argv[1], argv[2]);
+    logger_init("server.log");
+
+    int server_socket = setup_server_socket(argv[1], argv[2]);
 
     epoll_instance = epoll_create1(0);
     if (epoll_instance == -1)

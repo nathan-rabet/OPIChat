@@ -1,5 +1,6 @@
 #include "epoll_handler.h"
 
+#include <errno.h>
 #include <netdb.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -75,16 +76,15 @@ void communicate(int client_socket)
 {
     struct client *client = find_client(clients, client_socket);
 
-    client->nb_read = safe_recv(client_socket, (void *)&client->buffer, 0);
-    if (client->nb_read == -1)
+    struct message *m = safe_recv(client_socket, 0);
+    if (errno != 0)
     {
         write_warning("Impossible to read from the client %s with socket %d",
                       get_client_ip(client), client_socket);
         clients = _delete_epoll_client(client_socket);
     }
 
-    struct message *m = parse_message(client->buffer);
-    if (!m)
+    else if (!m)
         _send_invalid_message_error(client_socket);
 
     else

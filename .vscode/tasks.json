@@ -38,7 +38,7 @@
             "type": "shell",
             "command": "/usr/bin/make",
             "args": [
-                "opichat_client",
+                "opichat_client"
             ],
             "options": {
                 "cwd": "${workspaceFolder}"

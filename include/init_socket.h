@@ -14,5 +14,5 @@
  * @param port The port to listen on
  * @return The created socket, exit on error
  */
-int setup_socket(const char *ip, const char *port);
+int setup_server_socket(const char *ip, const char *port);
 #endif
