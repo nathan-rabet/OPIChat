@@ -53,6 +53,7 @@ struct room *add_room(struct room *room, const char *room_name,
 static void __free_room(struct room *room)
 {
     free(room->clients);
+    free(room->name);
     free(room);
 }
 

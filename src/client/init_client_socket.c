@@ -22,7 +22,7 @@ static int create_and_connect(struct addrinfo *addrinfo)
             return s;
     }
 
-    exit(1);
+    return -1;
 }
 
 int setup_client_socket(const char *ip, const char *port)
@@ -35,9 +35,12 @@ int setup_client_socket(const char *ip, const char *port)
     hints.ai_socktype = SOCK_STREAM;
 
     if (getaddrinfo(ip, port, &hints, &addrinfo) != 0)
-        exit(1);
+        return -1;
 
     int server_socket = create_and_connect(addrinfo);
+
+    if (server_socket == -1)
+        return -1;
 
     freeaddrinfo(addrinfo);
     return server_socket;

@@ -7,6 +7,10 @@
 
 #define BACKLOG 16
 
+int server_socket;
+char *ip;
+char *port;
+
 /**
  * @brief Create a listening socket
  *

@@ -75,19 +75,27 @@ void _read_from_server(int server_socket, char *message)
     }
     free(buf);
 }
-
+/*
 void print_received_message(char *a)
 {
     struct message *message = parse_message(a);
-    if (message->status_code == RESPONSE_MESSAGE_CODE && strcmp(message->payload, "") != 0)
-        fprintf(stdout, "< %s", message->payload);
+    if (message->status_code == RESPONSE_MESSAGE_CODE &&
+strcmp(message->payload, "") != 0) fprintf(stdout, "< %s", message->payload);
     if(message->status_code == ERROR_MESSAGE_CODE)
         fprintf(stdout, "< %s", message->payload);
     if(message->status_code == NOTIFICATION_MESSAGE_CODE)
-        if (strcmp(message->command, "SEND-DM") == 0 || strcmp(message->command, "BROADCAST") == 0)
-            fprintf(stdout, "From %s: %s\n", (char *) message->command_parameters[0].value, message->payload);
-}
-
+        if (strcmp(message->command, "SEND-DM") == 0 || strcmp(message->command,
+"BROADCAST") == 0)
+        {
+            int i = 0;
+            while (strcmp(message->command_parameters[i].key, "From") != 0
+                   && i < message->nb_parameters)
+                i++;
+            fprintf(stdout, "From %s: %s\n",
+                    (char *)message->command_parameters[i].value,
+                    message->payload);
+        }
+}*/
 
 void *read_thread(void *socket)
 {

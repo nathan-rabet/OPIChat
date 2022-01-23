@@ -71,7 +71,7 @@ struct message *handle_login(struct message *msg, struct client *client)
         response->payload_size = strlen("Bad username");
         response->command = xmalloc(6, sizeof(char));
         strcpy(response->command, "LOGIN");
-        response->payload = xmalloc(response->payload_size, sizeof(char));
+        response->payload = xmalloc(strlen("Bad username") + 1, sizeof(char));
         strcpy(response->payload, "Bad username");
     }
     return response;

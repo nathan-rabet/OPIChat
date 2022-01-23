@@ -4,12 +4,16 @@
 #include "message.h"
 #include "safe_io.h"
 #include "client_read.h"
+#include "init_socket.h"
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+extern int server_socket;
+
 int command_is_valid(char *a)
 {
     if (a == NULL)
@@ -42,8 +46,8 @@ static int regular_payload(struct message *message, int server_socket)
     {
         strcpy(message->payload, payload); // store the payload in struct message
         message->payload_size = strlen(payload); // Store the payload size in struct message
-        printf("Requete\n%s\n", compose_message(message));
-        while(safe_send(server_socket, compose_message(message), strlen(payload) + 1, MSG_EOR) != 0); // send the serialized message to the server :WIP:
+        safe_send(server_socket, compose_message(message), strlen(payload) + 1,
+                  MSG_EOR); // send the serialized message to the server :WIP:
         return 1;
     }
 
@@ -85,9 +89,15 @@ static void treat_commands(struct message *message, char *command, int server_so
         looping_payload(message, server_socket);
 }
 
+#ifdef DEBUG
+#define READ_FROM_STDIN_LOOP 0
+#else
+#define READ_FROM_STDIN_LOOP 1
+#endif
+
 void read_from_stdin(int server_socket)
 {
-    while(1)
+    do
     {
         struct message *message = init_message(REQUEST_MESSAGE_CODE); // Initializing struct message
         if (!message)   //If allocating fails
@@ -121,12 +131,13 @@ void read_from_stdin(int server_socket)
             fprintf(stderr, "Invalid command\n");
             free_partial_message(message);
         }
-    }
+    } while (READ_FROM_STDIN_LOOP);
 }
 
-void *read_from_stdin_thread(void *server_socket)
+void *read_from_stdin_thread(void *none)
 {
-    int *s = server_socket;
-    read_from_stdin(*s);
-    return s;
+    (void) none;
+    int s = server_socket;
+    read_from_stdin(s);
+    return NULL;
 }

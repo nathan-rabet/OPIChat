@@ -85,7 +85,7 @@ void communicate(int client_socket)
 {
     struct client *client = find_client(clients, client_socket);
 
-    struct message *m = safe_recv(client_socket, 0);
+    struct message *m = safe_recv(client_socket, 0, true);
 
     if (errno != 0 && errno != ECONNRESET)
     {

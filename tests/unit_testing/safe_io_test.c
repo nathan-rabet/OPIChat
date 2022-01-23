@@ -74,7 +74,7 @@ Test(safe_io, safe_send_recv)
         int s_listenfd = setup_server_socket("127.0.0.1", "8082");
         int s_clientfd = accept(s_listenfd, NULL, NULL);
 
-        m = safe_recv(s_clientfd, 0);
+        m = safe_recv(s_clientfd, 0, true);
         cr_expect_not_null(m);
 
         close(s_listenfd);
@@ -116,7 +116,7 @@ Test(safe_io, safe_recv__slow_loris_hack)
         int s_listenfd = setup_server_socket("127.0.0.1", "8083");
         int s_clientfd = accept(s_listenfd, NULL, NULL);
 
-        m = safe_recv(s_clientfd, 0);
+        m = safe_recv(s_clientfd, 0, true);
         cr_expect_null(m);
 
         close(s_listenfd);

@@ -95,6 +95,7 @@ static void *_thread_safe_recv(void *arg)
         nb_read += read_len;
 
         buf[nb_read] = '\0';
+
         struct message *message = NULL;
         if ((message = parse_message(buf)) != NULL)
             return (void *)message;
@@ -106,7 +107,7 @@ static void *_thread_safe_recv(void *arg)
     return NULL;
 }
 
-struct message *safe_recv(int sockfd, int flags)
+struct message *safe_recv(int sockfd, int flags, bool mustTimeout)
 {
     // Create thread and kill it if it takes too long
     pthread_t thread;
@@ -116,15 +117,20 @@ struct message *safe_recv(int sockfd, int flags)
     pthread_create(&thread, NULL, _thread_safe_recv, (void *)data);
 
     struct message *returned_message = NULL;
+    if (mustTimeout)
+    {
+        struct timespec timeout;
+        timeout.tv_sec = time(NULL) + RECV_TIMEOUT;
+        timeout.tv_nsec = 0;
 
-    struct timespec timeout;
-    timeout.tv_sec = time(NULL) + RECV_TIMEOUT;
-    timeout.tv_nsec = 0;
+        pthread_timedjoin_np(thread, (void *)&returned_message, &timeout);
+    }
 
-    pthread_timedjoin_np(thread, (void *)&returned_message, &timeout);
+    else
+        pthread_join(thread, (void *)&returned_message);
+
     pthread_cancel(thread);
     pthread_join(thread, NULL);
-
     free(data);
     return returned_message;
 }

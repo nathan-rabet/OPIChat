@@ -27,9 +27,7 @@ void read_from_stdin(int server_socket);
  */
 int command_is_valid(char *command);
 
-void *read_from_stdin_thread(void *server_socket);
-
-
+void *read_from_stdin_thread(void *none);
 
 #endif /* READ_FROM_STDIN_H */
 
