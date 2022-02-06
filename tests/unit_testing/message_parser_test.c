@@ -154,6 +154,23 @@ Test(requests_parsing, multiple_command_parameters)
     free_message(r);
 }
 
+Test(requests_parsing, no_payload_no_parameters)
+{
+    char req[] = "0\n3\nINVALID\n\n";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_eq(r->payload_size, 0, "r->payload_size = %d", r->payload_size);
+    cr_assert_eq(r->status_code, 3, "r->status_code = %d", r->status_code);
+    cr_assert_str_eq(r->command, "INVALID", "r->command = %s", r->command);
+    cr_assert_eq(r->nb_parameters, 0, "r->nb_parameters = %d",
+                 r->nb_parameters);
+    cr_assert_eq(r->command_parameters, NULL);
+    cr_assert_eq(r->payload, NULL);
+
+    free_message(r);
+}
+
 Test(requests_parsing, empty_request)
 {
     char req[] = "";

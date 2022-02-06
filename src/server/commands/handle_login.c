@@ -7,13 +7,16 @@
 #include "message.h"
 #include "xalloc.h"
 
+extern struct client *clients;
+
 int username_is_valid(char *s)
 {
     int i = 0;
     int isValid = 0;
     while (s[i] != '\0')
     {
-        if ( (s[i] > 'A' && s[i] > 'Z') || (s[i] > 'a' && s[i] < 'z') || (s[i] > '0' && s[i] < '9'))
+        if ((s[i] >= 'A' && s[i] <= 'Z') || (s[i] >= 'a' && s[i] <= 'z')
+            || (s[i] >= '0' && s[i] <= '9'))
             isValid = 1;
         if (isValid == 0)
             return 0;
@@ -23,13 +26,15 @@ int username_is_valid(char *s)
     return 1;
 }
 
-
 int username_not_duplicate(char *name, struct client *client)
 {
+    if (name == NULL)
+        return 1;
+
     struct client *current = client;
     while(current != NULL)
     {
-        if(strcmp(current->username, name) == 0)
+        if (current->username != NULL && strcmp(current->username, name) == 0)
             return 0;
         current = current->next;
     }
@@ -42,8 +47,7 @@ struct message *handle_login(struct message *msg, struct client *client)
 
     if(username_is_valid(msg->payload) == 1)
     {
-
-        if (username_not_duplicate(msg->payload, client))
+        if (username_not_duplicate(msg->payload, clients))
         {
             
             response = init_message(RESPONSE_MESSAGE_CODE);
@@ -52,7 +56,8 @@ struct message *handle_login(struct message *msg, struct client *client)
             strcpy(response->command, "LOGIN");
             response->payload = xmalloc(strlen("Logged in") + 1, sizeof(char));
             strcpy(response->payload, "Logged in");
-            client->username = xrealloc(client->username, msg->payload_size, sizeof(char));
+            client->username =
+                xrealloc(client->username, msg->payload_size + 1, sizeof(char));
             strcpy(client->username, msg->payload);
         }
         else

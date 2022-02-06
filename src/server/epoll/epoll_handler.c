@@ -41,6 +41,7 @@ static void _send_invalid_message_error(struct client *client)
     error_response.status_code = ERROR_MESSAGE_CODE;
     error_response.command = "INVALID";
     error_response.payload = "Bad request";
+    error_response.payload_size = sizeof("Bad request") - 1;
 
     char *encoded_response = compose_message(&error_response);
 
@@ -102,41 +103,41 @@ void communicate(int client_socket)
         struct message *response = NULL;
 
         // Core features
-        if (strcmp(m->command, "PING"))
+        if (strcmp(m->command, "PING") == 0)
             response = handle_ping(m, client);
 
-        else if (strcmp(m->command, "LOGIN"))
+        else if (strcmp(m->command, "LOGIN") == 0)
             response = handle_login(m, client);
 
-        else if (strcmp(m->command, "LIST-USERS"))
+        else if (strcmp(m->command, "LIST-USERS") == 0)
             response = handle_list_users(m, client);
 
-        else if (strcmp(m->command, "SEND-DM"))
+        else if (strcmp(m->command, "SEND-DM") == 0)
             response = handle_send_dm(m, client);
 
-        else if (strcmp(m->command, "BROADCAST"))
+        else if (strcmp(m->command, "BROADCAST") == 0)
             response = handle_broadcast(m, client);
 
         // Additionnal features
-        else if (strcmp(m->command, "CREATE-ROOM"))
+        else if (strcmp(m->command, "CREATE-ROOM") == 0)
             response = handle_create_room(m, client);
 
-        else if (strcmp(m->command, "LIST-ROOMS"))
+        else if (strcmp(m->command, "LIST-ROOMS") == 0)
             response = handle_list_rooms(m);
 
-        else if (strcmp(m->command, "JOIN-ROOM"))
+        else if (strcmp(m->command, "JOIN-ROOM") == 0)
             response = handle_join_room(m, client);
 
-        else if (strcmp(m->command, "LEAVE-ROOM"))
+        else if (strcmp(m->command, "LEAVE-ROOM") == 0)
             response = handle_leave_room(m, client);
 
-        else if (strcmp(m->command, "SEND-ROOM"))
+        else if (strcmp(m->command, "SEND-ROOM") == 0)
             response = handle_send_room(m, client);
 
-        else if (strcmp(m->command, "DELETE-ROOM"))
+        else if (strcmp(m->command, "DELETE-ROOM") == 0)
             response = handle_delete_room(m, client);
 
-        else if (strcmp(m->command, "PROFILE"))
+        else if (strcmp(m->command, "PROFILE") == 0)
             response = handle_profile(m, client);
 
         else
@@ -156,7 +157,7 @@ void communicate(int client_socket)
                 write_warning("Failed to send a response to client %d",
                               client_socket);
             free(encoded_response);
-            free_partial_message(response);
+            free_message(response);
         }
     }
 }

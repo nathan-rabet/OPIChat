@@ -33,8 +33,7 @@ void *read_from_server_thread(void *none)
         }
         else
         {
-            if (m->status_code == RESPONSE_MESSAGE_CODE
-                && strcmp(m->payload, "") != 0)
+            if (m->status_code == RESPONSE_MESSAGE_CODE && m->payload == NULL)
                 fprintf(stdout, "< %s\n", m->payload);
             if (m->status_code == ERROR_MESSAGE_CODE)
                 fprintf(stdout, "! %s\n", m->payload);

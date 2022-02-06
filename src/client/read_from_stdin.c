@@ -84,19 +84,14 @@ static void command_send_dm(struct message *message, int server_socket)
 }
 static void treat_commands(struct message *message, char *command, int server_socket)
 {
-    if(strcmp(command, "PING") == 0 || strcmp(command, "LIST-USERS\n") == 0 || strcmp(command, "LOGIN\n") == 0)
+    if (strcmp(command, "PING") == 0 || strcmp(command, "LIST-USERS") == 0
+        || strcmp(command, "LOGIN") == 0)
         regular_payload(message, server_socket);
     if(strcmp(command, "SEND-DM") == 0)
         command_send_dm(message, server_socket);
     if(strcmp(command, "BROADCAST") == 0)
         looping_payload(message, server_socket);
 }
-
-#ifdef DEBUG
-#define READ_FROM_STDIN_LOOP 0
-#else
-#define READ_FROM_STDIN_LOOP 1
-#endif
 
 void read_from_stdin(int server_socket)
 {
@@ -134,7 +129,7 @@ void read_from_stdin(int server_socket)
             fprintf(stderr, "Invalid command\n");
             free_partial_message(message);
         }
-    } while (READ_FROM_STDIN_LOOP);
+    } while (1);
 }
 
 void *read_from_stdin_thread(void *none)

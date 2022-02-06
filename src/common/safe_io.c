@@ -1,5 +1,6 @@
 #include "safe_io.h"
 
+#include <errno.h>
 #include <pthread.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -29,6 +30,7 @@ int safe_send(int sockfd, const void *buf, size_t count, int flags)
         offset += sent;
     }
 
+    errno = 0;
     return 0;
 }
 
@@ -45,6 +47,7 @@ int safe_write(int fd, const void *buf, size_t count)
         offset += sent;
     }
 
+    errno = 0;
     return 0;
 }
 
@@ -65,6 +68,7 @@ ssize_t safe_read(int fd, void **buf)
         *buf = xrealloc(*buf, READ_BUFFER_SIZE + nb_read, 1);
     }
 
+    errno = 0;
     return nb_read;
 }
 
@@ -72,6 +76,7 @@ struct safe_recv_data
 {
     int sockfd;
     int flags;
+    char *recv_buffer;
 };
 
 static void *_thread_safe_recv(void *arg)
@@ -81,11 +86,10 @@ static void *_thread_safe_recv(void *arg)
     int sockfd = data->sockfd;
     int flags = data->flags;
 
-    char *buf = xmalloc(READ_BUFFER_SIZE, 1); // (Re)allocate the given buffer
-
     ssize_t nb_read = 0; // Total number of bytes read
     ssize_t read_len; // Number returned by read
-    while ((read_len = recv(sockfd, buf + nb_read, READ_BUFFER_SIZE - 1, flags))
+    while ((read_len = recv(sockfd, data->recv_buffer + nb_read,
+                            READ_BUFFER_SIZE - 1, flags))
            != 0)
     {
         // If any client reading error
@@ -94,16 +98,17 @@ static void *_thread_safe_recv(void *arg)
 
         nb_read += read_len;
 
-        buf[nb_read] = '\0';
+        data->recv_buffer[nb_read] = '\0';
 
         struct message *message = NULL;
-        if ((message = parse_message(buf)) != NULL)
+        if ((message = parse_message(data->recv_buffer)) != NULL)
             return (void *)message;
 
         // If the buffer is full
-        buf = xrealloc(buf, READ_BUFFER_SIZE + nb_read, 1);
+        data->recv_buffer =
+            xrealloc(data->recv_buffer, READ_BUFFER_SIZE + nb_read, 1);
     }
-
+    errno = 0;
     return NULL;
 }
 
@@ -114,6 +119,7 @@ struct message *safe_recv(int sockfd, int flags, bool mustTimeout)
     struct safe_recv_data *data = xmalloc(1, sizeof(struct safe_recv_data));
     data->sockfd = sockfd;
     data->flags = flags;
+    data->recv_buffer = xmalloc(READ_BUFFER_SIZE, 1);
     pthread_create(&thread, NULL, _thread_safe_recv, (void *)data);
 
     struct message *returned_message = NULL;
@@ -124,13 +130,16 @@ struct message *safe_recv(int sockfd, int flags, bool mustTimeout)
         timeout.tv_nsec = 0;
 
         pthread_timedjoin_np(thread, (void *)&returned_message, &timeout);
+
+        pthread_cancel(thread);
+        pthread_join(thread, NULL);
     }
 
     else
         pthread_join(thread, (void *)&returned_message);
 
-    pthread_cancel(thread);
-    pthread_join(thread, NULL);
+    free(data->recv_buffer);
     free(data);
+    errno = 0;
     return returned_message;
 }

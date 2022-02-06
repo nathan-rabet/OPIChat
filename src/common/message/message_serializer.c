@@ -79,7 +79,10 @@ char *compose_message(struct message *message)
         }
     }
 
-    strcat(ret, "\n");
+    // Avoid \n\n when there is no parameters
+    if (message->nb_parameters != 0)
+        strcat(ret, "\n");
+
     if (message->payload_size != 0)
     {
         ret = xrealloc(ret, strlen(ret) + strlen(message->payload) + 3,
