@@ -4,7 +4,7 @@
 #include "commands.h"
 #include "message.h"
 
-struct message *handle_create_room(struct message *msg, struct client *client)
+struct send_pool *handle_create_room(struct message *msg, struct client *client)
 {
     // TODO
     (void)msg;

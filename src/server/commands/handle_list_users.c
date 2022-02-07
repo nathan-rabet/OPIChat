@@ -33,7 +33,7 @@ char *list_of_users(struct client *client)
         strcat(ret, current->username);
     return ret;
 }
-struct message *handle_list_users(struct message *msg, struct client *client)
+struct send_pool *handle_list_users(struct message *msg, struct client *client)
 {
     (void) msg;
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);
@@ -46,5 +46,14 @@ struct message *handle_list_users(struct message *msg, struct client *client)
         response->payload[0] = '\0';
     }
     response->payload_size = strlen(response->payload) + 1;
-    return response;
+
+    struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
+
+    sp->nb_msg = 1;
+    sp->msg = xmalloc(1, sizeof(struct message *));
+    sp->clients_sockets = xmalloc(1, sizeof(int));
+    sp->msg[0] = response;
+    sp->clients_sockets[0] = client->client_socket;
+
+    return sp;
 }

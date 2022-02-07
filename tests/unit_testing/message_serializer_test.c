@@ -59,6 +59,18 @@ Test(message_serializing, multiple_command_parameters)
     free(serialized);
 }
 
+Test(message_serializing, invalid_size)
+{
+    char req[] = "4\n2\nSEND-DM\na=aa\nb=bb\nc=cc\nd=dd\n\n2022";
+    char req_modified[] = "2\n2\nSEND-DM\na=aa\nb=bb\nc=cc\nd=dd\n\n20";
+
+    struct message *r = parse_message(req);
+    r->payload_size = 2;
+    char *serialized = compose_message(r);
+    cr_assert_str_eq(serialized, req_modified);
+    free_message(r);
+    free(serialized);
+}
 
 Test(message_serializing, empty_message)
 {

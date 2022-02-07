@@ -6,33 +6,57 @@
 #include "message.h"
 #include "xalloc.h"
 
-struct message *handle_send_dm(struct message *msg, struct client *client)
+struct send_pool *handle_send_dm(struct message *msg, struct client *client)
 {
     (void) client;
+
+    if (msg->nb_parameters != 1
+        || strcmp(msg->command_parameters[0].key, "User") != 0)
+        return NULL;
+
+    // RESPONSE
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);
     response->command = xmalloc(8, sizeof(char));
     strcpy(response->command, "SEND-DM");
-    uint64_t i = 0;
-    struct message *notification = init_message(NOTIFICATION_MESSAGE_CODE);
-    notification->payload_size = msg->payload_size;
-    response->command = xmalloc(5, sizeof(char));
-    strcpy(response->command, "BROADCAST");
-    notification->payload = xmalloc(strlen(msg->payload) + 1, sizeof(char));
-    notification->payload_size = msg->payload_size;
-    notification->nb_parameters = msg->nb_parameters;
-    if(msg->nb_parameters != 0)
-        notification->command_parameters = xmalloc(notification->nb_parameters + 1,sizeof(struct command_parameter));
-    for(i = 0; i < msg->nb_parameters; i++)
-    {
-        notification->command_parameters[i].key = xmalloc(strlen(msg->command_parameters[i].key) + 1, sizeof(char));
-        notification->command_parameters[i].value = xmalloc(strlen(msg->command_parameters[i].value) + 1, sizeof(char));
-        strcpy(notification->command_parameters[i].key, msg->command_parameters[i].key);
-        strcpy(notification->command_parameters[i].value, msg->command_parameters[i].value);
-    }
-    notification->command_parameters[i].key = xmalloc(5, sizeof(char));
-    strcpy(notification->command_parameters[i].key, "From");
-    notification->command_parameters[i].value = xmalloc(msg->payload_size, sizeof(char));
-    strcpy(notification->command_parameters[i].value, msg->payload);
 
-    return response;
+    response->nb_parameters = 1;
+    response->command_parameters = xmalloc(1, sizeof(struct command_parameter));
+
+    response->command_parameters[0].key = strdup("User");
+    response->command_parameters[0].value =
+        strdup(msg->command_parameters[0].value);
+
+    // response->command_parameters[0].key = strdup("From");
+    // response->command_parameters[0].value =
+    //     strdup(find_client(clients, client->client_socket)->username);
+
+    // NOTIFICATION
+    struct client *notified_client =
+        find_client(clients, client->client_socket);
+
+    struct message *notification = init_message(NOTIFICATION_MESSAGE_CODE);
+    notification->command = strdup("SEND-DM");
+    notification->payload_size = msg->payload_size;
+    notification->payload = strdup(msg->payload);
+    notification->nb_parameters = 2;
+
+    notification->command_parameters =
+        xmalloc(2, sizeof(struct command_parameter));
+    notification->command_parameters[0].key = strdup("User");
+    response->command_parameters[0].value =
+        strdup(msg->command_parameters[0].value);
+    notification->command_parameters[1].key = strdup("From");
+    response->command_parameters[1].value = strdup(notified_client->username);
+
+    struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
+
+    sp->nb_msg = 2;
+    sp->msg = xmalloc(2, sizeof(struct message *));
+    sp->clients_sockets = xmalloc(1, sizeof(int));
+    sp->msg[0] = response;
+    sp->msg[1] = notification;
+    sp->clients_sockets[0] = client->client_socket;
+    sp->clients_sockets[0] = client->client_socket;
+
+    return sp;
 }

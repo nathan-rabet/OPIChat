@@ -41,7 +41,7 @@ int username_not_duplicate(char *name, struct client *client)
     return 1;
 }
 
-struct message *handle_login(struct message *msg, struct client *client)
+struct send_pool *handle_login(struct message *msg, struct client *client)
 {
     struct message *response = NULL;
 
@@ -79,5 +79,14 @@ struct message *handle_login(struct message *msg, struct client *client)
         response->payload = xmalloc(strlen("Bad username") + 1, sizeof(char));
         strcpy(response->payload, "Bad username");
     }
-    return response;
+
+    struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
+
+    sp->nb_msg = 1;
+    sp->msg = xmalloc(1, sizeof(struct message *));
+    sp->clients_sockets = xmalloc(1, sizeof(int));
+    sp->msg[0] = response;
+    sp->clients_sockets[0] = client->client_socket;
+
+    return sp;
 }

@@ -6,7 +6,7 @@
 #include "message.h"
 #include "xalloc.h"
 
-struct message *handle_broadcast(struct message *msg, struct client *client)
+struct send_pool *handle_broadcast(struct message *msg, struct client *client)
 {
     (void) client;
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);
@@ -29,5 +29,13 @@ struct message *handle_broadcast(struct message *msg, struct client *client)
         strcpy(notification->command_parameters[i].key, msg->command_parameters[i].key);
         strcpy(notification->command_parameters[i].value, msg->command_parameters[i].value);
     }
-    return response;
+    struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
+
+    sp->nb_msg = 1;
+    sp->msg = xmalloc(1, sizeof(struct message *));
+    sp->clients_sockets = xmalloc(1, sizeof(int));
+    sp->msg[0] = response;
+    sp->clients_sockets[0] = client->client_socket;
+
+    return sp;
 }

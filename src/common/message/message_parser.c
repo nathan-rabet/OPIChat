@@ -84,6 +84,16 @@ struct message *parse_message(const char *request_string)
         r->payload = strdup(line);
     }
 
+    else if (r->payload_size > 0)
+    {
+        FREETURN(NULL); // invalid message
+    }
+
+    else
+    {
+        r->payload = strdup("");
+    }
+
     free(req_str_dup);
     return r;
 }

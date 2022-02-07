@@ -41,7 +41,7 @@ Test(requests_parsing, subject_server_response)
     cr_assert_str_eq(r->command_parameters[0].value, "acu",
                      "r->command_parameters[0].value = %s",
                      r->command_parameters[0].value);
-    cr_assert_eq(r->payload, NULL);
+    cr_assert_str_eq(r->payload, "");
 
     free_message(r);
 }
@@ -166,7 +166,7 @@ Test(requests_parsing, no_payload_no_parameters)
     cr_assert_eq(r->nb_parameters, 0, "r->nb_parameters = %d",
                  r->nb_parameters);
     cr_assert_eq(r->command_parameters, NULL);
-    cr_assert_eq(r->payload, NULL);
+    cr_assert_str_eq(r->payload, "");
 
     free_message(r);
 }

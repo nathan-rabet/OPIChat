@@ -4,7 +4,7 @@
 #include "commands.h"
 #include "message.h"
 
-struct message *handle_profile(struct message *msg, struct client *client)
+struct send_pool *handle_profile(struct message *msg, struct client *client)
 {
     // TODO
     (void)msg;

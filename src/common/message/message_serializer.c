@@ -79,17 +79,14 @@ char *compose_message(struct message *message)
         }
     }
 
-    // Avoid \n\n when there is no parameters
-    if (message->nb_parameters != 0)
-        strcat(ret, "\n");
-
+    strcat(ret, "\n");
     if (message->payload_size != 0)
     {
         ret = xrealloc(ret, strlen(ret) + strlen(message->payload) + 3,
                        sizeof(char));
-        strcat(ret, message->payload);
-
+        strncat(ret, message->payload, message->payload_size);
     }
+
     ret = xrealloc(ret, strlen(ret) + 1,
                    sizeof(char)); // In case too much memory was allocated
     return ret;
