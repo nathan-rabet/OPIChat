@@ -114,19 +114,14 @@ void read_from_stdin(int server_socket)
                             parameterFound = true;
                             message->command_parameters =
                                 xrealloc(message->command_parameters,
-                                         ++message->nb_parameters,
+                                         message->nb_parameters + 1,
                                          sizeof(struct command_parameter));
 
                             message->command_parameters[entered_params].key =
-                                xmalloc(strlen(key), sizeof(char));
+                                strdup(key);
                             message->command_parameters[entered_params].value =
-                                xmalloc(strlen(value), sizeof(char));
-                            strcpy(
-                                message->command_parameters[entered_params].key,
-                                key);
-                            strcpy(message->command_parameters[entered_params]
-                                       .value,
-                                   value);
+                                strdup(value);
+
                             message->nb_parameters = ++entered_params;
                             break;
                         }

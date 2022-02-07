@@ -92,3 +92,11 @@ struct client *find_client(struct client *client, int client_socket)
 
     return client;
 }
+
+struct client *find_client_by_username(struct client *client, char *username)
+{
+    while (client != NULL && strcmp(client->username, username) != 0)
+        client = client->next;
+
+    return client;
+}

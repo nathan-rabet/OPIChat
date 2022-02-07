@@ -8,21 +8,26 @@ Test(commands, ping_empty_payload)
 {
     struct message *message = init_message(REQUEST_MESSAGE_CODE);
     message->command = "PING";
-    message->payload_size = 0;
-    message->payload = malloc(sizeof(char) * 5);
+    message->payload_size = 4;
+    message->payload = xmalloc(5, sizeof(char));
     strcpy(message->payload, "PONG");
 
-    struct message *response = handle_ping(message, NULL);
-    cr_assert_eq(response->status_code, RESPONSE_MESSAGE_CODE);
-    cr_assert_eq(response->payload_size,message->payload_size);
-    cr_assert_eq(response->nb_parameters, message->nb_parameters);
-    cr_assert_eq(strcmp(response->payload, "PONG"), 0);
-    free(message->payload);
-    free(message);
-    free(response->command);
-    free(response->payload);
-    free(response);
+    struct sockaddr addr = {
+        .sa_family = AF_INET,
+    };
 
+    struct client *client = add_client(NULL, 1, addr, sizeof(addr));
+
+    struct send_pool *sp = handle_ping(message, client);
+    cr_assert_eq(sp->msg[0]->status_code, RESPONSE_MESSAGE_CODE);
+    cr_assert_eq(sp->msg[0]->payload_size, 4);
+    cr_assert_eq(sp->msg[0]->nb_parameters, 0);
+    cr_assert_str_eq(sp->msg[0]->payload, "PONG");
+
+    free_message(sp->msg[0]);
+    free(sp->msg);
+    free(sp);
+    free(client);
 }
 
 Test(commands, ping_with_payload)
@@ -33,17 +38,22 @@ Test(commands, ping_with_payload)
     message->payload = malloc(sizeof(char) * 5);
     strcpy(message->payload, "skkkkkkkrt");
 
-    struct message *response = handle_ping(message, NULL);
-    cr_assert_eq(response->status_code, RESPONSE_MESSAGE_CODE);
-    cr_assert_eq(response->payload_size,message->payload_size);
-    cr_assert_eq(response->nb_parameters, message->nb_parameters);
-    cr_assert_eq(strcmp(response->payload, "PONG"), 0);
+    struct sockaddr addr = {
+        .sa_family = AF_INET,
+    };
 
-    free(message->payload);
-    free(message);
-    free(response->command);
-    free(response->payload);
-    free(response);
+    struct client *client = add_client(NULL, 1, addr, sizeof(addr));
+
+    struct send_pool *sp = handle_ping(message, client);
+    cr_assert_eq(sp->msg[0]->status_code, RESPONSE_MESSAGE_CODE);
+    cr_assert_eq(sp->msg[0]->payload_size, 4);
+    cr_assert_eq(sp->msg[0]->nb_parameters, 0);
+    cr_assert_eq(strcmp(sp->msg[0]->payload, "PONG"), 0);
+
+    free_message(sp->msg[0]);
+    free(sp->msg);
+    free(sp);
+    free(client);
 }
 
 Test(commands, dup_true)

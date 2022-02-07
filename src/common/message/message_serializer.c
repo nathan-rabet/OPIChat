@@ -14,7 +14,7 @@ static int number_of_decimal(int i)
     return j;
 }
 
-static int message_size(struct message *message)
+static int message_size(const struct message *message)
 {
     int i = 0;
     i += number_of_decimal(message->payload_size) + 1;
@@ -38,7 +38,7 @@ static int message_size(struct message *message)
     return i + 3;
 }
 
-char *compose_message(struct message *message)
+char *compose_message(const struct message *message)
 {
     if (message == NULL)
         return NULL;

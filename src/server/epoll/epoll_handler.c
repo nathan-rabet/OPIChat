@@ -100,6 +100,9 @@ void communicate(int client_socket)
 
     else
     {
+        fprintf(stderr, "< Request data from '%s':\n%s\n",
+                get_client_ip(client), compose_message(m));
+
         struct send_pool *send_pool = NULL;
 
         // Core features
@@ -152,6 +155,10 @@ void communicate(int client_socket)
         {
             for (uint8_t i = 0; i < send_pool->nb_msg; i++)
             {
+                fprintf(stderr, "> Send data to '%s':\n%s\n",
+                        get_client_ip(client),
+                        compose_message(send_pool->msg[i]));
+
                 char *encoded_response = compose_message(send_pool->msg[i]);
                 if (safe_send(send_pool->clients_sockets[i], encoded_response,
                               strlen(encoded_response), MSG_EOR)

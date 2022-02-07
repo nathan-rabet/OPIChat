@@ -20,8 +20,7 @@ void *read_from_server_thread(void *none)
     while (1)
     {
         struct message *m = safe_recv(server_sockfd, 0, false);
-
-        if (m == NULL)
+        if (m == NULL && errno != ETIMEDOUT)
         {
             while ((server_sockfd = setup_client_socket(ip, port)) == -1)
             {
@@ -31,9 +30,16 @@ void *read_from_server_thread(void *none)
                 sleep(1);
             }
         }
+
+        else if (m == NULL)
+        {
+            write_warning("Receving corrupted message from server");
+        }
+
         else
         {
-            if (m->status_code == RESPONSE_MESSAGE_CODE && m->payload == NULL)
+            if (m->status_code == RESPONSE_MESSAGE_CODE
+                && (strcmp(m->payload, "") != 0))
                 fprintf(stdout, "< %s\n", m->payload);
             if (m->status_code == ERROR_MESSAGE_CODE)
                 fprintf(stdout, "! %s\n", m->payload);

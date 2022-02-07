@@ -5,53 +5,24 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include "read_from_stdin.h"
+
 #include "client.h"
 #include "client_read.h"
+#include "commands.h"
 #include "init_socket.h"
-#include "safe_io.h"
 #include "message.h"
+#include "read_from_stdin.h"
+#include "safe_io.h"
 
 int main(void)
 {
-    char client_request[] = "PING\n\n";
-    struct message *server_response = NULL;
-    struct message *server_request = NULL;
+    struct message *message = init_message(REQUEST_MESSAGE_CODE);
+    message->command = "PING";
+    message->payload_size = 4;
+    message->payload = xmalloc(5, sizeof(char));
+    strcpy(message->payload, "PONG");
 
-    // Fork a child process to send data and another to receive it
-    pid_t pid = fork();
-    if (pid == 0)
-    {
-        // Client process
-        // Init a socket with the server
-        usleep(100 * 1000);
-        int s_clientfd = setup_client_socket("127.0.0.1", "7000");
+    struct send_pool *sp = handle_ping(message, NULL);
 
-        safe_write(STDIN_FILENO, client_request, sizeof(client_request));
-        read_from_stdin(s_clientfd);
-        server_response = safe_recv(s_clientfd, 0, false);
-
-        close(s_clientfd);
-        exit(0);
-    }
-    else
-    {
-        // Server process
-        // Init a socket with the client
-        int s_listenfd = setup_server_socket("127.0.0.1", "7000");
-        int s_clientfd = accept(s_listenfd, NULL, NULL);
-
-        server_request = safe_recv(s_clientfd, 0,true);
-
-        close(s_listenfd);
-        close(s_clientfd);
-
-        free_message(server_request);
-        waitpid(pid, NULL, 0);
-
-        (void)server_response;
-    }
-
-    (void)server_response;
-
+    (void)sp;
 }

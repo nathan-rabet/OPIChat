@@ -9,6 +9,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "logger.h"
 #include "message.h"
 #include "xalloc.h"
 
@@ -129,17 +130,17 @@ struct message *safe_recv(int sockfd, int flags, bool mustTimeout)
         timeout.tv_sec = time(NULL) + RECV_TIMEOUT;
         timeout.tv_nsec = 0;
 
-        pthread_timedjoin_np(thread, (void *)&returned_message, &timeout);
+        errno =
+            pthread_timedjoin_np(thread, (void *)&returned_message, &timeout);
 
         pthread_cancel(thread);
         pthread_join(thread, NULL);
     }
 
     else
-        pthread_join(thread, (void *)&returned_message);
+        errno = pthread_join(thread, (void *)&returned_message);
 
     free(data->recv_buffer);
     free(data);
-    errno = 0;
     return returned_message;
 }

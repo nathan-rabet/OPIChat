@@ -80,4 +80,15 @@ struct client *remove_client(struct client *connection, int client_socket);
  */
 struct client *find_client(struct client *connection, int client_socket);
 
+/**
+ * @brief Find the first client who match the username
+ *
+ * @param connection The client linked list with all the clients
+ *
+ * @param username The username to find
+ *
+ * @return The client element of the specific client
+ */
+struct client *find_client_by_username(struct client *client, char *username);
+
 #endif /* CLIENT_H */

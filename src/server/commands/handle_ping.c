@@ -8,9 +8,10 @@
 
 struct send_pool *handle_ping(struct message *msg, struct client *client)
 {
-    (void) client;
+    (void)msg;
+    (void)client;
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);
-    response->payload_size = msg->payload_size;
+    response->payload_size = 4;
     response->command = xmalloc(5, sizeof(char));
     strcpy(response->command, "PING");
     response->payload = xmalloc(5, sizeof(char));

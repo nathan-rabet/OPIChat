@@ -32,8 +32,21 @@ struct send_pool *handle_send_dm(struct message *msg, struct client *client)
 
     // NOTIFICATION
     struct client *notified_client =
-        find_client(clients, client->client_socket);
+        find_client_by_username(clients, msg->command_parameters[0].value);
 
+    if (!notified_client->username)
+    {
+        struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
+
+        free_message(response);
+        struct message *error_message = init_message(ERROR_MESSAGE_CODE);
+        error_message->payload = strdup("User not found");
+        sp->msg = xmalloc(1, sizeof(struct message));
+        *sp->msg = error_message;
+        *sp->clients_sockets = client->client_socket;
+
+        return sp;
+    }
     struct message *notification = init_message(NOTIFICATION_MESSAGE_CODE);
     notification->command = strdup("SEND-DM");
     notification->payload_size = msg->payload_size;
