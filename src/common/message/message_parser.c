@@ -75,13 +75,13 @@ struct message *parse_message(const char *request_string)
 
     if (line)
     {
-        if ((strlen(line) != r->payload_size) /*No size lying is allowed :)*/
+        if ((strlen(line) < r->payload_size) /*No size lying is allowed :)*/
             || *saveptr != '\0' /*Last LF must be deleted*/)
         {
             FREETURN(NULL); // invalid message
         }
 
-        r->payload = strdup(line);
+        r->payload = strndup(line, r->payload_size);
     }
 
     else if (r->payload_size > 0)

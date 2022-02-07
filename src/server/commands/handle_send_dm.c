@@ -34,14 +34,19 @@ struct send_pool *handle_send_dm(struct message *msg, struct client *client)
     struct client *notified_client =
         find_client_by_username(clients, msg->command_parameters[0].value);
 
-    if (!notified_client->username)
+    if (!notified_client || !notified_client->username)
     {
         struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
 
         free_message(response);
         struct message *error_message = init_message(ERROR_MESSAGE_CODE);
         error_message->payload = strdup("User not found");
+        error_message->command = strdup("SEND-DM");
+        error_message->payload_size = strlen(error_message->payload);
+
+        sp->nb_msg = 1;
         sp->msg = xmalloc(1, sizeof(struct message));
+        sp->clients_sockets = xmalloc(1, sizeof(int));
         *sp->msg = error_message;
         *sp->clients_sockets = client->client_socket;
 
@@ -56,10 +61,11 @@ struct send_pool *handle_send_dm(struct message *msg, struct client *client)
     notification->command_parameters =
         xmalloc(2, sizeof(struct command_parameter));
     notification->command_parameters[0].key = strdup("User");
-    response->command_parameters[0].value =
+    notification->command_parameters[0].value =
         strdup(msg->command_parameters[0].value);
     notification->command_parameters[1].key = strdup("From");
-    response->command_parameters[1].value = strdup(notified_client->username);
+    notification->command_parameters[1].value =
+        strdup(notified_client->username);
 
     struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
 
@@ -69,7 +75,7 @@ struct send_pool *handle_send_dm(struct message *msg, struct client *client)
     sp->msg[0] = response;
     sp->msg[1] = notification;
     sp->clients_sockets[0] = client->client_socket;
-    sp->clients_sockets[0] = client->client_socket;
+    sp->clients_sockets[1] = notified_client->client_socket;
 
     return sp;
 }

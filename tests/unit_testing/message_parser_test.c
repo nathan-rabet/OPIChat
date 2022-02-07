@@ -317,3 +317,12 @@ Test(command_parameter, incomplete_request)
 
     cr_assert_eq(r, NULL);
 }
+
+Test(command_parameter, other_1)
+{
+    char req[] = "14\n3\nSEND-DM\n\nUser not found";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_neq(r, NULL);
+}

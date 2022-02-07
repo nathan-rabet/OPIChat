@@ -20,7 +20,7 @@ void *read_from_server_thread(void *none)
     while (1)
     {
         struct message *m = safe_recv(server_sockfd, 0, false);
-        if (m == NULL && errno != ETIMEDOUT)
+        if (m == NULL)
         {
             while ((server_sockfd = setup_client_socket(ip, port)) == -1)
             {
@@ -38,12 +38,18 @@ void *read_from_server_thread(void *none)
 
         else
         {
-            if (m->status_code == RESPONSE_MESSAGE_CODE
-                && (strcmp(m->payload, "") != 0))
-                fprintf(stdout, "< %s\n", m->payload);
-            if (m->status_code == ERROR_MESSAGE_CODE)
+            switch (m->status_code)
+            {
+            case RESPONSE_MESSAGE_CODE:
+                if (strcmp(m->payload, "") != 0)
+                    fprintf(stdout, "< %s\n", m->payload);
+                break;
+
+            case ERROR_MESSAGE_CODE:
                 fprintf(stdout, "! %s\n", m->payload);
-            if (m->status_code == NOTIFICATION_MESSAGE_CODE)
+                break;
+
+            case NOTIFICATION_MESSAGE_CODE:
                 if (strcmp(m->command, "SEND-DM") == 0
                     || strcmp(m->command, "BROADCAST") == 0)
                 {
@@ -54,6 +60,14 @@ void *read_from_server_thread(void *none)
                     fprintf(stdout, "From %s: %s\n",
                             (char *)m->command_parameters[i].value, m->payload);
                 }
+                break;
+
+            default:
+                write_warning(
+                    "Receving corrupted message type from server '%d'",
+                    m->status_code);
+                break;
+            }
 
             free_message(m);
         }
