@@ -37,6 +37,7 @@ struct send_pool *handle_delete_room(struct message *msg,
 
 struct send_pool *handle_profile(struct message *msg, struct client *client);
 
-int username_not_duplicate(char *name, struct client *client);
+int username_not_duplicate(char *name, struct client *clients,
+                           struct client *me);
 
 #endif /* COMMANDS_H */

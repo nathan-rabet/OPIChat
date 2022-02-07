@@ -44,6 +44,7 @@ struct client *add_client(struct client *client, int client_socket,
     new_connection->client_sockaddr =
         xcalloc(1, sizeof(struct sockaddr_storage));
     memcpy(new_connection->client_sockaddr, &sockaddr, sockaddr_len);
+    new_connection->ip = get_client_ip(new_connection);
 
     return new_connection;
 }
@@ -60,6 +61,7 @@ static void __free_client(struct client *client)
         write_error("Failed to close socket for client %s",
                     get_client_ip(client));
     free(client->client_sockaddr);
+    free(client->ip);
     free(client);
 }
 

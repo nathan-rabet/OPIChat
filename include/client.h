@@ -15,6 +15,7 @@ struct client
 {
     int client_socket; // Socket FD of the client
     struct sockaddr_storage *client_sockaddr; // Client address
+    char *ip; // Client IP
 
     char *username; // Username of the client
 

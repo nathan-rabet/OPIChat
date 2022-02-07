@@ -26,15 +26,18 @@ int username_is_valid(char *s)
     return 1;
 }
 
-int username_not_duplicate(char *name, struct client *client)
+int username_not_duplicate(char *name, struct client *clients,
+                           struct client *me)
 {
     if (name == NULL)
         return 1;
 
-    struct client *current = client;
+    struct client *current = clients;
     while(current != NULL)
     {
-        if (current->username != NULL && strcmp(current->username, name) == 0)
+        if (current->client_socket != me->client_socket
+            && current->username != NULL
+            && strcmp(current->username, name) == 0)
             return 0;
         current = current->next;
     }
@@ -47,37 +50,31 @@ struct send_pool *handle_login(struct message *msg, struct client *client)
 
     if(username_is_valid(msg->payload) == 1)
     {
-        if (username_not_duplicate(msg->payload, clients))
+        if (username_not_duplicate(msg->payload, clients, client))
         {
             
             response = init_message(RESPONSE_MESSAGE_CODE);
-            response->payload_size = strlen("Logged in") + 1;
-            response->command = xmalloc(6, sizeof(char));
-            strcpy(response->command, "LOGIN");
-            response->payload = xmalloc(strlen("Logged in") + 1, sizeof(char));
-            strcpy(response->payload, "Logged in");
-            client->username =
-                xrealloc(client->username, msg->payload_size + 1, sizeof(char));
-            strcpy(client->username, msg->payload);
+            response->payload_size = strlen("Logged in");
+            response->command = strdup("LOGIN");
+            response->payload = strdup("Logged in");
+
+            find_client(clients, client->client_socket)->username =
+                strdup(msg->payload);
         }
         else
         {
             response = init_message(ERROR_MESSAGE_CODE);
-            response->payload_size = strlen("Duplicate username") + 1;
-            response->command = xmalloc(6, sizeof(char));
-            strcpy(response->command, "LOGIN");
-            response->payload = xmalloc(response->payload_size, sizeof(char));
-            strcpy(response->payload, "Duplicate username");
+            response->payload_size = strlen("Duplicate username");
+            response->command = strdup("LOGIN");
+            response->payload = strdup("Duplicate username");
         }
     }
     else
     {
         response = init_message(ERROR_MESSAGE_CODE);
         response->payload_size = strlen("Bad username");
-        response->command = xmalloc(6, sizeof(char));
-        strcpy(response->command, "LOGIN");
-        response->payload = xmalloc(strlen("Bad username") + 1, sizeof(char));
-        strcpy(response->payload, "Bad username");
+        response->command = strdup("LOGIN");
+        response->payload = strdup("Bad username");
     }
 
     struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));

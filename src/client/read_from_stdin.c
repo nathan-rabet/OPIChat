@@ -62,7 +62,8 @@ void read_from_stdin(int server_socket)
 {
     do
     {
-        struct message *message = init_message(REQUEST_MESSAGE_CODE); // Initializing struct message
+        struct message *message =
+            init_message(REQUEST_MESSAGE_CODE); // Initializing struct message
         if (!message)
         {
             close(server_socket);
@@ -72,8 +73,8 @@ void read_from_stdin(int server_socket)
 
         char command[DEFAULT_BUFFER_SIZE];
         fprintf(stdout, "Command:\n");
-        fgets(command, DEFAULT_BUFFER_SIZE, stdin); //Get user input
-        command[strcspn(command, "\n")] = 0;    // parse the newline
+        fgets(command, DEFAULT_BUFFER_SIZE, stdin); // Get user input
+        command[strcspn(command, "\n")] = 0; // parse the newline
 
         struct command_parameters *cmd_params =
             get_command_parameters_info(command);
@@ -150,21 +151,21 @@ void read_from_stdin(int server_socket)
 
         if (strcmp(payload, "/quit") != 0)
         {
-            message->payload = xmalloc(strlen(payload) + 1, sizeof(char));
-            strcpy(message->payload, payload);
-        }
+            message->payload = strdup(payload);
+            message->payload_size = strlen(payload);
 
-        char *serialized_message = compose_message(message);
-        if (serialized_message)
-        {
-            safe_send(server_socket, serialized_message,
-                      strlen(serialized_message), MSG_EOR);
-            free(serialized_message);
-        }
-        else
-        {
-            close(server_socket);
-            raise_panic(EXIT_FAILURE, "Error while serializing message\n");
+            char *serialized_message = compose_message(message);
+            if (serialized_message)
+            {
+                safe_send(server_socket, serialized_message,
+                          strlen(serialized_message), MSG_EOR);
+                free(serialized_message);
+            }
+            else
+            {
+                close(server_socket);
+                raise_panic(EXIT_FAILURE, "Error while serializing message\n");
+            }
         }
 
         free_command_parameters_info(cmd_params);
@@ -175,7 +176,7 @@ void read_from_stdin(int server_socket)
 
 void *read_from_stdin_thread(void *none)
 {
-    (void) none;
+    (void)none;
     int s = server_socket;
     read_from_stdin(s);
     return NULL;

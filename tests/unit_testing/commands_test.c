@@ -68,7 +68,7 @@ Test(commands, dup_true)
     client2->username = xmalloc(strlen("bonj") + 1, sizeof(char));
     strcpy(client1->username, "bonjour");
     strcpy(client2->username, "bonj");
-    cr_assert_eq(username_not_duplicate("bonjour", client1), 0);
+    cr_assert_eq(username_not_duplicate("bonjour", client1, client2), 0);
     free(client1->username);
     free(client1);
     free(client2->username);
@@ -88,7 +88,7 @@ Test(commands, dup_false)
     client2->username = xmalloc(strlen("b") + 1, sizeof(char));
     strcpy(client1->username, "bonjour");
     strcpy(client2->username, "bonj");
-    cr_assert_eq(username_not_duplicate("daeedja", client1), 1);
+    cr_assert_eq(username_not_duplicate("daeedja", client1, client2), 1);
     free(client1->username);
     free(client1);
     free(client2->username);

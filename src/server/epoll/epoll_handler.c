@@ -49,8 +49,8 @@ static void _send_invalid_message_error(struct client *client)
               MSG_EOR);
     if (errno = ECONNRESET)
     {
-        write_warning("Client %s with socket %d has disconnected",
-                      get_client_ip(client), client->client_socket);
+        write_warning("Client %s with socket %d has disconnected", client->ip,
+                      client->client_socket);
         clients = _delete_epoll_client(client->client_socket);
     }
 }
@@ -74,8 +74,8 @@ void accept_client(int server_socket)
         clients =
             add_client(clients, client_socket, client_sockaddr, sockaddr_len);
 
-        write_info("Client %s with socket %d has connected",
-                   get_client_ip(clients), clients);
+        write_info("Client %s with socket %d has connected", clients->ip,
+                   clients);
     }
 
     else
@@ -85,13 +85,12 @@ void accept_client(int server_socket)
 void communicate(int client_socket)
 {
     struct client *client = find_client(clients, client_socket);
-
     struct message *m = safe_recv(client_socket, 0, true);
 
     if (errno != 0 && errno != ECONNRESET)
     {
         write_warning("Impossible to read from the client %s with socket %d",
-                      get_client_ip(client), client_socket);
+                      client->ip, client_socket);
         clients = _delete_epoll_client(client_socket);
     }
 
@@ -100,8 +99,8 @@ void communicate(int client_socket)
 
     else
     {
-        fprintf(stderr, "< Request data from '%s':\n%s\n",
-                get_client_ip(client), compose_message(m));
+        fprintf(stderr, "< Request data from '%s':\n%s\n", client->ip,
+                compose_message(m));
 
         struct send_pool *send_pool = NULL;
 
@@ -147,19 +146,18 @@ void communicate(int client_socket)
         {
             write_warning("Client %s with socket %d sent a message with an "
                           "unsupported command",
-                          get_client_ip(client), client_socket);
+                          client->ip, client_socket);
             _send_invalid_message_error(client);
         }
 
-        if (send_pool)
+        if (send_pool && send_pool->nb_msg > 0)
         {
             for (uint8_t i = 0; i < send_pool->nb_msg; i++)
             {
-                fprintf(stderr, "> Send data to '%s':\n%s\n",
-                        get_client_ip(client),
-                        compose_message(send_pool->msg[i]));
-
                 char *encoded_response = compose_message(send_pool->msg[i]);
+                fprintf(stderr, "> Send data to '%s':\n%s\n", client->ip,
+                        encoded_response);
+
                 if (safe_send(send_pool->clients_sockets[i], encoded_response,
                               strlen(encoded_response), MSG_EOR)
                     == -1)
