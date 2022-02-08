@@ -31,7 +31,7 @@ struct send_pool *handle_list_users(struct message *msg, struct client *client)
     (void) msg;
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);
     response->command = strdup("LIST-USERS");
-    response->payload = list_of_users(client);
+    response->payload = list_of_users(clients);
 
     response->payload_size = strlen(response->payload);
 
