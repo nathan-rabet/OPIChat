@@ -99,8 +99,8 @@ void communicate(int client_socket)
 
     else
     {
-        fprintf(stderr, "< Request data from '%s':\n%s\n", client->ip,
-                compose_message(m));
+        fprintf(stderr, "< Request data from '%s' (socket %d) :\n%s\n",
+                client->ip, client->client_socket, compose_message(m));
 
         struct send_pool *send_pool = NULL;
 
@@ -155,8 +155,8 @@ void communicate(int client_socket)
             for (uint8_t i = 0; i < send_pool->nb_msg; i++)
             {
                 char *encoded_response = compose_message(send_pool->msg[i]);
-                fprintf(stderr, "> Send data to '%s':\n%s\n", client->ip,
-                        encoded_response);
+                fprintf(stderr, "> Send data to socket '%d' :\n%s\n",
+                        send_pool->clients_sockets[i], encoded_response);
 
                 if (safe_send(send_pool->clients_sockets[i], encoded_response,
                               strlen(encoded_response), MSG_EOR)

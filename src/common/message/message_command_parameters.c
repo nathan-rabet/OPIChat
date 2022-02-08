@@ -9,7 +9,7 @@ int get_message_next_parameter_kv(char *params_start, char **key, char **value)
     regex_t regex;
     regmatch_t match[4]; // [0] = whole match, [1] = key, [2] = value,
                          // [3] = end of line
-    int ret = regcomp(&regex, "^([^=]+)=([^\n]+)(\n\n|\n)", REG_EXTENDED);
+    int ret = regcomp(&regex, "^([^=]+)=([^\n]+)(\n)", REG_EXTENDED);
     if (ret != 0)
     {
         fprintf(stderr, "Error compiling regex\n");

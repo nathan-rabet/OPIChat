@@ -16,13 +16,8 @@
 
 int main(void)
 {
-    struct message *message = init_message(REQUEST_MESSAGE_CODE);
-    message->command = "PING";
-    message->payload_size = 4;
-    message->payload = xmalloc(5, sizeof(char));
-    strcpy(message->payload, "PONG");
+    char req[] = "4\n2\nSEND-DM\nUser=acu\nFrom=ING1\n\n2022";
+    struct message *r = parse_message(req);
 
-    struct send_pool *sp = handle_ping(message, NULL);
-
-    (void)sp;
+    (void)r;
 }

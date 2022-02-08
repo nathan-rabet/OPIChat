@@ -22,13 +22,14 @@ void *read_from_server_thread(void *none)
         struct message *m = safe_recv(server_sockfd, 0, false);
         if (m == NULL)
         {
-            while ((server_sockfd = setup_client_socket(ip, port)) == -1)
+            do
             {
+                close(server_socket);
                 write_error(
                     "Impossible to connect to server %s:%s, retrying... : %s",
                     ip, port, strerror(errno));
                 sleep(1);
-            }
+            } while ((server_sockfd = setup_client_socket(ip, port)) == -1);
         }
 
         else if (m == NULL)

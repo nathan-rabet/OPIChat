@@ -17,6 +17,8 @@
 #    define READ_BUFFER_SIZE 2048
 #endif
 
+#define NB_RECV_AFTER_RESET
+
 int safe_send(int sockfd, const void *buf, size_t count, int flags)
 {
     size_t offset = 0;
@@ -78,6 +80,7 @@ struct safe_recv_data
     int sockfd;
     int flags;
     char *recv_buffer;
+    time_t starting_time;
 };
 
 static void *_thread_safe_recv(void *arg)
@@ -97,7 +100,15 @@ static void *_thread_safe_recv(void *arg)
         if (read_len == -1)
             return NULL;
 
-        nb_read += read_len;
+        if (time(NULL) + RECV_TIMEOUT > data->starting_time && nb_read > 0)
+        {
+            data->starting_time = time(NULL);
+            for (ssize_t i = 0; i < read_len; i++)
+                data->recv_buffer[i] = data->recv_buffer[i + nb_read];
+            nb_read = read_len;
+        }
+        else
+            nb_read += read_len;
 
         data->recv_buffer[nb_read] = '\0';
 
@@ -121,15 +132,16 @@ struct message *safe_recv(int sockfd, int flags, bool mustTimeout)
     data->sockfd = sockfd;
     data->flags = flags;
     data->recv_buffer = xmalloc(READ_BUFFER_SIZE, 1);
+    data->starting_time = time(NULL);
+
     pthread_create(&thread, NULL, _thread_safe_recv, (void *)data);
 
     struct message *returned_message = NULL;
     if (mustTimeout)
     {
         struct timespec timeout;
-        timeout.tv_sec = time(NULL) + RECV_TIMEOUT;
+        timeout.tv_sec = data->starting_time + RECV_TIMEOUT;
         timeout.tv_nsec = 0;
-
         errno =
             pthread_timedjoin_np(thread, (void *)&returned_message, &timeout);
 

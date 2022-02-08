@@ -21,6 +21,7 @@ struct command_parameters
     char *command; // NULL if invalid
     uint8_t nb_parameters;
     char **parameters_name;
+    bool loop_payload;
 };
 
 // TODO : Do not use the heap, use a fixed size array instead
@@ -38,9 +39,13 @@ get_command_parameters_info(char *command_string)
         else if (strcmp(command_string, "LIST-USERS") == 0)
             cmd_params->command = "LIST-USERS";
         else if (strcmp(command_string, "BROADCAST") == 0)
+        {
+            cmd_params->loop_payload = true;
             cmd_params->command = "BROADCAST";
+        }
         else if (strcmp(command_string, "SEND-DM") == 0)
         {
+            cmd_params->loop_payload = true;
             cmd_params->command = "SEND-DM";
             cmd_params->nb_parameters = 1;
             cmd_params->parameters_name = xmalloc(1, sizeof(char **));
@@ -144,29 +149,35 @@ void read_from_stdin(int server_socket)
             continue;
         }
 
-        char *payload = command; // Reuse the command buffer
-        fprintf(stdout, "Payload:\n");
-        fgets(payload, DEFAULT_BUFFER_SIZE, stdin); // Get user input
-        payload[strcspn(payload, "\n")] = 0; // Eliminate the newline
-
-        if (strcmp(payload, "/quit") != 0)
+        do
         {
-            message->payload = strdup(payload);
-            message->payload_size = strlen(payload);
+            char *payload = command; // Reuse the command buffer
+            fprintf(stdout, "Payload:\n");
+            fgets(payload, DEFAULT_BUFFER_SIZE, stdin); // Get user input
+            payload[strcspn(payload, "\n")] = 0; // Eliminate the newline
 
-            char *serialized_message = compose_message(message);
-            if (serialized_message)
+            if (strcmp(payload, "/quit") != 0)
             {
-                safe_send(server_socket, serialized_message,
-                          strlen(serialized_message), MSG_EOR);
-                free(serialized_message);
+                message->payload = strdup(payload);
+                message->payload_size = strlen(payload);
+
+                char *serialized_message = compose_message(message);
+                if (serialized_message)
+                {
+                    safe_send(server_socket, serialized_message,
+                              strlen(serialized_message), MSG_EOR);
+                    free(serialized_message);
+                }
+                else
+                {
+                    close(server_socket);
+                    raise_panic(EXIT_FAILURE,
+                                "Error while serializing message\n");
+                }
             }
             else
-            {
-                close(server_socket);
-                raise_panic(EXIT_FAILURE, "Error while serializing message\n");
-            }
-        }
+                cmd_params->loop_payload = false;
+        } while (cmd_params->loop_payload);
 
         free_command_parameters_info(cmd_params);
         free_message(message);

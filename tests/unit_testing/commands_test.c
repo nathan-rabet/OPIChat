@@ -60,6 +60,8 @@ Test(commands, dup_true)
 {
     struct client *client1 = xmalloc(1, sizeof(struct client));
     struct client *client2 = xmalloc(1, sizeof(struct client));
+    client1->client_socket = 1;
+    client2->client_socket = 2;
     client1->username = NULL;
     client2->username = NULL;
     client1->next = client2;
@@ -73,7 +75,6 @@ Test(commands, dup_true)
     free(client1);
     free(client2->username);
     free(client2);
-
 }
 
 Test(commands, dup_false)

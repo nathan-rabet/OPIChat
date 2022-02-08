@@ -98,7 +98,7 @@ Test(requests_parsing, key_value_is_payload)
 
 Test(requests_parsing, no_command_parameter)
 {
-    char req[] = "9\n2\nSEND-DM\nFrom=ING1";
+    char req[] = "9\n2\nSEND-DM\n\nFrom=ING1";
 
     struct message *r = parse_message(req);
 
@@ -318,6 +318,18 @@ Test(command_parameter, incomplete_request)
     cr_assert_eq(r, NULL);
 }
 
+Test(command_parameter, payload_with_lf)
+{
+    char req[] = "28\n3\nSEND-DM\n\nBonjour\nBonsoir\n\nBienoubien?";
+    char payload[] = "Bonjour\nBonsoir\n\nBienoubien?";
+    struct message *r = parse_message(req);
+
+    cr_assert_neq(r, NULL);
+    cr_expect_str_eq(r->payload, payload, "Payload = %s", r->payload);
+
+    free_partial_message(r);
+}
+
 Test(command_parameter, other_1)
 {
     char req[] = "14\n3\nSEND-DM\n\nUser not found";
@@ -325,4 +337,6 @@ Test(command_parameter, other_1)
     struct message *r = parse_message(req);
 
     cr_assert_neq(r, NULL);
+
+    free_message(r);
 }

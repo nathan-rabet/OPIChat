@@ -67,16 +67,12 @@ char *compose_message(const struct message *message)
     }
 
     // strcat(ret, command) and command parameters
-    if (message->command != NULL && strcmp(message->command, "SEND-DM") == 0)
+    for (uint64_t i = 0; i < message->nb_parameters; i++)
     {
-        unsigned i;
-        for (i = 0; i < message->nb_parameters; i++)
-        {
-            strcat(ret, message->command_parameters[i].key);
-            strcat(ret, "=");
-            strcat(ret, message->command_parameters[i].value);
-            strcat(ret, "\n");
-        }
+        strcat(ret, message->command_parameters[i].key);
+        strcat(ret, "=");
+        strcat(ret, message->command_parameters[i].value);
+        strcat(ret, "\n");
     }
 
     strcat(ret, "\n");
