@@ -9,8 +9,11 @@
 
 extern struct client *clients;
 
-int username_is_valid(char *s)
+int name_is_valid(char *s)
 {
+    if (!s)
+        return 0;
+
     int i = 0;
     int isValid = 0;
     while (s[i] != '\0')
@@ -48,7 +51,7 @@ struct send_pool *handle_login(struct message *msg, struct client *client)
 {
     struct message *response = NULL;
 
-    if(username_is_valid(msg->payload) == 1)
+    if (name_is_valid(msg->payload) == 1)
     {
         if (username_not_duplicate(msg->payload, clients, client))
         {

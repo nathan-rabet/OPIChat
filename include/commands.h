@@ -3,6 +3,7 @@
 
 #include "client.h"
 #include "message.h"
+#include "xalloc.h"
 
 struct send_pool
 {
@@ -24,7 +25,7 @@ struct send_pool *handle_broadcast(struct message *msg, struct client *client);
 struct send_pool *handle_create_room(struct message *msg,
                                      struct client *client);
 
-struct send_pool *handle_list_rooms(struct message *msg);
+struct send_pool *handle_list_rooms(struct message *msg, struct client *client);
 
 struct send_pool *handle_join_room(struct message *msg, struct client *client);
 

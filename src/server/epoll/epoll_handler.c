@@ -125,7 +125,7 @@ void communicate(int client_socket)
             send_pool = handle_create_room(m, client);
 
         else if (strcmp(m->command, "LIST-ROOMS") == 0)
-            send_pool = handle_list_rooms(m);
+            send_pool = handle_list_rooms(m, client);
 
         else if (strcmp(m->command, "JOIN-ROOM") == 0)
             send_pool = handle_join_room(m, client);

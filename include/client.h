@@ -20,7 +20,7 @@ struct client
     char *username; // Username of the client
 
     size_t nb_rooms; // Number of rooms the client is in
-    char *rooms; // Rooms of the client // TODO : another struct ?
+    char **rooms; // Rooms of the client // TODO : another struct ?
 
     struct client *next; // Next client for another client
 };

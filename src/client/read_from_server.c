@@ -17,7 +17,7 @@ void *read_from_server_thread(void *none)
 {
     (void)none;
     int server_sockfd = server_socket;
-    while (1)
+    while (true)
     {
         struct message *m = safe_recv(server_sockfd, 0, false);
         if (m == NULL)
@@ -25,18 +25,13 @@ void *read_from_server_thread(void *none)
             do
             {
                 close(server_socket);
+                server_sockfd = setup_client_socket(ip, port);
                 write_error(
                     "Impossible to connect to server %s:%s, retrying... : %s",
                     ip, port, strerror(errno));
                 sleep(1);
-            } while ((server_sockfd = setup_client_socket(ip, port)) == -1);
+            } while (server_socket == -1);
         }
-
-        else if (m == NULL)
-        {
-            write_warning("Receving corrupted message from server");
-        }
-
         else
         {
             switch (m->status_code)
@@ -60,6 +55,18 @@ void *read_from_server_thread(void *none)
                         i++;
                     fprintf(stdout, "From %s: %s\n",
                             (char *)m->command_parameters[i].value, m->payload);
+                }
+
+                if (strcmp(m->command, "SEND-ROOM") == 0)
+                {
+                    uint64_t i = 0;
+                    while (strcmp(m->command_parameters[i].key, "From") != 0
+                           && i < m->nb_parameters)
+                        i++;
+                    fprintf(stdout, "From %s@%s: %s\n",
+                            (char *)m->command_parameters[i].value,
+                            (char *)m->command_parameters[i + 1].value,
+                            m->payload);
                 }
                 break;
 

@@ -25,7 +25,7 @@ int setup_server_socket(const char *ip, const char *port);
  *
  * @param ip The ip to connect to
  * @param port The port to connect on
- * @return The created socket, exit on error
+ * @return The created socket, -1 on error
  */
 int setup_client_socket(const char *ip, const char *port);
 #endif

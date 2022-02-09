@@ -51,6 +51,26 @@ get_command_parameters_info(char *command_string)
             cmd_params->parameters_name = xmalloc(1, sizeof(char **));
             cmd_params->parameters_name[0] = strdup("User");
         }
+
+        else if (strcmp(command_string, "CREATE-ROOM") == 0)
+            cmd_params->command = "CREATE-ROOM";
+        else if (strcmp(command_string, "LIST-ROOMS") == 0)
+            cmd_params->command = "LIST-ROOMS";
+        else if (strcmp(command_string, "JOIN-ROOM") == 0)
+            cmd_params->command = "JOIN-ROOM";
+        else if (strcmp(command_string, "LEAVE-ROOM") == 0)
+            cmd_params->command = "LEAVE-ROOM";
+        else if (strcmp(command_string, "SEND-ROOM") == 0)
+        {
+            cmd_params->command = "SEND-ROOM";
+            cmd_params->nb_parameters = 1;
+            cmd_params->parameters_name = xmalloc(1, sizeof(char **));
+            cmd_params->parameters_name[0] = strdup("Room");
+        }
+        else if (strcmp(command_string, "DELETE-ROOM") == 0)
+            cmd_params->command = "DELETE-ROOM";
+        else if (strcmp(command_string, "PROFILE") == 0)
+            cmd_params->command = "PROFILE";
     }
     return cmd_params;
 }
