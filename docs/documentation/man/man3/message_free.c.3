@@ -1,0 +1,76 @@
+.TH "/home/runner/work/OPIChat/OPIChat/src/common/message/message_free.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/OPIChat/OPIChat/src/common/message/message_free.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include 'message\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBfree_message\fP (struct \fBmessage\fP *\fBmessage\fP)"
+.br
+.RI "Free the memory allocated by a struct message\&. "
+.ti -1c
+.RI "void \fBfree_partial_message\fP (struct \fBmessage\fP *\fBmessage\fP)"
+.br
+.RI "Like \fCfree_message\fP, but disalocate a non-valid struct message\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void free_message (struct \fBmessage\fP * message)"
+
+.PP
+Free the memory allocated by a struct message\&. 
+.PP
+\fBWarning\fP
+.RS 4
+MUST NOT be used on incomplete struct message
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fImessage\fP The struct message to free 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 5 of file message_free\&.c\&.
+.SS "void free_partial_message (struct \fBmessage\fP * message)"
+
+.PP
+Like \fCfree_message\fP, but disalocate a non-valid struct message\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function is less efficient than \fCfree_message\fP
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fImessage\fP The struct message to free 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void 
+.RE
+.PP
+
+.PP
+Definition at line 18 of file message_free\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

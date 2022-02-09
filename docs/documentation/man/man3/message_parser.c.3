@@ -1,0 +1,69 @@
+.TH "/home/runner/work/OPIChat/OPIChat/src/common/message/message_parser.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+/home/runner/work/OPIChat/OPIChat/src/common/message/message_parser.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'message\&.h'\fP
+.br
+\fC#include 'type_check\&.h'\fP
+.br
+\fC#include 'xalloc\&.h'\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBFREETURN\fP(returned)"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBmessage\fP * \fBparse_message\fP (const char *request_string)"
+.br
+.RI "Take a message as a string and parse it into a message struct\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define FREETURN(returned)"
+\fBValue:\fP
+.PP
+.nf
+    free(req_str_dup);                                                         \
+    free_partial_message(r);                                                   \
+    return (returned)
+.fi
+.SH "Function Documentation"
+.PP 
+.SS "struct \fBmessage\fP* parse_message (const char * request_string)"
+
+.PP
+Take a message as a string and parse it into a message struct\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIrequest_string\fP The message as a string 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+struct message, NULL if error or invalid message 
+.RE
+.PP
+
+.PP
+Definition at line 8 of file message_parser\&.c\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

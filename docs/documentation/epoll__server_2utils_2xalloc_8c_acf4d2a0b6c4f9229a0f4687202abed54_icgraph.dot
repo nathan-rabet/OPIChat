@@ -1,0 +1,24 @@
+digraph "xcalloc"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="xcalloc",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Calloc wrapper that exit on failure."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="add_client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8c.html#a70a1bb5924258ddc99459842fcc91593",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="add_room",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$room_8c.html#a2ab5feb4830c297aaf6aa50c23883964",tooltip="Add a new room room to the linked list room."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="handle_create_room",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__create__room_8c.html#ac0e36a04db06a1ffb854091eacf2eefe",tooltip=" "];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Test",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$room__test_8c.html#a78d77fd5a00a1bf202f9f814b7b2024a",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="handle_profile",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__profile_8c.html#a9e9fc6ffdb14b983b5969ecc8dc263da",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="parse_message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$message__parser_8c.html#aa8487af4610a19e0a3e4dea4ae684fc7",tooltip="Take a message as a string and parse it into a message struct."];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$test__main_8c.html#a840291bc02cba5474a4cb46a9b9566fe",tooltip=" "];
+  Node7 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="Test",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$message__parser__test_8c.html#ae1574755fc96bba0dbd62bcc19e385a6",tooltip=" "];
+}

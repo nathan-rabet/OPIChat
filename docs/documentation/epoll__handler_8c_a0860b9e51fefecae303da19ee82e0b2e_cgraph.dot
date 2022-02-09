@@ -1,0 +1,18 @@
+digraph "communicate"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="communicate",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Handle communication with the server."];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="_read_from_server",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$basic__client_8c.html#a5fe8d2bcada37c4643319d61a9b380f8",tooltip="Read the server response."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="find_client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$connection_8c.html#aefccf8e7b43e39717455ca63ca6fa03c",tooltip="Find the connection_t element where the socket is equal to client sock."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="safe_recv",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe__io_8h.html#a11618f30f0d5d1293329f1d6804ff5fa",tooltip="Receive a message from a client safely."];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="xmalloc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoll__server_2utils_2xalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490",tooltip="Malloc wrapper that exit on failure."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="write_warning",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$logger_8h.html#ae5719e99feb0e409f827c968cb6c824c",tooltip="Log an error message."];
+}

@@ -1,0 +1,18 @@
+digraph "Test"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Test",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="add_room",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$room_8h.html#a2ab5feb4830c297aaf6aa50c23883964",tooltip="Add a new room room to the linked list room."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="find_room",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$room_8c.html#acae659308b57651995d3e0089068cfb8",tooltip="Find the room element where the socket is equal to room sock."];
+  Node2 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="xcalloc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoll__server_2utils_2xalloc_8c.html#acf4d2a0b6c4f9229a0f4687202abed54",tooltip="Calloc wrapper that exit on failure."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="find_room",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$room_8h.html#acae659308b57651995d3e0089068cfb8",tooltip="Find the room element where the socket is equal to room sock."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="remove_room",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$room_8h.html#a27230e0744e03e415bcdbc12f2e51b91",tooltip="Remove the room room from the linked list room."];
+}

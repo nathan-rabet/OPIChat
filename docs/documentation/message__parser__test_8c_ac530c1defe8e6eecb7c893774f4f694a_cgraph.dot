@@ -1,0 +1,20 @@
+digraph "Test"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Test",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="free_message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$message_8h.html#aafafca753919c7d770812f5c47b5fe7f",tooltip="Free the memory allocated by a struct message."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="parse_message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$message_8h.html#aa8487af4610a19e0a3e4dea4ae684fc7",tooltip="Take a message as a string and parse it into a message struct."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="check_is_number",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$type__check_8h.html#a19d3a4f9ccbc6c2c26d8e0b468529502",tooltip="Check if a string is a number."];
+  Node3 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="get_message_next_parameter_kv",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$message_8h.html#a28d4651376c79b584f48cf6ea0e2089a",tooltip="Get the next key value object."];
+  Node3 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="xcalloc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoll__server_2utils_2xalloc_8c.html#acf4d2a0b6c4f9229a0f4687202abed54",tooltip="Calloc wrapper that exit on failure."];
+  Node3 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="xrealloc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoll__server_2utils_2xalloc_8c.html#a93a8ec6e8a6eef0f62b7e5b50d0bf9e4",tooltip="Realloc wrapper that exit on failure."];
+}

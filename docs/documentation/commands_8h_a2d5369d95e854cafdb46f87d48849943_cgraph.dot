@@ -1,0 +1,19 @@
+digraph "handle_login"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="handle_login",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="find_client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$connection_8c.html#aefccf8e7b43e39717455ca63ca6fa03c",tooltip="Find the connection_t element where the socket is equal to client sock."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="init_message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$message_8h.html#a2949ade165d1040b2cb63f5d680f9914",tooltip="Initializes a struct message with the param status code affected."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="xmalloc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoll__server_2utils_2xalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490",tooltip="Malloc wrapper that exit on failure."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="name_is_valid",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__login_8c.html#a1d5012b1b4f2dcb64c30072f37b08f17",tooltip=" "];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="username_not_duplicate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__login_8c.html#a136c79309efc368ff4d7dc6324af80a2",tooltip=" "];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

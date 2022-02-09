@@ -1,0 +1,23 @@
+digraph "/home/runner/work/OPIChat/OPIChat/include/room.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="/home/runner/work/OPIChat\l/OPIChat/include/room.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="/home/runner/work/OPIChat\l/OPIChat/src/server/commands\l/handle_create_room.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__create__room_8c.html",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="/home/runner/work/OPIChat\l/OPIChat/src/server/commands\l/handle_delete_room.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__delete__room_8c.html",tooltip=" "];
+  Node1 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="/home/runner/work/OPIChat\l/OPIChat/src/server/commands\l/handle_join_room.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__join__room_8c.html",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="/home/runner/work/OPIChat\l/OPIChat/src/server/commands\l/handle_leave_room.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__leave__room_8c.html",tooltip=" "];
+  Node1 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="/home/runner/work/OPIChat\l/OPIChat/src/server/commands\l/handle_list_rooms.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__list__rooms_8c.html",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="/home/runner/work/OPIChat\l/OPIChat/src/server/commands\l/handle_send_room.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$handle__send__room_8c.html",tooltip=" "];
+  Node1 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="/home/runner/work/OPIChat\l/OPIChat/src/server/room.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$room_8c.html",tooltip=" "];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="/home/runner/work/OPIChat\l/OPIChat/tests/unit_testing\l/room_test.c",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$room__test_8c.html",tooltip=" "];
+}

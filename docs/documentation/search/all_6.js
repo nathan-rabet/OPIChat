@@ -1,0 +1,10 @@
+var searchData=
+[
+  ['find_5fclient_43',['find_client',['../connection_8c.html#aefccf8e7b43e39717455ca63ca6fa03c',1,'find_client(struct connection_t *connection, int client_socket):&#160;connection.c'],['../connection_8h.html#aefccf8e7b43e39717455ca63ca6fa03c',1,'find_client(struct connection_t *connection, int client_socket):&#160;connection.c'],['../client_8h.html#a482b2ffb7c63f6e3314013fd90419b3d',1,'find_client(struct client *connection, int client_socket):&#160;client.c'],['../client_8c.html#a7e478cee5c2ab135e0eb1dedc4e49e97',1,'find_client(struct client *client, int client_socket):&#160;client.c']]],
+  ['find_5fclient_5fby_5fusername_44',['find_client_by_username',['../client_8h.html#a40b84df1d2f32d0fc1ef9bfbf5861887',1,'find_client_by_username(struct client *client, char *username):&#160;client.c'],['../client_8c.html#a40b84df1d2f32d0fc1ef9bfbf5861887',1,'find_client_by_username(struct client *client, char *username):&#160;client.c']]],
+  ['find_5froom_45',['find_room',['../room_8h.html#acae659308b57651995d3e0089068cfb8',1,'find_room(struct room *room, const char *room_name):&#160;room.c'],['../room_8c.html#acae659308b57651995d3e0089068cfb8',1,'find_room(struct room *room, const char *room_name):&#160;room.c']]],
+  ['flags_46',['flags',['../structsafe__recv__data.html#ac8bf36fe0577cba66bccda3a6f7e80a4',1,'safe_recv_data']]],
+  ['free_5fmessage_47',['free_message',['../message_8h.html#aafafca753919c7d770812f5c47b5fe7f',1,'free_message(struct message *message):&#160;message_free.c'],['../message__free_8c.html#aafafca753919c7d770812f5c47b5fe7f',1,'free_message(struct message *message):&#160;message_free.c']]],
+  ['free_5fpartial_5fmessage_48',['free_partial_message',['../message_8h.html#a5bcae38822e01fd2316aede529617559',1,'free_partial_message(struct message *message):&#160;message_free.c'],['../message__free_8c.html#a5bcae38822e01fd2316aede529617559',1,'free_partial_message(struct message *message):&#160;message_free.c']]],
+  ['freeturn_49',['FREETURN',['../message__parser_8c.html#a36a74f751091df649880c7c5ed1def9b',1,'message_parser.c']]]
+];

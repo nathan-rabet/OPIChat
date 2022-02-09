@@ -1,0 +1,22 @@
+digraph "Test"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Test",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="free_message",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$message_8h.html#aafafca753919c7d770812f5c47b5fe7f",tooltip="Free the memory allocated by a struct message."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="safe_recv",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe__io_8h.html#a11618f30f0d5d1293329f1d6804ff5fa",tooltip="Receive a message from a client safely."];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="xmalloc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoll__server_2utils_2xalloc_8c.html#a42ccfa6fc49cc4ce90cc44cd05052490",tooltip="Malloc wrapper that exit on failure."];
+  Node1 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="safe_send",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe__io_8h.html#a3730804c00874106746163562e2693ac",tooltip="Send a message to a client safely."];
+  Node1 -> Node6 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="setup_client_socket",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$init__socket_8h.html#aeb1ff62bccbab70efeeac34f505ceb36",tooltip="Create a connection socket."];
+  Node1 -> Node7 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="setup_server_socket",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$init__socket_8h.html#a52a29341829d13d3e6bd26bfb9cd8939",tooltip="Create a listening socket."];
+  Node7 -> Node8 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="raise_panic",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$logger_8h.html#aa3c3e5e89264af119696a729635581e4",tooltip="Log a CRITICAL error message & exit the program."];
+}

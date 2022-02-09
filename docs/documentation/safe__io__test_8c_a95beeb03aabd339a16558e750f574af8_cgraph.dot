@@ -1,0 +1,14 @@
+digraph "Test"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Test",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="safe_read",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe__io_8h.html#a70bebf5ac8325b0eb363be83f11a1f9b",tooltip="Read a message from a file descriptor safely."];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="xrealloc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoll__server_2utils_2xalloc_8c.html#a93a8ec6e8a6eef0f62b7e5b50d0bf9e4",tooltip="Realloc wrapper that exit on failure."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="safe_write",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$safe__io_8h.html#af5b0cdbd9fea86b0c53e02b3b5e31518",tooltip="Write a message to a file descriptor safely."];
+}

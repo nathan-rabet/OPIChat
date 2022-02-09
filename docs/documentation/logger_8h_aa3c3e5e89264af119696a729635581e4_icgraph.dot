@@ -1,0 +1,23 @@
+digraph "raise_panic"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="RL";
+  Node1 [label="raise_panic",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip="Log a CRITICAL error message & exit the program."];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$server__main_8c.html#a0ddf1224851353fc92bfbff6f499fa97",tooltip=" "];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="read_from_stdin",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$read__from__stdin_8c.html#a12dd841eebca77e40e225f37da7f778e",tooltip="Read from stdin and send the message to the server."];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="read_from_stdin_thread",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$read__from__stdin_8c.html#a823c02d2aa4f7bf6b7eabcf83fe760f1",tooltip=" "];
+  Node4 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="main",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client__main_8c.html#a0ddf1224851353fc92bfbff6f499fa97",tooltip=" "];
+  Node3 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Test",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$read__from__stdin__test_8c.html#a3ac7ccd7a65b60790fe3057ad65ee87b",tooltip=" "];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="setup_server_socket",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$init__server__socket_8c.html#a52a29341829d13d3e6bd26bfb9cd8939",tooltip="Create a listening socket."];
+  Node7 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="Test",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoll__test_8c.html#a80f6f4dd9fb91da78e41dddf99644cde",tooltip=" "];
+}

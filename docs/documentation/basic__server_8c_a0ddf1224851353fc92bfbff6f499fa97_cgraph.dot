@@ -1,0 +1,16 @@
+digraph "main"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="main",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="accept_client",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$basic__server_8c.html#ace3f10a600415838e09a4302024a5c30",tooltip="Accept a new client."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="communicate",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$basic__server_8c.html#a0860b9e51fefecae303da19ee82e0b2e",tooltip="Handle communication with the server."];
+  Node1 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="prepare_socket",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$basic__server_8c.html#a3ad2113f2297a7cbdaa71f370aea7db0",tooltip="Initialize the addrinfo struct and call create_and_connect()"];
+  Node4 -> Node5 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="create_and_bind",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$basic__server_8c.html#a4022681cfcf69f5864f0d54b275d591e",tooltip="Iterate over the struct addrinfo elements to create and bind a socket."];
+}

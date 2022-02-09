@@ -1,0 +1,12 @@
+digraph "add_client"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="add_client",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="get_client_ip",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$client_8c.html#abd8a9db1d28dbaf3e50be127beca1299",tooltip="Get the client IPv4/IPv6 address."];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="xcalloc",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$epoll__server_2utils_2xalloc_8c.html#acf4d2a0b6c4f9229a0f4687202abed54",tooltip="Calloc wrapper that exit on failure."];
+}
