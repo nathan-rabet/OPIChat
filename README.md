@@ -73,7 +73,7 @@ To enter a parameter as a key/value pair, you must type:
 ```
 
 Where `<key>` and `<value>` are respectively the key and the value of the parameter.
-Then press <kbd>Enter</kbd>
+Then press <kbd>Enter</kbd>.
 
 > The parameters prompt will always asks you key/value pairs forever until you press <kbd>Enter</kbd> and nothing else.
 
