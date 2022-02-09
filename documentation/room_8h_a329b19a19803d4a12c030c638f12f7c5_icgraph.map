@@ -1,8 +1,0 @@
-<map id="return_forged_error_message" name="return_forged_error_message">
-<area shape="rect" id="node1" title=" " alt="" coords="192,99,323,141"/>
-<area shape="rect" id="node2" href="$handle__create__room_8c.html#a955d604957591980dbd64208781c79ba" title=" " alt="" coords="5,5,144,32"/>
-<area shape="rect" id="node3" href="$handle__delete__room_8c.html#af22b8dc7bc9c5d320437688785db2899" title=" " alt="" coords="5,56,144,83"/>
-<area shape="rect" id="node4" href="$handle__join__room_8c.html#a97196ee4e63ce94e3420974ef7479b5c" title=" " alt="" coords="13,107,136,133"/>
-<area shape="rect" id="node5" href="$handle__leave__room_8c.html#af10dbeed7be2f4e3fdb1459ce43bb6ca" title=" " alt="" coords="7,157,142,184"/>
-<area shape="rect" id="node6" href="$handle__send__room_8c.html#a1849484b2f214d45916a9245319c1cb0" title=" " alt="" coords="9,208,140,235"/>
-</map>

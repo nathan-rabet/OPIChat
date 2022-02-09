@@ -1,4 +1,0 @@
-<map id="safe_recv" name="safe_recv">
-<area shape="rect" id="node1" title="Receive a message from a client safely." alt="" coords="5,5,84,32"/>
-<area shape="rect" id="node2" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="132,5,199,32"/>
-</map>

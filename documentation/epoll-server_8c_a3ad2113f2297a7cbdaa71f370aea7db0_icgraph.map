@@ -1,4 +1,0 @@
-<map id="prepare_socket" name="prepare_socket">
-<area shape="rect" id="node1" title="Initialize the addrinfo struct and call create_and_connect()" alt="" coords="104,5,215,32"/>
-<area shape="rect" id="node2" href="$epoll-server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
-</map>

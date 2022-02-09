@@ -1,5 +1,0 @@
-<map id="add_client" name="add_client">
-<area shape="rect" id="node1" title="Add a new client client to the linked list connection." alt="" coords="5,31,87,57"/>
-<area shape="rect" id="node2" href="$client_8c.html#a80a0df2bd2e5d096d8ea40517ffe6f24" title="Get the client IPv4/IPv6 address." alt="" coords="135,5,229,32"/>
-<area shape="rect" id="node3" href="$epoll__server_2utils_2xalloc_8c.html#a64dbeff7c3555eb2cb5991583d733f5a" title="Calloc wrapper that exit on failure." alt="" coords="151,56,213,83"/>
-</map>

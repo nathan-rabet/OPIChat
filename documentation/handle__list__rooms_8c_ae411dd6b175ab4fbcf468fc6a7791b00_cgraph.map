@@ -1,7 +1,0 @@
-<map id="handle_list_rooms" name="handle_list_rooms">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,132,83"/>
-<area shape="rect" id="node2" href="$message__init_8c.html#abeba53932f51cf0ac12dd3a1dc8bf1ff" title="Initializes a struct message with the param status code affected." alt="" coords="181,5,279,32"/>
-<area shape="rect" id="node3" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="328,31,395,57"/>
-<area shape="rect" id="node4" href="$handle__list__rooms_8c.html#aafe02cc0084050f9db58198d872d8c62" title=" " alt="" coords="180,107,280,133"/>
-<area shape="rect" id="node5" href="$epoll__server_2utils_2xalloc_8c.html#af1634ff7d575d04a5ad3bd26343b4e51" title="Realloc wrapper that exit on failure." alt="" coords="328,107,395,133"/>
-</map>

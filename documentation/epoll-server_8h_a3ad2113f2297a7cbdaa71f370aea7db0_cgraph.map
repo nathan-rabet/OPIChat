@@ -1,5 +1,0 @@
-<map id="prepare_socket" name="prepare_socket">
-<area shape="rect" id="node1" title="Initialize the Addrinfo struct and call create_and bind() and listen(2)" alt="" coords="5,31,116,57"/>
-<area shape="rect" id="node2" href="$basic__server_8c.html#a4022681cfcf69f5864f0d54b275d591e" title="Iterate over the struct addrinfo elements to create and bind a socket." alt="" coords="175,5,292,32"/>
-<area shape="rect" id="node3" href="$basic__client_8c.html#ab726def94a221e5ac93bcb2a42d16619" title="Iterate over the struct addrinfo elements to connect to the server." alt="" coords="164,56,303,83"/>
-</map>

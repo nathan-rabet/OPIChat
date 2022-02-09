@@ -1,8 +1,0 @@
-<map id="find_client" name="find_client">
-<area shape="rect" id="node1" title="Find the connection_t element where the socket is equal to client sock." alt="" coords="283,81,363,108"/>
-<area shape="rect" id="node2" href="$epoll-server_8c.html#a46a7917dc7230fcf524740bfca239cae" title=" " alt="" coords="119,5,219,32"/>
-<area shape="rect" id="node4" href="$handle__login_8c.html#a14392c5bd469cd46922243c88d661115" title=" " alt="" coords="122,56,217,83"/>
-<area shape="rect" id="node5" href="$handle__send__room_8c.html#a1849484b2f214d45916a9245319c1cb0" title=" " alt="" coords="104,107,235,133"/>
-<area shape="rect" id="node6" href="$client__test_8c.html#a35a01140d60eee4326be66d76f5ea305" title=" " alt="" coords="145,157,193,184"/>
-<area shape="rect" id="node3" href="$epoll-server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
-</map>

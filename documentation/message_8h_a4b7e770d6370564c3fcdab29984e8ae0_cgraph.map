@@ -1,4 +1,0 @@
-<map id="compose_message" name="compose_message">
-<area shape="rect" id="node1" title="Takes a message struct and serializes it to a string." alt="" coords="5,5,140,32"/>
-<area shape="rect" id="node2" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="188,5,255,32"/>
-</map>

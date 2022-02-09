@@ -1,8 +1,0 @@
-<map id="Test" name="Test">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,53,83"/>
-<area shape="rect" id="node2" href="$safe__io_8c.html#ac8413ee3e5fa5ceab0e0cb43c4b6aab8" title="Receive a message from a client safely." alt="" coords="133,5,212,32"/>
-<area shape="rect" id="node4" href="$init__client__socket_8c.html#aeb1ff62bccbab70efeeac34f505ceb36" title="Create a connection socket." alt="" coords="103,56,242,83"/>
-<area shape="rect" id="node5" href="$init__server__socket_8c.html#a52a29341829d13d3e6bd26bfb9cd8939" title="Create a listening socket." alt="" coords="101,107,244,133"/>
-<area shape="rect" id="node3" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="303,5,369,32"/>
-<area shape="rect" id="node6" href="$logger_8c.html#aa3c3e5e89264af119696a729635581e4" title="Log a CRITICAL error message &amp; exit the program." alt="" coords="292,107,380,133"/>
-</map>

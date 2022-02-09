@@ -1,6 +1,0 @@
-<map id="read_from_stdin" name="read_from_stdin">
-<area shape="rect" id="node1" title="Read from stdin and send the message to the server." alt="" coords="311,31,425,57"/>
-<area shape="rect" id="node2" href="$read__from__stdin_8c.html#aae4c2c08a6014ef154dba3a468584846" title=" " alt="" coords="104,5,263,32"/>
-<area shape="rect" id="node4" href="$read__from__stdin__test_8c.html#a3ac7ccd7a65b60790fe3057ad65ee87b" title=" " alt="" coords="159,56,207,83"/>
-<area shape="rect" id="node3" href="$client__main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
-</map>

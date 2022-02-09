@@ -1,9 +1,0 @@
-<map id="read_from_server_thread" name="read_from_server_thread">
-<area shape="rect" id="node1" title="Reads from the server and print (eventually) the formated message. This function is thread compliant." alt="" coords="5,107,172,133"/>
-<area shape="rect" id="node2" href="$message__free_8c.html#aafafca753919c7d770812f5c47b5fe7f" title="Free the memory allocated by a struct message." alt="" coords="237,5,341,32"/>
-<area shape="rect" id="node3" href="$safe__io_8c.html#ac8413ee3e5fa5ceab0e0cb43c4b6aab8" title="Receive a message from a client safely." alt="" coords="250,56,329,83"/>
-<area shape="rect" id="node5" href="$init__client__socket_8c.html#aeb1ff62bccbab70efeeac34f505ceb36" title="Create a connection socket." alt="" coords="220,107,359,133"/>
-<area shape="rect" id="node6" href="$logger_8c.html#aa2f6842f436362eed5f832d3b6611165" title="Log an error message." alt="" coords="248,157,331,184"/>
-<area shape="rect" id="node7" href="$logger_8c.html#ae5719e99feb0e409f827c968cb6c824c" title="Log an error message." alt="" coords="238,208,341,235"/>
-<area shape="rect" id="node4" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="407,56,473,83"/>
-</map>

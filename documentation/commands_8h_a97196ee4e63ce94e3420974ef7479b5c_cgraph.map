@@ -1,8 +1,0 @@
-<map id="handle_join_room" name="handle_join_room">
-<area shape="rect" id="node1" title=" " alt="" coords="5,107,128,133"/>
-<area shape="rect" id="node2" href="$room_8c.html#a69144af99b4765ffbb794ce40941e479" title="Find the room element where the socket is equal to room sock." alt="" coords="202,5,281,32"/>
-<area shape="rect" id="node3" href="$message__init_8c.html#abeba53932f51cf0ac12dd3a1dc8bf1ff" title="Initializes a struct message with the param status code affected." alt="" coords="355,108,453,135"/>
-<area shape="rect" id="node4" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="501,108,568,135"/>
-<area shape="rect" id="node5" href="$room_8c.html#a329b19a19803d4a12c030c638f12f7c5" title=" " alt="" coords="176,158,307,199"/>
-<area shape="rect" id="node6" href="$epoll__server_2utils_2xalloc_8c.html#af1634ff7d575d04a5ad3bd26343b4e51" title="Realloc wrapper that exit on failure." alt="" coords="208,224,275,251"/>
-</map>

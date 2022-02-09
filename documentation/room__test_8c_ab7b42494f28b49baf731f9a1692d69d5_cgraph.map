@@ -1,7 +1,0 @@
-<map id="Test" name="Test">
-<area shape="rect" id="node1" title=" " alt="" coords="5,56,53,83"/>
-<area shape="rect" id="node2" href="$room_8c.html#ac32507e64a7f7399971d75bda37c526b" title="Add a new room room to the linked list room." alt="" coords="113,56,191,83"/>
-<area shape="rect" id="node3" href="$room_8c.html#a69144af99b4765ffbb794ce40941e479" title="Find the room element where the socket is equal to room sock." alt="" coords="251,5,329,32"/>
-<area shape="rect" id="node5" href="$room_8c.html#a94c22f6317fb18032ebcb2598b4e8523" title="Remove the room room from the linked list room." alt="" coords="101,107,203,133"/>
-<area shape="rect" id="node4" href="$epoll__server_2utils_2xalloc_8c.html#a64dbeff7c3555eb2cb5991583d733f5a" title="Calloc wrapper that exit on failure." alt="" coords="259,56,321,83"/>
-</map>

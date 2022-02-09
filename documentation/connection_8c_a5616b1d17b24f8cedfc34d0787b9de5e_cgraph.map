@@ -1,4 +1,0 @@
-<map id="add_client" name="add_client">
-<area shape="rect" id="node1" title="Add a new client connection_t to the linked list connection." alt="" coords="5,5,87,32"/>
-<area shape="rect" id="node2" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="135,5,201,32"/>
-</map>
