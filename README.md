@@ -1,87 +1,49 @@
-# OPIchat bible
+# OPIChat
 
-The following project is organised in a certain way (and must stay like this!!) in order to keep it reliable, secure and maintainable.
+*OPIChat* is a simple IRC-like chat software. It is written in C and aims to be a simple, secured and easy to use. The project includes a client and a server.
 
-Thus, there is a serie of non-exhaustive mandatory rules that must be followed in order to make the project work.
+## Installation and compilation
 
-## Coding style
+1. Make sure to have the following dependencies:
+   - (GNU) make
+   - gcc
 
-- The project **must follow the EPITA
-coding style** (obviously).
-- Macro's must be *UPPERCASE*.
-- Functions, enumerations and variables must be *snake_case*.
+2. Clone the repository
 
-## Architecture
+3. Build the project using the `make` command.
 
-The project is divided in the following parts:
+4. Both of client and server are in the `build/` folder.
 
-- `src/`
-  - `client/`: the client part.
-  - `server/`: the server.
-  - `common/`: functions and procedures that are used by both the client and the server.
-  - `client_main.c`: the main file of the client.
-  - `server_main.c`: the main file of the server.
-- `include/`: the header files.
-- `tests/`
-  - `test_main.c` : the manual main test file.
-  - `unit_testing/` : the unit testing folder.
+## Usage
 
-## Header files
+### Server
 
-A header file must contains for each feature:
+The server executable is called `opichat_server` and is located in the `build/` folder.
 
-- Their structures.
-- Their functions
-- Their macros.
-- Their global variables.
-- Their constants.
-- Their enumerations.
+To start the server, you must run the following command:
 
-Concretely, all the informations that must be shared between project's folders must be put in the header files.
-
-Also, each header **MUST** have a standard include guard :
-
-```c
-#ifndef __MY_HEADER_FILE_H__
-#define __MY_HEADER_FILE_H__
-...
-#endif
+```bash
+    ./opichat_server <ip> <port>
 ```
 
-NB : `#pragma once` is not standard, then forbiden.
+Where `<ip>` is the IP address of the server and <`port`> is the port where clients will connect to.
 
-Also, if the name of the header file is `my_header_file.h`, the corresponding include guard must be `MY_HEADER_FILE_H`.
+> Note that you can use `localhost` as a loopback `<ip>` address to start the server.
 
-## Isolation and "foldering"
+### Client
 
-All functions must be isolated in their own logical files.
+The client executable is called `opichat_client` and is located in the `build/` folder.
 
-For example, `src/common/message_free.c` contains all the functions that are used to free a message.
+To start the client, you must run the following command:
 
-Also, if you create a feature and you want to separate it in different files, you must create a folder for it. For example, if you create a `src/common/message_free.c` and `src/common/message_parser.c` files, you must create a `src/common/message/` folder and put the two files in it.
+```bash
+    ./opichat_client <ip> <port>
+```
 
-## Documentation
+Where `<ip>` is the IP address of the server and `<port>` is the port where the server is listening to.
 
-All functions, structures, structure field, macros, global variables. are documented in their corresponding header file.
+### More information
 
-The documentation must be written with the [Doxygen](https://www.doxygen.org/) syntax.
+If you are interested in the architecture of the project, check [ARCH.md](ARCH.md).
 
-## Unit testing
-
-All written functions **MUST HAVE a unit test** which use the *Criterion* framework. The unit test must be in the `tests/unit_testing/` folder. The unit test file must be named like `<something>_test.c`.
-
-## Memory allocations
-
-All functions that allocate memory **MUST BE** freed (again this is obviously obvious).
-
-Also, heap memory allocation **MUST NOT** be done with malloc(), calloc() or realloc(), but with the functions defined in the `src/common/utils/xalloc.c` file.
-
-We won't preload our xmalloc() dude thus there is a tollerance for functions under our control (like syscalls or other libc stuff).
-
-## Recommended practices
-
-If you create a set of methods and structure you don't want another programmer (or hAcKeR user) to manipulate data as their wish, you can use the following practices:
-
-- All *INTERNAL* the methods of a structure **MUST** be static.
-- All hidden structures **MUST NOT** be in the header file. Instead, they must be in the .c source file.
-- You can create a mempool for your structures and just allow external users to communicate with it through the functions defined in the same file.
+Also, if you want a detailled documentation about the communication protocol, read [PROTOCOL.md](PROTOCOL.md).
