@@ -41,7 +41,7 @@ For example the following is a request sent by a user named `ING1` asking the se
 > SEND-DM\$\
 > User=acu\$\
 > $\
-> 2022\
+> 2022
 
 In this example and all the others in this document, the <kbd>$</kbd> character corresponds to a newline.
 
