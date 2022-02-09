@@ -22,16 +22,11 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
       - name: Doxygen Action
-      # You may pin to the exact commit or the version.
-      # uses: mattnotmitt/doxygen-action@5636578e966e739b7f06c7fa74b1b3e8267484a5
         uses: mattnotmitt/doxygen-action@1.9.3
         with:
           # Path to Doxyfile
-          doxyfile-path: ./Doxyfile # default is ./Doxyfile
+          doxyfile-path: ./docs/Doxyfile.conf # default is ./Doxyfile
           # Working directory
-          working-directory: . # default is .
-          # Generate latex documentation
+          working-directory: . # default is ./docs
