@@ -38,9 +38,11 @@ int safe_write(int fd, const void *buf, size_t count);
  *
  * @param sockfd The file descriptor of the client.
  * @param flags the recv() flags.
+ * @param mustTimeout If true, the function will exit after RECV_TIMEOUT
+ * seconds, otherwise it will wait for the message to be received forever.
  * @return The message received, NULL if an error occured.
  */
-struct message *safe_recv(int sockfd, int flags);
+struct message *safe_recv(int sockfd, int flags, bool mustTimeout);
 
 /**
  * @brief Read a message from a file descriptor safely.

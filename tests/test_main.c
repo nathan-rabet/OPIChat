@@ -1,28 +1,23 @@
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
 
+#include "client.h"
 #include "client_read.h"
+#include "commands.h"
 #include "init_socket.h"
 #include "message.h"
-#include "client.h"
-
+#include "read_from_stdin.h"
+#include "safe_io.h"
 
 int main(void)
 {
-    struct client *client1 = NULL;
-    struct client *client2 = NULL;
-    struct sockaddr addr = {
-        .sa_family = AF_INET,
-    };
+    char req[] = "4\n2\nSEND-DM\nUser=acu\nFrom=ING1\n\n2022";
+    struct message *r = parse_message(req);
 
-    client1 = add_client(client1, 1, addr, sizeof(addr));
-    client2 = add_client(client1, 2, addr, sizeof(addr));
-
-    client2 = remove_client(client2, 1);
-    client2 = remove_client(client2, 2);
-
+    (void)r;
 }

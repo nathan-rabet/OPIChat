@@ -41,7 +41,7 @@ Test(requests_parsing, subject_server_response)
     cr_assert_str_eq(r->command_parameters[0].value, "acu",
                      "r->command_parameters[0].value = %s",
                      r->command_parameters[0].value);
-    cr_assert_eq(r->payload, NULL);
+    cr_assert_str_eq(r->payload, "");
 
     free_message(r);
 }
@@ -98,7 +98,7 @@ Test(requests_parsing, key_value_is_payload)
 
 Test(requests_parsing, no_command_parameter)
 {
-    char req[] = "9\n2\nSEND-DM\nFrom=ING1";
+    char req[] = "9\n2\nSEND-DM\n\nFrom=ING1";
 
     struct message *r = parse_message(req);
 
@@ -150,6 +150,23 @@ Test(requests_parsing, multiple_command_parameters)
                      r->command_parameters[3].value);
 
     cr_assert_str_eq(r->payload, "2022");
+
+    free_message(r);
+}
+
+Test(requests_parsing, no_payload_no_parameters)
+{
+    char req[] = "0\n3\nINVALID\n\n";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_eq(r->payload_size, 0, "r->payload_size = %d", r->payload_size);
+    cr_assert_eq(r->status_code, 3, "r->status_code = %d", r->status_code);
+    cr_assert_str_eq(r->command, "INVALID", "r->command = %s", r->command);
+    cr_assert_eq(r->nb_parameters, 0, "r->nb_parameters = %d",
+                 r->nb_parameters);
+    cr_assert_eq(r->command_parameters, NULL);
+    cr_assert_str_eq(r->payload, "");
 
     free_message(r);
 }
@@ -299,4 +316,27 @@ Test(command_parameter, incomplete_request)
     struct message *r = parse_message(req);
 
     cr_assert_eq(r, NULL);
+}
+
+Test(command_parameter, payload_with_lf)
+{
+    char req[] = "28\n3\nSEND-DM\n\nBonjour\nBonsoir\n\nBienoubien?";
+    char payload[] = "Bonjour\nBonsoir\n\nBienoubien?";
+    struct message *r = parse_message(req);
+
+    cr_assert_neq(r, NULL);
+    cr_expect_str_eq(r->payload, payload, "Payload = %s", r->payload);
+
+    free_partial_message(r);
+}
+
+Test(command_parameter, other_1)
+{
+    char req[] = "14\n3\nSEND-DM\n\nUser not found";
+
+    struct message *r = parse_message(req);
+
+    cr_assert_neq(r, NULL);
+
+    free_message(r);
 }

@@ -20,16 +20,14 @@ TEST_SRC = $(shell find tests/unit_testing -name '*.c')
 TEST_OBJS = $(TEST_SRC:%.c=$(BUILD)/%.o)
 TEST_LDFLAGS = -lcriterion
 
-DYN_LIB = $(BUILD)/libmalloc.so
-
 # OPIchat
 all: opichat_server opichat_client
 	
 # Compile server and client
-opichat_server: $(OBJS) src/server_main.o
+opichat_server: $(OBJS) $(BUILD)/src/server_main.o
 	$(CC) $(LDFLAGS) -o opichat_server $^
 
-opichat_client: $(OBJS) src/client_main.o
+opichat_client: $(OBJS) $(BUILD)/src/client_main.o
 	$(CC) $(LDFLAGS) -o opichat_client $^
 
 # Run test suite
@@ -44,11 +42,8 @@ check_asan:
 tests: $(TEST_OBJS) $(OBJS)
 	$(CC) $(TEST_LDFLAGS) $(LDFLAGS) -o $(BUILD)/tests_suite $^
 
-test_main: $(OBJS) tests/test_main.o
+test_main: $(OBJS) $(BUILD)/tests/test_main.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o test_main $^
-# dynamic libraries
-$(BUILD)/%.so: src/library/%.o $(BUILD)
-	$(CC) -shared -fPIC -o $@ $<
 
 # object files
 $(BUILD)/%.o: %.c
@@ -56,7 +51,7 @@ $(BUILD)/%.o: %.c
 	$(CC) $(ADD_COMPIL) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(BUILD) $(DYN_LIB) $(TEST_OBJS) $(OBJS) tests/test_main.o src/server_main.o src/client_main.o
+	$(RM) $(BUILD) opichat_client opichat_server test_main
 
 .PHONY: clean check
 

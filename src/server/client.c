@@ -44,6 +44,7 @@ struct client *add_client(struct client *client, int client_socket,
     new_connection->client_sockaddr =
         xcalloc(1, sizeof(struct sockaddr_storage));
     memcpy(new_connection->client_sockaddr, &sockaddr, sockaddr_len);
+    new_connection->ip = get_client_ip(new_connection);
 
     return new_connection;
 }
@@ -60,6 +61,7 @@ static void __free_client(struct client *client)
         write_error("Failed to close socket for client %s",
                     get_client_ip(client));
     free(client->client_sockaddr);
+    free(client->ip);
     free(client);
 }
 
@@ -88,6 +90,15 @@ struct client *remove_client(struct client *client, int client_socket)
 struct client *find_client(struct client *client, int client_socket)
 {
     while (client != NULL && client->client_socket != client_socket)
+        client = client->next;
+
+    return client;
+}
+
+struct client *find_client_by_username(struct client *client, char *username)
+{
+    while (client != NULL
+           && (!client->username || strcmp(client->username, username) != 0))
         client = client->next;
 
     return client;

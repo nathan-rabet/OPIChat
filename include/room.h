@@ -27,7 +27,7 @@ struct room
     int owner_socket; // Socket FD of the room owner
 
     size_t nb_clients; // Number of clients in the room
-    struct client *clients; // Clients in the room
+    int *clients_sockets; // Clients in the room
 
     struct room *next; // Next room for another room
 };
@@ -72,5 +72,8 @@ struct room *remove_room(struct room *room, const char *room_name,
  * ROOM_ERROR_NOT_FOUND
  */
 struct room *find_room(struct room *room, const char *room_name);
+
+struct send_pool *return_forged_error_message(char *command, char *payload,
+                                              int send_socket);
 
 #endif /* ROOM_H */

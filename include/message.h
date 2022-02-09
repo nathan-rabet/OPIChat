@@ -92,6 +92,6 @@ int get_message_next_parameter_kv(char *params_start, char **key, char **value);
  * 
  * @return char pointer
  */
-char *compose_message(struct message *message);
+char *compose_message(const struct message *message);
 
 #endif /* MESSAGE_H */

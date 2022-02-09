@@ -6,28 +6,45 @@
 #include "message.h"
 #include "xalloc.h"
 
-struct message *handle_broadcast(struct message *msg, struct client *client)
+struct send_pool *handle_broadcast(struct message *msg, struct client *client)
 {
     (void) client;
-    struct message *response = init_message(RESPONSE_MESSAGE_CODE);
-    response->command = xmalloc(10, sizeof(char));
-    strcpy(response->command, "BROADCAST");
+    if (msg->nb_parameters != 0)
+        return NULL;
 
-    struct message *notification = init_message(NOTIFICATION_MESSAGE_CODE);
-    notification->payload_size = msg->payload_size;
-    response->command = xmalloc(5, sizeof(char));
-    strcpy(response->command, "BROADCAST");
-    notification->payload = xmalloc(strlen(msg->payload) + 1, sizeof(char));
-    notification->payload_size = msg->payload_size;
-    notification->nb_parameters = msg->nb_parameters;
-    if(msg->nb_parameters != 0)
-        notification->command_parameters = xmalloc(notification->nb_parameters,sizeof(struct command_parameter));
-    for(uint64_t i = 0; i < msg->nb_parameters; i++)
+    char *client_name = client->username ? client->username : "<Anonymous>";
+
+    struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
+
+    struct message *response = init_message(RESPONSE_MESSAGE_CODE);
+    response->command = strdup("BROADCAST");
+    sp->msg = xmalloc(1, sizeof(struct message *));
+    sp->nb_msg = 1;
+    sp->clients_sockets = xmalloc(1, sizeof(int));
+    sp->msg[0] = response;
+    sp->clients_sockets[0] = client->client_socket;
+
+    for (struct client *cur = clients; cur; cur = cur->next)
     {
-        notification->command_parameters[i].key = xmalloc(strlen(msg->command_parameters[i].key) + 1, sizeof(char));
-        notification->command_parameters[i].value = xmalloc(strlen(msg->command_parameters[i].value) + 1, sizeof(char));
-        strcpy(notification->command_parameters[i].key, msg->command_parameters[i].key);
-        strcpy(notification->command_parameters[i].value, msg->command_parameters[i].value);
+        if (cur->client_socket != client->client_socket)
+        {
+            struct message *notification =
+                init_message(NOTIFICATION_MESSAGE_CODE);
+            notification->command = strdup("BROADCAST");
+            notification->payload_size = msg->payload_size;
+            notification->payload = strdup(msg->payload);
+            notification->nb_parameters = 1;
+            notification->command_parameters =
+                xmalloc(1, sizeof(struct command_parameter));
+            notification->command_parameters->key = strdup("From");
+            notification->command_parameters->value = strdup(client_name);
+
+            sp->nb_msg++;
+            sp->msg = xrealloc(sp->msg, sp->nb_msg, sizeof(struct message));
+            sp->msg[sp->nb_msg - 1] = notification;
+            sp->clients_sockets[sp->nb_msg - 1] = cur->client_socket;
+        }
     }
-    return response;
+
+    return sp;
 }

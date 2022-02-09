@@ -9,27 +9,14 @@
 #include <sys/types.h>
 #include <pthread.h>
 
-
-
+void *read_from_stdin_thread(void *none);
 
 /**
- * @brief Reads request from stdin and sends it so server
- * 
- * @param server_socket 
+ * @brief Read from stdin and send the message to the server
+ *
+ * @param server_socket The socket to send the message to
  */
 void read_from_stdin(int server_socket);
-
-/**
- * @brief Checks whether the param is a valid command
- * 
- * @param command
- * @return int 
- */
-int command_is_valid(char *command);
-
-void *read_from_stdin_thread(void *server_socket);
-
-
 
 #endif /* READ_FROM_STDIN_H */
 

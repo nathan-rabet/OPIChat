@@ -1,87 +1,93 @@
-# OPIchat bible
+# OPIChat
 
-The following project is organised in a certain way (and must stay like this!!) in order to keep it reliable, secure and maintainable.
+[![Test suite](https://github.com/nathan-rabet/OPIChat/actions/workflows/unit_testing.yml/badge.svg)](https://github.com/nathan-rabet/OPIChat/actions/workflows/unit_testing.yml)
 
-Thus, there is a serie of non-exhaustive mandatory rules that must be followed in order to make the project work.
+*OPIChat* is a simple IRC-like chat software. It is written in C and aims to be a simple, secured and easy to use. The project includes a client and a server.
 
-## Coding style
+## Installation and compilation
 
-- The project **must follow the EPITA
-coding style** (obviously).
-- Macro's must be *UPPERCASE*.
-- Functions, enumerations and variables must be *snake_case*.
+1. Make sure to have the following dependencies:
+   - (GNU) make
+   - gcc
 
-## Architecture
+2. Clone the repository
 
-The project is divided in the following parts:
+3. Build the project using the `make` command.
 
-- `src/`
-  - `client/`: the client part.
-  - `server/`: the server.
-  - `common/`: functions and procedures that are used by both the client and the server.
-  - `client_main.c`: the main file of the client.
-  - `server_main.c`: the main file of the server.
-- `include/`: the header files.
-- `tests/`
-  - `test_main.c` : the manual main test file.
-  - `unit_testing/` : the unit testing folder.
+4. Both of client and server are in the `build/` folder.
 
-## Header files
+## Usage
 
-A header file must contains for each feature:
+### Server
 
-- Their structures.
-- Their functions
-- Their macros.
-- Their global variables.
-- Their constants.
-- Their enumerations.
+The server executable is called `opichat_server` and is located in the `build/` folder.
 
-Concretely, all the informations that must be shared between project's folders must be put in the header files.
+To start the server, you must run the following command:
 
-Also, each header **MUST** have a standard include guard :
-
-```c
-#ifndef __MY_HEADER_FILE_H__
-#define __MY_HEADER_FILE_H__
-...
-#endif
+```bash
+    ./opichat_server <ip> <port>
 ```
 
-NB : `#pragma once` is not standard, then forbiden.
+Where `<ip>` is the IP address of the server and <`port`> is the port where clients will connect to.
 
-Also, if the name of the header file is `my_header_file.h`, the corresponding include guard must be `MY_HEADER_FILE_H`.
+> Note that you can use `localhost` as a loopback `<ip>` address to start the server.
 
-## Isolation and "foldering"
+#### Actions to perform
+No action is required for the server
 
-All functions must be isolated in their own logical files.
+### Client
 
-For example, `src/common/message_free.c` contains all the functions that are used to free a message.
+The client executable is called `opichat_client` and is located in the `build/` folder.
 
-Also, if you create a feature and you want to separate it in different files, you must create a folder for it. For example, if you create a `src/common/message_free.c` and `src/common/message_parser.c` files, you must create a `src/common/message/` folder and put the two files in it.
+To start the client, you must run the following command:
 
-## Documentation
+```bash
+    ./opichat_client <ip> <port>
+```
 
-All functions, structures, structure field, macros, global variables. are documented in their corresponding header file.
+Where `<ip>` is the IP address of the server and `<port>` is the port where the server is listening to.
 
-The documentation must be written with the [Doxygen](https://www.doxygen.org/) syntax.
+#### Actions to perform
+When the client launchs, you will deal with the command prompt.
 
-## Unit testing
+```
+Command:
+```
 
-All written functions **MUST HAVE a unit test** which use the *Criterion* framework. The unit test must be in the `tests/unit_testing/` folder. The unit test file must be named like `<something>_test.c`.
+At this step, you must enter a valid command name (as described in the [protocol](PROTOCOL.md)).
 
-## Memory allocations
+If you enter a valid command, you will have one or both of these 2 following prompts:
 
-All functions that allocate memory **MUST BE** freed (again this is obviously obvious).
+**Parameters**
+At this step, the client program valued that you entered a command which requires parameters.
 
-Also, heap memory allocation **MUST NOT** be done with malloc(), calloc() or realloc(), but with the functions defined in the `src/common/utils/xalloc.c` file.
+```
+Parameters:
+```
 
-We won't preload our xmalloc() dude thus there is a tollerance for functions under our control (like syscalls or other libc stuff).
+To enter a parameter as a key/value pair, you must type:
 
-## Recommended practices
+```
+<key>=<value>
+```
 
-If you create a set of methods and structure you don't want another programmer (or hAcKeR user) to manipulate data as their wish, you can use the following practices:
+Where `<key>` and `<value>` are respectively the key and the value of the parameter.
+Then press <kbd>Enter</kbd>
 
-- All *INTERNAL* the methods of a structure **MUST** be static.
-- All hidden structures **MUST NOT** be in the header file. Instead, they must be in the .c source file.
-- You can create a mempool for your structures and just allow external users to communicate with it through the functions defined in the same file.
+> The parameters prompt will always asks you key/value pairs forever until you press <kbd>Enter</kbd> and nothing else.
+
+**Payload**
+At this step, you must enter the content of the payload. Unless *Parameters*, no specific format is applied here.
+
+```
+Payload:
+```
+
+> Some command (like `SEND-DM` or `BROADCAST`) will loop on the payload prompt forever. To exit the payload prompt, type `\quit`.
+
+
+### More information
+
+If you are interested in the architecture of the project, check [ARCH.md](ARCH.md).
+
+Also, if you want a detailled documentation about the communication protocol, read [PROTOCOL.md](PROTOCOL.md).

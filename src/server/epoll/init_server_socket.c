@@ -1,10 +1,9 @@
-#include "init_socket.h"
-
 #include <netdb.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
+#include "init_socket.h"
 #include "logger.h"
 
 /**
@@ -31,8 +30,7 @@ static int _setup_socket_basis(struct addrinfo *addrinfo)
             return s;
     }
 
-    raise_panic(EXIT_FAILURE, "Could not bind socket to %s",
-                addrinfo->ai_canonname);
+    raise_panic(EXIT_FAILURE, "Could not bind server socket");
 
     return -1;
 }

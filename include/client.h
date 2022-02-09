@@ -15,11 +15,12 @@ struct client
 {
     int client_socket; // Socket FD of the client
     struct sockaddr_storage *client_sockaddr; // Client address
+    char *ip; // Client IP
 
     char *username; // Username of the client
 
     size_t nb_rooms; // Number of rooms the client is in
-    char *rooms; // Rooms of the client // TODO : another struct ?
+    char **rooms; // Rooms of the client // TODO : another struct ?
 
     struct client *next; // Next client for another client
 };
@@ -79,5 +80,16 @@ struct client *remove_client(struct client *connection, int client_socket);
  * is not in the linked list returns NULL
  */
 struct client *find_client(struct client *connection, int client_socket);
+
+/**
+ * @brief Find the first client who match the username
+ *
+ * @param connection The client linked list with all the clients
+ *
+ * @param username The username to find
+ *
+ * @return The client element of the specific client
+ */
+struct client *find_client_by_username(struct client *client, char *username);
 
 #endif /* CLIENT_H */

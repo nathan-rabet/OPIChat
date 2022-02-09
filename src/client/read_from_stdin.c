@@ -1,132 +1,214 @@
 #include "read_from_stdin.h"
-#include "xalloc.h"
-#include "my_itoa.h"
-#include "message.h"
-#include "safe_io.h"
-#include "client_read.h"
 
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-int command_is_valid(char *a)
-{
-    if (a == NULL)
-        return 0;
-    if (strcmp(a, "LOGIN") == 0)
-        return 1;
-    if (strcmp(a, "PING") == 0)
-        return 1;
-    if (strcmp(a, "LIST-USERS") == 0)
-        return 1;
-    if (strcmp(a, "SEND-DM") == 0)
-        return 1;
-    if (strcmp(a, "BROADCAST") == 0)
-        return 1;
-    return 0;
-}
-static int regular_payload(struct message *message, int server_socket)
-{
-    char payload[DEFAULT_BUFFER_SIZE];
-    printf("Payload:\n");
-    fgets(payload, DEFAULT_BUFFER_SIZE, stdin); // read the payload we went to send
-    payload[strcspn(payload, "\n")] = 0;    // parse the newline
-    message->payload = xmalloc(strlen(payload) + 1, sizeof(char)); // allocating payload memory in struct message
-    if (strcmp(payload, "/quit") == 0) // If the payload is /quit
-    {
-        free_partial_message(message); //free the message and exit
-        return 0;
-    }
-    else
-    {
-        strcpy(message->payload, payload); // store the payload in struct message
-        message->payload_size = strlen(payload); // Store the payload size in struct message
-        printf("Requete\n%s\n", compose_message(message));
-        while(safe_send(server_socket, compose_message(message), strlen(payload) + 1, MSG_EOR) != 0); // send the serialized message to the server :WIP:
-        return 1;
-    }
 
-}
-static void looping_payload(struct message *message, int server_socket)
+#include "client_read.h"
+#include "init_socket.h"
+#include "logger.h"
+#include "message.h"
+#include "my_itoa.h"
+#include "safe_io.h"
+#include "xalloc.h"
+
+extern int server_socket;
+
+struct command_parameters
 {
-    while((regular_payload(message, server_socket) != 0));
-}
-static void command_send_dm(struct message *message, int server_socket)
+    char *command; // NULL if invalid
+    uint8_t nb_parameters;
+    char **parameters_name;
+    bool loop_payload;
+};
+
+// TODO : Do not use the heap, use a fixed size array instead
+static struct command_parameters *
+get_command_parameters_info(char *command_string)
 {
-    char parameters[DEFAULT_BUFFER_SIZE];
-    printf("Parameters:\n");
-    fgets(parameters, DEFAULT_BUFFER_SIZE, stdin);
-    message->command_parameters = xmalloc(message->nb_parameters, sizeof(struct command_parameter));
-    while(strcmp(parameters, "\n") != 0)
+    struct command_parameters *cmd_params =
+        xcalloc(1, sizeof(struct command_parameters));
+    if (command_string != NULL)
     {
-        if((strncmp(parameters, "User=", 5)!= 0) || (strlen(parameters) == 6 && strncmp(parameters, "User=", 5) == 0))
-            fprintf(stderr, "Invalid parameter\n");
-        else
+        if (strcmp(command_string, "LOGIN") == 0)
+            cmd_params->command = "LOGIN";
+        else if (strcmp(command_string, "PING") == 0)
+            cmd_params->command = "PING";
+        else if (strcmp(command_string, "LIST-USERS") == 0)
+            cmd_params->command = "LIST-USERS";
+        else if (strcmp(command_string, "BROADCAST") == 0)
         {
-            parameters[strcspn(parameters, "\n")] = '\0';
-            message->command_parameters[message->nb_parameters].key = xmalloc(5, sizeof(char));
-            message->command_parameters[message->nb_parameters].value = xmalloc(strlen(parameters), sizeof(char));
-            strcpy(message->command_parameters[message->nb_parameters].key, "User\0");
-            strcpy(message->command_parameters[message->nb_parameters].value, parameters + 5);
-            message->nb_parameters++;
+            cmd_params->loop_payload = true;
+            cmd_params->command = "BROADCAST";
         }
-        fgets(parameters, DEFAULT_BUFFER_SIZE, stdin);
+        else if (strcmp(command_string, "SEND-DM") == 0)
+        {
+            cmd_params->loop_payload = true;
+            cmd_params->command = "SEND-DM";
+            cmd_params->nb_parameters = 1;
+            cmd_params->parameters_name = xmalloc(1, sizeof(char **));
+            cmd_params->parameters_name[0] = strdup("User");
+        }
+
+        else if (strcmp(command_string, "CREATE-ROOM") == 0)
+            cmd_params->command = "CREATE-ROOM";
+        else if (strcmp(command_string, "LIST-ROOMS") == 0)
+            cmd_params->command = "LIST-ROOMS";
+        else if (strcmp(command_string, "JOIN-ROOM") == 0)
+            cmd_params->command = "JOIN-ROOM";
+        else if (strcmp(command_string, "LEAVE-ROOM") == 0)
+            cmd_params->command = "LEAVE-ROOM";
+        else if (strcmp(command_string, "SEND-ROOM") == 0)
+        {
+            cmd_params->command = "SEND-ROOM";
+            cmd_params->nb_parameters = 1;
+            cmd_params->parameters_name = xmalloc(1, sizeof(char **));
+            cmd_params->parameters_name[0] = strdup("Room");
+        }
+        else if (strcmp(command_string, "DELETE-ROOM") == 0)
+            cmd_params->command = "DELETE-ROOM";
+        else if (strcmp(command_string, "PROFILE") == 0)
+            cmd_params->command = "PROFILE";
     }
-    looping_payload(message, server_socket);
+    return cmd_params;
 }
-static void treat_commands(struct message *message, char *command, int server_socket)
+
+static void free_command_parameters_info(struct command_parameters *cmd_params)
 {
-    if(strcmp(command, "PING") == 0 || strcmp(command, "LIST-USERS\n") == 0 || strcmp(command, "LOGIN\n") == 0)
-        regular_payload(message, server_socket);
-    if(strcmp(command, "SEND-DM") == 0)
-        command_send_dm(message, server_socket);
-    if(strcmp(command, "BROADCAST") == 0)
-        looping_payload(message, server_socket);
+    for (uint8_t i = 0; i < cmd_params->nb_parameters; i++)
+        free(cmd_params->parameters_name[i]);
+    free(cmd_params->parameters_name);
+    free(cmd_params);
 }
 
 void read_from_stdin(int server_socket)
 {
-    while(1)
+    do
     {
-        struct message *message = init_message(REQUEST_MESSAGE_CODE); // Initializing struct message
-        if (!message)   //If allocating fails
+        struct message *message =
+            init_message(REQUEST_MESSAGE_CODE); // Initializing struct message
+        if (!message)
         {
-            fprintf(stderr, "Error while allocating memory\n"); //Exiting properly
             close(server_socket);
-            exit(1);
-        }        
-        //char * command = xmalloc(DEFAULT_BUFFER_SIZE, sizeof(char));
-        //safe_read(STDIN_FILENO,(void **) &command);
+            raise_panic(EXIT_FAILURE,
+                        "Error while allocating memory\n"); // Exiting properly
+        }
 
         char command[DEFAULT_BUFFER_SIZE];
         fprintf(stdout, "Command:\n");
-        fgets(command, DEFAULT_BUFFER_SIZE, stdin); //Get user input
-        command[strcspn(command, "\n")] = 0;    // parse the newline
-        if(command_is_valid(command)) //If the command is valid
+        fgets(command, DEFAULT_BUFFER_SIZE, stdin); // Get user input
+        command[strcspn(command, "\n")] = 0; // parse the newline
+
+        struct command_parameters *cmd_params =
+            get_command_parameters_info(command);
+
+        if (cmd_params->command) // If the command is valid
         {
             message->command = xmalloc(strlen(command) + 1, sizeof(char));
+            message->nb_parameters = 0;
+
             strcpy(message->command, command);
-            treat_commands(message, command, server_socket);    
+
+            if (cmd_params->nb_parameters > 0)
+            {
+                char parameters[DEFAULT_BUFFER_SIZE] = { 0 };
+                uint8_t entered_params = 0;
+
+                fprintf(stdout, "Parameters:\n");
+                while (1)
+                {
+                    fgets(parameters, DEFAULT_BUFFER_SIZE, stdin);
+
+                    if (parameters[0] == '\n')
+                        break;
+
+                    char *key;
+                    char *value;
+
+                    // Get a "key=value" pair using
+                    // get_message_next_parameter_kv (witch also works in this
+                    // case)
+                    get_message_next_parameter_kv(parameters, &key, &value);
+                    bool parameterFound = false;
+                    for (uint8_t i = 0; i < cmd_params->nb_parameters; i++)
+                    {
+                        if (key
+                            && strcmp(key, cmd_params->parameters_name[i]) == 0)
+                        {
+                            parameterFound = true;
+                            message->command_parameters =
+                                xrealloc(message->command_parameters,
+                                         message->nb_parameters + 1,
+                                         sizeof(struct command_parameter));
+
+                            message->command_parameters[entered_params].key =
+                                strdup(key);
+                            message->command_parameters[entered_params].value =
+                                strdup(value);
+
+                            message->nb_parameters = ++entered_params;
+                            break;
+                        }
+                    }
+
+                    if (!parameterFound)
+                    {
+                        fprintf(stderr, "Invalid parameter\n");
+                        continue;
+                    }
+                }
+            }
         }
-        else if (command == NULL) //If the entry isn't valid
-        {
-            free_partial_message(message);
-            fprintf(stderr, "Error while reading STDIN data\n");
-            close(server_socket);
-            exit(1);
-        }
-        else // If the command isn't valid
+        else
         {
             fprintf(stderr, "Invalid command\n");
             free_partial_message(message);
+            free_command_parameters_info(cmd_params);
+            continue;
         }
-    }
+
+        do
+        {
+            char *payload = command; // Reuse the command buffer
+            fprintf(stdout, "Payload:\n");
+            fgets(payload, DEFAULT_BUFFER_SIZE, stdin); // Get user input
+            payload[strcspn(payload, "\n")] = 0; // Eliminate the newline
+
+            if (strcmp(payload, "/quit") != 0)
+            {
+                message->payload = strdup(payload);
+                message->payload_size = strlen(payload);
+
+                char *serialized_message = compose_message(message);
+                if (serialized_message)
+                {
+                    safe_send(server_socket, serialized_message,
+                              strlen(serialized_message), MSG_EOR);
+                    free(serialized_message);
+                }
+                else
+                {
+                    close(server_socket);
+                    raise_panic(EXIT_FAILURE,
+                                "Error while serializing message\n");
+                }
+            }
+            else
+                cmd_params->loop_payload = false;
+        } while (cmd_params->loop_payload);
+
+        free_command_parameters_info(cmd_params);
+        free_message(message);
+
+    } while (1);
 }
 
-void *read_from_stdin_thread(void *server_socket)
+void *read_from_stdin_thread(void *none)
 {
-    int *s = server_socket;
-    read_from_stdin(*s);
-    return s;
+    (void)none;
+    int s = server_socket;
+    read_from_stdin(s);
+    return NULL;
 }

@@ -66,22 +66,29 @@ struct message *parse_message(const char *request_string)
         saveptr += offset;
     }
 
-    if (value && (*(saveptr - 1) == '\0'))
+    if (*saveptr++ != '\n')
     {
         FREETURN(NULL); // invalid message
     }
 
-    line = strtok_r(NULL, "\n", &saveptr);
-
-    if (line)
+    if (*saveptr)
     {
-        if ((strlen(line) != r->payload_size) /*No size lying is allowed :)*/
-            || *saveptr != '\0' /*Last LF must be deleted*/)
+        if ((strlen(saveptr) != r->payload_size))
         {
             FREETURN(NULL); // invalid message
         }
 
-        r->payload = strdup(line);
+        r->payload = strndup(saveptr, r->payload_size);
+    }
+
+    else if (r->payload_size != 0)
+    {
+        FREETURN(NULL); // invalid message
+    }
+
+    else
+    {
+        r->payload = strdup("");
     }
 
     free(req_str_dup);

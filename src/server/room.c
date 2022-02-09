@@ -11,8 +11,26 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include "commands.h"
 #include "logger.h"
+#include "message.h"
 #include "xalloc.h"
+
+struct send_pool *return_forged_error_message(char *command, char *payload,
+                                              int send_socket)
+{
+    struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
+    struct message *error_message = init_message(ERROR_MESSAGE_CODE);
+    error_message->command = strdup(command);
+    error_message->payload = strdup(payload);
+    error_message->payload_size = strlen(error_message->payload);
+    sp->nb_msg = 1;
+    sp->msg = xmalloc(1, sizeof(struct message));
+    sp->clients_sockets = xmalloc(1, sizeof(int));
+    *sp->msg = error_message;
+    *sp->clients_sockets = send_socket;
+    return sp;
+}
 
 struct room *add_room(struct room *room, const char *room_name,
                       int owner_socket)
@@ -52,7 +70,8 @@ struct room *add_room(struct room *room, const char *room_name,
  */
 static void __free_room(struct room *room)
 {
-    free(room->clients);
+    free(room->clients_sockets);
+    free(room->name);
     free(room);
 }
 

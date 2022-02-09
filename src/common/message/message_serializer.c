@@ -14,7 +14,7 @@ static int number_of_decimal(int i)
     return j;
 }
 
-static int message_size(struct message *message)
+static int message_size(const struct message *message)
 {
     int i = 0;
     i += number_of_decimal(message->payload_size) + 1;
@@ -38,7 +38,7 @@ static int message_size(struct message *message)
     return i + 3;
 }
 
-char *compose_message(struct message *message)
+char *compose_message(const struct message *message)
 {
     if (message == NULL)
         return NULL;
@@ -67,16 +67,12 @@ char *compose_message(struct message *message)
     }
 
     // strcat(ret, command) and command parameters
-    if (message->command != NULL && strcmp(message->command, "SEND-DM") == 0)
+    for (uint64_t i = 0; i < message->nb_parameters; i++)
     {
-        unsigned i;
-        for (i = 0; i < message->nb_parameters; i++)
-        {
-            strcat(ret, message->command_parameters[i].key);
-            strcat(ret, "=");
-            strcat(ret, message->command_parameters[i].value);
-            strcat(ret, "\n");
-        }
+        strcat(ret, message->command_parameters[i].key);
+        strcat(ret, "=");
+        strcat(ret, message->command_parameters[i].value);
+        strcat(ret, "\n");
     }
 
     strcat(ret, "\n");
@@ -84,9 +80,9 @@ char *compose_message(struct message *message)
     {
         ret = xrealloc(ret, strlen(ret) + strlen(message->payload) + 3,
                        sizeof(char));
-        strcat(ret, message->payload);
-
+        strncat(ret, message->payload, message->payload_size);
     }
+
     ret = xrealloc(ret, strlen(ret) + 1,
                    sizeof(char)); // In case too much memory was allocated
     return ret;
