@@ -1,5 +1,7 @@
 # OPIChat
 
+[![Test suite](https://github.com/nathan-rabet/OPIChat/actions/workflows/unit_testing.yml/badge.svg)](https://github.com/nathan-rabet/OPIChat/actions/workflows/unit_testing.yml)
+
 *OPIChat* is a simple IRC-like chat software. It is written in C and aims to be a simple, secured and easy to use. The project includes a client and a server.
 
 ## Installation and compilation
