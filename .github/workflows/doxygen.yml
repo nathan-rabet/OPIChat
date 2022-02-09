@@ -29,7 +29,7 @@ jobs:
         - name: Installing doxygen
           run: sudo apt-get install doxygen
         - name: Removing old documentation
-          run: cd docs ; rm -rf documentation ; rm manual.pdf
+          run: cd docs ; rm -rf documentation ; rm -rf manual.pdf
         - name: Generating man & HTML documentation
           run: cd docs ; doxygen doxygen.conf
         - name: Moving 'man' folder
@@ -39,7 +39,7 @@ jobs:
         - name: Generating PDF documentation
           run: cd docs/latex ; make pdf ; cp refman.pdf ../manual.pdf
         - name: Cleaning useless files
-          run: cd docs ; rm -r latex
+          run: cd docs ; rm -rf latex
         - name: Commit files
           run: |
             git config --local user.email "github-actions[bot]@users.noreply.github.com"
