@@ -1,0 +1,109 @@
+.TH "md__r_e_a_d_m_e" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__r_e_a_d_m_e \- OPIChat 
+\fC\fP \fC\fP
+.PP
+\fIOPIChat\fP is a simple IRC-like chat software\&. It is written in C and aims to be a simple, secured and easy to use\&. The project includes a client and a server\&.
+.SH "Installation and compilation"
+.PP
+.IP "1." 4
+Make sure to have the following dependencies:
+.IP "  \(bu" 4
+(GNU) make
+.IP "  \(bu" 4
+gcc
+.PP
+
+.IP "2." 4
+Clone the repository
+.IP "3." 4
+Build the project using the \fCmake\fP command\&.
+.IP "4." 4
+Both of client and server are in the \fCbuild/\fP folder\&.
+.PP
+.SH "Usage"
+.PP
+.SS "Server"
+The server executable is called \fCopichat_server\fP and is located in the \fCbuild/\fP folder\&.
+.PP
+To start the server, you must run the following command:
+.PP
+.PP
+.nf
+\&./opichat_server <ip> <port>
+.fi
+.PP
+.PP
+Where \fC<ip>\fP is the IP address of the server and <\fCport\fP> is the port where clients will connect to\&.
+.PP
+.RS 4
+Note that you can use \fClocalhost\fP as a loopback \fC<ip>\fP address to start the server\&. 
+.RE
+.PP
+.SS "Actions to perform"
+No action is required for the server
+.SS "Client"
+The client executable is called \fCopichat_client\fP and is located in the \fCbuild/\fP folder\&.
+.PP
+To start the client, you must run the following command:
+.PP
+.PP
+.nf
+\&./opichat_client <ip> <port>
+.fi
+.PP
+.PP
+Where \fC<ip>\fP is the IP address of the server and \fC<port>\fP is the port where the server is listening to\&.
+.SS "Actions to perform"
+When the client launchs, you will deal with the command prompt\&.
+.PP
+.PP
+.nf
+Command:
+.fi
+.PP
+.PP
+At this step, you must enter a valid command name (as described in the \fBprotocol\fP)\&.
+.PP
+If you enter a valid command, you will have one or both of these 2 following prompts:
+.PP
+\fBParameters\fP At this step, the client program valued that you entered a command which requires parameters\&.
+.PP
+.PP
+.nf
+Parameters:
+.fi
+.PP
+.PP
+To enter a parameter as a key/value pair, you must type:
+.PP
+.PP
+.nf
+<key>=<value>
+.fi
+.PP
+.PP
+Where \fC<key>\fP and \fC<value>\fP are respectively the key and the value of the parameter\&. Then press \fCEnter\fP\&.
+.PP
+.RS 4
+The parameters prompt will always asks you key/value pairs forever until you press \fCEnter\fP and nothing else\&. 
+.RE
+.PP
+\fBPayload\fP At this step, you must enter the content of the payload\&. Unless \fIParameters\fP, no specific format is applied here\&.
+.PP
+.PP
+.nf
+Payload:
+.fi
+.PP
+.PP
+.RS 4
+Some command (like \fCSEND-DM\fP or \fCBROADCAST\fP) will loop on the payload prompt forever\&. To exit the payload prompt, type \fC\\quit\fP\&. 
+.RE
+.PP
+.SS "More information"
+If you are interested in the architecture of the project, check \fBARCH\&.md\fP\&.
+.PP
+Also, if you want a detailled documentation about the communication protocol, read \fBPROTOCOL\&.md\fP\&. 

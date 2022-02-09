@@ -1,0 +1,7 @@
+<map id="communicate" name="communicate">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,105,83"/>
+<area shape="rect" id="node2" href="$epoll-server_8c.html#aaa6e5bcf010f834f13a3b6755c122180" title=" " alt="" coords="153,5,283,32"/>
+<area shape="rect" id="node4" href="$connection_8c.html#a5c993924a198348770d2028c1cc4c199" title="Find the connection_t element where the socket is equal to client sock." alt="" coords="178,56,258,83"/>
+<area shape="rect" id="node5" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="185,107,251,133"/>
+<area shape="rect" id="node3" href="$connection_8c.html#a6b9d94fcdf4e08d50ec8aaa73e9f0419" title="Remove the client connection_t from the linked list connection." alt="" coords="331,5,433,32"/>
+</map>

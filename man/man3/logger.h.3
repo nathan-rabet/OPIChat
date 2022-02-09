@@ -1,0 +1,198 @@
+.TH "include/logger.h" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/logger.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdio\&.h>\fP
+.br
+
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBlog_cp_on_file\fP { \fBLOG_CP_ON_FILE_NONE\fP = 0 }"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBlogger_init\fP (const char *path)"
+.br
+.RI "Init the logger system\&. "
+.ti -1c
+.RI "FILE * \fBget_logger_file\fP ()"
+.br
+.RI "Get the logger system *FILE\&. "
+.ti -1c
+.RI "void \fBwrite_logger\fP (const char *banner, FILE *cp_on_file, const char *str,\&.\&.\&.)"
+.br
+.RI "Log a message\&. "
+.ti -1c
+.RI "void \fBwrite_info\fP (const char *msg,\&.\&.\&.)"
+.br
+.RI "Log an info message\&. "
+.ti -1c
+.RI "void \fBwrite_warning\fP (const char *msg,\&.\&.\&.)"
+.br
+.RI "Log an error message\&. "
+.ti -1c
+.RI "void \fBwrite_error\fP (const char *msg,\&.\&.\&.)"
+.br
+.RI "Log an error message\&. "
+.ti -1c
+.RI "void \fBraise_panic\fP (int exitCode, const char *msg,\&.\&.\&.)"
+.br
+.RI "Log a CRITICAL error message & exit the program\&. "
+.ti -1c
+.RI "void \fBlogger_close\fP ()"
+.br
+.RI "Close the logger system properly\&. "
+.in -1c
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBlog_cp_on_file\fP"
+
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fILOG_CP_ON_FILE_NONE \fP\fP
+.PP
+Definition at line \fB6\fP of file \fBlogger\&.h\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "FILE * get_logger_file ()"
+
+.PP
+Get the logger system *FILE\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The logger *FILE 
+.RE
+.PP
+
+.PP
+Definition at line \fB22\fP of file \fBlogger\&.c\fP\&.
+.SS "void logger_close ()"
+
+.PP
+Close the logger system properly\&. 
+.PP
+Definition at line \fB109\fP of file \fBlogger\&.c\fP\&.
+.SS "void logger_init (const char * path)"
+
+.PP
+Init the logger system\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIpath\fP The path of the file to log to 
+.RE
+.PP
+
+.PP
+Definition at line \fB12\fP of file \fBlogger\&.c\fP\&.
+.SS "void raise_panic (int exitCode, const char * msg,  \&.\&.\&.)"
+
+.PP
+Log a CRITICAL error message & exit the program\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function supports formatted string (like printf)
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIexitCode\fP The exit code to use 
+.br
+\fImsg\fP The error to log 
+.RE
+.PP
+
+.PP
+Definition at line \fB100\fP of file \fBlogger\&.c\fP\&.
+.SS "void write_error (const char * msg,  \&.\&.\&.)"
+
+.PP
+Log an error message\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function supports formatted string (like printf)
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fImsg\fP The message to log 
+.RE
+.PP
+
+.PP
+Definition at line \fB92\fP of file \fBlogger\&.c\fP\&.
+.SS "void write_info (const char * msg,  \&.\&.\&.)"
+
+.PP
+Log an info message\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function supports formatted string (like printf)
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fImsg\fP The message to log 
+.RE
+.PP
+
+.PP
+Definition at line \fB76\fP of file \fBlogger\&.c\fP\&.
+.SS "void write_logger (const char * banner, FILE * cp_on_file, const char * str,  \&.\&.\&.)"
+
+.PP
+Log a message\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function supports formatted string (like printf)
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIbanner\fP The banner to display before the message 
+.br
+\fIcp_on_file\fP Copy the message to the file (ignored if set on \fCLOG_CP_ON_FILE_NONE\fP) 
+.br
+\fIstr\fP The message to log 
+.RE
+.PP
+
+.PP
+Definition at line \fB68\fP of file \fBlogger\&.c\fP\&.
+.SS "void write_warning (const char * msg,  \&.\&.\&.)"
+
+.PP
+Log an error message\&. 
+.PP
+\fBNote\fP
+.RS 4
+This function supports formatted string (like printf)
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fImsg\fP The message to log 
+.RE
+.PP
+
+.PP
+Definition at line \fB84\fP of file \fBlogger\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

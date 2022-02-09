@@ -1,0 +1,7 @@
+<map id="handle_send_dm" name="handle_send_dm">
+<area shape="rect" id="node1" title=" " alt="" coords="5,81,125,108"/>
+<area shape="rect" id="node2" href="$client_8c.html#a8e987a5d308606c037c426a0aba7c060" title="Find the first client who match the username." alt="" coords="173,5,337,32"/>
+<area shape="rect" id="node3" href="$message__free_8c.html#aafafca753919c7d770812f5c47b5fe7f" title="Free the memory allocated by a struct message." alt="" coords="203,56,307,83"/>
+<area shape="rect" id="node4" href="$message__init_8c.html#abeba53932f51cf0ac12dd3a1dc8bf1ff" title="Initializes a struct message with the param status code affected." alt="" coords="206,107,305,133"/>
+<area shape="rect" id="node5" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="385,132,452,159"/>
+</map>

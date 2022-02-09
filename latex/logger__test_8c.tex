@@ -1,0 +1,120 @@
+\hypertarget{logger__test_8c}{}\doxysection{tests/unit\+\_\+testing/logger\+\_\+test.c File Reference}
+\label{logger__test_8c}\index{tests/unit\_testing/logger\_test.c@{tests/unit\_testing/logger\_test.c}}
+{\ttfamily \#include $<$criterion/criterion.\+h$>$}\newline
+{\ttfamily \#include $<$criterion/redirect.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}logger.\+h\char`\"{}}\newline
+Include dependency graph for logger\+\_\+test.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{logger__test_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{logger__test_8c_aff463e212b73e43a8f52498ce0ad9df6}{Test}} (logger, \mbox{\hyperlink{logger_8c_adbd31571b49f4ff32cda46460abe6469}{logger\+\_\+init}})
+\item 
+\mbox{\hyperlink{logger__test_8c_a9fe844aa8919e1344c5a980dc307703b}{Test}} (logger, log\+\_\+info,.init=cr\+\_\+redirect\+\_\+stdout)
+\item 
+\mbox{\hyperlink{logger__test_8c_a89227601e5139a9410a589e109a76800}{Test}} (logger, log\+\_\+warning,.init=cr\+\_\+redirect\+\_\+stderr)
+\item 
+\mbox{\hyperlink{logger__test_8c_aaf8caf87cce5798011681b2916d27729}{Test}} (logger, log\+\_\+error,.init=cr\+\_\+redirect\+\_\+stderr)
+\item 
+\mbox{\hyperlink{logger__test_8c_a9bc3eb68199e6b12e2b23205d390c462}{Test}} (logger, log\+\_\+custom)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{logger__test_8c_a9bc3eb68199e6b12e2b23205d390c462}\label{logger__test_8c_a9bc3eb68199e6b12e2b23205d390c462}} 
+\index{logger\_test.c@{logger\_test.c}!Test@{Test}}
+\index{Test@{Test}!logger\_test.c@{logger\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{logger}]{,  }\item[{log\+\_\+custom}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{logger__test_8c_source_l00069}{69}} of file \mbox{\hyperlink{logger__test_8c_source}{logger\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{logger__test_8c_a9bc3eb68199e6b12e2b23205d390c462_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger__test_8c_aaf8caf87cce5798011681b2916d27729}\label{logger__test_8c_aaf8caf87cce5798011681b2916d27729}} 
+\index{logger\_test.c@{logger\_test.c}!Test@{Test}}
+\index{Test@{Test}!logger\_test.c@{logger\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{logger}]{,  }\item[{log\+\_\+error}]{,  }\item[{.}]{init = {\ttfamily cr\+\_\+redirect\+\_\+stderr} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{logger__test_8c_source_l00052}{52}} of file \mbox{\hyperlink{logger__test_8c_source}{logger\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{logger__test_8c_aaf8caf87cce5798011681b2916d27729_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger__test_8c_a9fe844aa8919e1344c5a980dc307703b}\label{logger__test_8c_a9fe844aa8919e1344c5a980dc307703b}} 
+\index{logger\_test.c@{logger\_test.c}!Test@{Test}}
+\index{Test@{Test}!logger\_test.c@{logger\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{logger}]{,  }\item[{log\+\_\+info}]{,  }\item[{.}]{init = {\ttfamily cr\+\_\+redirect\+\_\+stdout} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{logger__test_8c_source_l00018}{18}} of file \mbox{\hyperlink{logger__test_8c_source}{logger\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{logger__test_8c_a9fe844aa8919e1344c5a980dc307703b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger__test_8c_a89227601e5139a9410a589e109a76800}\label{logger__test_8c_a89227601e5139a9410a589e109a76800}} 
+\index{logger\_test.c@{logger\_test.c}!Test@{Test}}
+\index{Test@{Test}!logger\_test.c@{logger\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{logger}]{,  }\item[{log\+\_\+warning}]{,  }\item[{.}]{init = {\ttfamily cr\+\_\+redirect\+\_\+stderr} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{logger__test_8c_source_l00035}{35}} of file \mbox{\hyperlink{logger__test_8c_source}{logger\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{logger__test_8c_a89227601e5139a9410a589e109a76800_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger__test_8c_aff463e212b73e43a8f52498ce0ad9df6}\label{logger__test_8c_aff463e212b73e43a8f52498ce0ad9df6}} 
+\index{logger\_test.c@{logger\_test.c}!Test@{Test}}
+\index{Test@{Test}!logger\_test.c@{logger\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{logger}]{,  }\item[{\mbox{\hyperlink{logger_8c_adbd31571b49f4ff32cda46460abe6469}{logger\+\_\+init}}}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{logger__test_8c_source_l00007}{7}} of file \mbox{\hyperlink{logger__test_8c_source}{logger\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{logger__test_8c_aff463e212b73e43a8f52498ce0ad9df6_cgraph}
+\end{center}
+\end{figure}

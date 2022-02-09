@@ -1,0 +1,7 @@
+<map id="free_message" name="free_message">
+<area shape="rect" id="node1" title="Free the memory allocated by a struct message." alt="" coords="319,56,423,83"/>
+<area shape="rect" id="node2" href="$handle__send__dm_8c.html#a40123b4c86247252138de4e1d5cf39c1" title=" " alt="" coords="127,5,247,32"/>
+<area shape="rect" id="node3" href="$read__from__server_8c.html#ad4ec40c300bc539cbe0b51f6af544bff" title="Reads from the server and print (eventually) the formated message. This function is thread compliant." alt="" coords="104,56,271,83"/>
+<area shape="rect" id="node5" href="$commands__test_8c.html#a244814124f068421f6dd1e6a72a831e9" title=" " alt="" coords="163,107,211,133"/>
+<area shape="rect" id="node4" href="$client__main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,56,56,83"/>
+</map>

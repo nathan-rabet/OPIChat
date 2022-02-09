@@ -1,0 +1,121 @@
+\hypertarget{epoll__server_2utils_2xalloc_8c}{}\doxysection{epoll\+\_\+server/utils/xalloc.c File Reference}
+\label{epoll__server_2utils_2xalloc_8c}\index{epoll\_server/utils/xalloc.c@{epoll\_server/utils/xalloc.c}}
+{\ttfamily \#include \char`\"{}xalloc.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$err.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+Include dependency graph for xalloc.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{epoll__server_2utils_2xalloc_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}{xmalloc}} (size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Malloc wrapper that exit on failure. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_a64dbeff7c3555eb2cb5991583d733f5a}{xcalloc}} (size\+\_\+t nmemb, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Calloc wrapper that exit on failure. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af1634ff7d575d04a5ad3bd26343b4e51}{xrealloc}} (void $\ast$ptr, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Realloc wrapper that exit on failure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{epoll__server_2utils_2xalloc_8c_a64dbeff7c3555eb2cb5991583d733f5a}\label{epoll__server_2utils_2xalloc_8c_a64dbeff7c3555eb2cb5991583d733f5a}} 
+\index{xalloc.c@{xalloc.c}!xcalloc@{xcalloc}}
+\index{xcalloc@{xcalloc}!xalloc.c@{xalloc.c}}
+\doxysubsubsection{\texorpdfstring{xcalloc()}{xcalloc()}}
+{\footnotesize\ttfamily void $\ast$ xcalloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nmemb,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Calloc wrapper that exit on failure. 
+
+Calloc wrapper that exits the program if the allocation fails or if nmemb $\ast$ size overflows.
+
+
+\begin{DoxyParams}{Parameters}
+{\em nmemb} & The number of elements. \\
+\hline
+{\em size} & The size to calloc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The calloc return. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_source_l00015}{15}} of file \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_source}{xalloc.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{epoll__server_2utils_2xalloc_8c_a64dbeff7c3555eb2cb5991583d733f5a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}\label{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}} 
+\index{xalloc.c@{xalloc.c}!xmalloc@{xmalloc}}
+\index{xmalloc@{xmalloc}!xalloc.c@{xalloc.c}}
+\doxysubsubsection{\texorpdfstring{xmalloc()}{xmalloc()}}
+{\footnotesize\ttfamily void $\ast$ xmalloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Malloc wrapper that exit on failure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size to malloc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The malloc return. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_source_l00006}{6}} of file \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_source}{xalloc.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{epoll__server_2utils_2xalloc_8c_af1634ff7d575d04a5ad3bd26343b4e51}\label{epoll__server_2utils_2xalloc_8c_af1634ff7d575d04a5ad3bd26343b4e51}} 
+\index{xalloc.c@{xalloc.c}!xrealloc@{xrealloc}}
+\index{xrealloc@{xrealloc}!xalloc.c@{xalloc.c}}
+\doxysubsubsection{\texorpdfstring{xrealloc()}{xrealloc()}}
+{\footnotesize\ttfamily void $\ast$ xrealloc (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Realloc wrapper that exit on failure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & The mem pointer. \\
+\hline
+{\em size} & The size to realloc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The realloc return. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_source_l00024}{24}} of file \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_source}{xalloc.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{epoll__server_2utils_2xalloc_8c_af1634ff7d575d04a5ad3bd26343b4e51_icgraph}
+\end{center}
+\end{figure}

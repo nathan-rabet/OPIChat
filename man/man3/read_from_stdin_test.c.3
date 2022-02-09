@@ -1,0 +1,43 @@
+.TH "tests/unit_testing/read_from_stdin_test.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tests/unit_testing/read_from_stdin_test.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <criterion/criterion\&.h>\fP
+.br
+\fC#include <criterion/redirect\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <sys/wait\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include 'init_socket\&.h'\fP
+.br
+\fC#include 'message\&.h'\fP
+.br
+\fC#include 'read_from_stdin\&.h'\fP
+.br
+\fC#include 'safe_io\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTest\fP (\fBread_from_stdin\fP, request_ping,\&.disabled=true)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "Test (\fBread_from_stdin\fP, request_ping, \&. disabled = \fCtrue\fP)"
+
+.PP
+Definition at line \fB12\fP of file \fBread_from_stdin_test\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

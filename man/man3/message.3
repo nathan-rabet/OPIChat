@@ -1,0 +1,68 @@
+.TH "message" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+message \- Structure to store the parsed message\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <message\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "uint64_t \fBpayload_size\fP"
+.br
+.ti -1c
+.RI "uint8_t \fBstatus_code\fP: 2"
+.br
+.ti -1c
+.RI "char * \fBcommand\fP"
+.br
+.ti -1c
+.RI "uint64_t \fBnb_parameters\fP"
+.br
+.ti -1c
+.RI "struct \fBcommand_parameter\fP * \fBcommand_parameters\fP"
+.br
+.ti -1c
+.RI "char * \fBpayload\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Structure to store the parsed message\&. 
+.PP
+Definition at line \fB18\fP of file \fBmessage\&.h\fP\&.
+.SH "Field Documentation"
+.PP 
+.SS "char* command"
+
+.PP
+Definition at line \fB22\fP of file \fBmessage\&.h\fP\&.
+.SS "struct \fBcommand_parameter\fP* \fBcommand_parameters\fP"
+
+.PP
+Definition at line \fB24\fP of file \fBmessage\&.h\fP\&.
+.SS "uint64_t nb_parameters"
+
+.PP
+Definition at line \fB23\fP of file \fBmessage\&.h\fP\&.
+.SS "char* payload"
+
+.PP
+Definition at line \fB25\fP of file \fBmessage\&.h\fP\&.
+.SS "uint64_t payload_size"
+
+.PP
+Definition at line \fB20\fP of file \fBmessage\&.h\fP\&.
+.SS "uint8_t status_code"
+
+.PP
+Definition at line \fB21\fP of file \fBmessage\&.h\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

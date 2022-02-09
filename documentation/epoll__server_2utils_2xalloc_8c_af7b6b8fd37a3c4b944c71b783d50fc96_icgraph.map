@@ -1,0 +1,32 @@
+<map id="xmalloc" name="xmalloc">
+<area shape="rect" id="node1" title="Malloc wrapper that exit on failure." alt="" coords="680,512,747,539"/>
+<area shape="rect" id="node2" href="$connection_8c.html#a5616b1d17b24f8cedfc34d0787b9de5e" title="Add a new client connection_t to the linked list connection." alt="" coords="524,56,605,83"/>
+<area shape="rect" id="node6" href="$epoll-server_8c.html#a46a7917dc7230fcf524740bfca239cae" title=" " alt="" coords="515,107,615,133"/>
+<area shape="rect" id="node7" href="$message__serializer_8c.html#a4b7e770d6370564c3fcdab29984e8ae0" title="Takes a message struct and serializes it to a string." alt="" coords="497,157,632,184"/>
+<area shape="rect" id="node9" href="$handle__broadcast_8c.html#a288ed99598971722165d5367c28431a6" title=" " alt="" coords="322,411,446,437"/>
+<area shape="rect" id="node10" href="$handle__create__room_8c.html#a955d604957591980dbd64208781c79ba" title=" " alt="" coords="118,933,257,960"/>
+<area shape="rect" id="node11" href="$handle__delete__room_8c.html#af22b8dc7bc9c5d320437688785db2899" title=" " alt="" coords="118,883,257,909"/>
+<area shape="rect" id="node12" href="$handle__join__room_8c.html#a97196ee4e63ce94e3420974ef7479b5c" title=" " alt="" coords="126,715,249,741"/>
+<area shape="rect" id="node13" href="$handle__leave__room_8c.html#af10dbeed7be2f4e3fdb1459ce43bb6ca" title=" " alt="" coords="120,664,255,691"/>
+<area shape="rect" id="node14" href="$handle__list__rooms_8c.html#ae411dd6b175ab4fbcf468fc6a7791b00" title=" " alt="" coords="321,461,447,488"/>
+<area shape="rect" id="node15" href="$handle__list__users_8c.html#a4f85e4f1283fec83e3cfa31c44b5122a" title=" " alt="" coords="323,512,445,539"/>
+<area shape="rect" id="node16" href="$handle__login_8c.html#a14392c5bd469cd46922243c88d661115" title=" " alt="" coords="337,563,431,589"/>
+<area shape="rect" id="node17" href="$handle__ping_8c.html#a52e11f8467c5fd9f7721b1f4b997fc1d" title=" " alt="" coords="339,259,429,285"/>
+<area shape="rect" id="node18" href="$commands__test_8c.html#a244814124f068421f6dd1e6a72a831e9" title=" " alt="" coords="163,259,211,285"/>
+<area shape="rect" id="node19" href="$handle__profile_8c.html#a579a8a3f1d9cc79746b80c5e7dcee6a1" title=" " alt="" coords="333,984,435,1011"/>
+<area shape="rect" id="node20" href="$handle__send__dm_8c.html#a40123b4c86247252138de4e1d5cf39c1" title=" " alt="" coords="324,1035,444,1061"/>
+<area shape="rect" id="node21" href="$handle__send__room_8c.html#a1849484b2f214d45916a9245319c1cb0" title=" " alt="" coords="122,824,253,851"/>
+<area shape="rect" id="node22" href="$message__init_8c.html#abeba53932f51cf0ac12dd3a1dc8bf1ff" title="Initializes a struct message with the param status code affected." alt="" coords="515,689,614,716"/>
+<area shape="rect" id="node27" href="$room_8c.html#a329b19a19803d4a12c030c638f12f7c5" title=" " alt="" coords="319,817,449,858"/>
+<area shape="rect" id="node28" href="$safe__io_8c.html#ac8413ee3e5fa5ceab0e0cb43c4b6aab8" title="Receive a message from a client safely." alt="" coords="345,1288,423,1315"/>
+<area shape="rect" id="node3" href="$epoll-server_8c.html#ae91ab67a01fb4b53eebeb8a4bad10847" title="Accept a new client and add it to the connection_t struct." alt="" coords="335,5,433,32"/>
+<area shape="rect" id="node5" href="$client__test_8c.html#a42fe40dfdef3c25003537fedf7878dfe" title=" " alt="" coords="360,56,408,83"/>
+<area shape="rect" id="node4" href="$epoll-server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="162,56,213,83"/>
+<area shape="rect" id="node8" href="$message__serializer__test_8c.html#a7261e336e4746ed822652f41f7c0d79c" title=" " alt="" coords="360,157,408,184"/>
+<area shape="rect" id="node23" href="$read__from__stdin_8c.html#a12dd841eebca77e40e225f37da7f778e" title="Read from stdin and send the message to the server." alt="" coords="327,1237,441,1264"/>
+<area shape="rect" id="node24" href="$read__from__stdin_8c.html#aae4c2c08a6014ef154dba3a468584846" title=" " alt="" coords="108,1187,267,1213"/>
+<area shape="rect" id="node26" href="$read__from__stdin__test_8c.html#a3ac7ccd7a65b60790fe3057ad65ee87b" title=" " alt="" coords="163,1237,211,1264"/>
+<area shape="rect" id="node25" href="$client__main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,1237,56,1264"/>
+<area shape="rect" id="node29" href="$epoll__handler_8c.html#a0860b9e51fefecae303da19ee82e0b2e" title="Handle communication with the server." alt="" coords="137,1339,237,1365"/>
+<area shape="rect" id="node30" href="$read__from__server_8c.html#ad4ec40c300bc539cbe0b51f6af544bff" title="Reads from the server and print (eventually) the formated message. This function is thread compliant." alt="" coords="104,1288,271,1315"/>
+</map>

@@ -1,0 +1,48 @@
+\hypertarget{message_8h_source}{}\doxysection{message.\+h}
+\label{message_8h_source}\index{include/message.h@{include/message.h}}
+\mbox{\hyperlink{message_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef MESSAGE\_H}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00002}00002 \textcolor{preprocessor}{\#define MESSAGE\_H}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00006}\mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835f}{00006}} \textcolor{keyword}{enum} \mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835f}{message\_status\_code}}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00007}00007 \{}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00008}\mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835fa7c38dee28cc443c7d05d01fdd48666cc}{00008}}     \mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835fa7c38dee28cc443c7d05d01fdd48666cc}{REQUEST\_MESSAGE\_CODE}} = 0,}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00009}\mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835fa9df86d3c8b256e82225b9fdd5c7397aa}{00009}}     \mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835fa9df86d3c8b256e82225b9fdd5c7397aa}{RESPONSE\_MESSAGE\_CODE}} = 1,}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00010}\mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835fa5ab883514599aac5ee28829c01baae9c}{00010}}     \mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835fa5ab883514599aac5ee28829c01baae9c}{NOTIFICATION\_MESSAGE\_CODE}} = 2,}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00011}\mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835fa0d42846a4c4e20af60ddd15d6f5e4d3c}{00011}}     \mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835fa0d42846a4c4e20af60ddd15d6f5e4d3c}{ERROR\_MESSAGE\_CODE}} = 3,}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00012}00012 \};}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00018}\mbox{\hyperlink{structmessage}{00018}} \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00019}00019 \{}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00020}\mbox{\hyperlink{structmessage_aac1f7a36891dde68709d58926289458a}{00020}}     uint64\_t \mbox{\hyperlink{structmessage_aac1f7a36891dde68709d58926289458a}{payload\_size}}; \textcolor{comment}{// size of the payload}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00021}\mbox{\hyperlink{structmessage_a3c795973beeecd1596967a31a805488e}{00021}}     uint8\_t \mbox{\hyperlink{structmessage_a3c795973beeecd1596967a31a805488e}{status\_code}} : 2; \textcolor{comment}{// enum message\_status\_code (aligned on 2 bits)}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00022}\mbox{\hyperlink{structmessage_ade9cba72805fe52685a1deea307a8e82}{00022}}     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structmessage_ade9cba72805fe52685a1deea307a8e82}{command}}; \textcolor{comment}{// command name}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00023}\mbox{\hyperlink{structmessage_a6f6d728707a09ca3f6280160f9dceee0}{00023}}     uint64\_t \mbox{\hyperlink{structmessage_a6f6d728707a09ca3f6280160f9dceee0}{nb\_parameters}}; \textcolor{comment}{// number of parameters}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00024}\mbox{\hyperlink{structmessage_ad5c217513154f9cdd331b82efc6351cf}{00024}}     \textcolor{keyword}{struct }\mbox{\hyperlink{structcommand__parameter}{command\_parameter}} *\mbox{\hyperlink{structmessage_ad5c217513154f9cdd331b82efc6351cf}{command\_parameters}}; \textcolor{comment}{// array of parameters}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00025}\mbox{\hyperlink{structmessage_a18f141cb2726073503afb9f1d6c85efb}{00025}}     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structmessage_a18f141cb2726073503afb9f1d6c85efb}{payload}}; \textcolor{comment}{// payload}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00026}00026 \};}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00027}00027 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00035}00035 \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}} *\mbox{\hyperlink{message_8h_abeba53932f51cf0ac12dd3a1dc8bf1ff}{init\_message}}(uint8\_t \mbox{\hyperlink{structmessage_a3c795973beeecd1596967a31a805488e}{status\_code}});}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00041}\mbox{\hyperlink{structcommand__parameter}{00041}} \textcolor{keyword}{struct }\mbox{\hyperlink{structcommand__parameter}{command\_parameter}}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00042}00042 \{}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00043}\mbox{\hyperlink{structcommand__parameter_a5892a9181e6a332f84d27aecd41dcd12}{00043}}     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structcommand__parameter_a5892a9181e6a332f84d27aecd41dcd12}{key}}; \textcolor{comment}{// parameter key}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00044}\mbox{\hyperlink{structcommand__parameter_a0f61d63b009d0880a89c843bd50d8d76}{00044}}     \textcolor{keywordtype}{void} *\mbox{\hyperlink{structcommand__parameter_a0f61d63b009d0880a89c843bd50d8d76}{value}}; \textcolor{comment}{// parameter value}}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00045}00045 \};}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00054}00054 \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}} *\mbox{\hyperlink{message_8h_a3b73b25240ab9cd5fb472c05281e3f5c}{parse\_message}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *request\_string);}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00064}00064 \textcolor{keywordtype}{void} \mbox{\hyperlink{message_8h_aafafca753919c7d770812f5c47b5fe7f}{free\_message}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structmessage}{message}} *\mbox{\hyperlink{structmessage}{message}});}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00065}00065 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00073}00073 \textcolor{keywordtype}{void} \mbox{\hyperlink{message_8h_a5bcae38822e01fd2316aede529617559}{free\_partial\_message}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structmessage}{message}} *\mbox{\hyperlink{structmessage}{message}});}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00074}00074 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00085}00085 \textcolor{keywordtype}{int} \mbox{\hyperlink{message_8h_a28d4651376c79b584f48cf6ea0e2089a}{get\_message\_next\_parameter\_kv}}(\textcolor{keywordtype}{char} *params\_start, \textcolor{keywordtype}{char} **key, \textcolor{keywordtype}{char} **value);}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00086}00086 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00095}00095 \textcolor{keywordtype}{char} *\mbox{\hyperlink{message_8h_a4b7e770d6370564c3fcdab29984e8ae0}{compose\_message}}(\textcolor{keyword}{const} \textcolor{keyword}{struct} \mbox{\hyperlink{structmessage}{message}} *\mbox{\hyperlink{structmessage}{message}});}
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{message_8h_source_l00097}00097 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* MESSAGE\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

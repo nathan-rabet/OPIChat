@@ -1,0 +1,518 @@
+\hypertarget{message__parser__test_8c}{}\doxysection{tests/unit\+\_\+testing/message\+\_\+parser\+\_\+test.c File Reference}
+\label{message__parser__test_8c}\index{tests/unit\_testing/message\_parser\_test.c@{tests/unit\_testing/message\_parser\_test.c}}
+{\ttfamily \#include $<$criterion/criterion.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}message.\+h\char`\"{}}\newline
+Include dependency graph for message\+\_\+parser\+\_\+test.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{message__parser__test_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{message__parser__test_8c_ae1574755fc96bba0dbd62bcc19e385a6}{Test}} (requests\+\_\+parsing, subject\+\_\+client\+\_\+request)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a50572b286d00ed1e2441da9eadac2ae7}{Test}} (requests\+\_\+parsing, subject\+\_\+server\+\_\+response)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a1c1401844f22996c7623236f27875322}{Test}} (requests\+\_\+parsing, subject\+\_\+server\+\_\+notification)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a1ee95bf53d9d75ba56e005fcbe39af35}{Test}} (requests\+\_\+parsing, key\+\_\+value\+\_\+is\+\_\+payload)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_af85c9418ec64ebf907ddfc832dc5f4aa}{Test}} (requests\+\_\+parsing, no\+\_\+command\+\_\+parameter)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a106a5a4397e8dc9d3516cf51d4bc8c2d}{Test}} (requests\+\_\+parsing, multiple\+\_\+command\+\_\+parameters)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_ac530c1defe8e6eecb7c893774f4f694a}{Test}} (requests\+\_\+parsing, no\+\_\+payload\+\_\+no\+\_\+parameters)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a92445fd9a993037e1ea971711922f686}{Test}} (requests\+\_\+parsing, empty\+\_\+request)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_aa451eb4c655eb493c632a8b1d7bd86df}{Test}} (requests\+\_\+parsing, wrong\+\_\+payload\+\_\+size)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_ae67bebcf2b2db62862fbd21cff9d04f7}{Test}} (requests\+\_\+parsing, byte\+\_\+instead\+\_\+of\+\_\+char)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a35d865df394a3a3be65fa9d2d181d7a6}{Test}} (requests\+\_\+parsing, bad\+\_\+input)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a4b294a3b7da166dbc3564608c52301e1}{Test}} (requests\+\_\+parsing, no\+\_\+line\+\_\+feed)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a228d4dbbd10e3ee23bdf4d11205b9099}{Test}} (requests\+\_\+parsing, random\+\_\+request)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a4383fb4d063b45931b4b1e79084c470e}{Test}} (requests\+\_\+parsing, huge\+\_\+llong)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_acf08181b87aca78def4d113576a749dc}{Test}} (requests\+\_\+parsing, huge\+\_\+llong\+\_\+2)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a5059eb27288e5980a4fe6ec5de588e00}{Test}} (requests\+\_\+parsing, huge\+\_\+llong\+\_\+3)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_ae0a9bd98efed5a1b3f74df4c0aeb4ca5}{Test}} (\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}, only\+\_\+one\+\_\+\+LF)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_ad67a765a23accdb1a57d35ad95de29d9}{Test}} (\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}, end\+\_\+\+LFLF)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a9ae60953596d765318153f0e40c4f414}{Test}} (\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}, only\+\_\+one\+\_\+\+LF\+\_\+with\+\_\+kv\+\_\+as\+\_\+payload)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a8cf6ec7df8ad80433ae8dc3dc1e76997}{Test}} (\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}, invalid\+\_\+key)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a7051d2380a3abb7a59129646f6a7402c}{Test}} (\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}, invalid\+\_\+value)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a9410c253897eaee50fddcaf13bcb3ccb}{Test}} (\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}, duplicate\+\_\+key)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a9aea210b5cbf18cff21716f9cabba3eb}{Test}} (\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}, incomplete\+\_\+request)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_adae7c0a16917a265f5f24464b45fb0b1}{Test}} (\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}, payload\+\_\+with\+\_\+lf)
+\item 
+\mbox{\hyperlink{message__parser__test_8c_a128059e4e839853efb1e9e716740aca2}{Test}} (\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}, other\+\_\+1)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{message__parser__test_8c_a9410c253897eaee50fddcaf13bcb3ccb}\label{message__parser__test_8c_a9410c253897eaee50fddcaf13bcb3ccb}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [1/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}}]{,  }\item[{duplicate\+\_\+key}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00303}{303}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a9410c253897eaee50fddcaf13bcb3ccb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_ad67a765a23accdb1a57d35ad95de29d9}\label{message__parser__test_8c_ad67a765a23accdb1a57d35ad95de29d9}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [2/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}}]{,  }\item[{end\+\_\+\+LFLF}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00267}{267}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_ad67a765a23accdb1a57d35ad95de29d9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a9aea210b5cbf18cff21716f9cabba3eb}\label{message__parser__test_8c_a9aea210b5cbf18cff21716f9cabba3eb}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [3/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}}]{,  }\item[{incomplete\+\_\+request}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00312}{312}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a9aea210b5cbf18cff21716f9cabba3eb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a8cf6ec7df8ad80433ae8dc3dc1e76997}\label{message__parser__test_8c_a8cf6ec7df8ad80433ae8dc3dc1e76997}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [4/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}}]{,  }\item[{invalid\+\_\+key}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00285}{285}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a8cf6ec7df8ad80433ae8dc3dc1e76997_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a7051d2380a3abb7a59129646f6a7402c}\label{message__parser__test_8c_a7051d2380a3abb7a59129646f6a7402c}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [5/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}}]{,  }\item[{invalid\+\_\+value}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00294}{294}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a7051d2380a3abb7a59129646f6a7402c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_ae0a9bd98efed5a1b3f74df4c0aeb4ca5}\label{message__parser__test_8c_ae0a9bd98efed5a1b3f74df4c0aeb4ca5}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [6/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}}]{,  }\item[{only\+\_\+one\+\_\+\+LF}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00258}{258}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_ae0a9bd98efed5a1b3f74df4c0aeb4ca5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a9ae60953596d765318153f0e40c4f414}\label{message__parser__test_8c_a9ae60953596d765318153f0e40c4f414}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [7/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}}]{,  }\item[{only\+\_\+one\+\_\+\+LF\+\_\+with\+\_\+kv\+\_\+as\+\_\+payload}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00276}{276}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a9ae60953596d765318153f0e40c4f414_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a128059e4e839853efb1e9e716740aca2}\label{message__parser__test_8c_a128059e4e839853efb1e9e716740aca2}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [8/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}}]{,  }\item[{other\+\_\+1}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00333}{333}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a128059e4e839853efb1e9e716740aca2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_adae7c0a16917a265f5f24464b45fb0b1}\label{message__parser__test_8c_adae7c0a16917a265f5f24464b45fb0b1}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [9/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structcommand__parameter}{command\+\_\+parameter}}}]{,  }\item[{payload\+\_\+with\+\_\+lf}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00321}{321}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_adae7c0a16917a265f5f24464b45fb0b1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a35d865df394a3a3be65fa9d2d181d7a6}\label{message__parser__test_8c_a35d865df394a3a3be65fa9d2d181d7a6}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [10/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{bad\+\_\+input}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00201}{201}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a35d865df394a3a3be65fa9d2d181d7a6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_ae67bebcf2b2db62862fbd21cff9d04f7}\label{message__parser__test_8c_ae67bebcf2b2db62862fbd21cff9d04f7}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [11/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{byte\+\_\+instead\+\_\+of\+\_\+char}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00192}{192}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_ae67bebcf2b2db62862fbd21cff9d04f7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a92445fd9a993037e1ea971711922f686}\label{message__parser__test_8c_a92445fd9a993037e1ea971711922f686}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [12/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{empty\+\_\+request}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00174}{174}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a92445fd9a993037e1ea971711922f686_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a4383fb4d063b45931b4b1e79084c470e}\label{message__parser__test_8c_a4383fb4d063b45931b4b1e79084c470e}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [13/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{huge\+\_\+llong}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00228}{228}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a4383fb4d063b45931b4b1e79084c470e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_acf08181b87aca78def4d113576a749dc}\label{message__parser__test_8c_acf08181b87aca78def4d113576a749dc}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [14/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{huge\+\_\+llong\+\_\+2}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00238}{238}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_acf08181b87aca78def4d113576a749dc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a5059eb27288e5980a4fe6ec5de588e00}\label{message__parser__test_8c_a5059eb27288e5980a4fe6ec5de588e00}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [15/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{huge\+\_\+llong\+\_\+3}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00248}{248}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a5059eb27288e5980a4fe6ec5de588e00_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a1ee95bf53d9d75ba56e005fcbe39af35}\label{message__parser__test_8c_a1ee95bf53d9d75ba56e005fcbe39af35}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [16/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{key\+\_\+value\+\_\+is\+\_\+payload}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00077}{77}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a1ee95bf53d9d75ba56e005fcbe39af35_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a106a5a4397e8dc9d3516cf51d4bc8c2d}\label{message__parser__test_8c_a106a5a4397e8dc9d3516cf51d4bc8c2d}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [17/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{multiple\+\_\+command\+\_\+parameters}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00116}{116}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a106a5a4397e8dc9d3516cf51d4bc8c2d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_af85c9418ec64ebf907ddfc832dc5f4aa}\label{message__parser__test_8c_af85c9418ec64ebf907ddfc832dc5f4aa}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [18/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{no\+\_\+command\+\_\+parameter}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00099}{99}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_af85c9418ec64ebf907ddfc832dc5f4aa_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a4b294a3b7da166dbc3564608c52301e1}\label{message__parser__test_8c_a4b294a3b7da166dbc3564608c52301e1}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [19/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{no\+\_\+line\+\_\+feed}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00210}{210}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a4b294a3b7da166dbc3564608c52301e1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_ac530c1defe8e6eecb7c893774f4f694a}\label{message__parser__test_8c_ac530c1defe8e6eecb7c893774f4f694a}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [20/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{no\+\_\+payload\+\_\+no\+\_\+parameters}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00157}{157}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_ac530c1defe8e6eecb7c893774f4f694a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a228d4dbbd10e3ee23bdf4d11205b9099}\label{message__parser__test_8c_a228d4dbbd10e3ee23bdf4d11205b9099}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [21/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{random\+\_\+request}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00219}{219}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a228d4dbbd10e3ee23bdf4d11205b9099_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_ae1574755fc96bba0dbd62bcc19e385a6}\label{message__parser__test_8c_ae1574755fc96bba0dbd62bcc19e385a6}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [22/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{subject\+\_\+client\+\_\+request}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00005}{5}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_ae1574755fc96bba0dbd62bcc19e385a6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a1c1401844f22996c7623236f27875322}\label{message__parser__test_8c_a1c1401844f22996c7623236f27875322}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [23/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{subject\+\_\+server\+\_\+notification}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00049}{49}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a1c1401844f22996c7623236f27875322_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_a50572b286d00ed1e2441da9eadac2ae7}\label{message__parser__test_8c_a50572b286d00ed1e2441da9eadac2ae7}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [24/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{subject\+\_\+server\+\_\+response}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00027}{27}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_a50572b286d00ed1e2441da9eadac2ae7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__parser__test_8c_aa451eb4c655eb493c632a8b1d7bd86df}\label{message__parser__test_8c_aa451eb4c655eb493c632a8b1d7bd86df}} 
+\index{message\_parser\_test.c@{message\_parser\_test.c}!Test@{Test}}
+\index{Test@{Test}!message\_parser\_test.c@{message\_parser\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [25/25]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{requests\+\_\+parsing}]{,  }\item[{wrong\+\_\+payload\+\_\+size}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{message__parser__test_8c_source_l00183}{183}} of file \mbox{\hyperlink{message__parser__test_8c_source}{message\+\_\+parser\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser__test_8c_aa451eb4c655eb493c632a8b1d7bd86df_cgraph}
+\end{center}
+\end{figure}

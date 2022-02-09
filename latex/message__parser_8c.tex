@@ -1,0 +1,83 @@
+\hypertarget{message__parser_8c}{}\doxysection{src/common/message/message\+\_\+parser.c File Reference}
+\label{message__parser_8c}\index{src/common/message/message\_parser.c@{src/common/message/message\_parser.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}message.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}type\+\_\+check.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}xalloc.\+h\char`\"{}}\newline
+Include dependency graph for message\+\_\+parser.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{message__parser_8c_a36a74f751091df649880c7c5ed1def9b}{FREETURN}}(returned)
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmessage}{message}} $\ast$ \mbox{\hyperlink{message__parser_8c_a3b73b25240ab9cd5fb472c05281e3f5c}{parse\+\_\+message}} (const char $\ast$request\+\_\+string)
+\begin{DoxyCompactList}\small\item\em Take a message as a string and parse it into a message struct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{message__parser_8c_a36a74f751091df649880c7c5ed1def9b}\label{message__parser_8c_a36a74f751091df649880c7c5ed1def9b}} 
+\index{message\_parser.c@{message\_parser.c}!FREETURN@{FREETURN}}
+\index{FREETURN@{FREETURN}!message\_parser.c@{message\_parser.c}}
+\doxysubsubsection{\texorpdfstring{FREETURN}{FREETURN}}
+{\footnotesize\ttfamily \#define FREETURN(\begin{DoxyParamCaption}\item[{}]{returned }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{    free(req\_str\_dup);                                                         \(\backslash\)}
+\DoxyCodeLine{    free\_partial\_message(r);                                                   \(\backslash\)}
+\DoxyCodeLine{    return (returned)}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{message__parser_8c_a3b73b25240ab9cd5fb472c05281e3f5c}\label{message__parser_8c_a3b73b25240ab9cd5fb472c05281e3f5c}} 
+\index{message\_parser.c@{message\_parser.c}!parse\_message@{parse\_message}}
+\index{parse\_message@{parse\_message}!message\_parser.c@{message\_parser.c}}
+\doxysubsubsection{\texorpdfstring{parse\_message()}{parse\_message()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structmessage}{message}} $\ast$ parse\+\_\+message (\begin{DoxyParamCaption}\item[{const char $\ast$}]{request\+\_\+string }\end{DoxyParamCaption})}
+
+
+
+Take a message as a string and parse it into a message struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request\+\_\+string} & The message as a string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+struct message, NULL if error or invalid message 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{message__parser_8c_source_l00008}{8}} of file \mbox{\hyperlink{message__parser_8c_source}{message\+\_\+parser.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__parser_8c_a3b73b25240ab9cd5fb472c05281e3f5c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{message__parser_8c_a3b73b25240ab9cd5fb472c05281e3f5c_icgraph}
+\end{center}
+\end{figure}

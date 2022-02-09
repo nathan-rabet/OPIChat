@@ -1,0 +1,61 @@
+.TH "tests/unit_testing/logger_test.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tests/unit_testing/logger_test.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <criterion/criterion\&.h>\fP
+.br
+\fC#include <criterion/redirect\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include 'logger\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTest\fP (logger, \fBlogger_init\fP)"
+.br
+.ti -1c
+.RI "\fBTest\fP (logger, log_info,\&.init=cr_redirect_stdout)"
+.br
+.ti -1c
+.RI "\fBTest\fP (logger, log_warning,\&.init=cr_redirect_stderr)"
+.br
+.ti -1c
+.RI "\fBTest\fP (logger, log_error,\&.init=cr_redirect_stderr)"
+.br
+.ti -1c
+.RI "\fBTest\fP (logger, log_custom)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "Test (logger, log_custom)"
+
+.PP
+Definition at line \fB69\fP of file \fBlogger_test\&.c\fP\&.
+.SS "Test (logger, log_error, \&. init = \fCcr_redirect_stderr\fP)"
+
+.PP
+Definition at line \fB52\fP of file \fBlogger_test\&.c\fP\&.
+.SS "Test (logger, log_info, \&. init = \fCcr_redirect_stdout\fP)"
+
+.PP
+Definition at line \fB18\fP of file \fBlogger_test\&.c\fP\&.
+.SS "Test (logger, log_warning, \&. init = \fCcr_redirect_stderr\fP)"
+
+.PP
+Definition at line \fB35\fP of file \fBlogger_test\&.c\fP\&.
+.SS "Test (logger, \fBlogger_init\fP)"
+
+.PP
+Definition at line \fB7\fP of file \fBlogger_test\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

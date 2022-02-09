@@ -1,0 +1,59 @@
+\hypertarget{message__command__parameters_8c}{}\doxysection{src/common/message/message\+\_\+command\+\_\+parameters.c File Reference}
+\label{message__command__parameters_8c}\index{src/common/message/message\_command\_parameters.c@{src/common/message/message\_command\_parameters.c}}
+{\ttfamily \#include $<$regex.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}message.\+h\char`\"{}}\newline
+Include dependency graph for message\+\_\+command\+\_\+parameters.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=338pt]{message__command__parameters_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{message__command__parameters_8c_a28d4651376c79b584f48cf6ea0e2089a}{get\+\_\+message\+\_\+next\+\_\+parameter\+\_\+kv}} (char $\ast$params\+\_\+start, char $\ast$$\ast$key, char $\ast$$\ast$value)
+\begin{DoxyCompactList}\small\item\em Get the next key value object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{message__command__parameters_8c_a28d4651376c79b584f48cf6ea0e2089a}\label{message__command__parameters_8c_a28d4651376c79b584f48cf6ea0e2089a}} 
+\index{message\_command\_parameters.c@{message\_command\_parameters.c}!get\_message\_next\_parameter\_kv@{get\_message\_next\_parameter\_kv}}
+\index{get\_message\_next\_parameter\_kv@{get\_message\_next\_parameter\_kv}!message\_command\_parameters.c@{message\_command\_parameters.c}}
+\doxysubsubsection{\texorpdfstring{get\_message\_next\_parameter\_kv()}{get\_message\_next\_parameter\_kv()}}
+{\footnotesize\ttfamily int get\+\_\+message\+\_\+next\+\_\+parameter\+\_\+kv (\begin{DoxyParamCaption}\item[{char $\ast$}]{params\+\_\+start,  }\item[{char $\ast$$\ast$}]{key,  }\item[{char $\ast$$\ast$}]{value }\end{DoxyParamCaption})}
+
+
+
+Get the next key value object. 
+
+\begin{DoxyWarning}{Warning}
+This function modifies the input string
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em params\+\_\+start} & The start of the parameters \\
+\hline
+{\em key} & The key of the object, NULL if no key \\
+\hline
+{\em value} & The value of the object, NULL if no value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+offset to the next object, 0 if no more object 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{message__command__parameters_8c_source_l00007}{7}} of file \mbox{\hyperlink{message__command__parameters_8c_source}{message\+\_\+command\+\_\+parameters.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__command__parameters_8c_a28d4651376c79b584f48cf6ea0e2089a_icgraph}
+\end{center}
+\end{figure}

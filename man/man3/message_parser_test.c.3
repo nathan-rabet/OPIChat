@@ -1,0 +1,197 @@
+.TH "tests/unit_testing/message_parser_test.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+tests/unit_testing/message_parser_test.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <criterion/criterion\&.h>\fP
+.br
+\fC#include 'message\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, subject_client_request)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, subject_server_response)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, subject_server_notification)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, key_value_is_payload)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, no_command_parameter)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, multiple_command_parameters)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, no_payload_no_parameters)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, empty_request)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, wrong_payload_size)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, byte_instead_of_char)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, bad_input)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, no_line_feed)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, random_request)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, huge_llong)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, huge_llong_2)"
+.br
+.ti -1c
+.RI "\fBTest\fP (requests_parsing, huge_llong_3)"
+.br
+.ti -1c
+.RI "\fBTest\fP (\fBcommand_parameter\fP, only_one_LF)"
+.br
+.ti -1c
+.RI "\fBTest\fP (\fBcommand_parameter\fP, end_LFLF)"
+.br
+.ti -1c
+.RI "\fBTest\fP (\fBcommand_parameter\fP, only_one_LF_with_kv_as_payload)"
+.br
+.ti -1c
+.RI "\fBTest\fP (\fBcommand_parameter\fP, invalid_key)"
+.br
+.ti -1c
+.RI "\fBTest\fP (\fBcommand_parameter\fP, invalid_value)"
+.br
+.ti -1c
+.RI "\fBTest\fP (\fBcommand_parameter\fP, duplicate_key)"
+.br
+.ti -1c
+.RI "\fBTest\fP (\fBcommand_parameter\fP, incomplete_request)"
+.br
+.ti -1c
+.RI "\fBTest\fP (\fBcommand_parameter\fP, payload_with_lf)"
+.br
+.ti -1c
+.RI "\fBTest\fP (\fBcommand_parameter\fP, other_1)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "Test (\fBcommand_parameter\fP, duplicate_key)"
+
+.PP
+Definition at line \fB303\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (\fBcommand_parameter\fP, end_LFLF)"
+
+.PP
+Definition at line \fB267\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (\fBcommand_parameter\fP, incomplete_request)"
+
+.PP
+Definition at line \fB312\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (\fBcommand_parameter\fP, invalid_key)"
+
+.PP
+Definition at line \fB285\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (\fBcommand_parameter\fP, invalid_value)"
+
+.PP
+Definition at line \fB294\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (\fBcommand_parameter\fP, only_one_LF)"
+
+.PP
+Definition at line \fB258\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (\fBcommand_parameter\fP, only_one_LF_with_kv_as_payload)"
+
+.PP
+Definition at line \fB276\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (\fBcommand_parameter\fP, other_1)"
+
+.PP
+Definition at line \fB333\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (\fBcommand_parameter\fP, payload_with_lf)"
+
+.PP
+Definition at line \fB321\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, bad_input)"
+
+.PP
+Definition at line \fB201\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, byte_instead_of_char)"
+
+.PP
+Definition at line \fB192\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, empty_request)"
+
+.PP
+Definition at line \fB174\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, huge_llong)"
+
+.PP
+Definition at line \fB228\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, huge_llong_2)"
+
+.PP
+Definition at line \fB238\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, huge_llong_3)"
+
+.PP
+Definition at line \fB248\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, key_value_is_payload)"
+
+.PP
+Definition at line \fB77\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, multiple_command_parameters)"
+
+.PP
+Definition at line \fB116\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, no_command_parameter)"
+
+.PP
+Definition at line \fB99\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, no_line_feed)"
+
+.PP
+Definition at line \fB210\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, no_payload_no_parameters)"
+
+.PP
+Definition at line \fB157\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, random_request)"
+
+.PP
+Definition at line \fB219\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, subject_client_request)"
+
+.PP
+Definition at line \fB5\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, subject_server_notification)"
+
+.PP
+Definition at line \fB49\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, subject_server_response)"
+
+.PP
+Definition at line \fB27\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SS "Test (requests_parsing, wrong_payload_size)"
+
+.PP
+Definition at line \fB183\fP of file \fBmessage_parser_test\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

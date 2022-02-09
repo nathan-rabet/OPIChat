@@ -1,0 +1,6 @@
+<map id="add_client" name="add_client">
+<area shape="rect" id="node1" title="Add a new client connection_t to the linked list connection." alt="" coords="251,31,332,57"/>
+<area shape="rect" id="node2" href="$epoll-server_8c.html#ae91ab67a01fb4b53eebeb8a4bad10847" title="Accept a new client and add it to the connection_t struct." alt="" coords="104,5,203,32"/>
+<area shape="rect" id="node4" href="$client__test_8c.html#a42fe40dfdef3c25003537fedf7878dfe" title=" " alt="" coords="129,56,177,83"/>
+<area shape="rect" id="node3" href="$epoll-server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
+</map>

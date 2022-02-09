@@ -1,0 +1,45 @@
+\hypertarget{python__echo_8py_source}{}\doxysection{python\+\_\+echo.\+py}
+\label{python__echo_8py_source}\index{basic\_client/python\_echo.py@{basic\_client/python\_echo.py}}
+\mbox{\hyperlink{python__echo_8py}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00001}\mbox{\hyperlink{namespacepython__echo}{00001}} \textcolor{comment}{\#!/usr/bin/env python}}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00003}00003 \textcolor{keyword}{import} socket}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00004}00004 \textcolor{keyword}{import} sys}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00006}00006 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00007}\mbox{\hyperlink{namespacepython__echo_a59ed1993ba38ef27db51bb898456a5d6}{00007}} \textcolor{keyword}{def }\mbox{\hyperlink{namespacepython__echo_a59ed1993ba38ef27db51bb898456a5d6}{main}}():}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00008}00008     \textcolor{comment}{\# Check if the correct number of arguments has been passed}}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00009}00009     \textcolor{keywordflow}{if} len(sys.argv) != 3:}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00010}00010         print(}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00011}00011             \textcolor{stringliteral}{"{}Usage: python \{\} SERVER\_IP SERVER\_PORT"{}}.format(sys.argv[0]),}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00012}00012             file=sys.stderr,}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00013}00013         )}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00014}00014         sys.exit(1)}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00016}00016     \textcolor{comment}{\# Create a server socket and set its options}}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00017}00017     listening\_socket = socket.socket(socket.AF\_INET, socket.SOCK\_STREAM)}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00018}00018     listening\_socket.setsockopt(socket.SOL\_SOCKET, socket.SO\_REUSEADDR, 1)}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00020}00020     \textcolor{comment}{\# Bind the socket to a port and start listening for connections}}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00021}00021     listening\_socket.bind((sys.argv[1], int(sys.argv[2])))}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00022}00022     listening\_socket.listen(10)}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00024}00024     \textcolor{keywordflow}{while} \textcolor{keyword}{True}:}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00025}00025         \textcolor{comment}{\# Accept a client and communicate with it}}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00026}00026         client\_socket, \_ = listening\_socket.accept()}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00027}00027         msg = client\_socket.recv(4096)}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00029}00029         \textcolor{comment}{\# Communicate while the client does not close the connection}}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00030}00030         \textcolor{keywordflow}{while} len(msg):}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00031}00031             print(msg)}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00032}00032             client\_socket.send(b\textcolor{stringliteral}{"{}<OK> "{}} + msg)}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00033}00033             msg = client\_socket.recv(4096)}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00035}00035         client\_socket.close()}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00036}00036 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00038}00038 \textcolor{keywordflow}{if} \_\_name\_\_ == \textcolor{stringliteral}{"{}\_\_main\_\_"{}}:}
+\DoxyCodeLine{\Hypertarget{python__echo_8py_source_l00039}00039     \mbox{\hyperlink{namespacepython__echo_a59ed1993ba38ef27db51bb898456a5d6}{main}}()}
+
+\end{DoxyCode}

@@ -1,0 +1,288 @@
+\hypertarget{logger_8h}{}\doxysection{include/logger.h File Reference}
+\label{logger_8h}\index{include/logger.h@{include/logger.h}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+Include dependency graph for logger.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=164pt]{logger_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{logger_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{logger_8h_aaa472d30cbe3421030b069201e64811b}{log\+\_\+cp\+\_\+on\+\_\+file}} \{ \mbox{\hyperlink{logger_8h_aaa472d30cbe3421030b069201e64811ba0f94ee58c079ad4ab6bd4ca3cf614ade}{LOG\+\_\+\+CP\+\_\+\+ON\+\_\+\+FILE\+\_\+\+NONE}} = 0
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{logger_8h_adbd31571b49f4ff32cda46460abe6469}{logger\+\_\+init}} (const char $\ast$path)
+\begin{DoxyCompactList}\small\item\em Init the logger system. \end{DoxyCompactList}\item 
+FILE $\ast$ \mbox{\hyperlink{logger_8h_a68c2a0b37f9a0b984ee9f6476c2fea24}{get\+\_\+logger\+\_\+file}} ()
+\begin{DoxyCompactList}\small\item\em Get the logger system $\ast$\+FILE. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{logger_8h_a76d0452a3c1fcdf8c4e037edec252e3e}{write\+\_\+logger}} (const char $\ast$banner, FILE $\ast$cp\+\_\+on\+\_\+file, const char $\ast$str,...)
+\begin{DoxyCompactList}\small\item\em Log a message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{logger_8h_a5d3830f7ea3878240b25dd1097ed5d28}{write\+\_\+info}} (const char $\ast$msg,...)
+\begin{DoxyCompactList}\small\item\em Log an info message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{logger_8h_ae5719e99feb0e409f827c968cb6c824c}{write\+\_\+warning}} (const char $\ast$msg,...)
+\begin{DoxyCompactList}\small\item\em Log an error message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{logger_8h_aa2f6842f436362eed5f832d3b6611165}{write\+\_\+error}} (const char $\ast$msg,...)
+\begin{DoxyCompactList}\small\item\em Log an error message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{logger_8h_aa3c3e5e89264af119696a729635581e4}{raise\+\_\+panic}} (int exit\+Code, const char $\ast$msg,...)
+\begin{DoxyCompactList}\small\item\em Log a CRITICAL error message \& exit the program. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{logger_8h_a919a00b5426a76a15d7425041e8029b4}{logger\+\_\+close}} ()
+\begin{DoxyCompactList}\small\item\em Close the logger system properly. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{logger_8h_aaa472d30cbe3421030b069201e64811b}\label{logger_8h_aaa472d30cbe3421030b069201e64811b}} 
+\index{logger.h@{logger.h}!log\_cp\_on\_file@{log\_cp\_on\_file}}
+\index{log\_cp\_on\_file@{log\_cp\_on\_file}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{log\_cp\_on\_file}{log\_cp\_on\_file}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{logger_8h_aaa472d30cbe3421030b069201e64811b}{log\+\_\+cp\+\_\+on\+\_\+file}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LOG\_CP\_ON\_FILE\_NONE@{LOG\_CP\_ON\_FILE\_NONE}!logger.h@{logger.h}}\index{logger.h@{logger.h}!LOG\_CP\_ON\_FILE\_NONE@{LOG\_CP\_ON\_FILE\_NONE}}}\mbox{\Hypertarget{logger_8h_aaa472d30cbe3421030b069201e64811ba0f94ee58c079ad4ab6bd4ca3cf614ade}\label{logger_8h_aaa472d30cbe3421030b069201e64811ba0f94ee58c079ad4ab6bd4ca3cf614ade}} 
+LOG\+\_\+\+CP\+\_\+\+ON\+\_\+\+FILE\+\_\+\+NONE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{logger_8h_source_l00006}{6}} of file \mbox{\hyperlink{logger_8h_source}{logger.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{logger_8h_a68c2a0b37f9a0b984ee9f6476c2fea24}\label{logger_8h_a68c2a0b37f9a0b984ee9f6476c2fea24}} 
+\index{logger.h@{logger.h}!get\_logger\_file@{get\_logger\_file}}
+\index{get\_logger\_file@{get\_logger\_file}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{get\_logger\_file()}{get\_logger\_file()}}
+{\footnotesize\ttfamily FILE $\ast$ get\+\_\+logger\+\_\+file (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the logger system $\ast$\+FILE. 
+
+\begin{DoxyReturn}{Returns}
+The logger $\ast$\+FILE 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{logger_8c_source_l00022}{22}} of file \mbox{\hyperlink{logger_8c_source}{logger.\+c}}.
+
+\mbox{\Hypertarget{logger_8h_a919a00b5426a76a15d7425041e8029b4}\label{logger_8h_a919a00b5426a76a15d7425041e8029b4}} 
+\index{logger.h@{logger.h}!logger\_close@{logger\_close}}
+\index{logger\_close@{logger\_close}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{logger\_close()}{logger\_close()}}
+{\footnotesize\ttfamily void logger\+\_\+close (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Close the logger system properly. 
+
+
+
+Definition at line \mbox{\hyperlink{logger_8c_source_l00109}{109}} of file \mbox{\hyperlink{logger_8c_source}{logger.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{logger_8h_a919a00b5426a76a15d7425041e8029b4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger_8h_adbd31571b49f4ff32cda46460abe6469}\label{logger_8h_adbd31571b49f4ff32cda46460abe6469}} 
+\index{logger.h@{logger.h}!logger\_init@{logger\_init}}
+\index{logger\_init@{logger\_init}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{logger\_init()}{logger\_init()}}
+{\footnotesize\ttfamily void logger\+\_\+init (\begin{DoxyParamCaption}\item[{const char $\ast$}]{path }\end{DoxyParamCaption})}
+
+
+
+Init the logger system. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path of the file to log to \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{logger_8c_source_l00012}{12}} of file \mbox{\hyperlink{logger_8c_source}{logger.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=215pt]{logger_8h_adbd31571b49f4ff32cda46460abe6469_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger_8h_aa3c3e5e89264af119696a729635581e4}\label{logger_8h_aa3c3e5e89264af119696a729635581e4}} 
+\index{logger.h@{logger.h}!raise\_panic@{raise\_panic}}
+\index{raise\_panic@{raise\_panic}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{raise\_panic()}{raise\_panic()}}
+{\footnotesize\ttfamily void raise\+\_\+panic (\begin{DoxyParamCaption}\item[{int}]{exit\+Code,  }\item[{const char $\ast$}]{msg,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Log a CRITICAL error message \& exit the program. 
+
+\begin{DoxyNote}{Note}
+This function supports formatted string (like printf)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em exit\+Code} & The exit code to use \\
+\hline
+{\em msg} & The error to log \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{logger_8c_source_l00100}{100}} of file \mbox{\hyperlink{logger_8c_source}{logger.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{logger_8h_aa3c3e5e89264af119696a729635581e4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger_8h_aa2f6842f436362eed5f832d3b6611165}\label{logger_8h_aa2f6842f436362eed5f832d3b6611165}} 
+\index{logger.h@{logger.h}!write\_error@{write\_error}}
+\index{write\_error@{write\_error}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{write\_error()}{write\_error()}}
+{\footnotesize\ttfamily void write\+\_\+error (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Log an error message. 
+
+\begin{DoxyNote}{Note}
+This function supports formatted string (like printf)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The message to log \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{logger_8c_source_l00092}{92}} of file \mbox{\hyperlink{logger_8c_source}{logger.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{logger_8h_aa2f6842f436362eed5f832d3b6611165_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger_8h_a5d3830f7ea3878240b25dd1097ed5d28}\label{logger_8h_a5d3830f7ea3878240b25dd1097ed5d28}} 
+\index{logger.h@{logger.h}!write\_info@{write\_info}}
+\index{write\_info@{write\_info}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{write\_info()}{write\_info()}}
+{\footnotesize\ttfamily void write\+\_\+info (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Log an info message. 
+
+\begin{DoxyNote}{Note}
+This function supports formatted string (like printf)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The message to log \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{logger_8c_source_l00076}{76}} of file \mbox{\hyperlink{logger_8c_source}{logger.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=249pt]{logger_8h_a5d3830f7ea3878240b25dd1097ed5d28_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger_8h_a76d0452a3c1fcdf8c4e037edec252e3e}\label{logger_8h_a76d0452a3c1fcdf8c4e037edec252e3e}} 
+\index{logger.h@{logger.h}!write\_logger@{write\_logger}}
+\index{write\_logger@{write\_logger}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{write\_logger()}{write\_logger()}}
+{\footnotesize\ttfamily void write\+\_\+logger (\begin{DoxyParamCaption}\item[{const char $\ast$}]{banner,  }\item[{FILE $\ast$}]{cp\+\_\+on\+\_\+file,  }\item[{const char $\ast$}]{str,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Log a message. 
+
+\begin{DoxyNote}{Note}
+This function supports formatted string (like printf)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em banner} & The banner to display before the message \\
+\hline
+{\em cp\+\_\+on\+\_\+file} & Copy the message to the file (ignored if set on {\ttfamily LOG\+\_\+\+CP\+\_\+\+ON\+\_\+\+FILE\+\_\+\+NONE}) \\
+\hline
+{\em str} & The message to log \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{logger_8c_source_l00068}{68}} of file \mbox{\hyperlink{logger_8c_source}{logger.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=221pt]{logger_8h_a76d0452a3c1fcdf8c4e037edec252e3e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{logger_8h_ae5719e99feb0e409f827c968cb6c824c}\label{logger_8h_ae5719e99feb0e409f827c968cb6c824c}} 
+\index{logger.h@{logger.h}!write\_warning@{write\_warning}}
+\index{write\_warning@{write\_warning}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{write\_warning()}{write\_warning()}}
+{\footnotesize\ttfamily void write\+\_\+warning (\begin{DoxyParamCaption}\item[{const char $\ast$}]{msg,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+Log an error message. 
+
+\begin{DoxyNote}{Note}
+This function supports formatted string (like printf)
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & The message to log \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \mbox{\hyperlink{logger_8c_source_l00084}{84}} of file \mbox{\hyperlink{logger_8c_source}{logger.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{logger_8h_ae5719e99feb0e409f827c968cb6c824c_icgraph}
+\end{center}
+\end{figure}

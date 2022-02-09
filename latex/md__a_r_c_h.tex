@@ -1,0 +1,79 @@
+The following project is organised in a certain way (and must stay like this!!) in order to keep it reliable, secure and maintainable.
+
+Thus, there is a serie of non-\/exhaustive mandatory rules that must be followed in order to make the project work.\hypertarget{md__a_r_c_h_autotoc_md1}{}\doxysection{Coding style}\label{md__a_r_c_h_autotoc_md1}
+
+\begin{DoxyItemize}
+\item The project {\bfseries{must follow the EPITA coding style}} (obviously).
+\item Macro\textquotesingle{}s must be {\itshape UPPERCASE}.
+\item Functions, enumerations and variables must be {\itshape snake\+\_\+case}.
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_autotoc_md2}{}\doxysection{Architecture}\label{md__a_r_c_h_autotoc_md2}
+The project is divided in the following parts\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily src/}
+\begin{DoxyItemize}
+\item {\ttfamily client/}\+: the client part.
+\item {\ttfamily server/}\+: the server.
+\item {\ttfamily common/}\+: functions and procedures that are used by both the client and the server.
+\item {\ttfamily \mbox{\hyperlink{client__main_8c}{client\+\_\+main.\+c}}}\+: the main file of the client.
+\item {\ttfamily \mbox{\hyperlink{server__main_8c}{server\+\_\+main.\+c}}}\+: the main file of the server.
+\end{DoxyItemize}
+\item {\ttfamily include/}\+: the header files.
+\item {\ttfamily tests/}
+\begin{DoxyItemize}
+\item {\ttfamily \mbox{\hyperlink{test__main_8c}{test\+\_\+main.\+c}}} \+: the manual main test file.
+\item {\ttfamily unit\+\_\+testing/} \+: the unit testing folder.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__a_r_c_h_autotoc_md3}{}\doxysection{Header files}\label{md__a_r_c_h_autotoc_md3}
+A header file must contains for each feature\+:
+
+
+\begin{DoxyItemize}
+\item Their structures.
+\item Their functions
+\item Their macros.
+\item Their global variables.
+\item Their constants.
+\item Their enumerations.
+\end{DoxyItemize}
+
+Concretely, all the informations that must be shared between project\textquotesingle{}s folders must be put in the header files.
+
+Also, each header {\bfseries{MUST}} have a standard include guard \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef \_\_MY\_HEADER\_FILE\_H\_\_}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define \_\_MY\_HEADER\_FILE\_H\_\_}}
+\DoxyCodeLine{...}
+\DoxyCodeLine{\#endif}
+
+\end{DoxyCode}
+
+
+NB \+: {\ttfamily \#pragma once} is not standard, then forbiden.
+
+Also, if the name of the header file is {\ttfamily my\+\_\+header\+\_\+file.\+h}, the corresponding include guard must be {\ttfamily MY\+\_\+\+HEADER\+\_\+\+FILE\+\_\+H}.\hypertarget{md__a_r_c_h_autotoc_md4}{}\doxysection{Isolation and \char`\"{}foldering\char`\"{}}\label{md__a_r_c_h_autotoc_md4}
+All functions must be isolated in their own logical files.
+
+For example, {\ttfamily src/common/message\+\_\+free.\+c} contains all the functions that are used to free a message.
+
+Also, if you create a feature and you want to separate it in different files, you must create a folder for it. For example, if you create a {\ttfamily src/common/message\+\_\+free.\+c} and {\ttfamily src/common/message\+\_\+parser.\+c} files, you must create a {\ttfamily src/common/message/} folder and put the two files in it.\hypertarget{md__a_r_c_h_autotoc_md5}{}\doxysection{Documentation}\label{md__a_r_c_h_autotoc_md5}
+All functions, structures, structure field, macros, global variables. are documented in their corresponding header file.
+
+The documentation must be written with the \href{https://www.doxygen.org/}{\texttt{ Doxygen}} syntax.\hypertarget{md__a_r_c_h_autotoc_md6}{}\doxysection{Unit testing}\label{md__a_r_c_h_autotoc_md6}
+All written functions {\bfseries{MUST HAVE a unit test}} which use the {\itshape Criterion} framework. The unit test must be in the {\ttfamily tests/unit\+\_\+testing/} folder. The unit test file must be named like {\ttfamily \texorpdfstring{$<$}{<}something\texorpdfstring{$>$}{>}\+\_\+test.\+c}.\hypertarget{md__a_r_c_h_autotoc_md7}{}\doxysection{Memory allocations}\label{md__a_r_c_h_autotoc_md7}
+All functions that allocate memory {\bfseries{MUST BE}} freed (again this is obviously obvious).
+
+Also, heap memory allocation {\bfseries{MUST NOT}} be done with malloc(), calloc() or realloc(), but with the functions defined in the {\ttfamily \mbox{\hyperlink{src_2common_2utils_2xalloc_8c}{src/common/utils/xalloc.\+c}}} file.
+
+We won\textquotesingle{}t preload our \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}{xmalloc()}} dude thus there is a tollerance for functions under our control (like syscalls or other libc stuff).\hypertarget{md__a_r_c_h_autotoc_md8}{}\doxysection{Recommended practices}\label{md__a_r_c_h_autotoc_md8}
+If you create a set of methods and structure you don\textquotesingle{}t want another programmer (or h\+Ac\+KeR user) to manipulate data as their wish, you can use the following practices\+:
+
+
+\begin{DoxyItemize}
+\item All {\itshape INTERNAL} the methods of a structure {\bfseries{MUST}} be static.
+\item All hidden structures {\bfseries{MUST NOT}} be in the header file. Instead, they must be in the .c source file.
+\item You can create a mempool for your structures and just allow external users to communicate with it through the functions defined in the same file. 
+\end{DoxyItemize}

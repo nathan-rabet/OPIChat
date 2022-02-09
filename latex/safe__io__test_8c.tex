@@ -1,0 +1,109 @@
+\hypertarget{safe__io__test_8c}{}\doxysection{tests/unit\+\_\+testing/safe\+\_\+io\+\_\+test.c File Reference}
+\label{safe__io__test_8c}\index{tests/unit\_testing/safe\_io\_test.c@{tests/unit\_testing/safe\_io\_test.c}}
+{\ttfamily \#include $<$criterion/criterion.\+h$>$}\newline
+{\ttfamily \#include $<$criterion/redirect.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}client\+\_\+read.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}init\+\_\+socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}logger.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}message.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}safe\+\_\+io.\+h\char`\"{}}\newline
+Include dependency graph for safe\+\_\+io\+\_\+test.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe__io__test_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{safe__io__test_8c_a4b53518635937f50a0e4cd330dcc9180}{Test}} (safe\+\_\+io, \mbox{\hyperlink{safe__io_8c_af5b0cdbd9fea86b0c53e02b3b5e31518}{safe\+\_\+write}},.init=cr\+\_\+redirect\+\_\+stdout)
+\item 
+\mbox{\hyperlink{safe__io__test_8c_a95beeb03aabd339a16558e750f574af8}{Test}} (safe\+\_\+io, \mbox{\hyperlink{safe__io_8c_a70bebf5ac8325b0eb363be83f11a1f9b}{safe\+\_\+read}})
+\item 
+\mbox{\hyperlink{safe__io__test_8c_a3fb3142c90d3ab68241b0433c112fedd}{Test}} (safe\+\_\+io, safe\+\_\+send\+\_\+recv)
+\item 
+\mbox{\hyperlink{safe__io__test_8c_ad23640c18379be9bbbc2ff4db324f7f8}{Test}} (safe\+\_\+io, safe\+\_\+recv\+\_\+\+\_\+slow\+\_\+loris\+\_\+hack)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{safe__io__test_8c_a95beeb03aabd339a16558e750f574af8}\label{safe__io__test_8c_a95beeb03aabd339a16558e750f574af8}} 
+\index{safe\_io\_test.c@{safe\_io\_test.c}!Test@{Test}}
+\index{Test@{Test}!safe\_io\_test.c@{safe\_io\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{safe\+\_\+io}]{,  }\item[{\mbox{\hyperlink{safe__io_8c_a70bebf5ac8325b0eb363be83f11a1f9b}{safe\+\_\+read}}}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{safe__io__test_8c_source_l00027}{27}} of file \mbox{\hyperlink{safe__io__test_8c_source}{safe\+\_\+io\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=300pt]{safe__io__test_8c_a95beeb03aabd339a16558e750f574af8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{safe__io__test_8c_ad23640c18379be9bbbc2ff4db324f7f8}\label{safe__io__test_8c_ad23640c18379be9bbbc2ff4db324f7f8}} 
+\index{safe\_io\_test.c@{safe\_io\_test.c}!Test@{Test}}
+\index{Test@{Test}!safe\_io\_test.c@{safe\_io\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{safe\+\_\+io}]{,  }\item[{safe\+\_\+recv\+\_\+\+\_\+slow\+\_\+loris\+\_\+hack}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{safe__io__test_8c_source_l00088}{88}} of file \mbox{\hyperlink{safe__io__test_8c_source}{safe\+\_\+io\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe__io__test_8c_ad23640c18379be9bbbc2ff4db324f7f8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{safe__io__test_8c_a3fb3142c90d3ab68241b0433c112fedd}\label{safe__io__test_8c_a3fb3142c90d3ab68241b0433c112fedd}} 
+\index{safe\_io\_test.c@{safe\_io\_test.c}!Test@{Test}}
+\index{Test@{Test}!safe\_io\_test.c@{safe\_io\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{safe\+\_\+io}]{,  }\item[{safe\+\_\+send\+\_\+recv}]{ }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{safe__io__test_8c_source_l00050}{50}} of file \mbox{\hyperlink{safe__io__test_8c_source}{safe\+\_\+io\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe__io__test_8c_a3fb3142c90d3ab68241b0433c112fedd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{safe__io__test_8c_a4b53518635937f50a0e4cd330dcc9180}\label{safe__io__test_8c_a4b53518635937f50a0e4cd330dcc9180}} 
+\index{safe\_io\_test.c@{safe\_io\_test.c}!Test@{Test}}
+\index{Test@{Test}!safe\_io\_test.c@{safe\_io\_test.c}}
+\doxysubsubsection{\texorpdfstring{Test()}{Test()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Test (\begin{DoxyParamCaption}\item[{safe\+\_\+io}]{,  }\item[{\mbox{\hyperlink{safe__io_8c_af5b0cdbd9fea86b0c53e02b3b5e31518}{safe\+\_\+write}}}]{,  }\item[{.}]{init = {\ttfamily cr\+\_\+redirect\+\_\+stdout} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{safe__io__test_8c_source_l00016}{16}} of file \mbox{\hyperlink{safe__io__test_8c_source}{safe\+\_\+io\+\_\+test.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{safe__io__test_8c_a4b53518635937f50a0e4cd330dcc9180_cgraph}
+\end{center}
+\end{figure}

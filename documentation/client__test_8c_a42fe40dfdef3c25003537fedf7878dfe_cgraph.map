@@ -1,0 +1,6 @@
+<map id="Test" name="Test">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,53,57"/>
+<area shape="rect" id="node2" href="$connection_8c.html#a5616b1d17b24f8cedfc34d0787b9de5e" title="Add a new client connection_t to the linked list connection." alt="" coords="112,5,193,32"/>
+<area shape="rect" id="node4" href="$connection_8c.html#a6b9d94fcdf4e08d50ec8aaa73e9f0419" title="Remove the client connection_t from the linked list connection." alt="" coords="101,56,204,83"/>
+<area shape="rect" id="node3" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="252,5,319,32"/>
+</map>

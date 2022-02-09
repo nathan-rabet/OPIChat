@@ -1,0 +1,5 @@
+<map id="create_and_bind" name="create_and_bind">
+<area shape="rect" id="node1" title="Iterate over the struct addrinfo elements to create and bind a socket." alt="" coords="263,5,380,32"/>
+<area shape="rect" id="node2" href="$epoll-server_8c.html#a3ad2113f2297a7cbdaa71f370aea7db0" title="Initialize the addrinfo struct and call create_and_connect()" alt="" coords="104,5,215,32"/>
+<area shape="rect" id="node3" href="$epoll-server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
+</map>

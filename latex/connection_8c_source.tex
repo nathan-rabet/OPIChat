@@ -1,0 +1,67 @@
+\hypertarget{connection_8c_source}{}\doxysection{connection.\+c}
+\label{connection_8c_source}\index{epoll\_server/connection.c@{epoll\_server/connection.c}}
+\mbox{\hyperlink{connection_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{connection_8h}{connection.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <err.h>}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00005}00005 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00006}00006 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00007}00007 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{epoll__server_2utils_2xalloc_8h}{utils/xalloc.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00009}\mbox{\hyperlink{connection_8c_a5616b1d17b24f8cedfc34d0787b9de5e}{00009}} \textcolor{keyword}{struct }\mbox{\hyperlink{structconnection__t}{connection\_t}} *\mbox{\hyperlink{connection_8c_a5616b1d17b24f8cedfc34d0787b9de5e}{add\_client}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structconnection__t}{connection\_t}} *connection,}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00010}00010                                 \textcolor{keywordtype}{int} \mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}})}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00011}00011 \{}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00012}00012     \textcolor{keyword}{struct }\mbox{\hyperlink{structconnection__t}{connection\_t}} *new\_connection = \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}{xmalloc}}(\textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{structconnection__t}{connection\_t}}));}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00014}00014     new\_connection-\/>\mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}} = \mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}};}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00015}00015     new\_connection-\/>\mbox{\hyperlink{structconnection__t_aff2566f4c366b48d73479bef43ee4d2e}{buffer}} = NULL;}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00016}00016     new\_connection-\/>\mbox{\hyperlink{structconnection__t_a3876de7388812b5fde1a77294c2bdedf}{nb\_read}} = 0;}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00017}00017     new\_connection-\/>\mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}} = connection;}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00019}00019     \textcolor{keywordflow}{return} new\_connection;}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00020}00020 \}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00022}\mbox{\hyperlink{connection_8c_a6b9d94fcdf4e08d50ec8aaa73e9f0419}{00022}} \textcolor{keyword}{struct }\mbox{\hyperlink{structconnection__t}{connection\_t}} *\mbox{\hyperlink{connection_8c_a6b9d94fcdf4e08d50ec8aaa73e9f0419}{remove\_client}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structconnection__t}{connection\_t}} *connection,}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00023}00023                                    \textcolor{keywordtype}{int} \mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}})}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00024}00024 \{}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00025}00025     \textcolor{keywordflow}{if} (connection \&\& connection-\/>\mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}} == \mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}})}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00026}00026     \{}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00027}00027         \textcolor{keyword}{struct }\mbox{\hyperlink{structconnection__t}{connection\_t}} *client\_connection = connection-\/>\mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}};}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00028}00028         \textcolor{keywordflow}{if} (close(connection-\/>\mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}}) == -\/1)}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00029}00029             errx(1, \textcolor{stringliteral}{"{}Failed to close socket"{}});}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00030}00030         free(connection-\/>\mbox{\hyperlink{structconnection__t_aff2566f4c366b48d73479bef43ee4d2e}{buffer}});}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00031}00031         free(connection);}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00032}00032         \textcolor{keywordflow}{return} client\_connection;}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00033}00033     \}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00035}00035     \textcolor{keyword}{struct }\mbox{\hyperlink{structconnection__t}{connection\_t}} *tmp = connection;}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00036}00036     \textcolor{keywordflow}{while} (tmp-\/>\mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}})}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00037}00037     \{}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00038}00038         \textcolor{keywordflow}{if} (tmp-\/>\mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}}-\/>\mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}} == \mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}})}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00039}00039         \{}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00040}00040             \textcolor{keyword}{struct }\mbox{\hyperlink{structconnection__t}{connection\_t}} *client\_connection = tmp-\/>\mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}};}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00041}00041             tmp-\/>\mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}} = client\_connection-\/>\mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}};}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00042}00042             \textcolor{keywordflow}{if} (close(client\_connection-\/>\mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}}) == -\/1)}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00043}00043                 errx(1, \textcolor{stringliteral}{"{}Failed to close socket"{}});}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00044}00044             free(client\_connection-\/>\mbox{\hyperlink{structconnection__t_aff2566f4c366b48d73479bef43ee4d2e}{buffer}});}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00045}00045             free(client\_connection);}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00046}00046             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00047}00047         \}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00048}00048         tmp = tmp-\/>\mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}};}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00049}00049     \}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00050}00050 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00051}00051     \textcolor{keywordflow}{return} connection;}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00052}00052 \}}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00053}00053 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00054}\mbox{\hyperlink{connection_8c_a5c993924a198348770d2028c1cc4c199}{00054}} \textcolor{keyword}{struct }\mbox{\hyperlink{structconnection__t}{connection\_t}} *\mbox{\hyperlink{connection_8c_a5c993924a198348770d2028c1cc4c199}{find\_client}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structconnection__t}{connection\_t}} *connection,}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00055}00055                                  \textcolor{keywordtype}{int} \mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}})}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00056}00056 \{}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00057}00057     \textcolor{keywordflow}{while} (connection != NULL \&\& connection-\/>\mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}} != \mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\_socket}})}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00058}00058         connection = connection-\/>\mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}};}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00059}00059 }
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00060}00060     \textcolor{keywordflow}{return} connection;}
+\DoxyCodeLine{\Hypertarget{connection_8c_source_l00061}00061 \}}
+
+\end{DoxyCode}

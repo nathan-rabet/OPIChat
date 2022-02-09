@@ -1,0 +1,212 @@
+\hypertarget{client_8h}{}\doxysection{include/client.h File Reference}
+\label{client_8h}\index{include/client.h@{include/client.h}}
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+Include dependency graph for client.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=234pt]{client_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structclient}{client}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \mbox{\hyperlink{client_8h_a80a0df2bd2e5d096d8ea40517ffe6f24}{get\+\_\+client\+\_\+ip}} (struct \mbox{\hyperlink{structclient}{client}} $\ast$\mbox{\hyperlink{structclient}{client}})
+\begin{DoxyCompactList}\small\item\em Get the client IPv4/\+IPv6 address. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structclient}{client}} $\ast$ \mbox{\hyperlink{client_8h_a4e35564ced258ce23a4c36b7d22760ac}{add\+\_\+client}} (struct \mbox{\hyperlink{structclient}{client}} $\ast$\mbox{\hyperlink{structclient}{client}}, int client\+\_\+socket, struct sockaddr sockaddr, socklen\+\_\+t sockaddr\+\_\+len)
+\begin{DoxyCompactList}\small\item\em Add a new client client to the linked list connection. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structclient}{client}} $\ast$ \mbox{\hyperlink{client_8h_adb8c6835d5d23e6f1f6ca49a8883b2c2}{remove\+\_\+client}} (struct \mbox{\hyperlink{structclient}{client}} $\ast$connection, int client\+\_\+socket)
+\begin{DoxyCompactList}\small\item\em Remove the client client from the linked list connection. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structclient}{client}} $\ast$ \mbox{\hyperlink{client_8h_a820686562baeb5681caf3fc9c4c883ef}{find\+\_\+client}} (struct \mbox{\hyperlink{structclient}{client}} $\ast$connection, int client\+\_\+socket)
+\begin{DoxyCompactList}\small\item\em Find the client element where the socket is equal to client sock. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structclient}{client}} $\ast$ \mbox{\hyperlink{client_8h_a8e987a5d308606c037c426a0aba7c060}{find\+\_\+client\+\_\+by\+\_\+username}} (struct \mbox{\hyperlink{structclient}{client}} $\ast$\mbox{\hyperlink{structclient}{client}}, char $\ast$username)
+\begin{DoxyCompactList}\small\item\em Find the first client who match the username. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structclient}{client}} $\ast$ \mbox{\hyperlink{client_8h_ab13b91cda85acbe50143a8d0cbec99f8}{clients}}
+\begin{DoxyCompactList}\small\item\em Contain all the information about all clients (linked list) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{client_8h_a4e35564ced258ce23a4c36b7d22760ac}\label{client_8h_a4e35564ced258ce23a4c36b7d22760ac}} 
+\index{client.h@{client.h}!add\_client@{add\_client}}
+\index{add\_client@{add\_client}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{add\_client()}{add\_client()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structclient}{client}} $\ast$ add\+\_\+client (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structclient}{client}} $\ast$}]{client,  }\item[{int}]{client\+\_\+socket,  }\item[{struct sockaddr}]{sockaddr,  }\item[{socklen\+\_\+t}]{sockaddr\+\_\+len }\end{DoxyParamCaption})}
+
+
+
+Add a new client client to the linked list connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The client linked list with all the clients\\
+\hline
+{\em client\+\_\+socket} & The client socket fd to add\\
+\hline
+{\em sockaddr} & The client socket address info (used to get the client ip)\\
+\hline
+{\em sockaddr\+\_\+len} & The client socket address info length\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The client linked list with the element added
+\end{DoxyReturn}
+Add the new client element with a head insert 
+
+Definition at line \mbox{\hyperlink{client_8c_source_l00037}{37}} of file \mbox{\hyperlink{client_8c_source}{client.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{client_8h_a4e35564ced258ce23a4c36b7d22760ac_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8h_a820686562baeb5681caf3fc9c4c883ef}\label{client_8h_a820686562baeb5681caf3fc9c4c883ef}} 
+\index{client.h@{client.h}!find\_client@{find\_client}}
+\index{find\_client@{find\_client}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{find\_client()}{find\_client()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structclient}{client}} $\ast$ find\+\_\+client (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structclient}{client}} $\ast$}]{connection,  }\item[{int}]{client\+\_\+socket }\end{DoxyParamCaption})}
+
+
+
+Find the client element where the socket is equal to client sock. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The client linked list with all the clients\\
+\hline
+{\em client\+\_\+socket} & The client socket to find\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The client element of the specific client
+\end{DoxyReturn}
+Iterate over the linked list until it finds the client. If the client is not in the linked list returns NULL 
+
+Definition at line \mbox{\hyperlink{client_8c_source_l00090}{90}} of file \mbox{\hyperlink{client_8c_source}{client.\+c}}.
+
+\mbox{\Hypertarget{client_8h_a8e987a5d308606c037c426a0aba7c060}\label{client_8h_a8e987a5d308606c037c426a0aba7c060}} 
+\index{client.h@{client.h}!find\_client\_by\_username@{find\_client\_by\_username}}
+\index{find\_client\_by\_username@{find\_client\_by\_username}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{find\_client\_by\_username()}{find\_client\_by\_username()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structclient}{client}} $\ast$ find\+\_\+client\+\_\+by\+\_\+username (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structclient}{client}} $\ast$}]{client,  }\item[{char $\ast$}]{username }\end{DoxyParamCaption})}
+
+
+
+Find the first client who match the username. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The client linked list with all the clients\\
+\hline
+{\em username} & The username to find\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The client element of the specific client 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{client_8c_source_l00098}{98}} of file \mbox{\hyperlink{client_8c_source}{client.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=329pt]{client_8h_a8e987a5d308606c037c426a0aba7c060_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8h_a80a0df2bd2e5d096d8ea40517ffe6f24}\label{client_8h_a80a0df2bd2e5d096d8ea40517ffe6f24}} 
+\index{client.h@{client.h}!get\_client\_ip@{get\_client\_ip}}
+\index{get\_client\_ip@{get\_client\_ip}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{get\_client\_ip()}{get\_client\_ip()}}
+{\footnotesize\ttfamily char $\ast$ get\+\_\+client\+\_\+ip (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structclient}{client}} $\ast$}]{client }\end{DoxyParamCaption})}
+
+
+
+Get the client IPv4/\+IPv6 address. 
+
+\begin{DoxyWarning}{Warning}
+This function returns dynamically allocated string and thus must be freed after use
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em client} & The client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+char$\ast$ The client IPv4/\+IPv6 address (x.\+x.\+x.\+x or x\+:x\+:x\+:x\+:x\+:x\+:x\+:x) 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{client_8c_source_l00016}{16}} of file \mbox{\hyperlink{client_8c_source}{client.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=248pt]{client_8h_a80a0df2bd2e5d096d8ea40517ffe6f24_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{client_8h_adb8c6835d5d23e6f1f6ca49a8883b2c2}\label{client_8h_adb8c6835d5d23e6f1f6ca49a8883b2c2}} 
+\index{client.h@{client.h}!remove\_client@{remove\_client}}
+\index{remove\_client@{remove\_client}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{remove\_client()}{remove\_client()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structclient}{client}} $\ast$ remove\+\_\+client (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structclient}{client}} $\ast$}]{connection,  }\item[{int}]{client\+\_\+socket }\end{DoxyParamCaption})}
+
+
+
+Remove the client client from the linked list connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The client linked list with all the clients\\
+\hline
+{\em client\+\_\+socket} & The client socket fd to remove\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The client linked list with element removed
+\end{DoxyReturn}
+Iterate over the linked list to find the right client and remove it 
+
+Definition at line \mbox{\hyperlink{client_8c_source_l00068}{68}} of file \mbox{\hyperlink{client_8c_source}{client.\+c}}.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{client_8h_ab13b91cda85acbe50143a8d0cbec99f8}\label{client_8h_ab13b91cda85acbe50143a8d0cbec99f8}} 
+\index{client.h@{client.h}!clients@{clients}}
+\index{clients@{clients}!client.h@{client.h}}
+\doxysubsubsection{\texorpdfstring{clients}{clients}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structclient}{client}}$\ast$ clients}
+
+
+
+Contain all the information about all clients (linked list) 
+
+
+
+Definition at line \mbox{\hyperlink{client_8h_source_l00012}{12}} of file \mbox{\hyperlink{client_8h_source}{client.\+h}}.
+

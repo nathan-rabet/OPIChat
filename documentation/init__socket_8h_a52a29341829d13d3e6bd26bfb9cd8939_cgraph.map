@@ -1,0 +1,4 @@
+<map id="setup_server_socket" name="setup_server_socket">
+<area shape="rect" id="node1" title="Create a listening socket." alt="" coords="5,5,148,32"/>
+<area shape="rect" id="node2" href="$logger_8c.html#aa3c3e5e89264af119696a729635581e4" title="Log a CRITICAL error message &amp; exit the program." alt="" coords="196,5,284,32"/>
+</map>

@@ -1,0 +1,125 @@
+\hypertarget{include_2xalloc_8h}{}\doxysection{include/xalloc.h File Reference}
+\label{include_2xalloc_8h}\index{include/xalloc.h@{include/xalloc.h}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+Include dependency graph for xalloc.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=163pt]{include_2xalloc_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{include_2xalloc_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{include_2xalloc_8h_ae9b50ae8678311a8c5680aef935f27d0}{xmalloc}} (size\+\_\+t nmemb, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Malloc wrapper that exits the program if the allocation fails or if nmemb $\ast$ size overflows. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{include_2xalloc_8h_a64dbeff7c3555eb2cb5991583d733f5a}{xcalloc}} (size\+\_\+t nmemb, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Calloc wrapper that exits the program if the allocation fails or if nmemb $\ast$ size overflows. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{include_2xalloc_8h_a7fa788e7578d69528b6b88209362353e}{xrealloc}} (void $\ast$ptr, size\+\_\+t nmemb, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Realloc wrapper that exits the program if the allocation fails or if nmemb $\ast$ size overflows. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{include_2xalloc_8h_a64dbeff7c3555eb2cb5991583d733f5a}\label{include_2xalloc_8h_a64dbeff7c3555eb2cb5991583d733f5a}} 
+\index{xalloc.h@{xalloc.h}!xcalloc@{xcalloc}}
+\index{xcalloc@{xcalloc}!xalloc.h@{xalloc.h}}
+\doxysubsubsection{\texorpdfstring{xcalloc()}{xcalloc()}}
+{\footnotesize\ttfamily void $\ast$ xcalloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nmemb,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Calloc wrapper that exits the program if the allocation fails or if nmemb $\ast$ size overflows. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nmemb} & Number of elements to allocate \\
+\hline
+{\em size} & Size of each element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$
+\end{DoxyReturn}
+Calloc wrapper that exits the program if the allocation fails or if nmemb $\ast$ size overflows.
+
+
+\begin{DoxyParams}{Parameters}
+{\em nmemb} & The number of elements. \\
+\hline
+{\em size} & The size to calloc. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The calloc return. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_source_l00015}{15}} of file \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_source}{xalloc.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{include_2xalloc_8h_a64dbeff7c3555eb2cb5991583d733f5a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{include_2xalloc_8h_ae9b50ae8678311a8c5680aef935f27d0}\label{include_2xalloc_8h_ae9b50ae8678311a8c5680aef935f27d0}} 
+\index{xalloc.h@{xalloc.h}!xmalloc@{xmalloc}}
+\index{xmalloc@{xmalloc}!xalloc.h@{xalloc.h}}
+\doxysubsubsection{\texorpdfstring{xmalloc()}{xmalloc()}}
+{\footnotesize\ttfamily void $\ast$ xmalloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{nmemb,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Malloc wrapper that exits the program if the allocation fails or if nmemb $\ast$ size overflows. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nmemb} & Number of elements to allocate \\
+\hline
+{\em size} & Size of each element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{src_2common_2utils_2xalloc_8c_source_l00006}{6}} of file \mbox{\hyperlink{src_2common_2utils_2xalloc_8c_source}{xalloc.\+c}}.
+
+\mbox{\Hypertarget{include_2xalloc_8h_a7fa788e7578d69528b6b88209362353e}\label{include_2xalloc_8h_a7fa788e7578d69528b6b88209362353e}} 
+\index{xalloc.h@{xalloc.h}!xrealloc@{xrealloc}}
+\index{xrealloc@{xrealloc}!xalloc.h@{xalloc.h}}
+\doxysubsubsection{\texorpdfstring{xrealloc()}{xrealloc()}}
+{\footnotesize\ttfamily void $\ast$ xrealloc (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{size\+\_\+t}]{nmemb,  }\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+
+
+Realloc wrapper that exits the program if the allocation fails or if nmemb $\ast$ size overflows. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & Pointer to the memory to reallocate \\
+\hline
+{\em nmemb} & Number of elements to allocate \\
+\hline
+{\em size} & Size of each element \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void$\ast$ 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{src_2common_2utils_2xalloc_8c_source_l00032}{32}} of file \mbox{\hyperlink{src_2common_2utils_2xalloc_8c_source}{xalloc.\+c}}.
+

@@ -1,0 +1,5 @@
+<map id="setup_server_socket" name="setup_server_socket">
+<area shape="rect" id="node1" title="Create a listening socket." alt="" coords="104,31,247,57"/>
+<area shape="rect" id="node2" href="$server__main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
+<area shape="rect" id="node3" href="$epoll__test_8c.html#a80f6f4dd9fb91da78e41dddf99644cde" title=" " alt="" coords="7,56,55,83"/>
+</map>

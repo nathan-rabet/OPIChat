@@ -1,0 +1,88 @@
+.TH "src/client/read_from_stdin.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/client/read_from_stdin.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'read_from_stdin\&.h'\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include 'client_read\&.h'\fP
+.br
+\fC#include 'init_socket\&.h'\fP
+.br
+\fC#include 'logger\&.h'\fP
+.br
+\fC#include 'message\&.h'\fP
+.br
+\fC#include 'my_itoa\&.h'\fP
+.br
+\fC#include 'safe_io\&.h'\fP
+.br
+\fC#include 'xalloc\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBcommand_parameters\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBread_from_stdin\fP (int \fBserver_socket\fP)"
+.br
+.RI "Read from stdin and send the message to the server\&. "
+.ti -1c
+.RI "void * \fBread_from_stdin_thread\fP (void *none)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "int \fBserver_socket\fP"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void read_from_stdin (int server_socket)"
+
+.PP
+Read from stdin and send the message to the server\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIserver_socket\fP The socket to send the message to 
+.RE
+.PP
+
+.PP
+Definition at line \fB86\fP of file \fBread_from_stdin\&.c\fP\&.
+.SS "void * read_from_stdin_thread (void * none)"
+
+.PP
+Definition at line \fB208\fP of file \fBread_from_stdin\&.c\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "int server_socket\fC [extern]\fP"
+
+.PP
+Definition at line \fB10\fP of file \fBinit_socket\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

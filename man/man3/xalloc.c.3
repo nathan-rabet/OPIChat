@@ -1,0 +1,98 @@
+.TH "src/common/utils/xalloc.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/common/utils/xalloc.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'xalloc\&.h'\fP
+.br
+\fC#include <err\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void * \fBxmalloc\fP (size_t nmemb, size_t size)"
+.br
+.RI "Malloc wrapper that exits the program if the allocation fails or if nmemb * size overflows\&. "
+.ti -1c
+.RI "void * \fBxcalloc\fP (size_t nmemb, size_t size)"
+.br
+.RI "Calloc wrapper that exit on failure\&. "
+.ti -1c
+.RI "void * \fBxrealloc\fP (void *ptr, size_t nmemb, size_t size)"
+.br
+.RI "Realloc wrapper that exits the program if the allocation fails or if nmemb * size overflows\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "void * xcalloc (size_t nmemb, size_t size)"
+
+.PP
+Calloc wrapper that exit on failure\&. Calloc wrapper that exits the program if the allocation fails or if nmemb * size overflows\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fInmemb\fP The number of elements\&. 
+.br
+\fIsize\fP The size to calloc\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The calloc return\&. 
+.RE
+.PP
+
+.PP
+Definition at line \fB18\fP of file \fBxalloc\&.c\fP\&.
+.SS "void * xmalloc (size_t nmemb, size_t size)"
+
+.PP
+Malloc wrapper that exits the program if the allocation fails or if nmemb * size overflows\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInmemb\fP Number of elements to allocate 
+.br
+\fIsize\fP Size of each element 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void* 
+.RE
+.PP
+
+.PP
+Definition at line \fB6\fP of file \fBxalloc\&.c\fP\&.
+.SS "void * xrealloc (void * ptr, size_t nmemb, size_t size)"
+
+.PP
+Realloc wrapper that exits the program if the allocation fails or if nmemb * size overflows\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIptr\fP Pointer to the memory to reallocate 
+.br
+\fInmemb\fP Number of elements to allocate 
+.br
+\fIsize\fP Size of each element 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+void* 
+.RE
+.PP
+
+.PP
+Definition at line \fB32\fP of file \fBxalloc\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

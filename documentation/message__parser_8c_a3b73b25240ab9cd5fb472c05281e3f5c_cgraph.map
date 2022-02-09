@@ -1,0 +1,7 @@
+<map id="parse_message" name="parse_message">
+<area shape="rect" id="node1" title="Take a message as a string and parse it into a message struct." alt="" coords="5,81,120,108"/>
+<area shape="rect" id="node2" href="$type__check_8c.html#a19d3a4f9ccbc6c2c26d8e0b468529502" title="Check if a string is a number." alt="" coords="215,5,339,32"/>
+<area shape="rect" id="node3" href="$message__command__parameters_8c.html#a28d4651376c79b584f48cf6ea0e2089a" title="Get the next key value object." alt="" coords="168,56,385,83"/>
+<area shape="rect" id="node4" href="$epoll__server_2utils_2xalloc_8c.html#a64dbeff7c3555eb2cb5991583d733f5a" title="Calloc wrapper that exit on failure." alt="" coords="245,107,308,133"/>
+<area shape="rect" id="node5" href="$epoll__server_2utils_2xalloc_8c.html#af1634ff7d575d04a5ad3bd26343b4e51" title="Realloc wrapper that exit on failure." alt="" coords="243,157,310,184"/>
+</map>

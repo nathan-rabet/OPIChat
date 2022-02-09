@@ -1,0 +1,4 @@
+<map id="safe_read" name="safe_read">
+<area shape="rect" id="node1" title="Read a message from a file descriptor safely." alt="" coords="101,5,180,32"/>
+<area shape="rect" id="node2" href="$safe__io__test_8c.html#a95beeb03aabd339a16558e750f574af8" title=" " alt="" coords="5,5,53,32"/>
+</map>

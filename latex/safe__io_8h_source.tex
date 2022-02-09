@@ -1,0 +1,29 @@
+\hypertarget{safe__io_8h_source}{}\doxysection{safe\+\_\+io.\+h}
+\label{safe__io_8h_source}\index{include/safe\_io.h@{include/safe\_io.h}}
+\mbox{\hyperlink{safe__io_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef SAFE\_IO\_H}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00002}00002 \textcolor{preprocessor}{\#define SAFE\_IO\_H}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00004}\mbox{\hyperlink{safe__io_8h_a6e576a3c6530636d68b7a220480bcd32}{00004}} \textcolor{preprocessor}{\#define DEFAULT\_BUFFER\_SIZE 2048}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00005}\mbox{\hyperlink{safe__io_8h_aa882328bca54a0c7249a313d7d1f7d29}{00005}} \textcolor{preprocessor}{\#define RECV\_TIMEOUT 5}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00006}00006 }
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00007}00007 \textcolor{preprocessor}{\#include <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00008}00008 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00009}00009 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00010}00010 \textcolor{preprocessor}{\#include <sys/socket.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00011}00011 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00012}00012 }
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00013}00013 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{include_2xalloc_8h}{xalloc.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00024}00024 \textcolor{keywordtype}{int} \mbox{\hyperlink{safe__io_8h_a3730804c00874106746163562e2693ac}{safe\_send}}(\textcolor{keywordtype}{int} sockfd, \textcolor{keyword}{const} \textcolor{keywordtype}{void} *buf, \textcolor{keywordtype}{size\_t} count, \textcolor{keywordtype}{int} flags);}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00034}00034 \textcolor{keywordtype}{int} \mbox{\hyperlink{safe__io_8h_af5b0cdbd9fea86b0c53e02b3b5e31518}{safe\_write}}(\textcolor{keywordtype}{int} fd, \textcolor{keyword}{const} \textcolor{keywordtype}{void} *buf, \textcolor{keywordtype}{size\_t} count);}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00045}00045 \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}} *\mbox{\hyperlink{safe__io_8h_ac8413ee3e5fa5ceab0e0cb43c4b6aab8}{safe\_recv}}(\textcolor{keywordtype}{int} sockfd, \textcolor{keywordtype}{int} flags, \textcolor{keywordtype}{bool} mustTimeout);}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00046}00046 }
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00056}00056 ssize\_t \mbox{\hyperlink{safe__io_8h_a70bebf5ac8325b0eb363be83f11a1f9b}{safe\_read}}(\textcolor{keywordtype}{int} fd, \textcolor{keywordtype}{void} **buf);}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00057}00057 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* SAFE\_IO\_H */}\textcolor{preprocessor}{}}
+\DoxyCodeLine{\Hypertarget{safe__io_8h_source_l00058}00058 }
+
+\end{DoxyCode}

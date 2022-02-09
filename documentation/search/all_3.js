@@ -1,0 +1,26 @@
+var searchData=
+[
+  ['check_5fis_5fnumber_0',['check_is_number',['../type__check_8h.html#a19d3a4f9ccbc6c2c26d8e0b468529502',1,'check_is_number(const char *s):&#160;type_check.c'],['../type__check_8c.html#a19d3a4f9ccbc6c2c26d8e0b468529502',1,'check_is_number(const char *s):&#160;type_check.c']]],
+  ['client_1',['client',['../structclient.html',1,'']]],
+  ['client_2ec_2',['client.c',['../client_8c.html',1,'']]],
+  ['client_2eh_3',['client.h',['../client_8h.html',1,'']]],
+  ['client_5fmain_2ec_4',['client_main.c',['../client__main_8c.html',1,'']]],
+  ['client_5fread_2eh_5',['client_read.h',['../client__read_8h.html',1,'']]],
+  ['client_5fsockaddr_6',['client_sockaddr',['../structclient.html#a41be436a9eaeb16e097d37e31f2da695',1,'client']]],
+  ['client_5fsocket_7',['client_socket',['../structconnection__t.html#ae887b77f939a43b6387aa460f46836eb',1,'connection_t::client_socket()'],['../structclient.html#ae887b77f939a43b6387aa460f46836eb',1,'client::client_socket()']]],
+  ['client_5ftest_2ec_8',['client_test.c',['../client__test_8c.html',1,'']]],
+  ['clients_9',['clients',['../handle__login_8c.html#ab13b91cda85acbe50143a8d0cbec99f8',1,'clients():&#160;client.h'],['../client_8h.html#ab13b91cda85acbe50143a8d0cbec99f8',1,'clients():&#160;client.h'],['../epoll__handler_8c.html#ab13b91cda85acbe50143a8d0cbec99f8',1,'clients():&#160;client.h'],['../server__main_8c.html#ab13b91cda85acbe50143a8d0cbec99f8',1,'clients():&#160;client.h']]],
+  ['clients_5fsockets_10',['clients_sockets',['../structsend__pool.html#a10e16f3c89d56b66da41947bcc514bd1',1,'send_pool::clients_sockets()'],['../structroom.html#a10e16f3c89d56b66da41947bcc514bd1',1,'room::clients_sockets()']]],
+  ['command_11',['command',['../structmessage.html#ade9cba72805fe52685a1deea307a8e82',1,'message::command()'],['../structcommand__parameters.html#ade9cba72805fe52685a1deea307a8e82',1,'command_parameters::command()']]],
+  ['command_5fparameter_12',['command_parameter',['../structcommand__parameter.html',1,'']]],
+  ['command_5fparameters_13',['command_parameters',['../structmessage.html#ad5c217513154f9cdd331b82efc6351cf',1,'message::command_parameters()'],['../structcommand__parameters.html',1,'command_parameters']]],
+  ['commands_2eh_14',['commands.h',['../commands_8h.html',1,'']]],
+  ['commands_5ftest_2ec_15',['commands_test.c',['../commands__test_8c.html',1,'']]],
+  ['communicate_16',['communicate',['../epoll-server_8c.html#a46a7917dc7230fcf524740bfca239cae',1,'communicate(int epoll_instance, int client_socket, struct connection_t *connections):&#160;epoll-server.c'],['../epoll__handler_8c.html#a0860b9e51fefecae303da19ee82e0b2e',1,'communicate(int client_socket):&#160;epoll_handler.c'],['../epoll__handler_8h.html#a0860b9e51fefecae303da19ee82e0b2e',1,'communicate(int client_socket):&#160;basic_client.c'],['../basic__server_8h.html#a0860b9e51fefecae303da19ee82e0b2e',1,'communicate(int client_socket):&#160;basic_client.c'],['../basic__server_8c.html#a0860b9e51fefecae303da19ee82e0b2e',1,'communicate(int client_socket):&#160;basic_server.c'],['../basic__client_8h.html#a7cea10a6474f60869a6370bbb7836e4e',1,'communicate(int server_socket):&#160;basic_client.c'],['../basic__client_8c.html#a7cea10a6474f60869a6370bbb7836e4e',1,'communicate(int server_socket):&#160;basic_client.c']]],
+  ['compose_5fmessage_17',['compose_message',['../message_8h.html#a4b7e770d6370564c3fcdab29984e8ae0',1,'compose_message(const struct message *message):&#160;message_serializer.c'],['../message__serializer_8c.html#a4b7e770d6370564c3fcdab29984e8ae0',1,'compose_message(const struct message *message):&#160;message_serializer.c']]],
+  ['connection_2ec_18',['connection.c',['../connection_8c.html',1,'']]],
+  ['connection_2eh_19',['connection.h',['../connection_8h.html',1,'']]],
+  ['connection_5ft_20',['connection_t',['../structconnection__t.html',1,'']]],
+  ['create_5fand_5fbind_21',['create_and_bind',['../basic__server_8c.html#a4022681cfcf69f5864f0d54b275d591e',1,'create_and_bind(struct addrinfo *addrinfo):&#160;basic_server.c'],['../basic__server_8h.html#a4022681cfcf69f5864f0d54b275d591e',1,'create_and_bind(struct addrinfo *addrinfo):&#160;basic_server.c'],['../epoll-server_8c.html#a4022681cfcf69f5864f0d54b275d591e',1,'create_and_bind(struct addrinfo *addrinfo):&#160;epoll-server.c'],['../epoll-server_8h.html#a4022681cfcf69f5864f0d54b275d591e',1,'create_and_bind(struct addrinfo *addrinfo):&#160;basic_server.c']]],
+  ['create_5fand_5fconnect_22',['create_and_connect',['../basic__client_8c.html#ab726def94a221e5ac93bcb2a42d16619',1,'create_and_connect(struct addrinfo *addrinfo):&#160;basic_client.c'],['../basic__client_8h.html#ab726def94a221e5ac93bcb2a42d16619',1,'create_and_connect(struct addrinfo *addrinfo):&#160;basic_client.c']]]
+];

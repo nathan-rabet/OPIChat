@@ -1,0 +1,58 @@
+\hypertarget{init__server__socket_8c_source}{}\doxysection{init\+\_\+server\+\_\+socket.\+c}
+\label{init__server__socket_8c_source}\index{src/server/epoll/init\_server\_socket.c@{src/server/epoll/init\_server\_socket.c}}
+\mbox{\hyperlink{init__server__socket_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00001}00001 \textcolor{preprocessor}{\#include <netdb.h>}}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00002}00002 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00005}00005 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00006}00006 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{init__socket_8h}{init\_socket.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00007}00007 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{logger_8h}{logger.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00015}00015 \textcolor{keyword}{static} \textcolor{keywordtype}{int} \_setup\_socket\_basis(\textcolor{keyword}{struct} addrinfo *addrinfo)}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00016}00016 \{}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00017}00017     \textcolor{keywordflow}{for} (; addrinfo != NULL; addrinfo = addrinfo-\/>ai\_next)}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00018}00018     \{}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00019}00019         \textcolor{keywordtype}{int} s = socket(addrinfo-\/>ai\_family, addrinfo-\/>ai\_socktype,}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00020}00020                        addrinfo-\/>ai\_protocol);}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00021}00021         \textcolor{keywordflow}{if} (s == -\/1)}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00022}00022             \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00024}00024         \textcolor{keywordtype}{int} ok = 1;}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00025}00025         \textcolor{keywordflow}{if} (setsockopt(s, SOL\_SOCKET, SO\_REUSEADDR, \&ok, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int})) == -\/1}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00026}00026             || ok != 1)}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00027}00027             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00029}00029         \textcolor{keywordflow}{if} (bind(s, addrinfo-\/>ai\_addr, addrinfo-\/>ai\_addrlen) != -\/1)}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00030}00030             \textcolor{keywordflow}{return} s;}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00031}00031     \}}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00033}00033     \mbox{\hyperlink{logger_8h_aa3c3e5e89264af119696a729635581e4}{raise\_panic}}(EXIT\_FAILURE, \textcolor{stringliteral}{"{}Could not bind server socket"{}});}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00035}00035     \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00036}00036 \}}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00038}\mbox{\hyperlink{init__socket_8h_a52a29341829d13d3e6bd26bfb9cd8939}{00038}} \textcolor{keywordtype}{int} \mbox{\hyperlink{init__server__socket_8c_a52a29341829d13d3e6bd26bfb9cd8939}{setup\_server\_socket}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{init__socket_8h_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{init__socket_8h_add99ba4ea70b8f66170823cad9a55fa4}{port}})}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00039}00039 \{}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00040}00040     \textcolor{keyword}{struct }addrinfo hints = \{ 0 \};}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00041}00041     \textcolor{keyword}{struct }addrinfo *addrinfo;}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00042}00042     hints.ai\_family = AF\_UNSPEC;}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00043}00043     hints.ai\_socktype = SOCK\_STREAM;}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00045}00045     \textcolor{keywordflow}{if} (getaddrinfo(\mbox{\hyperlink{init__socket_8h_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}, \mbox{\hyperlink{init__socket_8h_add99ba4ea70b8f66170823cad9a55fa4}{port}}, \&hints, \&addrinfo) != 0)}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00046}00046         \mbox{\hyperlink{logger_8h_aa3c3e5e89264af119696a729635581e4}{raise\_panic}}(EXIT\_FAILURE, \textcolor{stringliteral}{"{}Could not get address info for \%s:\%s"{}}, \mbox{\hyperlink{init__socket_8h_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}},}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00047}00047                     \mbox{\hyperlink{init__socket_8h_add99ba4ea70b8f66170823cad9a55fa4}{port}});}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00048}00048 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00049}00049     \textcolor{keywordtype}{int} \mbox{\hyperlink{init__socket_8h_a9329c4790c307301a22f6d23cdc23edd}{server\_socket}} = \_setup\_socket\_basis(addrinfo);}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00050}00050 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00051}00051     freeaddrinfo(addrinfo);}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00053}00053     \textcolor{keywordflow}{if} (listen(\mbox{\hyperlink{init__socket_8h_a9329c4790c307301a22f6d23cdc23edd}{server\_socket}}, \mbox{\hyperlink{init__socket_8h_aeefbbafa97642defe3ee6c3080b7d66f}{BACKLOG}}) == -\/1)}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00054}00054         \mbox{\hyperlink{logger_8h_aa3c3e5e89264af119696a729635581e4}{raise\_panic}}(EXIT\_FAILURE, \textcolor{stringliteral}{"{}Could not listen on socket \%d"{}},}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00055}00055                     \mbox{\hyperlink{init__socket_8h_a9329c4790c307301a22f6d23cdc23edd}{server\_socket}});}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00057}00057     \textcolor{keywordflow}{return} \mbox{\hyperlink{init__socket_8h_a9329c4790c307301a22f6d23cdc23edd}{server\_socket}};}
+\DoxyCodeLine{\Hypertarget{init__server__socket_8c_source_l00058}00058 \}}
+
+\end{DoxyCode}

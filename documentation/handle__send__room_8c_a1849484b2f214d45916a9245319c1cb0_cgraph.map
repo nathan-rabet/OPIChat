@@ -1,0 +1,9 @@
+<map id="handle_send_room" name="handle_send_room">
+<area shape="rect" id="node1" title=" " alt="" coords="5,132,136,159"/>
+<area shape="rect" id="node2" href="$connection_8c.html#a5c993924a198348770d2028c1cc4c199" title="Find the connection_t element where the socket is equal to client sock." alt="" coords="209,5,289,32"/>
+<area shape="rect" id="node3" href="$room_8c.html#a69144af99b4765ffbb794ce40941e479" title="Find the room element where the socket is equal to room sock." alt="" coords="210,56,289,83"/>
+<area shape="rect" id="node4" href="$message__init_8c.html#abeba53932f51cf0ac12dd3a1dc8bf1ff" title="Initializes a struct message with the param status code affected." alt="" coords="363,159,461,185"/>
+<area shape="rect" id="node5" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="509,159,576,185"/>
+<area shape="rect" id="node6" href="$room_8c.html#a329b19a19803d4a12c030c638f12f7c5" title=" " alt="" coords="184,209,315,250"/>
+<area shape="rect" id="node7" href="$epoll__server_2utils_2xalloc_8c.html#af1634ff7d575d04a5ad3bd26343b4e51" title="Realloc wrapper that exit on failure." alt="" coords="216,275,283,301"/>
+</map>

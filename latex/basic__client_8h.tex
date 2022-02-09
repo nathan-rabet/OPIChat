@@ -1,0 +1,130 @@
+\hypertarget{basic__client_8h}{}\doxysection{basic\+\_\+client/basic\+\_\+client.h File Reference}
+\label{basic__client_8h}\index{basic\_client/basic\_client.h@{basic\_client/basic\_client.h}}
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+Include dependency graph for basic\+\_\+client.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=301pt]{basic__client_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{basic__client_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{basic__client_8h_a6e576a3c6530636d68b7a220480bcd32}{DEFAULT\+\_\+\+BUFFER\+\_\+\+SIZE}}~1024
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{basic__client_8h_ab726def94a221e5ac93bcb2a42d16619}{create\+\_\+and\+\_\+connect}} (struct addrinfo $\ast$addrinfo)
+\begin{DoxyCompactList}\small\item\em Iterate over the struct addrinfo elements to connect to the server. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{basic__client_8h_a3ad2113f2297a7cbdaa71f370aea7db0}{prepare\+\_\+socket}} (const char $\ast$\mbox{\hyperlink{client__main_8c_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}, const char $\ast$\mbox{\hyperlink{client__main_8c_add99ba4ea70b8f66170823cad9a55fa4}{port}})
+\begin{DoxyCompactList}\small\item\em Initialize the addrinfo struct and call \mbox{\hyperlink{basic__client_8h_ab726def94a221e5ac93bcb2a42d16619}{create\+\_\+and\+\_\+connect()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{basic__client_8h_a7cea10a6474f60869a6370bbb7836e4e}{communicate}} (int \mbox{\hyperlink{client__main_8c_a9329c4790c307301a22f6d23cdc23edd}{server\+\_\+socket}})
+\begin{DoxyCompactList}\small\item\em Handle communication with the server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{basic__client_8h_a6e576a3c6530636d68b7a220480bcd32}\label{basic__client_8h_a6e576a3c6530636d68b7a220480bcd32}} 
+\index{basic\_client.h@{basic\_client.h}!DEFAULT\_BUFFER\_SIZE@{DEFAULT\_BUFFER\_SIZE}}
+\index{DEFAULT\_BUFFER\_SIZE@{DEFAULT\_BUFFER\_SIZE}!basic\_client.h@{basic\_client.h}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_BUFFER\_SIZE}{DEFAULT\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define DEFAULT\+\_\+\+BUFFER\+\_\+\+SIZE~1024}
+
+
+
+Definition at line \mbox{\hyperlink{basic__client_8h_source_l00008}{8}} of file \mbox{\hyperlink{basic__client_8h_source}{basic\+\_\+client.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{basic__client_8h_a7cea10a6474f60869a6370bbb7836e4e}\label{basic__client_8h_a7cea10a6474f60869a6370bbb7836e4e}} 
+\index{basic\_client.h@{basic\_client.h}!communicate@{communicate}}
+\index{communicate@{communicate}!basic\_client.h@{basic\_client.h}}
+\doxysubsubsection{\texorpdfstring{communicate()}{communicate()}}
+{\footnotesize\ttfamily void communicate (\begin{DoxyParamCaption}\item[{int}]{server\+\_\+socket }\end{DoxyParamCaption})}
+
+
+
+Handle communication with the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em server\+\_\+socket} & server socket\\
+\hline
+\end{DoxyParams}
+Read user message from STDIN and send it to the server
+
+Step 2\+: This function sends small messages to the server
+
+Step 3\+: In addition to step 2 behavior, this function receives the server response on small messages
+
+Step 4\+: The function must now handle long messages 
+
+Definition at line \mbox{\hyperlink{basic__client_8c_source_l00113}{113}} of file \mbox{\hyperlink{basic__client_8c_source}{basic\+\_\+client.\+c}}.
+
+\mbox{\Hypertarget{basic__client_8h_ab726def94a221e5ac93bcb2a42d16619}\label{basic__client_8h_ab726def94a221e5ac93bcb2a42d16619}} 
+\index{basic\_client.h@{basic\_client.h}!create\_and\_connect@{create\_and\_connect}}
+\index{create\_and\_connect@{create\_and\_connect}!basic\_client.h@{basic\_client.h}}
+\doxysubsubsection{\texorpdfstring{create\_and\_connect()}{create\_and\_connect()}}
+{\footnotesize\ttfamily int create\+\_\+and\+\_\+connect (\begin{DoxyParamCaption}\item[{struct addrinfo $\ast$}]{addrinfo }\end{DoxyParamCaption})}
+
+
+
+Iterate over the struct addrinfo elements to connect to the server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em addrinfo} & struct addrinfo elements\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created socket or exit with 1 if there is an error
+\end{DoxyReturn}
+Try to create and connect a socket with every addrinfo element until it succeeds 
+
+Definition at line \mbox{\hyperlink{basic__client_8c_source_l00009}{9}} of file \mbox{\hyperlink{basic__client_8c_source}{basic\+\_\+client.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{basic__client_8h_ab726def94a221e5ac93bcb2a42d16619_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{basic__client_8h_a3ad2113f2297a7cbdaa71f370aea7db0}\label{basic__client_8h_a3ad2113f2297a7cbdaa71f370aea7db0}} 
+\index{basic\_client.h@{basic\_client.h}!prepare\_socket@{prepare\_socket}}
+\index{prepare\_socket@{prepare\_socket}!basic\_client.h@{basic\_client.h}}
+\doxysubsubsection{\texorpdfstring{prepare\_socket()}{prepare\_socket()}}
+{\footnotesize\ttfamily int prepare\+\_\+socket (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ip,  }\item[{const char $\ast$}]{port }\end{DoxyParamCaption})}
+
+
+
+Initialize the addrinfo struct and call \mbox{\hyperlink{basic__client_8h_ab726def94a221e5ac93bcb2a42d16619}{create\+\_\+and\+\_\+connect()}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & IP address of the server \\
+\hline
+{\em port} & Port of the server\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created socket 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{basic__client_8c_source_l00030}{30}} of file \mbox{\hyperlink{basic__client_8c_source}{basic\+\_\+client.\+c}}.
+

@@ -1,0 +1,106 @@
+.TH "basic_client/basic_client.h" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+basic_client/basic_client.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDEFAULT_BUFFER_SIZE\fP   1024"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBcreate_and_connect\fP (struct addrinfo *addrinfo)"
+.br
+.RI "Iterate over the struct addrinfo elements to connect to the server\&. "
+.ti -1c
+.RI "int \fBprepare_socket\fP (const char *\fBip\fP, const char *\fBport\fP)"
+.br
+.RI "Initialize the addrinfo struct and call \fBcreate_and_connect()\fP "
+.ti -1c
+.RI "void \fBcommunicate\fP (int \fBserver_socket\fP)"
+.br
+.RI "Handle communication with the server\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DEFAULT_BUFFER_SIZE   1024"
+
+.PP
+Definition at line \fB8\fP of file \fBbasic_client\&.h\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "void communicate (int server_socket)"
+
+.PP
+Handle communication with the server\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIserver_socket\fP server socket
+.RE
+.PP
+Read user message from STDIN and send it to the server
+.PP
+Step 2: This function sends small messages to the server
+.PP
+Step 3: In addition to step 2 behavior, this function receives the server response on small messages
+.PP
+Step 4: The function must now handle long messages 
+.PP
+Definition at line \fB113\fP of file \fBbasic_client\&.c\fP\&.
+.SS "int create_and_connect (struct addrinfo * addrinfo)"
+
+.PP
+Iterate over the struct addrinfo elements to connect to the server\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddrinfo\fP struct addrinfo elements
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The created socket or exit with 1 if there is an error
+.RE
+.PP
+Try to create and connect a socket with every addrinfo element until it succeeds 
+.PP
+Definition at line \fB9\fP of file \fBbasic_client\&.c\fP\&.
+.SS "int prepare_socket (const char * ip, const char * port)"
+
+.PP
+Initialize the addrinfo struct and call \fBcreate_and_connect()\fP 
+.PP
+\fBParameters\fP
+.RS 4
+\fIip\fP IP address of the server 
+.br
+\fIport\fP Port of the server
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The created socket 
+.RE
+.PP
+
+.PP
+Definition at line \fB30\fP of file \fBbasic_client\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

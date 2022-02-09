@@ -1,0 +1,242 @@
+\hypertarget{epoll-server_8c}{}\doxysection{epoll\+\_\+server/epoll-\/server.c File Reference}
+\label{epoll-server_8c}\index{epoll\_server/epoll-\/server.c@{epoll\_server/epoll-\/server.c}}
+{\ttfamily \#include \char`\"{}epoll-\/server.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$netdb.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/epoll.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}utils/xalloc.\+h\char`\"{}}\newline
+Include dependency graph for epoll-\/server.c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{epoll-server_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{epoll-server_8c_a60add547fb298c71dc4dbae76e61aae5}{MAX\+\_\+\+CONNECTION\+\_\+\+NB}}~5
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{epoll-server_8c_a4022681cfcf69f5864f0d54b275d591e}{create\+\_\+and\+\_\+bind}} (struct addrinfo $\ast$addrinfo)
+\begin{DoxyCompactList}\small\item\em Iterate over the struct addrinfo elements to create and bind a socket. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{epoll-server_8c_a3ad2113f2297a7cbdaa71f370aea7db0}{prepare\+\_\+socket}} (const char $\ast$\mbox{\hyperlink{client__main_8c_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}, const char $\ast$\mbox{\hyperlink{client__main_8c_add99ba4ea70b8f66170823cad9a55fa4}{port}})
+\begin{DoxyCompactList}\small\item\em Initialize the addrinfo struct and call \mbox{\hyperlink{basic__client_8h_ab726def94a221e5ac93bcb2a42d16619}{create\+\_\+and\+\_\+connect()}} \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$ \mbox{\hyperlink{epoll-server_8c_ae91ab67a01fb4b53eebeb8a4bad10847}{accept\+\_\+client}} (int \mbox{\hyperlink{server__main_8c_a563c714502d84960831913304caca7f3}{epoll\+\_\+instance}}, int \mbox{\hyperlink{client__main_8c_a9329c4790c307301a22f6d23cdc23edd}{server\+\_\+socket}}, struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$connection)
+\begin{DoxyCompactList}\small\item\em Accept a new client and add it to the \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} struct. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$ \mbox{\hyperlink{epoll-server_8c_aaa6e5bcf010f834f13a3b6755c122180}{delete\+\_\+epoll\+\_\+client}} (struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$connection, int \mbox{\hyperlink{server__main_8c_a563c714502d84960831913304caca7f3}{epoll\+\_\+instance}}, int client\+\_\+socket)
+\item 
+struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$ \mbox{\hyperlink{epoll-server_8c_a46a7917dc7230fcf524740bfca239cae}{communicate}} (int \mbox{\hyperlink{server__main_8c_a563c714502d84960831913304caca7f3}{epoll\+\_\+instance}}, int client\+\_\+socket, struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$connections)
+\item 
+int \mbox{\hyperlink{epoll-server_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{epoll-server_8c_a60add547fb298c71dc4dbae76e61aae5}\label{epoll-server_8c_a60add547fb298c71dc4dbae76e61aae5}} 
+\index{epoll-\/server.c@{epoll-\/server.c}!MAX\_CONNECTION\_NB@{MAX\_CONNECTION\_NB}}
+\index{MAX\_CONNECTION\_NB@{MAX\_CONNECTION\_NB}!epoll-\/server.c@{epoll-\/server.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_CONNECTION\_NB}{MAX\_CONNECTION\_NB}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+CONNECTION\+\_\+\+NB~5}
+
+
+
+Definition at line \mbox{\hyperlink{epoll-server_8c_source_l00014}{14}} of file \mbox{\hyperlink{epoll-server_8c_source}{epoll-\/server.\+c}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{epoll-server_8c_ae91ab67a01fb4b53eebeb8a4bad10847}\label{epoll-server_8c_ae91ab67a01fb4b53eebeb8a4bad10847}} 
+\index{epoll-\/server.c@{epoll-\/server.c}!accept\_client@{accept\_client}}
+\index{accept\_client@{accept\_client}!epoll-\/server.c@{epoll-\/server.c}}
+\doxysubsubsection{\texorpdfstring{accept\_client()}{accept\_client()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$ accept\+\_\+client (\begin{DoxyParamCaption}\item[{int}]{epoll\+\_\+instance,  }\item[{int}]{server\+\_\+socket,  }\item[{struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$}]{connection }\end{DoxyParamCaption})}
+
+
+
+Accept a new client and add it to the \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em epoll\+\_\+instance} & the epoll instance \\
+\hline
+{\em server\+\_\+socket} & listening socket \\
+\hline
+{\em connection} & the connection linked list with all the current connections\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The connection struct with the new client added 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{epoll-server_8c_source_l00057}{57}} of file \mbox{\hyperlink{epoll-server_8c_source}{epoll-\/server.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=337pt]{epoll-server_8c_ae91ab67a01fb4b53eebeb8a4bad10847_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=228pt]{epoll-server_8c_ae91ab67a01fb4b53eebeb8a4bad10847_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{epoll-server_8c_a46a7917dc7230fcf524740bfca239cae}\label{epoll-server_8c_a46a7917dc7230fcf524740bfca239cae}} 
+\index{epoll-\/server.c@{epoll-\/server.c}!communicate@{communicate}}
+\index{communicate@{communicate}!epoll-\/server.c@{epoll-\/server.c}}
+\doxysubsubsection{\texorpdfstring{communicate()}{communicate()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$ communicate (\begin{DoxyParamCaption}\item[{int}]{epoll\+\_\+instance,  }\item[{int}]{client\+\_\+socket,  }\item[{struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$}]{connections }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{epoll-server_8c_source_l00089}{89}} of file \mbox{\hyperlink{epoll-server_8c_source}{epoll-\/server.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{epoll-server_8c_a46a7917dc7230fcf524740bfca239cae_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{epoll-server_8c_a46a7917dc7230fcf524740bfca239cae_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{epoll-server_8c_a4022681cfcf69f5864f0d54b275d591e}\label{epoll-server_8c_a4022681cfcf69f5864f0d54b275d591e}} 
+\index{epoll-\/server.c@{epoll-\/server.c}!create\_and\_bind@{create\_and\_bind}}
+\index{create\_and\_bind@{create\_and\_bind}!epoll-\/server.c@{epoll-\/server.c}}
+\doxysubsubsection{\texorpdfstring{create\_and\_bind()}{create\_and\_bind()}}
+{\footnotesize\ttfamily int create\+\_\+and\+\_\+bind (\begin{DoxyParamCaption}\item[{struct addrinfo $\ast$}]{addrinfo }\end{DoxyParamCaption})}
+
+
+
+Iterate over the struct addrinfo elements to create and bind a socket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em addrinfo} & struct addrinfo elements\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created socket or exit with 1 if there is an error
+\end{DoxyReturn}
+Try to create and connect a socket with every addrinfo element until it succeeds 
+
+Definition at line \mbox{\hyperlink{epoll-server_8c_source_l00016}{16}} of file \mbox{\hyperlink{epoll-server_8c_source}{epoll-\/server.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{epoll-server_8c_a4022681cfcf69f5864f0d54b275d591e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{epoll-server_8c_aaa6e5bcf010f834f13a3b6755c122180}\label{epoll-server_8c_aaa6e5bcf010f834f13a3b6755c122180}} 
+\index{epoll-\/server.c@{epoll-\/server.c}!delete\_epoll\_client@{delete\_epoll\_client}}
+\index{delete\_epoll\_client@{delete\_epoll\_client}!epoll-\/server.c@{epoll-\/server.c}}
+\doxysubsubsection{\texorpdfstring{delete\_epoll\_client()}{delete\_epoll\_client()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$ delete\+\_\+epoll\+\_\+client (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$}]{connection,  }\item[{int}]{epoll\+\_\+instance,  }\item[{int}]{client\+\_\+socket }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{epoll-server_8c_source_l00077}{77}} of file \mbox{\hyperlink{epoll-server_8c_source}{epoll-\/server.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=290pt]{epoll-server_8c_aaa6e5bcf010f834f13a3b6755c122180_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{epoll-server_8c_aaa6e5bcf010f834f13a3b6755c122180_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{epoll-server_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{epoll-server_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{epoll-\/server.c@{epoll-\/server.c}!main@{main}}
+\index{main@{main}!epoll-\/server.c@{epoll-\/server.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{epoll-server_8c_source_l00159}{159}} of file \mbox{\hyperlink{epoll-server_8c_source}{epoll-\/server.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{epoll-server_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{epoll-server_8c_a3ad2113f2297a7cbdaa71f370aea7db0}\label{epoll-server_8c_a3ad2113f2297a7cbdaa71f370aea7db0}} 
+\index{epoll-\/server.c@{epoll-\/server.c}!prepare\_socket@{prepare\_socket}}
+\index{prepare\_socket@{prepare\_socket}!epoll-\/server.c@{epoll-\/server.c}}
+\doxysubsubsection{\texorpdfstring{prepare\_socket()}{prepare\_socket()}}
+{\footnotesize\ttfamily int prepare\+\_\+socket (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ip,  }\item[{const char $\ast$}]{port }\end{DoxyParamCaption})}
+
+
+
+Initialize the addrinfo struct and call \mbox{\hyperlink{basic__client_8h_ab726def94a221e5ac93bcb2a42d16619}{create\+\_\+and\+\_\+connect()}} 
+
+Initialize the Addrinfo struct and call create\+\_\+and bind() and listen(2)
+
+Initialize the addrinfo struct and call create\+\_\+and bind() and listen(2)
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & IP address of the server \\
+\hline
+{\em port} & Port of the server\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created socket 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{epoll-server_8c_source_l00037}{37}} of file \mbox{\hyperlink{epoll-server_8c_source}{epoll-\/server.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=287pt]{epoll-server_8c_a3ad2113f2297a7cbdaa71f370aea7db0_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=237pt]{epoll-server_8c_a3ad2113f2297a7cbdaa71f370aea7db0_icgraph}
+\end{center}
+\end{figure}

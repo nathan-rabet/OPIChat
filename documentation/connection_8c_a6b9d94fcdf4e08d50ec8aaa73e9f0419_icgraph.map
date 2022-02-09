@@ -1,0 +1,7 @@
+<map id="remove_client" name="remove_client">
+<area shape="rect" id="node1" title="Remove the client connection_t from the linked list connection." alt="" coords="429,31,532,57"/>
+<area shape="rect" id="node2" href="$epoll-server_8c.html#aaa6e5bcf010f834f13a3b6755c122180" title=" " alt="" coords="252,5,381,32"/>
+<area shape="rect" id="node5" href="$client__test_8c.html#a42fe40dfdef3c25003537fedf7878dfe" title=" " alt="" coords="293,56,341,83"/>
+<area shape="rect" id="node3" href="$epoll-server_8c.html#a46a7917dc7230fcf524740bfca239cae" title=" " alt="" coords="104,5,204,32"/>
+<area shape="rect" id="node4" href="$epoll-server_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,5,56,32"/>
+</map>

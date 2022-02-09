@@ -1,0 +1,7 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,56,56,83"/>
+<area shape="rect" id="node2" href="$basic__server_8c.html#ace3f10a600415838e09a4302024a5c30" title="Accept a new client." alt="" coords="110,5,209,32"/>
+<area shape="rect" id="node3" href="$basic__server_8c.html#a0860b9e51fefecae303da19ee82e0b2e" title="Handle communication with the server." alt="" coords="109,56,209,83"/>
+<area shape="rect" id="node4" href="$basic__server_8c.html#a3ad2113f2297a7cbdaa71f370aea7db0" title="Initialize the addrinfo struct and call create_and_connect()" alt="" coords="104,107,215,133"/>
+<area shape="rect" id="node5" href="$basic__server_8c.html#a4022681cfcf69f5864f0d54b275d591e" title="Iterate over the struct addrinfo elements to create and bind a socket." alt="" coords="263,107,380,133"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="handle_login" name="handle_login">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,100,133"/>
+<area shape="rect" id="node2" href="$connection_8c.html#a5c993924a198348770d2028c1cc4c199" title="Find the connection_t element where the socket is equal to client sock." alt="" coords="189,5,269,32"/>
+<area shape="rect" id="node3" href="$message__init_8c.html#abeba53932f51cf0ac12dd3a1dc8bf1ff" title="Initializes a struct message with the param status code affected." alt="" coords="180,56,279,83"/>
+<area shape="rect" id="node4" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="359,81,425,108"/>
+<area shape="rect" id="node5" href="$handle__login_8c.html#a1d5012b1b4f2dcb64c30072f37b08f17" title=" " alt="" coords="177,157,282,184"/>
+<area shape="rect" id="node6" href="$handle__login_8c.html#a136c79309efc368ff4d7dc6324af80a2" title=" " alt="" coords="148,208,311,235"/>
+</map>

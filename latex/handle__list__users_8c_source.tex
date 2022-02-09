@@ -1,0 +1,53 @@
+\hypertarget{handle__list__users_8c_source}{}\doxysection{handle\+\_\+list\+\_\+users.\+c}
+\label{handle__list__users_8c_source}\index{src/server/commands/handle\_list\_users.c@{src/server/commands/handle\_list\_users.c}}
+\mbox{\hyperlink{handle__list__users_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00001}00001 \textcolor{preprocessor}{\#include <stddef.h>}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00002}00002 \textcolor{preprocessor}{\#include <string.h>}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00004}00004 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{client_8h}{client.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00005}00005 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{commands_8h}{commands.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00006}00006 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{message_8h}{message.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00007}00007 \textcolor{preprocessor}{\#include "{}xalloc.h"{}}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00009}\mbox{\hyperlink{handle__list__users_8c_a735c47957269acc2d7229ed05218d229}{00009}} \textcolor{keywordtype}{char} *\mbox{\hyperlink{handle__list__users_8c_a735c47957269acc2d7229ed05218d229}{list\_of\_users}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{structclient}{client}})}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00010}00010 \{}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00011}00011     \textcolor{keywordtype}{char} *ret = strdup(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00012}00012     \textcolor{keyword}{struct }\mbox{\hyperlink{structclient}{client}} *current = \mbox{\hyperlink{structclient}{client}};}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00014}00014     \textcolor{keywordtype}{size\_t} size = 1;}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00015}00015     \textcolor{keywordflow}{while} (current)}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00016}00016     \{}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00017}00017         \textcolor{keywordflow}{if} (current-\/>\mbox{\hyperlink{structclient_a9b20c006bd90a09e1465fb668700e81d}{username}} \&\& strcmp(current-\/>\mbox{\hyperlink{structclient_a9b20c006bd90a09e1465fb668700e81d}{username}}, \textcolor{stringliteral}{"{}"{}}) != 0)}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00018}00018         \{}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00019}00019             size += strlen(current-\/>\mbox{\hyperlink{structclient_a9b20c006bd90a09e1465fb668700e81d}{username}}) + 1; \textcolor{comment}{// len + \(\backslash\)n}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00020}00020             ret = \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af1634ff7d575d04a5ad3bd26343b4e51}{xrealloc}}(ret, size, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{char}));}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00021}00021             strcat(ret, current-\/>\mbox{\hyperlink{structclient_a9b20c006bd90a09e1465fb668700e81d}{username}});}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00022}00022             strcat(ret, \textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00023}00023         \}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00024}00024 }
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00025}00025         current = current-\/>\mbox{\hyperlink{structclient_a0ed7e9bb9de23ef2b9f8923fc00e98ce}{next}};}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00026}00026     \}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00027}00027     \textcolor{keywordflow}{return} ret;}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00028}00028 \}}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00029}\mbox{\hyperlink{commands_8h_a4f85e4f1283fec83e3cfa31c44b5122a}{00029}} \textcolor{keyword}{struct }\mbox{\hyperlink{structsend__pool}{send\_pool}} *\mbox{\hyperlink{handle__list__users_8c_a4f85e4f1283fec83e3cfa31c44b5122a}{handle\_list\_users}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structmessage}{message}} *\mbox{\hyperlink{structsend__pool_aab8bcfb3c6778a757153067a36e705ed}{msg}}, \textcolor{keyword}{struct} \mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{structclient}{client}})}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00030}00030 \{}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00031}00031     (void) \mbox{\hyperlink{structsend__pool_aab8bcfb3c6778a757153067a36e705ed}{msg}};}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00032}00032     \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}} *response = \mbox{\hyperlink{message_8h_abeba53932f51cf0ac12dd3a1dc8bf1ff}{init\_message}}(\mbox{\hyperlink{message_8h_ad6c5c0fc281afcd9ebf73e88020c835fa9df86d3c8b256e82225b9fdd5c7397aa}{RESPONSE\_MESSAGE\_CODE}});}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00033}00033     response-\/>\mbox{\hyperlink{structmessage_ade9cba72805fe52685a1deea307a8e82}{command}} = strdup(\textcolor{stringliteral}{"{}LIST-\/USERS"{}});}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00034}00034     response-\/>\mbox{\hyperlink{structmessage_a18f141cb2726073503afb9f1d6c85efb}{payload}} = \mbox{\hyperlink{handle__list__users_8c_a735c47957269acc2d7229ed05218d229}{list\_of\_users}}(\mbox{\hyperlink{client_8h_ab13b91cda85acbe50143a8d0cbec99f8}{clients}});}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00036}00036     response-\/>\mbox{\hyperlink{structmessage_aac1f7a36891dde68709d58926289458a}{payload\_size}} = strlen(response-\/>\mbox{\hyperlink{structmessage_a18f141cb2726073503afb9f1d6c85efb}{payload}});}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00038}00038     \textcolor{keyword}{struct }\mbox{\hyperlink{structsend__pool}{send\_pool}} *sp = \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}{xmalloc}}(1, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{structsend__pool}{send\_pool}}));}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00040}00040     sp-\/>\mbox{\hyperlink{structsend__pool_a042195a296e8d02cac9544716e944c92}{nb\_msg}} = 1;}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00041}00041     sp-\/>\mbox{\hyperlink{structsend__pool_aab8bcfb3c6778a757153067a36e705ed}{msg}} = \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}{xmalloc}}(1, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{structmessage}{message}} *));}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00042}00042     sp-\/>\mbox{\hyperlink{structsend__pool_a10e16f3c89d56b66da41947bcc514bd1}{clients\_sockets}} = \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}{xmalloc}}(1, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int}));}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00043}00043     sp-\/>\mbox{\hyperlink{structsend__pool_aab8bcfb3c6778a757153067a36e705ed}{msg}}[0] = response;}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00044}00044     sp-\/>\mbox{\hyperlink{structsend__pool_a10e16f3c89d56b66da41947bcc514bd1}{clients\_sockets}}[0] = \mbox{\hyperlink{structclient}{client}}-\/>\mbox{\hyperlink{structclient_ae887b77f939a43b6387aa460f46836eb}{client\_socket}};}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00045}00045 }
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00046}00046     \textcolor{keywordflow}{return} sp;}
+\DoxyCodeLine{\Hypertarget{handle__list__users_8c_source_l00047}00047 \}}
+
+\end{DoxyCode}

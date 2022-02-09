@@ -1,0 +1,15 @@
+<map id="main" name="main">
+<area shape="rect" id="node1" title=" " alt="" coords="5,208,56,235"/>
+<area shape="rect" id="node2" href="$logger_8c.html#adbd31571b49f4ff32cda46460abe6469" title="Init the logger system." alt="" coords="147,107,228,133"/>
+<area shape="rect" id="node3" href="$read__from__server_8c.html#ad4ec40c300bc539cbe0b51f6af544bff" title="Reads from the server and print (eventually) the formated message. This function is thread compliant." alt="" coords="104,208,271,235"/>
+<area shape="rect" id="node7" href="$init__client__socket_8c.html#aeb1ff62bccbab70efeeac34f505ceb36" title="Create a connection socket." alt="" coords="319,259,457,285"/>
+<area shape="rect" id="node8" href="$logger_8c.html#aa2f6842f436362eed5f832d3b6611165" title="Log an error message." alt="" coords="347,309,429,336"/>
+<area shape="rect" id="node10" href="$read__from__stdin_8c.html#aae4c2c08a6014ef154dba3a468584846" title=" " alt="" coords="108,157,267,184"/>
+<area shape="rect" id="node4" href="$message__free_8c.html#aafafca753919c7d770812f5c47b5fe7f" title="Free the memory allocated by a struct message." alt="" coords="336,208,440,235"/>
+<area shape="rect" id="node5" href="$safe__io_8c.html#ac8413ee3e5fa5ceab0e0cb43c4b6aab8" title="Receive a message from a client safely." alt="" coords="515,107,594,133"/>
+<area shape="rect" id="node9" href="$logger_8c.html#ae5719e99feb0e409f827c968cb6c824c" title="Log an error message." alt="" coords="337,157,439,184"/>
+<area shape="rect" id="node6" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="652,81,719,108"/>
+<area shape="rect" id="node11" href="$read__from__stdin_8c.html#a12dd841eebca77e40e225f37da7f778e" title="Read from stdin and send the message to the server." alt="" coords="331,56,445,83"/>
+<area shape="rect" id="node12" href="$message__init_8c.html#abeba53932f51cf0ac12dd3a1dc8bf1ff" title="Initializes a struct message with the param status code affected." alt="" coords="505,56,604,83"/>
+<area shape="rect" id="node13" href="$logger_8c.html#aa3c3e5e89264af119696a729635581e4" title="Log a CRITICAL error message &amp; exit the program." alt="" coords="511,5,599,32"/>
+</map>

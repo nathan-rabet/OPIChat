@@ -1,0 +1,69 @@
+.TH "src/server/commands/handle_login.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/server/commands/handle_login.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stddef\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include 'client\&.h'\fP
+.br
+\fC#include 'commands\&.h'\fP
+.br
+\fC#include 'message\&.h'\fP
+.br
+\fC#include 'xalloc\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBname_is_valid\fP (char *s)"
+.br
+.ti -1c
+.RI "int \fBusername_not_duplicate\fP (char *name, struct \fBclient\fP *\fBclients\fP, struct \fBclient\fP *me)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_login\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "struct \fBclient\fP * \fBclients\fP"
+.br
+.RI "Contain all the information about all clients (linked list) "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "struct \fBsend_pool\fP * handle_login (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB50\fP of file \fBhandle_login\&.c\fP\&.
+.SS "int name_is_valid (char * s)"
+
+.PP
+Definition at line \fB12\fP of file \fBhandle_login\&.c\fP\&.
+.SS "int username_not_duplicate (char * name, struct \fBclient\fP * clients, struct \fBclient\fP * me)"
+
+.PP
+Definition at line \fB32\fP of file \fBhandle_login\&.c\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "struct \fBclient\fP* clients\fC [extern]\fP"
+
+.PP
+Contain all the information about all clients (linked list) 
+.PP
+Definition at line \fB12\fP of file \fBclient\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

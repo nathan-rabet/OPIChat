@@ -1,0 +1,164 @@
+\hypertarget{safe__io_8c_source}{}\doxysection{safe\+\_\+io.\+c}
+\label{safe__io_8c_source}\index{src/common/safe\_io.c@{src/common/safe\_io.c}}
+\mbox{\hyperlink{safe__io_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{safe__io_8h}{safe\_io.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <pthread.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00005}00005 \textcolor{preprocessor}{\#include <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00006}00006 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00007}00007 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00008}00008 \textcolor{preprocessor}{\#include <sys/socket.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00009}00009 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00010}00010 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00011}00011 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00012}00012 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{logger_8h}{logger.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00013}00013 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{message_8h}{message.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00014}00014 \textcolor{preprocessor}{\#include "{}xalloc.h"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00016}00016 \textcolor{preprocessor}{\#ifndef READ\_BUFFER\_SIZE }\textcolor{comment}{// Usefull for debugging}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00017}\mbox{\hyperlink{safe__io_8c_a46167a977503a51eb6efe97e870568c3}{00017}} \textcolor{preprocessor}{\#    define READ\_BUFFER\_SIZE 2048}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00018}00018 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00020}\mbox{\hyperlink{safe__io_8c_af4e18e810d48acdcf0c1927405197eef}{00020}} \textcolor{preprocessor}{\#define NB\_RECV\_AFTER\_RESET}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00022}\mbox{\hyperlink{safe__io_8h_a3730804c00874106746163562e2693ac}{00022}} \textcolor{keywordtype}{int} \mbox{\hyperlink{safe__io_8c_a3730804c00874106746163562e2693ac}{safe\_send}}(\textcolor{keywordtype}{int} sockfd, \textcolor{keyword}{const} \textcolor{keywordtype}{void} *buf, \textcolor{keywordtype}{size\_t} count, \textcolor{keywordtype}{int} flags)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00023}00023 \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00024}00024     \textcolor{keywordtype}{size\_t} offset = 0;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00025}00025 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00026}00026     \textcolor{keywordflow}{while} (offset < count)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00027}00027     \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00028}00028         ssize\_t sent = send(sockfd, (\textcolor{keywordtype}{char} *)buf + offset, count -\/ offset,}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00029}00029                             flags | MSG\_NOSIGNAL);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00030}00030         \textcolor{keywordflow}{if} (sent == -\/1)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00031}00031             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00033}00033         offset += sent;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00034}00034     \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00036}00036     errno = 0;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00037}00037     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00038}00038 \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00040}\mbox{\hyperlink{safe__io_8h_af5b0cdbd9fea86b0c53e02b3b5e31518}{00040}} \textcolor{keywordtype}{int} \mbox{\hyperlink{safe__io_8c_af5b0cdbd9fea86b0c53e02b3b5e31518}{safe\_write}}(\textcolor{keywordtype}{int} fd, \textcolor{keyword}{const} \textcolor{keywordtype}{void} *buf, \textcolor{keywordtype}{size\_t} count)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00041}00041 \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00042}00042     \textcolor{keywordtype}{size\_t} offset = 0;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00043}00043 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00044}00044     \textcolor{keywordflow}{while} (offset < count)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00045}00045     \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00046}00046         ssize\_t sent = write(fd, (\textcolor{keywordtype}{char} *)buf + offset, count -\/ offset);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00047}00047         \textcolor{keywordflow}{if} (sent == -\/1)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00048}00048             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00050}00050         offset += sent;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00051}00051     \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00052}00052 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00053}00053     errno = 0;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00054}00054     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00055}00055 \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00057}\mbox{\hyperlink{safe__io_8h_a70bebf5ac8325b0eb363be83f11a1f9b}{00057}} ssize\_t \mbox{\hyperlink{safe__io_8c_a70bebf5ac8325b0eb363be83f11a1f9b}{safe\_read}}(\textcolor{keywordtype}{int} fd, \textcolor{keywordtype}{void} **buf)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00058}00058 \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00059}00059     *buf = \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af1634ff7d575d04a5ad3bd26343b4e51}{xrealloc}}(*buf, \mbox{\hyperlink{safe__io_8c_a46167a977503a51eb6efe97e870568c3}{READ\_BUFFER\_SIZE}}, 1); \textcolor{comment}{// (Re)allocate the given buffer}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00061}00061     ssize\_t nb\_read = 0; \textcolor{comment}{// Total number of bytes read}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00062}00062     ssize\_t read\_len; \textcolor{comment}{// Number returned by read}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00063}00063     \textcolor{keywordflow}{while} ((read\_len = read(fd, (\textcolor{keywordtype}{char} *)*buf + nb\_read, \mbox{\hyperlink{safe__io_8c_a46167a977503a51eb6efe97e870568c3}{READ\_BUFFER\_SIZE}})) != 0)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00064}00064     \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00065}00065         \textcolor{comment}{// If any client reading error}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00066}00066         \textcolor{keywordflow}{if} (read\_len == -\/1)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00067}00067             \textcolor{keywordflow}{return} -\/1;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00068}00068         nb\_read += read\_len;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00069}00069 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00070}00070         \textcolor{comment}{// If the buffer is full}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00071}00071         *buf = \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af1634ff7d575d04a5ad3bd26343b4e51}{xrealloc}}(*buf, \mbox{\hyperlink{safe__io_8c_a46167a977503a51eb6efe97e870568c3}{READ\_BUFFER\_SIZE}} + nb\_read, 1);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00072}00072     \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00073}00073 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00074}00074     errno = 0;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00075}00075     \textcolor{keywordflow}{return} nb\_read;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00076}00076 \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00077}00077 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00078}\mbox{\hyperlink{structsafe__recv__data}{00078}} \textcolor{keyword}{struct }\mbox{\hyperlink{structsafe__recv__data}{safe\_recv\_data}}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00079}00079 \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00080}\mbox{\hyperlink{structsafe__recv__data_ad2c8fb3df3a737e0685e902870a611d2}{00080}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{structsafe__recv__data_ad2c8fb3df3a737e0685e902870a611d2}{sockfd}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00081}\mbox{\hyperlink{structsafe__recv__data_ac8bf36fe0577cba66bccda3a6f7e80a4}{00081}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{structsafe__recv__data_ac8bf36fe0577cba66bccda3a6f7e80a4}{flags}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00082}\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{00082}}     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00083}\mbox{\hyperlink{structsafe__recv__data_ac0ea47735600c4bb41ae64fd987f9190}{00083}}     time\_t \mbox{\hyperlink{structsafe__recv__data_ac0ea47735600c4bb41ae64fd987f9190}{starting\_time}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00084}00084 \};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00085}00085 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00086}00086 \textcolor{keyword}{static} \textcolor{keywordtype}{void} *\_thread\_safe\_recv(\textcolor{keywordtype}{void} *arg)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00087}00087 \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00088}00088     \textcolor{keyword}{struct }\mbox{\hyperlink{structsafe__recv__data}{safe\_recv\_data}} *data = (\textcolor{keyword}{struct }\mbox{\hyperlink{structsafe__recv__data}{safe\_recv\_data}} *)arg;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00089}00089 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00090}00090     \textcolor{keywordtype}{int} \mbox{\hyperlink{structsafe__recv__data_ad2c8fb3df3a737e0685e902870a611d2}{sockfd}} = data-\/>\mbox{\hyperlink{structsafe__recv__data_ad2c8fb3df3a737e0685e902870a611d2}{sockfd}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00091}00091     \textcolor{keywordtype}{int} \mbox{\hyperlink{structsafe__recv__data_ac8bf36fe0577cba66bccda3a6f7e80a4}{flags}} = data-\/>\mbox{\hyperlink{structsafe__recv__data_ac8bf36fe0577cba66bccda3a6f7e80a4}{flags}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00093}00093     ssize\_t nb\_read = 0; \textcolor{comment}{// Total number of bytes read}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00094}00094     ssize\_t read\_len; \textcolor{comment}{// Number returned by read}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00095}00095     \textcolor{keywordflow}{while} ((read\_len = recv(\mbox{\hyperlink{structsafe__recv__data_ad2c8fb3df3a737e0685e902870a611d2}{sockfd}}, data-\/>\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}} + nb\_read,}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00096}00096                             \mbox{\hyperlink{safe__io_8c_a46167a977503a51eb6efe97e870568c3}{READ\_BUFFER\_SIZE}} -\/ 1, \mbox{\hyperlink{structsafe__recv__data_ac8bf36fe0577cba66bccda3a6f7e80a4}{flags}}))}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00097}00097            != 0)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00098}00098     \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00099}00099         \textcolor{comment}{// If any client reading error}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00100}00100         \textcolor{keywordflow}{if} (read\_len == -\/1)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00101}00101             \textcolor{keywordflow}{return} NULL;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00102}00102 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00103}00103         \textcolor{keywordflow}{if} (time(NULL) + \mbox{\hyperlink{safe__io_8h_aa882328bca54a0c7249a313d7d1f7d29}{RECV\_TIMEOUT}} > data-\/>\mbox{\hyperlink{structsafe__recv__data_ac0ea47735600c4bb41ae64fd987f9190}{starting\_time}} \&\& nb\_read > 0)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00104}00104         \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00105}00105             data-\/>\mbox{\hyperlink{structsafe__recv__data_ac0ea47735600c4bb41ae64fd987f9190}{starting\_time}} = time(NULL);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00106}00106             \textcolor{keywordflow}{for} (ssize\_t i = 0; i < read\_len; i++)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00107}00107                 data-\/>\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}}[i] = data-\/>\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}}[i + nb\_read];}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00108}00108             nb\_read = read\_len;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00109}00109         \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00110}00110         \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00111}00111             nb\_read += read\_len;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00112}00112 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00113}00113         data-\/>\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}}[nb\_read] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00114}00114 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00115}00115         \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}} *\mbox{\hyperlink{structmessage}{message}} = NULL;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00116}00116         \textcolor{keywordflow}{if} ((\mbox{\hyperlink{structmessage}{message}} = \mbox{\hyperlink{message_8h_a3b73b25240ab9cd5fb472c05281e3f5c}{parse\_message}}(data-\/>\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}})) != NULL)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00117}00117             \textcolor{keywordflow}{return} (\textcolor{keywordtype}{void} *)\mbox{\hyperlink{structmessage}{message}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00119}00119         \textcolor{comment}{// If the buffer is full}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00120}00120         data-\/>\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}} =}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00121}00121             \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af1634ff7d575d04a5ad3bd26343b4e51}{xrealloc}}(data-\/>\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}}, \mbox{\hyperlink{safe__io_8c_a46167a977503a51eb6efe97e870568c3}{READ\_BUFFER\_SIZE}} + nb\_read, 1);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00122}00122     \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00123}00123     errno = 0;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00124}00124     \textcolor{keywordflow}{return} NULL;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00125}00125 \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00126}00126 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00127}\mbox{\hyperlink{safe__io_8h_ac8413ee3e5fa5ceab0e0cb43c4b6aab8}{00127}} \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}} *\mbox{\hyperlink{safe__io_8c_ac8413ee3e5fa5ceab0e0cb43c4b6aab8}{safe\_recv}}(\textcolor{keywordtype}{int} sockfd, \textcolor{keywordtype}{int} flags, \textcolor{keywordtype}{bool} mustTimeout)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00128}00128 \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00129}00129     \textcolor{comment}{// Create thread and kill it if it takes too long}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00130}00130     pthread\_t thread;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00131}00131     \textcolor{keyword}{struct }\mbox{\hyperlink{structsafe__recv__data}{safe\_recv\_data}} *data = \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}{xmalloc}}(1, \textcolor{keyword}{sizeof}(\textcolor{keyword}{struct} \mbox{\hyperlink{structsafe__recv__data}{safe\_recv\_data}}));}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00132}00132     data-\/>\mbox{\hyperlink{structsafe__recv__data_ad2c8fb3df3a737e0685e902870a611d2}{sockfd}} = \mbox{\hyperlink{structsafe__recv__data_ad2c8fb3df3a737e0685e902870a611d2}{sockfd}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00133}00133     data-\/>\mbox{\hyperlink{structsafe__recv__data_ac8bf36fe0577cba66bccda3a6f7e80a4}{flags}} = \mbox{\hyperlink{structsafe__recv__data_ac8bf36fe0577cba66bccda3a6f7e80a4}{flags}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00134}00134     data-\/>\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}} = \mbox{\hyperlink{epoll__server_2utils_2xalloc_8c_af7b6b8fd37a3c4b944c71b783d50fc96}{xmalloc}}(\mbox{\hyperlink{safe__io_8c_a46167a977503a51eb6efe97e870568c3}{READ\_BUFFER\_SIZE}}, 1);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00135}00135     data-\/>\mbox{\hyperlink{structsafe__recv__data_ac0ea47735600c4bb41ae64fd987f9190}{starting\_time}} = time(NULL);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00136}00136 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00137}00137     pthread\_create(\&thread, NULL, \_thread\_safe\_recv, (\textcolor{keywordtype}{void} *)data);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00138}00138 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00139}00139     \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}} *returned\_message = NULL;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00140}00140     \textcolor{keywordflow}{if} (mustTimeout)}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00141}00141     \{}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00142}00142         \textcolor{keyword}{struct }timespec timeout;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00143}00143         timeout.tv\_sec = data-\/>\mbox{\hyperlink{structsafe__recv__data_ac0ea47735600c4bb41ae64fd987f9190}{starting\_time}} + \mbox{\hyperlink{safe__io_8h_aa882328bca54a0c7249a313d7d1f7d29}{RECV\_TIMEOUT}};}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00144}00144         timeout.tv\_nsec = 0;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00145}00145         errno =}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00146}00146             pthread\_timedjoin\_np(thread, (\textcolor{keywordtype}{void} *)\&returned\_message, \&timeout);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00147}00147 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00148}00148         pthread\_cancel(thread);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00149}00149         pthread\_join(thread, NULL);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00150}00150     \}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00151}00151 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00152}00152     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00153}00153         errno = pthread\_join(thread, (\textcolor{keywordtype}{void} *)\&returned\_message);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00154}00154 }
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00155}00155     free(data-\/>\mbox{\hyperlink{structsafe__recv__data_a638bb9e40e1642c3cde577cf07d4b1d8}{recv\_buffer}});}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00156}00156     free(data);}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00157}00157     \textcolor{keywordflow}{return} returned\_message;}
+\DoxyCodeLine{\Hypertarget{safe__io_8c_source_l00158}00158 \}}
+
+\end{DoxyCode}

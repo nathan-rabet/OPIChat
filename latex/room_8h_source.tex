@@ -1,0 +1,48 @@
+\hypertarget{room_8h_source}{}\doxysection{room.\+h}
+\label{room_8h_source}\index{include/room.h@{include/room.h}}
+\mbox{\hyperlink{room_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef ROOM\_H}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00002}00002 \textcolor{preprocessor}{\#define ROOM\_H}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <sys/socket.h>}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00005}00005 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00006}00006 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00007}00007 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{client_8h}{client.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00008}00008 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00013}\mbox{\hyperlink{room_8h_a812b1516514fa66f13f80e0e352ae9ca}{00013}} \textcolor{keyword}{struct }\mbox{\hyperlink{structroom}{room}} *\mbox{\hyperlink{room_8h_a812b1516514fa66f13f80e0e352ae9ca}{rooms}};}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00015}\mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892}{00015}} \textcolor{keyword}{enum} \mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892}{room\_errors}}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00016}00016 \{}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00017}\mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892ada746f629208a833b9c3b79ca6b16a1a}{00017}}     \mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892ada746f629208a833b9c3b79ca6b16a1a}{ROOM\_ERROR\_NONE}},}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00018}\mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892a00d870a5c6f5f824db0aae503cfa39ec}{00018}}     \mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892a00d870a5c6f5f824db0aae503cfa39ec}{ROOM\_ERROR\_BAD\_NAME}},}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00019}\mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892a6aafd04e6e9b6c4bd66a3d0ff7f93d07}{00019}}     \mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892a6aafd04e6e9b6c4bd66a3d0ff7f93d07}{ROOM\_ERROR\_DUPPLICATE\_NAME}},}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00020}\mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892a82986aec9bf514c70d782a07383450bc}{00020}}     \mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892a82986aec9bf514c70d782a07383450bc}{ROOM\_ERROR\_NOT\_FOUND}},}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00021}00021     \mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892a3511f654fb9babcab51d7f05f802efe0}{ROOM\_ERROR\_UNAUTHORIZED}}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00022}\mbox{\hyperlink{room_8h_a47aa545895b61649610a42885f292892a3511f654fb9babcab51d7f05f802efe0}{00022}} \};}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00024}\mbox{\hyperlink{structroom}{00024}} \textcolor{keyword}{struct }\mbox{\hyperlink{structroom}{room}}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00025}00025 \{}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00026}\mbox{\hyperlink{structroom_a5ac083a645d964373f022d03df4849c8}{00026}}     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structroom_a5ac083a645d964373f022d03df4849c8}{name}}; \textcolor{comment}{// Name of the room}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00027}\mbox{\hyperlink{structroom_aa3ac66956d476737aaa8ff6c5cf7dd0a}{00027}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{structroom_aa3ac66956d476737aaa8ff6c5cf7dd0a}{owner\_socket}}; \textcolor{comment}{// Socket FD of the room owner}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00028}00028 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00029}\mbox{\hyperlink{structroom_a9c99196fc951529b3277cdcb6c937571}{00029}}     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structroom_a9c99196fc951529b3277cdcb6c937571}{nb\_clients}}; \textcolor{comment}{// Number of clients in the room}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00030}\mbox{\hyperlink{structroom_a10e16f3c89d56b66da41947bcc514bd1}{00030}}     \textcolor{keywordtype}{int} *\mbox{\hyperlink{structroom_a10e16f3c89d56b66da41947bcc514bd1}{clients\_sockets}}; \textcolor{comment}{// Clients in the room}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00031}00031 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00032}\mbox{\hyperlink{structroom_a71e15aebaa95e049a882767f4bdb8a8a}{00032}}     \textcolor{keyword}{struct }\mbox{\hyperlink{structroom}{room}} *\mbox{\hyperlink{structroom_a71e15aebaa95e049a882767f4bdb8a8a}{next}}; \textcolor{comment}{// Next room for another room}}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00033}00033 \};}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00034}00034 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00047}00047 \textcolor{keyword}{struct }\mbox{\hyperlink{structroom}{room}} *\mbox{\hyperlink{room_8h_ac32507e64a7f7399971d75bda37c526b}{add\_room}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structroom}{room}} *\mbox{\hyperlink{structroom}{room}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *room\_name,}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00048}00048                       \textcolor{keywordtype}{int} \mbox{\hyperlink{structroom_aa3ac66956d476737aaa8ff6c5cf7dd0a}{owner\_socket}});}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00062}00062 \textcolor{keyword}{struct }\mbox{\hyperlink{structroom}{room}} *\mbox{\hyperlink{room_8h_a94c22f6317fb18032ebcb2598b4e8523}{remove\_room}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structroom}{room}} *\mbox{\hyperlink{structroom}{room}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *room\_name,}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00063}00063                          \textcolor{keywordtype}{int} demander\_socket);}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00064}00064 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00074}00074 \textcolor{keyword}{struct }\mbox{\hyperlink{structroom}{room}} *\mbox{\hyperlink{room_8h_a69144af99b4765ffbb794ce40941e479}{find\_room}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structroom}{room}} *\mbox{\hyperlink{structroom}{room}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *room\_name);}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00076}00076 \textcolor{keyword}{struct }\mbox{\hyperlink{structsend__pool}{send\_pool}} *\mbox{\hyperlink{room_8h_a329b19a19803d4a12c030c638f12f7c5}{return\_forged\_error\_message}}(\textcolor{keywordtype}{char} *command, \textcolor{keywordtype}{char} *payload,}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00077}00077                                               \textcolor{keywordtype}{int} send\_socket);}
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00078}00078 }
+\DoxyCodeLine{\Hypertarget{room_8h_source_l00079}00079 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* ROOM\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

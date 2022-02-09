@@ -1,0 +1,105 @@
+\hypertarget{handle__login_8c}{}\doxysection{src/server/commands/handle\+\_\+login.c File Reference}
+\label{handle__login_8c}\index{src/server/commands/handle\_login.c@{src/server/commands/handle\_login.c}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}commands.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}message.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}xalloc.\+h\char`\"{}}\newline
+Include dependency graph for handle\+\_\+login.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{handle__login_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{handle__login_8c_a1d5012b1b4f2dcb64c30072f37b08f17}{name\+\_\+is\+\_\+valid}} (char $\ast$s)
+\item 
+int \mbox{\hyperlink{handle__login_8c_a136c79309efc368ff4d7dc6324af80a2}{username\+\_\+not\+\_\+duplicate}} (char $\ast$name, struct \mbox{\hyperlink{structclient}{client}} $\ast$\mbox{\hyperlink{server__main_8c_ab13b91cda85acbe50143a8d0cbec99f8}{clients}}, struct \mbox{\hyperlink{structclient}{client}} $\ast$me)
+\item 
+struct \mbox{\hyperlink{structsend__pool}{send\+\_\+pool}} $\ast$ \mbox{\hyperlink{handle__login_8c_a14392c5bd469cd46922243c88d661115}{handle\+\_\+login}} (struct \mbox{\hyperlink{structmessage}{message}} $\ast$msg, struct \mbox{\hyperlink{structclient}{client}} $\ast$\mbox{\hyperlink{structclient}{client}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structclient}{client}} $\ast$ \mbox{\hyperlink{handle__login_8c_ab13b91cda85acbe50143a8d0cbec99f8}{clients}}
+\begin{DoxyCompactList}\small\item\em Contain all the information about all clients (linked list) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{handle__login_8c_a14392c5bd469cd46922243c88d661115}\label{handle__login_8c_a14392c5bd469cd46922243c88d661115}} 
+\index{handle\_login.c@{handle\_login.c}!handle\_login@{handle\_login}}
+\index{handle\_login@{handle\_login}!handle\_login.c@{handle\_login.c}}
+\doxysubsubsection{\texorpdfstring{handle\_login()}{handle\_login()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structsend__pool}{send\+\_\+pool}} $\ast$ handle\+\_\+login (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmessage}{message}} $\ast$}]{msg,  }\item[{struct \mbox{\hyperlink{structclient}{client}} $\ast$}]{client }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{handle__login_8c_source_l00050}{50}} of file \mbox{\hyperlink{handle__login_8c_source}{handle\+\_\+login.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{handle__login_8c_a14392c5bd469cd46922243c88d661115_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{handle__login_8c_a1d5012b1b4f2dcb64c30072f37b08f17}\label{handle__login_8c_a1d5012b1b4f2dcb64c30072f37b08f17}} 
+\index{handle\_login.c@{handle\_login.c}!name\_is\_valid@{name\_is\_valid}}
+\index{name\_is\_valid@{name\_is\_valid}!handle\_login.c@{handle\_login.c}}
+\doxysubsubsection{\texorpdfstring{name\_is\_valid()}{name\_is\_valid()}}
+{\footnotesize\ttfamily int name\+\_\+is\+\_\+valid (\begin{DoxyParamCaption}\item[{char $\ast$}]{s }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{handle__login_8c_source_l00012}{12}} of file \mbox{\hyperlink{handle__login_8c_source}{handle\+\_\+login.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=266pt]{handle__login_8c_a1d5012b1b4f2dcb64c30072f37b08f17_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{handle__login_8c_a136c79309efc368ff4d7dc6324af80a2}\label{handle__login_8c_a136c79309efc368ff4d7dc6324af80a2}} 
+\index{handle\_login.c@{handle\_login.c}!username\_not\_duplicate@{username\_not\_duplicate}}
+\index{username\_not\_duplicate@{username\_not\_duplicate}!handle\_login.c@{handle\_login.c}}
+\doxysubsubsection{\texorpdfstring{username\_not\_duplicate()}{username\_not\_duplicate()}}
+{\footnotesize\ttfamily int username\+\_\+not\+\_\+duplicate (\begin{DoxyParamCaption}\item[{char $\ast$}]{name,  }\item[{struct \mbox{\hyperlink{structclient}{client}} $\ast$}]{clients,  }\item[{struct \mbox{\hyperlink{structclient}{client}} $\ast$}]{me }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{handle__login_8c_source_l00032}{32}} of file \mbox{\hyperlink{handle__login_8c_source}{handle\+\_\+login.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=309pt]{handle__login_8c_a136c79309efc368ff4d7dc6324af80a2_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{handle__login_8c_ab13b91cda85acbe50143a8d0cbec99f8}\label{handle__login_8c_ab13b91cda85acbe50143a8d0cbec99f8}} 
+\index{handle\_login.c@{handle\_login.c}!clients@{clients}}
+\index{clients@{clients}!handle\_login.c@{handle\_login.c}}
+\doxysubsubsection{\texorpdfstring{clients}{clients}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structclient}{client}}$\ast$ clients\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Contain all the information about all clients (linked list) 
+
+
+
+Definition at line \mbox{\hyperlink{client_8h_source_l00012}{12}} of file \mbox{\hyperlink{client_8h_source}{client.\+h}}.
+

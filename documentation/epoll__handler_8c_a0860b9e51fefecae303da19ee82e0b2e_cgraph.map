@@ -1,0 +1,7 @@
+<map id="communicate" name="communicate">
+<area shape="rect" id="node1" title="Handle communication with the server." alt="" coords="5,56,105,83"/>
+<area shape="rect" id="node2" href="$connection_8c.html#a5c993924a198348770d2028c1cc4c199" title="Find the connection_t element where the socket is equal to client sock." alt="" coords="165,5,245,32"/>
+<area shape="rect" id="node3" href="$safe__io_8c.html#ac8413ee3e5fa5ceab0e0cb43c4b6aab8" title="Receive a message from a client safely." alt="" coords="165,56,244,83"/>
+<area shape="rect" id="node5" href="$logger_8c.html#ae5719e99feb0e409f827c968cb6c824c" title="Log an error message." alt="" coords="153,107,256,133"/>
+<area shape="rect" id="node4" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="304,56,371,83"/>
+</map>

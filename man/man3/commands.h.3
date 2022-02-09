@@ -1,0 +1,122 @@
+.TH "include/commands.h" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+include/commands.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'client\&.h'\fP
+.br
+\fC#include 'message\&.h'\fP
+.br
+\fC#include 'xalloc\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsend_pool\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_ping\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_login\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_list_users\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_send_dm\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_broadcast\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_create_room\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_list_rooms\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_join_room\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_leave_room\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_send_room\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_delete_room\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBhandle_profile\fP (struct \fBmessage\fP *msg, struct \fBclient\fP *\fBclient\fP)"
+.br
+.ti -1c
+.RI "int \fBusername_not_duplicate\fP (char *name, struct \fBclient\fP *\fBclients\fP, struct \fBclient\fP *me)"
+.br
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "struct \fBsend_pool\fP * handle_broadcast (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB9\fP of file \fBhandle_broadcast\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_create_room (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB11\fP of file \fBhandle_create_room\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_delete_room (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB10\fP of file \fBhandle_delete_room\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_join_room (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB11\fP of file \fBhandle_join_room\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_leave_room (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB11\fP of file \fBhandle_leave_room\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_list_rooms (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB28\fP of file \fBhandle_list_rooms\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_list_users (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB29\fP of file \fBhandle_list_users\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_login (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB50\fP of file \fBhandle_login\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_ping (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB9\fP of file \fBhandle_ping\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_profile (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB7\fP of file \fBhandle_profile\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_send_dm (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB9\fP of file \fBhandle_send_dm\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * handle_send_room (struct \fBmessage\fP * msg, struct \fBclient\fP * client)"
+
+.PP
+Definition at line \fB11\fP of file \fBhandle_send_room\&.c\fP\&.
+.SS "int username_not_duplicate (char * name, struct \fBclient\fP * clients, struct \fBclient\fP * me)"
+
+.PP
+Definition at line \fB32\fP of file \fBhandle_login\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

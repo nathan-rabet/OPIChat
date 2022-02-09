@@ -1,0 +1,6 @@
+<map id="get_message_next_parameter_kv" name="get_message_next_parameter_kv">
+<area shape="rect" id="node1" title="Get the next key value object." alt="" coords="267,31,484,57"/>
+<area shape="rect" id="node2" href="$message__parser_8c.html#a3b73b25240ab9cd5fb472c05281e3f5c" title="Take a message as a string and parse it into a message struct." alt="" coords="104,31,219,57"/>
+<area shape="rect" id="node3" href="$test__main_8c.html#a840291bc02cba5474a4cb46a9b9566fe" title=" " alt="" coords="5,5,56,32"/>
+<area shape="rect" id="node4" href="$message__parser__test_8c.html#ae1574755fc96bba0dbd62bcc19e385a6" title=" " alt="" coords="7,56,55,83"/>
+</map>

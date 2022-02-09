@@ -1,0 +1,153 @@
+.TH "basic_server/basic_server.h" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+basic_server/basic_server.h
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDEFAULT_BUFFER_SIZE\fP   2048"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBcreate_and_bind\fP (struct addrinfo *addrinfo)"
+.br
+.RI "Iterate over the struct addrinfo elements to create and bind a socket\&. "
+.ti -1c
+.RI "int \fBprepare_socket\fP (const char *\fBip\fP, const char *\fBport\fP)"
+.br
+.RI "Initialize the addrinfo struct and call create_and bind() and listen(2) "
+.ti -1c
+.RI "int \fBaccept_client\fP (int socket)"
+.br
+.RI "Accept a new client\&. "
+.ti -1c
+.RI "void \fBcommunicate\fP (int client_socket)"
+.br
+.RI "Handle communication with a client\&. "
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DEFAULT_BUFFER_SIZE   2048"
+
+.PP
+Definition at line \fB8\fP of file \fBbasic_server\&.h\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int accept_client (int socket)"
+
+.PP
+Accept a new client\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIsocket\fP listening socket
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The new socket 
+.RE
+.PP
+
+.PP
+Definition at line \fB51\fP of file \fBbasic_server\&.c\fP\&.
+.SS "void communicate (int client_socket)"
+
+.PP
+Handle communication with a client\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIclient\fP client socket
+.RE
+.PP
+Receive a message from the client, and send back another message with the same content\&.
+.PP
+Handle communication with a client\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIserver_socket\fP server socket
+.RE
+.PP
+Read user message from STDIN and send it to the server
+.PP
+Step 2: This function sends small messages to the server
+.PP
+Step 3: In addition to step 2 behavior, this function receives the server response on small messages
+.PP
+Step 4: The function must now handle long messages 
+.PP
+Definition at line \fB113\fP of file \fBbasic_client\&.c\fP\&.
+.SS "int create_and_bind (struct addrinfo * addrinfo)"
+
+.PP
+Iterate over the struct addrinfo elements to create and bind a socket\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIaddrinfo\fP struct addrinfo elements
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The created socket or exit with 1 if there is an error
+.RE
+.PP
+Try to create and connect a socket with every addrinfo element until it succeeds 
+.PP
+Definition at line \fB10\fP of file \fBbasic_server\&.c\fP\&.
+.SS "int prepare_socket (const char * ip, const char * port)"
+
+.PP
+Initialize the addrinfo struct and call create_and bind() and listen(2) 
+.PP
+\fBParameters\fP
+.RS 4
+\fIip\fP IP address of the server 
+.br
+\fIport\fP Port of the server
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The created socket
+.RE
+.PP
+Initialize the addrinfo struct needed by \fBcreate_and_bind()\fP before calling it\&. When \fBcreate_and_bind()\fP returns a valid socket, set the socket to listening and return it\&.
+.PP
+Initialize the addrinfo struct and call create_and bind() and listen(2)
+.PP
+\fBParameters\fP
+.RS 4
+\fIip\fP IP address of the server 
+.br
+\fIport\fP Port of the server
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The created socket 
+.RE
+.PP
+
+.PP
+Definition at line \fB30\fP of file \fBbasic_client\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

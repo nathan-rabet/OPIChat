@@ -1,0 +1,131 @@
+.TH "src/server/room.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/server/room.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include 'room\&.h'\fP
+.br
+\fC#include <arpa/inet\&.h>\fP
+.br
+\fC#include <err\&.h>\fP
+.br
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <netdb\&.h>\fP
+.br
+\fC#include <netinet/in\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <sys/socket\&.h>\fP
+.br
+\fC#include <sys/types\&.h>\fP
+.br
+\fC#include <unistd\&.h>\fP
+.br
+\fC#include 'commands\&.h'\fP
+.br
+\fC#include 'logger\&.h'\fP
+.br
+\fC#include 'message\&.h'\fP
+.br
+\fC#include 'xalloc\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "struct \fBsend_pool\fP * \fBreturn_forged_error_message\fP (char *command, char *payload, int send_socket)"
+.br
+.ti -1c
+.RI "struct \fBroom\fP * \fBadd_room\fP (struct \fBroom\fP *\fBroom\fP, const char *room_name, int owner_socket)"
+.br
+.RI "Add a new room room to the linked list room\&. "
+.ti -1c
+.RI "struct \fBroom\fP * \fBremove_room\fP (struct \fBroom\fP *\fBroom\fP, const char *room_name, int demander_socket)"
+.br
+.RI "Remove the room room from the linked list room\&. "
+.ti -1c
+.RI "struct \fBroom\fP * \fBfind_room\fP (struct \fBroom\fP *\fBroom\fP, const char *room_name)"
+.br
+.RI "Find the room element where the socket is equal to room sock\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "struct \fBroom\fP * add_room (struct \fBroom\fP * room, const char * room_name, int owner_socket)"
+
+.PP
+Add a new room room to the linked list room\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIroom\fP The room linked list with all the rooms 
+.br
+\fIroom_name\fP The name of the room to add must be alphanumeric, else errno is set to ROOM_ERROR_BAD_NAME must be unique (not already in linked list), else errno is set to ROOM_ERROR_DUPPLICATE_NAME 
+.br
+\fIowner_socket\fP The socket FD of the room owner
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The room linked list with the element added 
+.RE
+.PP
+
+.PP
+Definition at line \fB35\fP of file \fBroom\&.c\fP\&.
+.SS "struct \fBroom\fP * find_room (struct \fBroom\fP * room, const char * room_name)"
+
+.PP
+Find the room element where the socket is equal to room sock\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIroom\fP The room linked list with all the rooms 
+.br
+\fIroom_name\fP The room name to find
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The room element of the specific room, if not found errno is set to ROOM_ERROR_NOT_FOUND 
+.RE
+.PP
+
+.PP
+Definition at line \fB112\fP of file \fBroom\&.c\fP\&.
+.SS "struct \fBroom\fP * remove_room (struct \fBroom\fP * room, const char * room_name, int demander_socket)"
+
+.PP
+Remove the room room from the linked list room\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIroom\fP The room linked list with all the rooms 
+.br
+\fIroom_name\fP The room name to remove, must be included in the linked list else errno is set to ROOM_ERROR_NOT_FOUND 
+.br
+\fIdemander_socket\fP The socket FD of the client who wants to remove the room, must be the owner of the room else errno is set to ROOM_ERROR_UNAUTHORIZED
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+The room linked list with the element removed 
+.RE
+.PP
+
+.PP
+Definition at line \fB78\fP of file \fBroom\&.c\fP\&.
+.SS "struct \fBsend_pool\fP * return_forged_error_message (char * command, char * payload, int send_socket)"
+
+.PP
+Definition at line \fB19\fP of file \fBroom\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

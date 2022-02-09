@@ -1,0 +1,133 @@
+\hypertarget{safe__io__test_8c_source}{}\doxysection{safe\+\_\+io\+\_\+test.\+c}
+\label{safe__io__test_8c_source}\index{tests/unit\_testing/safe\_io\_test.c@{tests/unit\_testing/safe\_io\_test.c}}
+\mbox{\hyperlink{safe__io__test_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00001}00001 \textcolor{preprocessor}{\#include <criterion/criterion.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00002}00002 \textcolor{preprocessor}{\#include <criterion/redirect.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <errno.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <fcntl.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00005}00005 \textcolor{preprocessor}{\#include <sys/stat.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00006}00006 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00007}00007 \textcolor{preprocessor}{\#include <sys/wait.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00008}00008 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00010}00010 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{client__read_8h}{client\_read.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00011}00011 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{init__socket_8h}{init\_socket.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00012}00012 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{logger_8h}{logger.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00013}00013 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{message_8h}{message.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00014}00014 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{safe__io_8h}{safe\_io.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00015}00015 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00016}\mbox{\hyperlink{safe__io__test_8c_a4b53518635937f50a0e4cd330dcc9180}{00016}} \mbox{\hyperlink{safe__io__test_8c_a4b53518635937f50a0e4cd330dcc9180}{Test}}(safe\_io, \mbox{\hyperlink{safe__io_8h_af5b0cdbd9fea86b0c53e02b3b5e31518}{safe\_write}}, .init = cr\_redirect\_stdout)}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00017}00017 \{}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00018}00018     \textcolor{keywordtype}{char} buf\_in[1024] = \{ \textcolor{charliteral}{'H'}, \textcolor{charliteral}{'e'}, \textcolor{charliteral}{'l'}, \textcolor{charliteral}{'l'}, \textcolor{charliteral}{'o'}, \textcolor{charliteral}{' '},}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00019}00019                           \textcolor{charliteral}{'W'}, \textcolor{charliteral}{'o'}, \textcolor{charliteral}{'r'}, \textcolor{charliteral}{'l'}, \textcolor{charliteral}{'d'}, \textcolor{charliteral}{'\(\backslash\)0'} \};}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00020}00020 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00021}00021     \textcolor{comment}{// Write test}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00022}00022     \textcolor{keywordtype}{int} isOk = \mbox{\hyperlink{safe__io_8h_af5b0cdbd9fea86b0c53e02b3b5e31518}{safe\_write}}(STDOUT\_FILENO, buf\_in, strlen(buf\_in)) == 0;}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00023}00023     cr\_assert(isOk, \textcolor{stringliteral}{"{}safe\_write failed"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00024}00024     cr\_stdout\_match\_str(\textcolor{stringliteral}{"{}Hello World"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00025}00025 \}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00026}00026 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00027}\mbox{\hyperlink{safe__io__test_8c_a95beeb03aabd339a16558e750f574af8}{00027}} \mbox{\hyperlink{safe__io__test_8c_a4b53518635937f50a0e4cd330dcc9180}{Test}}(safe\_io, \mbox{\hyperlink{safe__io_8h_a70bebf5ac8325b0eb363be83f11a1f9b}{safe\_read}})}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00028}00028 \{}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00029}00029     \textcolor{keywordtype}{char} *buf\_out = NULL;}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00030}00030     \textcolor{keywordtype}{char} buf\_in[] = \{ \textcolor{charliteral}{'H'}, \textcolor{charliteral}{'e'}, \textcolor{charliteral}{'l'}, \textcolor{charliteral}{'l'}, \textcolor{charliteral}{'o'}, \textcolor{charliteral}{' '},}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00031}00031                       \textcolor{charliteral}{'W'}, \textcolor{charliteral}{'o'}, \textcolor{charliteral}{'r'}, \textcolor{charliteral}{'l'}, \textcolor{charliteral}{'d'}, \textcolor{charliteral}{'\(\backslash\)0'} \};}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00033}00033     FILE *fp = fopen(\textcolor{stringliteral}{"{}safe\_io\_test.txt"{}}, \textcolor{stringliteral}{"{}w+"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00034}00034     cr\_assert(fp != NULL, \textcolor{stringliteral}{"{}safe\_read failed"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00035}00035 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00036}00036     \textcolor{comment}{// Read test}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00037}00037     \mbox{\hyperlink{safe__io_8h_af5b0cdbd9fea86b0c53e02b3b5e31518}{safe\_write}}(fileno(fp), buf\_in, \textcolor{keyword}{sizeof}(buf\_in));}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00038}00038     fseek(fp, 0, SEEK\_SET); \textcolor{comment}{// Set to the beginning of the file for reading}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00039}00039 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00040}00040     \textcolor{keywordtype}{int} nb\_read = \mbox{\hyperlink{safe__io_8h_a70bebf5ac8325b0eb363be83f11a1f9b}{safe\_read}}(fileno(fp), (\textcolor{keywordtype}{void} **)\&buf\_out);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00041}00041     cr\_expect\_eq(nb\_read, \textcolor{keyword}{sizeof}(buf\_in), \textcolor{stringliteral}{"{}Actual number of bytes read: \%d"{}},}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00042}00042                  nb\_read);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00043}00043     cr\_expect\_str\_eq(buf\_out, buf\_in);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00045}00045     free(buf\_out);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00046}00046     fclose(fp);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00047}00047     unlink(\textcolor{stringliteral}{"{}safe\_io\_test.txt"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00048}00048 \}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00049}00049 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00050}\mbox{\hyperlink{safe__io__test_8c_a3fb3142c90d3ab68241b0433c112fedd}{00050}} \mbox{\hyperlink{safe__io__test_8c_a4b53518635937f50a0e4cd330dcc9180}{Test}}(safe\_io, safe\_send\_recv)}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00051}00051 \{}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00052}00052     \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}} *m = NULL;}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00053}00053     \textcolor{keywordtype}{char} buf\_in[] = \textcolor{stringliteral}{"{}4\(\backslash\)n0\(\backslash\)nSEND-\/DM\(\backslash\)nUser=acu\(\backslash\)n\(\backslash\)n2022"{}};}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00054}00054 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00055}00055     \textcolor{comment}{// Fork a child process to send data and another to receive it}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00056}00056     pid\_t pid = fork();}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00057}00057     \textcolor{keywordflow}{if} (pid == 0)}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00058}00058     \{}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00059}00059         \textcolor{comment}{// Client process}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00060}00060         \textcolor{comment}{// Init a socket with the server}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00061}00061         usleep(100 * 1000);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00062}00062         \textcolor{keywordtype}{int} s\_clientfd = \mbox{\hyperlink{init__socket_8h_aeb1ff62bccbab70efeeac34f505ceb36}{setup\_client\_socket}}(\textcolor{stringliteral}{"{}127.0.0.1"{}}, \textcolor{stringliteral}{"{}8082"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00063}00063 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00064}00064         \textcolor{keywordtype}{int} isOk = \mbox{\hyperlink{safe__io_8h_a3730804c00874106746163562e2693ac}{safe\_send}}(s\_clientfd, buf\_in, \textcolor{keyword}{sizeof}(buf\_in), 0) == 0;}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00065}00065         sleep(1);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00066}00066         cr\_assert(isOk, \textcolor{stringliteral}{"{}safe\_write failed"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00067}00067         close(s\_clientfd);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00068}00068         exit(0);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00069}00069     \}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00070}00070     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00071}00071     \{}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00072}00072         \textcolor{comment}{// Server process}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00073}00073         \textcolor{comment}{// Init a socket with the client}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00074}00074         \textcolor{keywordtype}{int} s\_listenfd = \mbox{\hyperlink{init__socket_8h_a52a29341829d13d3e6bd26bfb9cd8939}{setup\_server\_socket}}(\textcolor{stringliteral}{"{}127.0.0.1"{}}, \textcolor{stringliteral}{"{}8082"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00075}00075         \textcolor{keywordtype}{int} s\_clientfd = accept(s\_listenfd, NULL, NULL);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00076}00076 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00077}00077         m = \mbox{\hyperlink{safe__io_8h_ac8413ee3e5fa5ceab0e0cb43c4b6aab8}{safe\_recv}}(s\_clientfd, 0, \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00078}00078         cr\_expect\_not\_null(m);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00079}00079 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00080}00080         close(s\_listenfd);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00081}00081         close(s\_clientfd);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00082}00082 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00083}00083         \mbox{\hyperlink{message_8h_aafafca753919c7d770812f5c47b5fe7f}{free\_message}}(m);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00084}00084         waitpid(pid, NULL, 0);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00085}00085     \}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00086}00086 \}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00087}00087 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00088}\mbox{\hyperlink{safe__io__test_8c_ad23640c18379be9bbbc2ff4db324f7f8}{00088}} \mbox{\hyperlink{safe__io__test_8c_a4b53518635937f50a0e4cd330dcc9180}{Test}}(safe\_io, safe\_recv\_\_slow\_loris\_hack)}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00089}00089 \{}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00090}00090     \textcolor{keyword}{struct }\mbox{\hyperlink{structmessage}{message}} *m = NULL;}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00091}00091     \textcolor{keywordtype}{char} buf\_in[] = \textcolor{stringliteral}{"{}4\(\backslash\)n0\(\backslash\)nSEND-\/DM\(\backslash\)nUser=acu\(\backslash\)n\(\backslash\)n2022"{}};}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00093}00093     \textcolor{comment}{// Fork a child process to send data and another to receive it}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00094}00094     pid\_t pid = fork();}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00095}00095     \textcolor{keywordflow}{if} (pid == 0)}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00096}00096     \{}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00097}00097         \textcolor{comment}{// H4ck3r man}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00098}00098         \textcolor{comment}{// Init a socket with the server}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00099}00099         usleep(100 * 1000);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00100}00100         \textcolor{keywordtype}{int} s\_clientfd = \mbox{\hyperlink{init__socket_8h_aeb1ff62bccbab70efeeac34f505ceb36}{setup\_client\_socket}}(\textcolor{stringliteral}{"{}127.0.0.1"{}}, \textcolor{stringliteral}{"{}8083"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00101}00101 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00102}00102         send(s\_clientfd, buf\_in, 10, MSG\_MORE);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00103}00103         sleep(3);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00104}00104         send(s\_clientfd, buf\_in + 10, 10, MSG\_MORE);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00105}00105         sleep(7);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00106}00106         send(s\_clientfd, buf\_in + 20, 5, MSG\_MORE);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00107}00107         sleep(20);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00108}00108         send(s\_clientfd, buf\_in + 25, 2, MSG\_EOR);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00109}00109         close(s\_clientfd);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00110}00110         exit(0);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00111}00111     \}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00112}00112     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00113}00113     \{}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00114}00114         \textcolor{comment}{// Server process}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00115}00115         \textcolor{comment}{// Init a socket with the client}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00116}00116         \textcolor{keywordtype}{int} s\_listenfd = \mbox{\hyperlink{init__socket_8h_a52a29341829d13d3e6bd26bfb9cd8939}{setup\_server\_socket}}(\textcolor{stringliteral}{"{}127.0.0.1"{}}, \textcolor{stringliteral}{"{}8083"{}});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00117}00117         \textcolor{keywordtype}{int} s\_clientfd = accept(s\_listenfd, NULL, NULL);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00118}00118 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00119}00119         m = \mbox{\hyperlink{safe__io_8h_ac8413ee3e5fa5ceab0e0cb43c4b6aab8}{safe\_recv}}(s\_clientfd, 0, \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00120}00120         cr\_expect\_null(m);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00121}00121 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00122}00122         close(s\_listenfd);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00123}00123         close(s\_clientfd);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00124}00124 }
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00125}00125         kill(pid, SIGKILL);}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00126}00126     \}}
+\DoxyCodeLine{\Hypertarget{safe__io__test_8c_source_l00127}00127 \}}
+
+\end{DoxyCode}

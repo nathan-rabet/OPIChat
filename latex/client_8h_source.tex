@@ -1,0 +1,40 @@
+\hypertarget{client_8h_source}{}\doxysection{client.\+h}
+\label{client_8h_source}\index{include/client.h@{include/client.h}}
+\mbox{\hyperlink{client_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef CLIENT\_H}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00002}00002 \textcolor{preprocessor}{\#define CLIENT\_H}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <sys/socket.h>}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00005}00005 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00006}00006 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00012}\mbox{\hyperlink{client_8h_ab13b91cda85acbe50143a8d0cbec99f8}{00012}} \textcolor{keyword}{struct }\mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{client_8h_ab13b91cda85acbe50143a8d0cbec99f8}{clients}};}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00013}00013 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00014}\mbox{\hyperlink{structclient}{00014}} \textcolor{keyword}{struct }\mbox{\hyperlink{structclient}{client}}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00015}00015 \{}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00016}\mbox{\hyperlink{structclient_ae887b77f939a43b6387aa460f46836eb}{00016}}     \textcolor{keywordtype}{int} \mbox{\hyperlink{structclient_ae887b77f939a43b6387aa460f46836eb}{client\_socket}}; \textcolor{comment}{// Socket FD of the client}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00017}\mbox{\hyperlink{structclient_a41be436a9eaeb16e097d37e31f2da695}{00017}}     \textcolor{keyword}{struct }sockaddr\_storage *\mbox{\hyperlink{structclient_a41be436a9eaeb16e097d37e31f2da695}{client\_sockaddr}}; \textcolor{comment}{// Client address}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00018}\mbox{\hyperlink{structclient_afbc356cd0e25d1dbbece7c10fd025fa6}{00018}}     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structclient_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}; \textcolor{comment}{// Client IP}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00019}00019 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00020}\mbox{\hyperlink{structclient_a9b20c006bd90a09e1465fb668700e81d}{00020}}     \textcolor{keywordtype}{char} *\mbox{\hyperlink{structclient_a9b20c006bd90a09e1465fb668700e81d}{username}}; \textcolor{comment}{// Username of the client}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00021}00021 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00022}\mbox{\hyperlink{structclient_a59c05c60ecd4fc940a49fa2f520b318d}{00022}}     \textcolor{keywordtype}{size\_t} \mbox{\hyperlink{structclient_a59c05c60ecd4fc940a49fa2f520b318d}{nb\_rooms}}; \textcolor{comment}{// Number of rooms the client is in}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00023}\mbox{\hyperlink{structclient_a5088d9f1a853de22a52bce55cb3cfb75}{00023}}     \textcolor{keywordtype}{char} **\mbox{\hyperlink{structclient_a5088d9f1a853de22a52bce55cb3cfb75}{rooms}}; \textcolor{comment}{// Rooms of the client // TODO : another struct ?}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00024}00024 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00025}\mbox{\hyperlink{structclient_a0ed7e9bb9de23ef2b9f8923fc00e98ce}{00025}}     \textcolor{keyword}{struct }\mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{structclient_a0ed7e9bb9de23ef2b9f8923fc00e98ce}{next}}; \textcolor{comment}{// Next client for another client}}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00026}00026 \};}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00027}00027 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00037}00037 \textcolor{keywordtype}{char} *\mbox{\hyperlink{client_8h_a80a0df2bd2e5d096d8ea40517ffe6f24}{get\_client\_ip}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{structclient}{client}});}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00038}00038 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00054}00054 \textcolor{keyword}{struct }\mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{client_8h_a4e35564ced258ce23a4c36b7d22760ac}{add\_client}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{structclient}{client}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{structclient_ae887b77f939a43b6387aa460f46836eb}{client\_socket}},}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00055}00055                           \textcolor{keyword}{struct} sockaddr sockaddr, socklen\_t sockaddr\_len);}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00056}00056 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00068}00068 \textcolor{keyword}{struct }\mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{client_8h_adb8c6835d5d23e6f1f6ca49a8883b2c2}{remove\_client}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structclient}{client}} *connection, \textcolor{keywordtype}{int} \mbox{\hyperlink{structclient_ae887b77f939a43b6387aa460f46836eb}{client\_socket}});}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00069}00069 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00082}00082 \textcolor{keyword}{struct }\mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{client_8h_a820686562baeb5681caf3fc9c4c883ef}{find\_client}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structclient}{client}} *connection, \textcolor{keywordtype}{int} \mbox{\hyperlink{structclient_ae887b77f939a43b6387aa460f46836eb}{client\_socket}});}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00083}00083 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00093}00093 \textcolor{keyword}{struct }\mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{client_8h_a8e987a5d308606c037c426a0aba7c060}{find\_client\_by\_username}}(\textcolor{keyword}{struct} \mbox{\hyperlink{structclient}{client}} *\mbox{\hyperlink{structclient}{client}}, \textcolor{keywordtype}{char} *\mbox{\hyperlink{structclient_a9b20c006bd90a09e1465fb668700e81d}{username}});}
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00094}00094 }
+\DoxyCodeLine{\Hypertarget{client_8h_source_l00095}00095 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* CLIENT\_H */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,13 @@
+<map id="src/server/commands/handle_send_dm.c" name="src/server/commands/handle_send_dm.c">
+<area shape="rect" id="node1" title=" " alt="" coords="179,5,327,47"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,244,73,271"/>
+<area shape="rect" id="node3" title=" " alt="" coords="315,95,379,121"/>
+<area shape="rect" id="node4" href="$client_8h.html" title=" " alt="" coords="167,169,229,196"/>
+<area shape="rect" id="node7" href="$commands_8h.html" title=" " alt="" coords="94,95,190,121"/>
+<area shape="rect" id="node8" href="$message_8h.html" title=" " alt="" coords="254,169,339,196"/>
+<area shape="rect" id="node11" title=" " alt="" coords="404,95,469,121"/>
+<area shape="rect" id="node5" title=" " alt="" coords="97,244,192,271"/>
+<area shape="rect" id="node6" title=" " alt="" coords="216,244,303,271"/>
+<area shape="rect" id="node10" href="$include_2xalloc_8h.html" title=" " alt="" coords="77,169,143,196"/>
+<area shape="rect" id="node9" title=" " alt="" coords="327,244,391,271"/>
+</map>

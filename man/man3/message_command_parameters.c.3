@@ -1,0 +1,57 @@
+.TH "src/common/message/message_command_parameters.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/common/message/message_command_parameters.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <regex\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include 'message\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBget_message_next_parameter_kv\fP (char *params_start, char **key, char **value)"
+.br
+.RI "Get the next key value object\&. "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int get_message_next_parameter_kv (char * params_start, char ** key, char ** value)"
+
+.PP
+Get the next key value object\&. 
+.PP
+\fBWarning\fP
+.RS 4
+This function modifies the input string
+.RE
+.PP
+\fBParameters\fP
+.RS 4
+\fIparams_start\fP The start of the parameters 
+.br
+\fIkey\fP The key of the object, NULL if no key 
+.br
+\fIvalue\fP The value of the object, NULL if no value 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+offset to the next object, 0 if no more object 
+.RE
+.PP
+
+.PP
+Definition at line \fB7\fP of file \fBmessage_command_parameters\&.c\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

@@ -1,0 +1,87 @@
+\hypertarget{structconnection__t}{}\doxysection{connection\+\_\+t Struct Reference}
+\label{structconnection__t}\index{connection\_t@{connection\_t}}
+
+
+Contain all the information about all clients (linked list)  
+
+
+
+
+{\ttfamily \#include $<$connection.\+h$>$}
+
+
+
+Collaboration diagram for connection\+\_\+t\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=191pt]{structconnection__t__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structconnection__t_ae887b77f939a43b6387aa460f46836eb}{client\+\_\+socket}}
+\item 
+char $\ast$ \mbox{\hyperlink{structconnection__t_aff2566f4c366b48d73479bef43ee4d2e}{buffer}}
+\item 
+ssize\+\_\+t \mbox{\hyperlink{structconnection__t_a3876de7388812b5fde1a77294c2bdedf}{nb\+\_\+read}}
+\item 
+struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} $\ast$ \mbox{\hyperlink{structconnection__t_a052119f5ad511bb3c608370bdaf114da}{next}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Contain all the information about all clients (linked list) 
+
+Definition at line \mbox{\hyperlink{connection_8h_source_l00009}{9}} of file \mbox{\hyperlink{connection_8h_source}{connection.\+h}}.
+
+
+
+\doxysubsection{Field Documentation}
+\mbox{\Hypertarget{structconnection__t_aff2566f4c366b48d73479bef43ee4d2e}\label{structconnection__t_aff2566f4c366b48d73479bef43ee4d2e}} 
+\index{connection\_t@{connection\_t}!buffer@{buffer}}
+\index{buffer@{buffer}!connection\_t@{connection\_t}}
+\doxysubsubsection{\texorpdfstring{buffer}{buffer}}
+{\footnotesize\ttfamily char$\ast$ buffer}
+
+buffer containing all the data received by this client 
+
+Definition at line \mbox{\hyperlink{connection_8h_source_l00013}{13}} of file \mbox{\hyperlink{connection_8h_source}{connection.\+h}}.
+
+\mbox{\Hypertarget{structconnection__t_ae887b77f939a43b6387aa460f46836eb}\label{structconnection__t_ae887b77f939a43b6387aa460f46836eb}} 
+\index{connection\_t@{connection\_t}!client\_socket@{client\_socket}}
+\index{client\_socket@{client\_socket}!connection\_t@{connection\_t}}
+\doxysubsubsection{\texorpdfstring{client\_socket}{client\_socket}}
+{\footnotesize\ttfamily int client\+\_\+socket}
+
+socket fd of the client 
+
+Definition at line \mbox{\hyperlink{connection_8h_source_l00011}{11}} of file \mbox{\hyperlink{connection_8h_source}{connection.\+h}}.
+
+\mbox{\Hypertarget{structconnection__t_a3876de7388812b5fde1a77294c2bdedf}\label{structconnection__t_a3876de7388812b5fde1a77294c2bdedf}} 
+\index{connection\_t@{connection\_t}!nb\_read@{nb\_read}}
+\index{nb\_read@{nb\_read}!connection\_t@{connection\_t}}
+\doxysubsubsection{\texorpdfstring{nb\_read}{nb\_read}}
+{\footnotesize\ttfamily ssize\+\_\+t nb\+\_\+read}
+
+number of bytes read (also size of the buffer) 
+
+Definition at line \mbox{\hyperlink{connection_8h_source_l00015}{15}} of file \mbox{\hyperlink{connection_8h_source}{connection.\+h}}.
+
+\mbox{\Hypertarget{structconnection__t_a052119f5ad511bb3c608370bdaf114da}\label{structconnection__t_a052119f5ad511bb3c608370bdaf114da}} 
+\index{connection\_t@{connection\_t}!next@{next}}
+\index{next@{next}!connection\_t@{connection\_t}}
+\doxysubsubsection{\texorpdfstring{next}{next}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}}$\ast$ next}
+
+next \mbox{\hyperlink{structconnection__t}{connection\+\_\+t}} for another client 
+
+Definition at line \mbox{\hyperlink{connection_8h_source_l00017}{17}} of file \mbox{\hyperlink{connection_8h_source}{connection.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+epoll\+\_\+server/\mbox{\hyperlink{connection_8h}{connection.\+h}}\end{DoxyCompactItemize}

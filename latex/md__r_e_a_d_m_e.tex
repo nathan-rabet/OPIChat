@@ -1,0 +1,94 @@
+\href{https://github.com/nathan-rabet/OPIChat/actions/workflows/unit_testing.yml}{\texttt{ }} \href{https://github.com/nathan-rabet/OPIChat/actions/workflows/doxygen.yml}{\texttt{ }}
+
+{\itshape OPIChat} is a simple IRC-\/like chat software. It is written in C and aims to be a simple, secured and easy to use. The project includes a client and a server.\hypertarget{md__r_e_a_d_m_e_autotoc_md66}{}\doxysection{Installation and compilation}\label{md__r_e_a_d_m_e_autotoc_md66}
+
+\begin{DoxyEnumerate}
+\item Make sure to have the following dependencies\+:
+\begin{DoxyItemize}
+\item (GNU) make
+\item gcc
+\end{DoxyItemize}
+\item Clone the repository
+\item Build the project using the {\ttfamily make} command.
+\item Both of client and server are in the {\ttfamily build/} folder.
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md67}{}\doxysection{Usage}\label{md__r_e_a_d_m_e_autotoc_md67}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md68}{}\doxysubsection{Server}\label{md__r_e_a_d_m_e_autotoc_md68}
+The server executable is called {\ttfamily opichat\+\_\+server} and is located in the {\ttfamily build/} folder.
+
+To start the server, you must run the following command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./opichat\_server <ip> <port>}
+
+\end{DoxyCode}
+
+
+Where {\ttfamily \texorpdfstring{$<$}{<}ip\texorpdfstring{$>$}{>}} is the IP address of the server and \texorpdfstring{$<$}{<}{\ttfamily port}\texorpdfstring{$>$}{>} is the port where clients will connect to.
+
+\begin{quote}
+Note that you can use {\ttfamily localhost} as a loopback {\ttfamily \texorpdfstring{$<$}{<}ip\texorpdfstring{$>$}{>}} address to start the server. \end{quote}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md69}{}\doxysubsubsection{Actions to perform}\label{md__r_e_a_d_m_e_autotoc_md69}
+No action is required for the server\hypertarget{md__r_e_a_d_m_e_autotoc_md70}{}\doxysubsection{Client}\label{md__r_e_a_d_m_e_autotoc_md70}
+The client executable is called {\ttfamily opichat\+\_\+client} and is located in the {\ttfamily build/} folder.
+
+To start the client, you must run the following command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./opichat\_client <ip> <port>}
+
+\end{DoxyCode}
+
+
+Where {\ttfamily \texorpdfstring{$<$}{<}ip\texorpdfstring{$>$}{>}} is the IP address of the server and {\ttfamily \texorpdfstring{$<$}{<}port\texorpdfstring{$>$}{>}} is the port where the server is listening to.\hypertarget{md__r_e_a_d_m_e_autotoc_md71}{}\doxysubsubsection{Actions to perform}\label{md__r_e_a_d_m_e_autotoc_md71}
+When the client launchs, you will deal with the command prompt.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Command:}
+
+\end{DoxyCode}
+
+
+At this step, you must enter a valid command name (as described in the \mbox{\hyperlink{md__p_r_o_t_o_c_o_l}{protocol}}).
+
+If you enter a valid command, you will have one or both of these 2 following prompts\+:
+
+{\bfseries{Parameters}} At this step, the client program valued that you entered a command which requires parameters.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Parameters:}
+
+\end{DoxyCode}
+
+
+To enter a parameter as a key/value pair, you must type\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<key>=<value>}
+
+\end{DoxyCode}
+
+
+Where {\ttfamily \texorpdfstring{$<$}{<}key\texorpdfstring{$>$}{>}} and {\ttfamily \texorpdfstring{$<$}{<}value\texorpdfstring{$>$}{>}} are respectively the key and the value of the parameter. Then press {\ttfamily Enter}.
+
+\begin{quote}
+The parameters prompt will always asks you key/value pairs forever until you press {\ttfamily Enter} and nothing else. \end{quote}
+{\bfseries{Payload}} At this step, you must enter the content of the payload. Unless {\itshape Parameters}, no specific format is applied here.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Payload:}
+
+\end{DoxyCode}
+
+
+\begin{quote}
+Some command (like {\ttfamily SEND-\/\+DM} or {\ttfamily BROADCAST}) will loop on the payload prompt forever. To exit the payload prompt, type {\ttfamily \textbackslash{}quit}. \end{quote}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md72}{}\doxysubsection{More information}\label{md__r_e_a_d_m_e_autotoc_md72}
+If you are interested in the architecture of the project, check \mbox{\hyperlink{md__a_r_c_h}{ARCH.md}}.
+
+Also, if you want a detailled documentation about the communication protocol, read \mbox{\hyperlink{md__p_r_o_t_o_c_o_l}{PROTOCOL.md}}. 

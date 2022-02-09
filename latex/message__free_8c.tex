@@ -1,0 +1,88 @@
+\hypertarget{message__free_8c}{}\doxysection{src/common/message/message\+\_\+free.c File Reference}
+\label{message__free_8c}\index{src/common/message/message\_free.c@{src/common/message/message\_free.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}message.\+h\char`\"{}}\newline
+Include dependency graph for message\+\_\+free.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=210pt]{message__free_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{message__free_8c_aafafca753919c7d770812f5c47b5fe7f}{free\+\_\+message}} (struct \mbox{\hyperlink{structmessage}{message}} $\ast$\mbox{\hyperlink{structmessage}{message}})
+\begin{DoxyCompactList}\small\item\em Free the memory allocated by a struct message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{message__free_8c_a5bcae38822e01fd2316aede529617559}{free\+\_\+partial\+\_\+message}} (struct \mbox{\hyperlink{structmessage}{message}} $\ast$\mbox{\hyperlink{structmessage}{message}})
+\begin{DoxyCompactList}\small\item\em Like {\ttfamily free\+\_\+message}, but disalocate a non-\/valid struct message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{message__free_8c_aafafca753919c7d770812f5c47b5fe7f}\label{message__free_8c_aafafca753919c7d770812f5c47b5fe7f}} 
+\index{message\_free.c@{message\_free.c}!free\_message@{free\_message}}
+\index{free\_message@{free\_message}!message\_free.c@{message\_free.c}}
+\doxysubsubsection{\texorpdfstring{free\_message()}{free\_message()}}
+{\footnotesize\ttfamily void free\+\_\+message (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmessage}{message}} $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+Free the memory allocated by a struct message. 
+
+\begin{DoxyWarning}{Warning}
+MUST NOT be used on incomplete struct message
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The struct message to free \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{message__free_8c_source_l00005}{5}} of file \mbox{\hyperlink{message__free_8c_source}{message\+\_\+free.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{message__free_8c_aafafca753919c7d770812f5c47b5fe7f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{message__free_8c_a5bcae38822e01fd2316aede529617559}\label{message__free_8c_a5bcae38822e01fd2316aede529617559}} 
+\index{message\_free.c@{message\_free.c}!free\_partial\_message@{free\_partial\_message}}
+\index{free\_partial\_message@{free\_partial\_message}!message\_free.c@{message\_free.c}}
+\doxysubsubsection{\texorpdfstring{free\_partial\_message()}{free\_partial\_message()}}
+{\footnotesize\ttfamily void free\+\_\+partial\+\_\+message (\begin{DoxyParamCaption}\item[{struct \mbox{\hyperlink{structmessage}{message}} $\ast$}]{message }\end{DoxyParamCaption})}
+
+
+
+Like {\ttfamily free\+\_\+message}, but disalocate a non-\/valid struct message. 
+
+\begin{DoxyNote}{Note}
+This function is less efficient than {\ttfamily free\+\_\+message}
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The struct message to free \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{message__free_8c_source_l00018}{18}} of file \mbox{\hyperlink{message__free_8c_source}{message\+\_\+free.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=262pt]{message__free_8c_a5bcae38822e01fd2316aede529617559_icgraph}
+\end{center}
+\end{figure}

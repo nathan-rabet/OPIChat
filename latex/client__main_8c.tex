@@ -1,0 +1,85 @@
+\hypertarget{client__main_8c}{}\doxysection{src/client\+\_\+main.c File Reference}
+\label{client__main_8c}\index{src/client\_main.c@{src/client\_main.c}}
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}init\+\_\+socket.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}logger.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}read\+\_\+from\+\_\+server.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}read\+\_\+from\+\_\+stdin.\+h\char`\"{}}\newline
+Include dependency graph for client\+\_\+main.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client__main_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{client__main_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{client__main_8c_a9329c4790c307301a22f6d23cdc23edd}{server\+\_\+socket}}
+\item 
+char $\ast$ \mbox{\hyperlink{client__main_8c_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}
+\item 
+char $\ast$ \mbox{\hyperlink{client__main_8c_add99ba4ea70b8f66170823cad9a55fa4}{port}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{client__main_8c_a0ddf1224851353fc92bfbff6f499fa97}\label{client__main_8c_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{client\_main.c@{client\_main.c}!main@{main}}
+\index{main@{main}!client\_main.c@{client\_main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{client__main_8c_source_l00014}{14}} of file \mbox{\hyperlink{client__main_8c_source}{client\+\_\+main.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{client__main_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{client__main_8c_afbc356cd0e25d1dbbece7c10fd025fa6}\label{client__main_8c_afbc356cd0e25d1dbbece7c10fd025fa6}} 
+\index{client\_main.c@{client\_main.c}!ip@{ip}}
+\index{ip@{ip}!client\_main.c@{client\_main.c}}
+\doxysubsubsection{\texorpdfstring{ip}{ip}}
+{\footnotesize\ttfamily char$\ast$ ip\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{init__socket_8h_source_l00011}{11}} of file \mbox{\hyperlink{init__socket_8h_source}{init\+\_\+socket.\+h}}.
+
+\mbox{\Hypertarget{client__main_8c_add99ba4ea70b8f66170823cad9a55fa4}\label{client__main_8c_add99ba4ea70b8f66170823cad9a55fa4}} 
+\index{client\_main.c@{client\_main.c}!port@{port}}
+\index{port@{port}!client\_main.c@{client\_main.c}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily char$\ast$ port\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{init__socket_8h_source_l00012}{12}} of file \mbox{\hyperlink{init__socket_8h_source}{init\+\_\+socket.\+h}}.
+
+\mbox{\Hypertarget{client__main_8c_a9329c4790c307301a22f6d23cdc23edd}\label{client__main_8c_a9329c4790c307301a22f6d23cdc23edd}} 
+\index{client\_main.c@{client\_main.c}!server\_socket@{server\_socket}}
+\index{server\_socket@{server\_socket}!client\_main.c@{client\_main.c}}
+\doxysubsubsection{\texorpdfstring{server\_socket}{server\_socket}}
+{\footnotesize\ttfamily int server\+\_\+socket\hspace{0.3cm}{\ttfamily [extern]}}
+
+
+
+Definition at line \mbox{\hyperlink{init__socket_8h_source_l00010}{10}} of file \mbox{\hyperlink{init__socket_8h_source}{init\+\_\+socket.\+h}}.
+

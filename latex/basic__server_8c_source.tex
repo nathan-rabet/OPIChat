@@ -1,0 +1,162 @@
+\hypertarget{basic__server_8c_source}{}\doxysection{basic\+\_\+server.\+c}
+\label{basic__server_8c_source}\index{basic\_server/basic\_server.c@{basic\_server/basic\_server.c}}
+\mbox{\hyperlink{basic__server_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00001}00001 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{basic__server_8h}{basic\_server.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00002}00002 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00003}00003 \textcolor{preprocessor}{\#include <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00004}00004 \textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00005}00005 \textcolor{preprocessor}{\#include <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00006}00006 \textcolor{preprocessor}{\#include <unistd.h>}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00008}\mbox{\hyperlink{basic__server_8c_a60add547fb298c71dc4dbae76e61aae5}{00008}} \textcolor{preprocessor}{\#define MAX\_CONNECTION\_NB 5}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00010}\mbox{\hyperlink{basic__server_8c_a4022681cfcf69f5864f0d54b275d591e}{00010}} \textcolor{keywordtype}{int} \mbox{\hyperlink{basic__server_8c_a4022681cfcf69f5864f0d54b275d591e}{create\_and\_bind}}(\textcolor{keyword}{struct} addrinfo *addrinfo)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00011}00011 \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00012}00012     \textcolor{keywordflow}{for} (; addrinfo != NULL; addrinfo = addrinfo-\/>ai\_next)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00013}00013     \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00014}00014         \textcolor{keywordtype}{int} s = socket(addrinfo-\/>ai\_family, addrinfo-\/>ai\_socktype,}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00015}00015                        addrinfo-\/>ai\_protocol);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00016}00016         \textcolor{keywordflow}{if} (s == -\/1)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00017}00017             \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00018}00018 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00019}00019         \textcolor{keywordtype}{int} ok = 1;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00020}00020         \textcolor{keywordflow}{if} (setsockopt(s, SOL\_SOCKET, SO\_REUSEADDR, \&ok, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{int})) == -\/1}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00021}00021             || ok != 1)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00022}00022             \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00023}00023 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00024}00024         \textcolor{keywordflow}{if} (bind(s, addrinfo-\/>ai\_addr, addrinfo-\/>ai\_addrlen) != -\/1)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00025}00025             \textcolor{keywordflow}{return} s;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00026}00026     \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00027}00027 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00028}00028     exit(1);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00029}00029 \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00030}00030 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00031}\mbox{\hyperlink{basic__server_8c_a3ad2113f2297a7cbdaa71f370aea7db0}{00031}} \textcolor{keywordtype}{int} \mbox{\hyperlink{basic__server_8c_a3ad2113f2297a7cbdaa71f370aea7db0}{prepare\_socket}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{init__socket_8h_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{init__socket_8h_add99ba4ea70b8f66170823cad9a55fa4}{port}})}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00032}00032 \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00033}00033     \textcolor{keyword}{struct }addrinfo hints = \{ 0 \};}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00034}00034     \textcolor{keyword}{struct }addrinfo *addrinfo;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00035}00035     hints.ai\_family = AF\_UNSPEC;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00036}00036     hints.ai\_socktype = SOCK\_STREAM;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00037}00037 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00038}00038     \textcolor{keywordflow}{if} (getaddrinfo(\mbox{\hyperlink{init__socket_8h_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}, \mbox{\hyperlink{init__socket_8h_add99ba4ea70b8f66170823cad9a55fa4}{port}}, \&hints, \&addrinfo) != 0)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00039}00039         exit(1);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00040}00040 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00041}00041     \textcolor{keywordtype}{int} \mbox{\hyperlink{init__socket_8h_a9329c4790c307301a22f6d23cdc23edd}{server\_socket}} = \mbox{\hyperlink{basic__server_8c_a4022681cfcf69f5864f0d54b275d591e}{create\_and\_bind}}(addrinfo);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00042}00042 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00043}00043     freeaddrinfo(addrinfo);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00045}00045     \textcolor{keywordflow}{if} (listen(\mbox{\hyperlink{init__socket_8h_a9329c4790c307301a22f6d23cdc23edd}{server\_socket}}, \mbox{\hyperlink{basic__server_8c_a60add547fb298c71dc4dbae76e61aae5}{MAX\_CONNECTION\_NB}}) == -\/1)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00046}00046         exit(1);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00047}00047 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00048}00048     \textcolor{keywordflow}{return} \mbox{\hyperlink{init__socket_8h_a9329c4790c307301a22f6d23cdc23edd}{server\_socket}};}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00049}00049 \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00050}00050 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00051}\mbox{\hyperlink{basic__server_8c_ace3f10a600415838e09a4302024a5c30}{00051}} \textcolor{keywordtype}{int} \mbox{\hyperlink{basic__server_8c_ace3f10a600415838e09a4302024a5c30}{accept\_client}}(\textcolor{keywordtype}{int} socket)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00052}00052 \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00053}00053     \textcolor{keyword}{struct }sockaddr client\_addr;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00054}00054     socklen\_t addr\_len;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00055}00055 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00056}00056     \textcolor{keywordtype}{int} client\_socket = accept(socket, \&client\_addr, \&addr\_len);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00058}00058     \textcolor{keywordflow}{if} (client\_socket >= 0)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00059}00059         printf(\textcolor{stringliteral}{"{}Client connected\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00060}00060 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00061}00061     \textcolor{keywordflow}{return} client\_socket;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00062}00062 \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00063}00063 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00064}\mbox{\hyperlink{basic__server_8c_a0860b9e51fefecae303da19ee82e0b2e}{00064}} \textcolor{keywordtype}{void} \mbox{\hyperlink{basic__server_8c_a0860b9e51fefecae303da19ee82e0b2e}{communicate}}(\textcolor{keywordtype}{int} client\_socket)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00065}00065 \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00066}00066     ssize\_t buf\_mult\_factor = 1; \textcolor{comment}{// How many times the buffer has been expanded}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00067}00067     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char} *buf = malloc(\mbox{\hyperlink{basic__client_8h_a6e576a3c6530636d68b7a220480bcd32}{DEFAULT\_BUFFER\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00068}00068     \textcolor{keywordflow}{if} (!buf)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00069}00069     \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00070}00070         fprintf(stderr, \textcolor{stringliteral}{"{}Error while allocating memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00071}00071         close(client\_socket);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00072}00072         free(buf);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00073}00073         exit(1);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00074}00074     \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00075}00075 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00076}00076     \textcolor{keywordtype}{bool} hasLF = 0; \textcolor{comment}{// Has any '\(\backslash\)n' ?}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00077}00077                     \textcolor{comment}{// in case of multiple loop)}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00078}00078     ssize\_t read\_len = 0; \textcolor{comment}{// Number returned by read}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00079}00079     ssize\_t msg\_len = 0; \textcolor{comment}{// Total request length (can be higher than `read\_len`}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00080}00080     \textcolor{keywordflow}{while} ((read\_len =}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00081}00081                 recv(client\_socket, buf + msg\_len, \mbox{\hyperlink{basic__client_8h_a6e576a3c6530636d68b7a220480bcd32}{DEFAULT\_BUFFER\_SIZE}} -\/ 1, 0))}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00082}00082            != 0)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00083}00083     \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00084}00084         \textcolor{comment}{// If any client reading error}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00085}00085         \textcolor{keywordflow}{if} (read\_len == -\/1)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00086}00086         \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00087}00087             fprintf(stderr, \textcolor{stringliteral}{"{}Error while reading client data\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00088}00088             close(client\_socket);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00089}00089             free(buf);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00090}00090             exit(1);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00091}00091         \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00092}00092 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00093}00093         \textcolor{comment}{// Determines real message length (must end with a '\(\backslash\)n)}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00094}00094         \textcolor{keywordflow}{for} (ssize\_t i = 0; !hasLF \&\& i < read\_len; i++)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00095}00095             hasLF = (buf[msg\_len++] == \textcolor{charliteral}{'\(\backslash\)n'});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00096}00096 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00097}00097         \textcolor{comment}{// If '\(\backslash\)n' detected}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00098}00098         \textcolor{keywordflow}{if} (hasLF)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00099}00099         \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00100}00100             \textcolor{comment}{// Print message to stdout}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00101}00101             buf[msg\_len] = \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00102}00102             printf(\textcolor{stringliteral}{"{}Received Body: \%s"{}}, buf);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00103}00103 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00104}00104             \textcolor{comment}{// Send message back to client}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00105}00105             ssize\_t error = 0;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00106}00106             ssize\_t send\_len = 0;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00107}00107             \textcolor{keywordflow}{while} ((error = send(client\_socket, buf + send\_len,}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00108}00108                                  msg\_len -\/ send\_len, MSG\_NOSIGNAL))}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00109}00109                    > 0)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00110}00110                 send\_len += error;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00111}00111 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00112}00112             \textcolor{keywordflow}{if} (error == -\/1)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00113}00113             \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00114}00114                 fprintf(stderr, \textcolor{stringliteral}{"{}Client interrupted connection\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00115}00115                 \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00116}00116             \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00117}00117             \textcolor{comment}{// Reset variables for next message}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00118}00118             buf = realloc(buf, \mbox{\hyperlink{basic__client_8h_a6e576a3c6530636d68b7a220480bcd32}{DEFAULT\_BUFFER\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00119}00119             buf\_mult\_factor = 1;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00120}00120             msg\_len = 0;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00121}00121             hasLF = 0;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00122}00122         \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00123}00123         \textcolor{keywordflow}{else} \textcolor{comment}{// The next loop can overflow the buffer}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00124}00124         \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00125}00125             buf = realloc(buf, ++buf\_mult\_factor * \mbox{\hyperlink{basic__client_8h_a6e576a3c6530636d68b7a220480bcd32}{DEFAULT\_BUFFER\_SIZE}});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00126}00126             \textcolor{keywordflow}{if} (!buf)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00127}00127             \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00128}00128                 free(buf);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00129}00129                 fprintf(stderr, \textcolor{stringliteral}{"{}Error while reallocating memory\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00130}00130                 close(client\_socket);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00131}00131                 exit(1);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00132}00132             \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00133}00133         \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00134}00134     \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00135}00135     printf(\textcolor{stringliteral}{"{}Client disconnected\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00136}00136     free(buf);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00137}00137     close(client\_socket);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00138}00138 \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00139}00139 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00140}\mbox{\hyperlink{basic__server_8c_a0ddf1224851353fc92bfbff6f499fa97}{00140}} \textcolor{keywordtype}{int} \mbox{\hyperlink{basic__server_8c_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00141}00141 \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00142}00142     \textcolor{keywordflow}{if} (argc != 3)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00143}00143     \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00144}00144         exit(1);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00145}00145     \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00146}00146 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00147}00147     \textcolor{keywordtype}{int} server\_listen\_socket = \mbox{\hyperlink{basic__server_8c_a3ad2113f2297a7cbdaa71f370aea7db0}{prepare\_socket}}(argv[1], argv[2]);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00148}00148 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00149}00149     \textcolor{keywordflow}{while} (1)}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00150}00150     \{}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00151}00151         \textcolor{keywordtype}{int} client\_sock = \mbox{\hyperlink{basic__server_8c_ace3f10a600415838e09a4302024a5c30}{accept\_client}}(server\_listen\_socket);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00152}00152         \mbox{\hyperlink{basic__server_8c_a0860b9e51fefecae303da19ee82e0b2e}{communicate}}(client\_sock);}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00153}00153     \}}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00154}00154 }
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00155}00155     \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{\Hypertarget{basic__server_8c_source_l00156}00156 \}}
+
+\end{DoxyCode}

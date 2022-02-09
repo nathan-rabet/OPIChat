@@ -1,0 +1,223 @@
+\hypertarget{safe__io_8h}{}\doxysection{include/safe\+\_\+io.h File Reference}
+\label{safe__io_8h}\index{include/safe\_io.h@{include/safe\_io.h}}
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/socket.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}xalloc.\+h\char`\"{}}\newline
+Include dependency graph for safe\+\_\+io.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe__io_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe__io_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{safe__io_8h_a6e576a3c6530636d68b7a220480bcd32}{DEFAULT\+\_\+\+BUFFER\+\_\+\+SIZE}}~2048
+\item 
+\#define \mbox{\hyperlink{safe__io_8h_aa882328bca54a0c7249a313d7d1f7d29}{RECV\+\_\+\+TIMEOUT}}~5
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{safe__io_8h_a3730804c00874106746163562e2693ac}{safe\+\_\+send}} (int sockfd, const void $\ast$buf, size\+\_\+t count, int flags)
+\begin{DoxyCompactList}\small\item\em Send a message to a client safely. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{safe__io_8h_af5b0cdbd9fea86b0c53e02b3b5e31518}{safe\+\_\+write}} (int fd, const void $\ast$buf, size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Write a message to a file descriptor safely. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structmessage}{message}} $\ast$ \mbox{\hyperlink{safe__io_8h_ac8413ee3e5fa5ceab0e0cb43c4b6aab8}{safe\+\_\+recv}} (int sockfd, int flags, bool must\+Timeout)
+\begin{DoxyCompactList}\small\item\em Receive a message from a client safely. \end{DoxyCompactList}\item 
+ssize\+\_\+t \mbox{\hyperlink{safe__io_8h_a70bebf5ac8325b0eb363be83f11a1f9b}{safe\+\_\+read}} (int fd, void $\ast$$\ast$buf)
+\begin{DoxyCompactList}\small\item\em Read a message from a file descriptor safely. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{safe__io_8h_a6e576a3c6530636d68b7a220480bcd32}\label{safe__io_8h_a6e576a3c6530636d68b7a220480bcd32}} 
+\index{safe\_io.h@{safe\_io.h}!DEFAULT\_BUFFER\_SIZE@{DEFAULT\_BUFFER\_SIZE}}
+\index{DEFAULT\_BUFFER\_SIZE@{DEFAULT\_BUFFER\_SIZE}!safe\_io.h@{safe\_io.h}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_BUFFER\_SIZE}{DEFAULT\_BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define DEFAULT\+\_\+\+BUFFER\+\_\+\+SIZE~2048}
+
+
+
+Definition at line \mbox{\hyperlink{safe__io_8h_source_l00004}{4}} of file \mbox{\hyperlink{safe__io_8h_source}{safe\+\_\+io.\+h}}.
+
+\mbox{\Hypertarget{safe__io_8h_aa882328bca54a0c7249a313d7d1f7d29}\label{safe__io_8h_aa882328bca54a0c7249a313d7d1f7d29}} 
+\index{safe\_io.h@{safe\_io.h}!RECV\_TIMEOUT@{RECV\_TIMEOUT}}
+\index{RECV\_TIMEOUT@{RECV\_TIMEOUT}!safe\_io.h@{safe\_io.h}}
+\doxysubsubsection{\texorpdfstring{RECV\_TIMEOUT}{RECV\_TIMEOUT}}
+{\footnotesize\ttfamily \#define RECV\+\_\+\+TIMEOUT~5}
+
+
+
+Definition at line \mbox{\hyperlink{safe__io_8h_source_l00005}{5}} of file \mbox{\hyperlink{safe__io_8h_source}{safe\+\_\+io.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{safe__io_8h_a70bebf5ac8325b0eb363be83f11a1f9b}\label{safe__io_8h_a70bebf5ac8325b0eb363be83f11a1f9b}} 
+\index{safe\_io.h@{safe\_io.h}!safe\_read@{safe\_read}}
+\index{safe\_read@{safe\_read}!safe\_io.h@{safe\_io.h}}
+\doxysubsubsection{\texorpdfstring{safe\_read()}{safe\_read()}}
+{\footnotesize\ttfamily ssize\+\_\+t safe\+\_\+read (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{void $\ast$$\ast$}]{buf }\end{DoxyParamCaption})}
+
+
+
+Read a message from a file descriptor safely. 
+
+\begin{DoxyWarning}{Warning}
+MUST NOT BE USED FOR SOCKETS.
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor of the client. \\
+\hline
+{\em buf} & The reference to the buffer where the message will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes read, -\/1 if an error occured. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{safe__io_8c_source_l00057}{57}} of file \mbox{\hyperlink{safe__io_8c_source}{safe\+\_\+io.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{safe__io_8h_a70bebf5ac8325b0eb363be83f11a1f9b_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=211pt]{safe__io_8h_a70bebf5ac8325b0eb363be83f11a1f9b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{safe__io_8h_ac8413ee3e5fa5ceab0e0cb43c4b6aab8}\label{safe__io_8h_ac8413ee3e5fa5ceab0e0cb43c4b6aab8}} 
+\index{safe\_io.h@{safe\_io.h}!safe\_recv@{safe\_recv}}
+\index{safe\_recv@{safe\_recv}!safe\_io.h@{safe\_io.h}}
+\doxysubsubsection{\texorpdfstring{safe\_recv()}{safe\_recv()}}
+{\footnotesize\ttfamily struct \mbox{\hyperlink{structmessage}{message}} $\ast$ safe\+\_\+recv (\begin{DoxyParamCaption}\item[{int}]{sockfd,  }\item[{int}]{flags,  }\item[{bool}]{must\+Timeout }\end{DoxyParamCaption})}
+
+
+
+Receive a message from a client safely. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sockfd} & The file descriptor of the client. \\
+\hline
+{\em flags} & the recv() flags. \\
+\hline
+{\em must\+Timeout} & If true, the function will exit after RECV\+\_\+\+TIMEOUT seconds, otherwise it will wait for the message to be received forever. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The message received, NULL if an error occured. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{safe__io_8c_source_l00127}{127}} of file \mbox{\hyperlink{safe__io_8c_source}{safe\+\_\+io.\+c}}.
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=225pt]{safe__io_8h_ac8413ee3e5fa5ceab0e0cb43c4b6aab8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{safe__io_8h_ac8413ee3e5fa5ceab0e0cb43c4b6aab8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{safe__io_8h_a3730804c00874106746163562e2693ac}\label{safe__io_8h_a3730804c00874106746163562e2693ac}} 
+\index{safe\_io.h@{safe\_io.h}!safe\_send@{safe\_send}}
+\index{safe\_send@{safe\_send}!safe\_io.h@{safe\_io.h}}
+\doxysubsubsection{\texorpdfstring{safe\_send()}{safe\_send()}}
+{\footnotesize\ttfamily int safe\+\_\+send (\begin{DoxyParamCaption}\item[{int}]{sockfd,  }\item[{const void $\ast$}]{buf,  }\item[{size\+\_\+t}]{count,  }\item[{int}]{flags }\end{DoxyParamCaption})}
+
+
+
+Send a message to a client safely. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sockfd} & The file descriptor of the client. \\
+\hline
+{\em buf} & The buffer containing the message. \\
+\hline
+{\em count} & The number of bytes to send. \\
+\hline
+{\em flags} & the send() flags. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the message has been sent, -\/1 otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{safe__io_8c_source_l00022}{22}} of file \mbox{\hyperlink{safe__io_8c_source}{safe\+\_\+io.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{safe__io_8h_a3730804c00874106746163562e2693ac_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{safe__io_8h_af5b0cdbd9fea86b0c53e02b3b5e31518}\label{safe__io_8h_af5b0cdbd9fea86b0c53e02b3b5e31518}} 
+\index{safe\_io.h@{safe\_io.h}!safe\_write@{safe\_write}}
+\index{safe\_write@{safe\_write}!safe\_io.h@{safe\_io.h}}
+\doxysubsubsection{\texorpdfstring{safe\_write()}{safe\_write()}}
+{\footnotesize\ttfamily int safe\+\_\+write (\begin{DoxyParamCaption}\item[{int}]{fd,  }\item[{const void $\ast$}]{buf,  }\item[{size\+\_\+t}]{count }\end{DoxyParamCaption})}
+
+
+
+Write a message to a file descriptor safely. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fd} & The file descriptor of the client. \\
+\hline
+{\em buf} & The buffer containing the message. \\
+\hline
+{\em count} & The number of bytes to write. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the message has been sent, -\/1 otherwise. 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{safe__io_8c_source_l00040}{40}} of file \mbox{\hyperlink{safe__io_8c_source}{safe\+\_\+io.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=214pt]{safe__io_8h_af5b0cdbd9fea86b0c53e02b3b5e31518_icgraph}
+\end{center}
+\end{figure}

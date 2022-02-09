@@ -1,0 +1,5 @@
+<map id="accept_client" name="accept_client">
+<area shape="rect" id="node1" title="Accept a new client and add it to the connection_t struct." alt="" coords="5,5,104,32"/>
+<area shape="rect" id="node2" href="$connection_8c.html#a5616b1d17b24f8cedfc34d0787b9de5e" title="Add a new client connection_t to the linked list connection." alt="" coords="152,5,233,32"/>
+<area shape="rect" id="node3" href="$epoll__server_2utils_2xalloc_8c.html#af7b6b8fd37a3c4b944c71b783d50fc96" title="Malloc wrapper that exit on failure." alt="" coords="281,5,348,32"/>
+</map>

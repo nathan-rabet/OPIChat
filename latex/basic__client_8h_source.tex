@@ -1,0 +1,22 @@
+\hypertarget{basic__client_8h_source}{}\doxysection{basic\+\_\+client.\+h}
+\label{basic__client_8h_source}\index{basic\_client/basic\_client.h@{basic\_client/basic\_client.h}}
+\mbox{\hyperlink{basic__client_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef BASIC\_CLIENT\_H\_}}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00002}00002 \textcolor{preprocessor}{\#define BASIC\_CLIENT\_H\_}}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <netdb.h>}}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00005}00005 \textcolor{preprocessor}{\#include <sys/socket.h>}}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00006}00006 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00008}\mbox{\hyperlink{basic__client_8h_a6e576a3c6530636d68b7a220480bcd32}{00008}} \textcolor{preprocessor}{\#define DEFAULT\_BUFFER\_SIZE 1024}}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00021}00021 \textcolor{keywordtype}{int} \mbox{\hyperlink{basic__client_8h_ab726def94a221e5ac93bcb2a42d16619}{create\_and\_connect}}(\textcolor{keyword}{struct} addrinfo *addrinfo);}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00022}00022 }
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00031}00031 \textcolor{keywordtype}{int} \mbox{\hyperlink{basic__client_8h_a3ad2113f2297a7cbdaa71f370aea7db0}{prepare\_socket}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{init__socket_8h_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{init__socket_8h_add99ba4ea70b8f66170823cad9a55fa4}{port}});}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00032}00032 }
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00047}00047 \textcolor{keywordtype}{void} \mbox{\hyperlink{basic__client_8h_a7cea10a6474f60869a6370bbb7836e4e}{communicate}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{init__socket_8h_a9329c4790c307301a22f6d23cdc23edd}{server\_socket}});}
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00048}00048 }
+\DoxyCodeLine{\Hypertarget{basic__client_8h_source_l00049}00049 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* BASIC\_CLIENT\_H\_ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

@@ -1,0 +1,54 @@
+\hypertarget{init__client__socket_8c}{}\doxysection{src/client/init\+\_\+client\+\_\+socket.c File Reference}
+\label{init__client__socket_8c}\index{src/client/init\_client\_socket.c@{src/client/init\_client\_socket.c}}
+{\ttfamily \#include $<$stddef.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}init\+\_\+socket.\+h\char`\"{}}\newline
+Include dependency graph for init\+\_\+client\+\_\+socket.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{init__client__socket_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{init__client__socket_8c_aeb1ff62bccbab70efeeac34f505ceb36}{setup\+\_\+client\+\_\+socket}} (const char $\ast$\mbox{\hyperlink{client__main_8c_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}, const char $\ast$\mbox{\hyperlink{client__main_8c_add99ba4ea70b8f66170823cad9a55fa4}{port}})
+\begin{DoxyCompactList}\small\item\em Create a connection socket. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{init__client__socket_8c_aeb1ff62bccbab70efeeac34f505ceb36}\label{init__client__socket_8c_aeb1ff62bccbab70efeeac34f505ceb36}} 
+\index{init\_client\_socket.c@{init\_client\_socket.c}!setup\_client\_socket@{setup\_client\_socket}}
+\index{setup\_client\_socket@{setup\_client\_socket}!init\_client\_socket.c@{init\_client\_socket.c}}
+\doxysubsubsection{\texorpdfstring{setup\_client\_socket()}{setup\_client\_socket()}}
+{\footnotesize\ttfamily int setup\+\_\+client\+\_\+socket (\begin{DoxyParamCaption}\item[{const char $\ast$}]{ip,  }\item[{const char $\ast$}]{port }\end{DoxyParamCaption})}
+
+
+
+Create a connection socket. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ip} & The ip to connect to \\
+\hline
+{\em port} & The port to connect on \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created socket, -\/1 on error 
+\end{DoxyReturn}
+
+
+Definition at line \mbox{\hyperlink{init__client__socket_8c_source_l00028}{28}} of file \mbox{\hyperlink{init__client__socket_8c_source}{init\+\_\+client\+\_\+socket.\+c}}.
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{init__client__socket_8c_aeb1ff62bccbab70efeeac34f505ceb36_icgraph}
+\end{center}
+\end{figure}

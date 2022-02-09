@@ -1,0 +1,27 @@
+\hypertarget{epoll-server_8h_source}{}\doxysection{epoll-\/server.h}
+\label{epoll-server_8h_source}\index{epoll\_server/epoll-\/server.h@{epoll\_server/epoll-\/server.h}}
+\mbox{\hyperlink{epoll-server_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00001}00001 \textcolor{preprocessor}{\#ifndef EPOLL\_SERVER\_H\_}}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00002}00002 \textcolor{preprocessor}{\#define EPOLL\_SERVER\_H\_}}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00003}00003 }
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00004}00004 \textcolor{preprocessor}{\#include <netdb.h>}}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00005}00005 \textcolor{preprocessor}{\#include <sys/socket.h>}}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00006}00006 \textcolor{preprocessor}{\#include <sys/types.h>}}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00007}00007 }
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00008}00008 \textcolor{preprocessor}{\#include "{}\mbox{\hyperlink{connection_8h}{connection.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00009}00009 }
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00013}\mbox{\hyperlink{epoll-server_8h_ae42954bb8545d24e3e9dcde5920c9a0b}{00013}} \textcolor{preprocessor}{\#define MAX\_EVENTS 64}}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00014}00014 }
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00015}\mbox{\hyperlink{epoll-server_8h_a6e576a3c6530636d68b7a220480bcd32}{00015}} \textcolor{preprocessor}{\#define DEFAULT\_BUFFER\_SIZE 2048}}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00016}00016 }
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00028}00028 \textcolor{keywordtype}{int} \mbox{\hyperlink{epoll-server_8h_a4022681cfcf69f5864f0d54b275d591e}{create\_and\_bind}}(\textcolor{keyword}{struct} addrinfo *addrinfo);}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00029}00029 }
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00043}00043 \textcolor{keywordtype}{int} \mbox{\hyperlink{epoll-server_8h_a3ad2113f2297a7cbdaa71f370aea7db0}{prepare\_socket}}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{init__socket_8h_afbc356cd0e25d1dbbece7c10fd025fa6}{ip}}, \textcolor{keyword}{const} \textcolor{keywordtype}{char} *\mbox{\hyperlink{init__socket_8h_add99ba4ea70b8f66170823cad9a55fa4}{port}});}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00044}00044 }
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00055}00055 \textcolor{keyword}{struct }\mbox{\hyperlink{structconnection__t}{connection\_t}} *\mbox{\hyperlink{epoll-server_8h_ae91ab67a01fb4b53eebeb8a4bad10847}{accept\_client}}(\textcolor{keywordtype}{int} \mbox{\hyperlink{epoll__handler_8h_a563c714502d84960831913304caca7f3}{epoll\_instance}}, \textcolor{keywordtype}{int} \mbox{\hyperlink{init__socket_8h_a9329c4790c307301a22f6d23cdc23edd}{server\_socket}},}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00056}00056                                    \textcolor{keyword}{struct} \mbox{\hyperlink{structconnection__t}{connection\_t}} *connection);}
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00057}00057 }
+\DoxyCodeLine{\Hypertarget{epoll-server_8h_source_l00058}00058 \textcolor{preprocessor}{\#endif }\textcolor{comment}{/* EPOLL\_SERVER\_H\_ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

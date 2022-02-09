@@ -1,0 +1,54 @@
+.TH "connection_t" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+connection_t \- Contain all the information about all clients (linked list)  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fC#include <connection\&.h>\fP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "int \fBclient_socket\fP"
+.br
+.ti -1c
+.RI "char * \fBbuffer\fP"
+.br
+.ti -1c
+.RI "ssize_t \fBnb_read\fP"
+.br
+.ti -1c
+.RI "struct \fBconnection_t\fP * \fBnext\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Contain all the information about all clients (linked list) 
+.PP
+Definition at line \fB9\fP of file \fBconnection\&.h\fP\&.
+.SH "Field Documentation"
+.PP 
+.SS "char* buffer"
+buffer containing all the data received by this client 
+.PP
+Definition at line \fB13\fP of file \fBconnection\&.h\fP\&.
+.SS "int client_socket"
+socket fd of the client 
+.PP
+Definition at line \fB11\fP of file \fBconnection\&.h\fP\&.
+.SS "ssize_t nb_read"
+number of bytes read (also size of the buffer) 
+.PP
+Definition at line \fB15\fP of file \fBconnection\&.h\fP\&.
+.SS "struct \fBconnection_t\fP* next"
+next \fBconnection_t\fP for another client 
+.PP
+Definition at line \fB17\fP of file \fBconnection\&.h\fP\&.
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.

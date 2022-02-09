@@ -1,0 +1,7 @@
+<map id="write_error" name="write_error">
+<area shape="rect" id="node1" title="Log an error message." alt="" coords="319,81,401,108"/>
+<area shape="rect" id="node2" href="$epoll__handler_8c.html#a2ce9f59acdc6ec21207b19376448105c" title="Accept a new client." alt="" coords="138,5,237,32"/>
+<area shape="rect" id="node3" href="$client__main_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,81,56,108"/>
+<area shape="rect" id="node4" href="$read__from__server_8c.html#ad4ec40c300bc539cbe0b51f6af544bff" title="Reads from the server and print (eventually) the formated message. This function is thread compliant." alt="" coords="104,107,271,133"/>
+<area shape="rect" id="node5" href="$logger__test_8c.html#aaf8caf87cce5798011681b2916d27729" title=" " alt="" coords="163,157,211,184"/>
+</map>

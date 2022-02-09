@@ -1,0 +1,68 @@
+.TH "src/server_main.c" 3 "Wed Feb 9 2022" "OPIchat" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+src/server_main.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <errno\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <sys/epoll\&.h>\fP
+.br
+\fC#include 'client\&.h'\fP
+.br
+\fC#include 'epoll_handler\&.h'\fP
+.br
+\fC#include 'init_socket\&.h'\fP
+.br
+\fC#include 'logger\&.h'\fP
+.br
+\fC#include 'xalloc\&.h'\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBmain\fP (int argc, char *argv[])"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "int \fBepoll_instance\fP"
+.br
+.ti -1c
+.RI "struct \fBclient\fP * \fBclients\fP"
+.br
+.RI "Contain all the information about all clients (linked list) "
+.in -1c
+.SH "Function Documentation"
+.PP 
+.SS "int main (int argc, char * argv[])"
+
+.PP
+Definition at line \fB16\fP of file \fBserver_main\&.c\fP\&.
+.SH "Variable Documentation"
+.PP 
+.SS "struct \fBclient\fP* clients\fC [extern]\fP"
+
+.PP
+Contain all the information about all clients (linked list) 
+.PP
+Definition at line \fB12\fP of file \fBclient\&.h\fP\&.
+.SS "int epoll_instance\fC [extern]\fP"
+
+.PP
+Definition at line \fB10\fP of file \fBepoll_handler\&.h\fP\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for OPIchat from the source code\&.
