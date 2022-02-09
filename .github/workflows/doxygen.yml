@@ -31,7 +31,7 @@ jobs:
         - name: Removing old documentation
           run: cd docs ; rm -rf documentation ; rm -rf manual.pdf
         - name: Generating man & HTML documentation
-          run: cd docs ; doxygen doxygen.conf
+          run: cd docs ; doxygen Doxyfile.conf
         - name: Moving 'man' folder
           run: mv docs/man docs/documentation/man
         - name: Installing pdflatex
