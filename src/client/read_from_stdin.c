@@ -127,7 +127,13 @@ void read_from_stdin(int server_socket)
                 fprintf(stdout, "Parameters:\n");
                 while (1)
                 {
-                    fgets(parameters, DEFAULT_BUFFER_SIZE, stdin);
+                    if (!fgets(parameters, DEFAULT_BUFFER_SIZE, stdin))
+                    {
+                        free_message(message);
+                        free_command_parameters_info(cmd_params);
+                        logger_close();
+                        exit(EXIT_SUCCESS);
+                    }
 
                     if (parameters[0] == '\n')
                         break;
@@ -181,7 +187,13 @@ void read_from_stdin(int server_socket)
         {
             char *payload = command; // Reuse the command buffer
             fprintf(stdout, "Payload:\n");
-            fgets(payload, DEFAULT_BUFFER_SIZE, stdin); // Get user input
+            if (!fgets(payload, DEFAULT_BUFFER_SIZE, stdin)) // Get user input
+            {
+                free_message(message);
+                free_command_parameters_info(cmd_params);
+                logger_close();
+                exit(EXIT_SUCCESS);
+            }
             payload[strcspn(payload, "\n")] = 0; // Eliminate the newline
 
             if (strcmp(payload, "/quit") != 0)
