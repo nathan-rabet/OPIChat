@@ -25,10 +25,10 @@ all: opichat_server opichat_client
 	
 # Compile server and client
 opichat_server: $(OBJS) $(BUILD)/src/server_main.o
-	$(CC) $(LDFLAGS) -o $(BUILD)/opichat_server $^
+	$(CC) $(LDFLAGS) -o opichat_server $^
 
 opichat_client: $(OBJS) $(BUILD)/src/client_main.o
-	$(CC) $(LDFLAGS) -o $(BUILD)/opichat_client $^
+	$(CC) $(LDFLAGS) -o opichat_client $^
 
 # Run test suite
 check:
@@ -51,7 +51,7 @@ $(BUILD)/%.o: %.c
 	$(CC) $(ADD_COMPIL) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(BUILD)
+	$(RM) $(BUILD) opichat_client opichat_server
 
 .PHONY: clean check
 
