@@ -99,8 +99,8 @@ void read_from_stdin(int server_socket)
 
         char command[DEFAULT_BUFFER_SIZE];
         fprintf(stdout, "Command:\n");
-        fgets(command, DEFAULT_BUFFER_SIZE, stdin); // Get user input
-        if (command[0] == '\0')
+        if (!fgets(command, DEFAULT_BUFFER_SIZE,
+                   stdin)) // Get user input, stop on EOF
         {
             free_message(message);
             logger_close();
