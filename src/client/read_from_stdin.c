@@ -100,6 +100,13 @@ void read_from_stdin(int server_socket)
         char command[DEFAULT_BUFFER_SIZE];
         fprintf(stdout, "Command:\n");
         fgets(command, DEFAULT_BUFFER_SIZE, stdin); // Get user input
+        if (command[0] == '\0')
+        {
+            free_message(message);
+            logger_close();
+            exit(EXIT_SUCCESS);
+        }
+
         command[strcspn(command, "\n")] = 0; // parse the newline
 
         struct command_parameters *cmd_params =

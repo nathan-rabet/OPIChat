@@ -31,17 +31,19 @@ opichat_client: $(OBJS) $(BUILD)/src/client_main.o
 	$(CC) $(LDFLAGS) -o opichat_client $^
 
 # Run test suite
-check:
-	$(MAKE) CFLAGS="$(CFLAGS) -DDEBUG" LDFLAGS="-pthread" tests
+check: tests
 	./$(BUILD)/tests_suite
 
 check_asan:
 	$(MAKE) CFLAGS="$(CFLAGS) -DDEBUG" tests
 	./$(BUILD)/tests_suite
 
+tests: CFLAGS += -DDEBUG
+tests: LDFLAGS = "-pthread"
 tests: $(TEST_OBJS) $(OBJS)
 	$(CC) $(TEST_LDFLAGS) $(LDFLAGS) -o $(BUILD)/tests_suite $^
 
+test_main: CFLAGS += -DDEBUG
 test_main: $(OBJS) $(BUILD)/tests/test_main.o
 	$(CC) $(CFLAGS) $(LDFLAGS) -o test_main $^
 

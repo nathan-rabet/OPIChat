@@ -20,9 +20,9 @@ Test(commands, ping_empty_payload)
 
     struct send_pool *sp = handle_ping(message, client);
     cr_assert_eq(sp->msg[0]->status_code, RESPONSE_MESSAGE_CODE);
-    cr_assert_eq(sp->msg[0]->payload_size, 4);
+    cr_assert_eq(sp->msg[0]->payload_size, 5);
     cr_assert_eq(sp->msg[0]->nb_parameters, 0);
-    cr_assert_str_eq(sp->msg[0]->payload, "PONG");
+    cr_assert_str_eq(sp->msg[0]->payload, "PONG\n");
 
     free_message(sp->msg[0]);
     free(sp->msg);
@@ -46,9 +46,9 @@ Test(commands, ping_with_payload)
 
     struct send_pool *sp = handle_ping(message, client);
     cr_assert_eq(sp->msg[0]->status_code, RESPONSE_MESSAGE_CODE);
-    cr_assert_eq(sp->msg[0]->payload_size, 4);
+    cr_assert_eq(sp->msg[0]->payload_size, 5);
     cr_assert_eq(sp->msg[0]->nb_parameters, 0);
-    cr_assert_eq(strcmp(sp->msg[0]->payload, "PONG"), 0);
+    cr_assert_eq(strcmp(sp->msg[0]->payload, "PONG\n"), 0);
 
     free_message(sp->msg[0]);
     free(sp->msg);
