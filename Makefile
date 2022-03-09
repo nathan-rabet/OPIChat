@@ -13,10 +13,10 @@ BUILD = build
 
 LDFLAGS = -fsanitize=address -pthread
 
-SRC = $(shell find src -name '*.c' ! -name '$(CLIENT_EXE).c' ! -name '$(SERVER_EXE).c')
+SRC = src/server/room.c src/server/commands/handle_send_room.c src/server/commands/handle_join_room.c src/server/commands/handle_create_room.c src/server/commands/handle_broadcast.c src/server/commands/handle_ping.c src/server/commands/handle_delete_room.c src/server/commands/handle_leave_room.c src/server/commands/handle_login.c src/server/commands/handle_list_rooms.c src/server/commands/handle_list_users.c src/server/commands/handle_send_dm.c src/server/commands/handle_profile.c src/server/client.c src/server/epoll/epoll_handler.c src/server/epoll/init_server_socket.c src/client/read_from_server.c src/client/read_from_stdin.c src/client/init_client_socket.c src/common/message/message_command_parameters.c src/common/message/message_parser.c src/common/message/message_serializer.c src/common/message/message_free.c src/common/message/message_init.c src/common/utils/type_check.c src/common/utils/xalloc.c src/common/utils/logger.c src/common/utils/my_itoa.c src/common/safe_io.c
 OBJS = $(SRC:%.c=$(BUILD)/%.o)
 
-TEST_SRC = $(shell find tests/unit_testing -name '*.c')
+TEST_SRC = tests/unit_testing/logger_test.c tests/unit_testing/room_test.c tests/unit_testing/epoll_test.c tests/unit_testing/message_serializer_test.c tests/unit_testing/message_parser_test.c tests/unit_testing/commands_test.c tests/unit_testing/read_from_stdin_test.c tests/unit_testing/client_test.c tests/unit_testing/safe_io_test.c
 TEST_OBJS = $(TEST_SRC:%.c=$(BUILD)/%.o)
 TEST_LDFLAGS = -lcriterion
 
