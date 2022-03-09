@@ -209,7 +209,7 @@ Test(commands, list_users, .disabled = true)
     struct message *message = init_message(REQUEST_MESSAGE_CODE);
     message->command = "LIST-USERS";
     struct message *response = handle_list_users(message, client1);
-    
+
 
 }*/
 /*

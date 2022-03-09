@@ -2,7 +2,6 @@
 
 #include "message.h"
 
-
 Test(message_serializing, subject_client_response)
 {
     char req[] = "4\n0\nSEND-DM\nUser=acu\n\n2022";
@@ -45,7 +44,6 @@ Test(message_serializing, key_value_is_payload)
     cr_assert_str_eq(serialized, req);
     free_message(r);
     free(serialized);
-
 }
 
 Test(message_serializing, multiple_command_parameters)

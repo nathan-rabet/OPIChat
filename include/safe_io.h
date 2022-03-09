@@ -55,4 +55,3 @@ struct message *safe_recv(int sockfd, int flags, bool mustTimeout);
  */
 ssize_t safe_read(int fd, void **buf);
 #endif /* SAFE_IO_H */
-

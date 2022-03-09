@@ -8,7 +8,7 @@
 
 struct send_pool *handle_broadcast(struct message *msg, struct client *client)
 {
-    (void) client;
+    (void)client;
     if (msg->nb_parameters != 0)
         return NULL;
 

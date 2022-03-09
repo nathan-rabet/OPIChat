@@ -27,8 +27,9 @@ Test(client, add_client__remove_client)
     cr_assert_eq(client2->client_sockaddr->ss_family, AF_INET, "Family is %d",
                  client2->client_sockaddr->ss_family);
 
-    cr_assert_eq(client2->next, client1, "client2->next is %p and client1 is %p",
-                 client2->next, client1);
+    cr_assert_eq(client2->next, client1,
+                 "client2->next is %p and client1 is %p", client2->next,
+                 client1);
 
     client2 = remove_client(client2, 1);
     client2 = remove_client(client2, 2);

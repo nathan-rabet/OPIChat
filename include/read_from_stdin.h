@@ -1,13 +1,13 @@
 #ifndef READ_FROM_STDIN_H
 #define READ_FROM_STDIN_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #include <netdb.h>
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-#include <pthread.h>
 
 void *read_from_stdin_thread(void *none);
 
@@ -19,4 +19,3 @@ void *read_from_stdin_thread(void *none);
 void read_from_stdin(int server_socket);
 
 #endif /* READ_FROM_STDIN_H */
-
