@@ -8,11 +8,13 @@
 
 struct send_pool *handle_send_dm(struct message *msg, struct client *client)
 {
-    (void) client;
+    (void)client;
 
     if (msg->nb_parameters != 1
         || strcmp(msg->command_parameters[0].key, "User") != 0)
-        return NULL;
+    {
+        MISSING_PARAMETER_RETURN("SEND-DM")
+    }
 
     // RESPONSE
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);
@@ -40,7 +42,7 @@ struct send_pool *handle_send_dm(struct message *msg, struct client *client)
 
         free_message(response);
         struct message *error_message = init_message(ERROR_MESSAGE_CODE);
-        error_message->payload = strdup("User not found");
+        error_message->payload = strdup("User not found\n");
         error_message->command = strdup("SEND-DM");
         error_message->payload_size = strlen(error_message->payload);
 

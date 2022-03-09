@@ -32,15 +32,15 @@ int name_is_valid(char *s)
 int username_not_duplicate(char *name, struct client *clients,
                            struct client *me)
 {
+    (void)me; // Because ref server is shit
     if (name == NULL)
         return 1;
 
     struct client *current = clients;
-    while(current != NULL)
+    while (current != NULL)
     {
-        if (current->client_socket != me->client_socket
-            && current->username != NULL
-            && strcmp(current->username, name) == 0)
+        if ( // current->client_socket != me->client_socket &&
+            current->username != NULL && strcmp(current->username, name) == 0)
             return 0;
         current = current->next;
     }
@@ -55,11 +55,10 @@ struct send_pool *handle_login(struct message *msg, struct client *client)
     {
         if (username_not_duplicate(msg->payload, clients, client))
         {
-            
             response = init_message(RESPONSE_MESSAGE_CODE);
-            response->payload_size = strlen("Logged in");
+            response->payload_size = strlen("Logged in\n");
             response->command = strdup("LOGIN");
-            response->payload = strdup("Logged in");
+            response->payload = strdup("Logged in\n");
 
             find_client(clients, client->client_socket)->username =
                 strdup(msg->payload);
@@ -67,17 +66,17 @@ struct send_pool *handle_login(struct message *msg, struct client *client)
         else
         {
             response = init_message(ERROR_MESSAGE_CODE);
-            response->payload_size = strlen("Duplicate username");
+            response->payload_size = strlen("Duplicate username\n");
             response->command = strdup("LOGIN");
-            response->payload = strdup("Duplicate username");
+            response->payload = strdup("Duplicate username\n");
         }
     }
     else
     {
         response = init_message(ERROR_MESSAGE_CODE);
-        response->payload_size = strlen("Bad username");
+        response->payload_size = strlen("Bad username\n");
         response->command = strdup("LOGIN");
-        response->payload = strdup("Bad username");
+        response->payload = strdup("Bad username\n");
     }
 
     struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));

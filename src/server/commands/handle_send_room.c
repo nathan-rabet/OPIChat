@@ -17,7 +17,7 @@ struct send_pool *handle_send_room(struct message *msg, struct client *client)
     struct room *room = find_room(rooms, msg->command_parameters[0].value);
 
     if (errno == ROOM_ERROR_NOT_FOUND)
-        return return_forged_error_message("SEND-ROOM", "Room not found",
+        return return_forged_error_message("SEND-ROOM", "Room not found\n",
                                            client->client_socket);
 
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);

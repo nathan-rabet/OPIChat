@@ -62,6 +62,7 @@ get_command_parameters_info(char *command_string)
             cmd_params->command = "LEAVE-ROOM";
         else if (strcmp(command_string, "SEND-ROOM") == 0)
         {
+            cmd_params->loop_payload = true;
             cmd_params->command = "SEND-ROOM";
             cmd_params->nb_parameters = 1;
             cmd_params->parameters_name = xmalloc(1, sizeof(char **));

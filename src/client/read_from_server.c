@@ -38,11 +38,11 @@ void *read_from_server_thread(void *none)
             {
             case RESPONSE_MESSAGE_CODE:
                 if (strcmp(m->payload, "") != 0)
-                    fprintf(stdout, "< %s\n", m->payload);
+                    fprintf(stdout, "< %s", m->payload);
                 break;
 
             case ERROR_MESSAGE_CODE:
-                fprintf(stdout, "! %s\n", m->payload);
+                fprintf(stdout, "! %s", m->payload);
                 break;
 
             case NOTIFICATION_MESSAGE_CODE:

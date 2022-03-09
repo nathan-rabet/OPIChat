@@ -14,6 +14,9 @@ struct send_pool *handle_profile(struct message *msg, struct client *client)
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);
     response->command = strdup("PROFILE");
 
+    if (!client->username)
+        client->username = strdup("Anonymous");
+
     // Add the username
     response->payload_size +=
         strlen("Username: ") + strlen(client->username) + 1;
@@ -34,7 +37,7 @@ struct send_pool *handle_profile(struct message *msg, struct client *client)
 
     if (client->nb_rooms > 0)
     {
-        response->payload_size += strlen("Rooms:\n") + 1;
+        response->payload_size += strlen("Rooms:") + 1;
         response->payload = xrealloc(response->payload,
                                      response->payload_size + 1, sizeof(char));
         strcat(response->payload, "Rooms:\n");

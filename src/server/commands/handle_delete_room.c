@@ -15,17 +15,17 @@ struct send_pool *handle_delete_room(struct message *msg, struct client *client)
     switch (errno)
     {
     case ROOM_ERROR_NOT_FOUND:
-        return return_forged_error_message("DELETE-ROOM", "Room not found",
+        return return_forged_error_message("DELETE-ROOM", "Room not \n",
                                            client->client_socket);
     case ROOM_ERROR_UNAUTHORIZED:
-        return return_forged_error_message("DELETE-ROOM", "Unauthorized",
+        return return_forged_error_message("DELETE-ROOM", "Unauthorized\n",
                                            client->client_socket);
     default:; // ROOM_ERROR_NONE
         struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
 
         struct message *response = init_message(RESPONSE_MESSAGE_CODE);
         response->command = strdup("DELETE-ROOM");
-        response->payload = strdup("Room deleted");
+        response->payload = strdup("Room deleted\n");
         response->payload_size = strlen(response->payload);
 
         sp->nb_msg = 1;

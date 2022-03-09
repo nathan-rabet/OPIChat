@@ -16,7 +16,7 @@ struct send_pool *handle_leave_room(struct message *msg, struct client *client)
     struct room *room = find_room(rooms, msg->payload);
 
     if (errno == ROOM_ERROR_NOT_FOUND)
-        return return_forged_error_message("JOIN-ROOM", "Room not found",
+        return return_forged_error_message("JOIN-ROOM", "Room not found\n",
                                            client->client_socket);
 
     size_t i = 0;
@@ -35,7 +35,7 @@ struct send_pool *handle_leave_room(struct message *msg, struct client *client)
 
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);
     response->command = strdup("LEAVE-ROOM");
-    response->payload = strdup("Room left");
+    response->payload = strdup("Room left\n");
     response->payload_size = strlen(response->payload);
 
     struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));

@@ -11,6 +11,21 @@ enum message_status_code
     ERROR_MESSAGE_CODE = 3,
 };
 
+#define MISSING_PARAMETER_RETURN(PAYOAD_COMMAND)                               \
+    struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));               \
+    struct message *error_message = init_message(ERROR_MESSAGE_CODE);          \
+    error_message->payload = strdup("Missing parameter\n");                    \
+    error_message->command = strdup((PAYOAD_COMMAND));                         \
+    error_message->payload_size = strlen(error_message->payload);              \
+                                                                               \
+    sp->nb_msg = 1;                                                            \
+    sp->msg = xmalloc(1, sizeof(struct message));                              \
+    sp->clients_sockets = xmalloc(1, sizeof(int));                             \
+    *sp->msg = error_message;                                                  \
+    *sp->clients_sockets = client->client_socket;                              \
+                                                                               \
+    return sp;
+
 /**
  * @brief Structure to store the parsed message
  *
@@ -27,10 +42,10 @@ struct message
 
 /**
  * @brief Initializes a struct message with the param status code affected
- * 
- * 
- * @param status_code 
- * @return struct message* 
+ *
+ *
+ * @param status_code
+ * @return struct message*
  */
 struct message *init_message(uint8_t status_code);
 
@@ -89,7 +104,7 @@ int get_message_next_parameter_kv(char *params_start, char **key, char **value);
  * to a string
  *
  * @param message The message as a message struct
- * 
+ *
  * @return char pointer
  */
 char *compose_message(const struct message *message);

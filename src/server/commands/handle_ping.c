@@ -11,11 +11,11 @@ struct send_pool *handle_ping(struct message *msg, struct client *client)
     (void)msg;
     (void)client;
     struct message *response = init_message(RESPONSE_MESSAGE_CODE);
-    response->payload_size = 4;
+    response->payload_size = 5;
     response->command = xmalloc(5, sizeof(char));
     strcpy(response->command, "PING");
-    response->payload = xmalloc(5, sizeof(char));
-    strcpy(response->payload, "PONG");
+    response->payload = xmalloc(6, sizeof(char));
+    strcpy(response->payload, "PONG\n");
 
     struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
 
