@@ -49,7 +49,6 @@ int setup_server_socket(const char *ip, const char *port)
     int server_socket = _setup_socket_basis(addrinfo);
 
     freeaddrinfo(addrinfo);
-
     if (listen(server_socket, BACKLOG) == -1)
         raise_panic(EXIT_FAILURE, "Could not listen on socket %d",
                     server_socket);

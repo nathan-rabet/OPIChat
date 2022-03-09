@@ -21,12 +21,10 @@ int main(int argc, char *argv[])
 
     logger_init("client.log");
 
-    while ((server_socket = setup_client_socket(argv[1], argv[2])) == -1)
-    {
-        write_error("Impossible to connect to server %s:%s, retrying... : %s",
+    if ((server_socket = setup_client_socket(argv[1], argv[2])) == -1)
+        raise_panic(EXIT_FAILURE,
+                    "Impossible to connect to server %s:%s, retrying... : %s",
                     argv[1], argv[2], strerror(errno));
-        sleep(1);
-    }
 
     ip = argv[1];
     port = argv[2];

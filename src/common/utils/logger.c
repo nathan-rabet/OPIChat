@@ -103,6 +103,7 @@ void raise_panic(int exitCode, const char *msg, ...)
     va_start(args, msg);
     __write_logger(msg, "PANIC", stderr, args);
     va_end(args);
+    logger_close();
     exit(exitCode);
 }
 

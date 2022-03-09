@@ -14,17 +14,17 @@ struct send_pool *handle_create_room(struct message *msg, struct client *client)
     switch (errno)
     {
     case ROOM_ERROR_BAD_NAME:
-        return return_forged_error_message("CREATE_ROOM", "Bad room name\n",
+        return return_forged_error_message("CREATE-ROOM", "Bad room name\n",
                                            client->client_socket);
 
     case ROOM_ERROR_DUPPLICATE_NAME:
         return return_forged_error_message(
-            "CREATE_ROOM", "Duplicate room name\n", client->client_socket);
+            "CREATE-ROOM", "Duplicate room name\n", client->client_socket);
 
     default:;
         struct message *response = init_message(RESPONSE_MESSAGE_CODE);
         response->payload_size = strlen("Room created\n");
-        response->command = strdup("CREATE_ROOM");
+        response->command = strdup("CREATE-ROOM");
         response->payload = strdup("Room created\n");
         struct send_pool *sp = xmalloc(1, sizeof(struct send_pool));
 

@@ -39,9 +39,9 @@ int setup_client_socket(const char *ip, const char *port)
 
     int server_socket = create_and_connect(addrinfo);
 
+    freeaddrinfo(addrinfo);
     if (server_socket == -1)
         return -1;
 
-    freeaddrinfo(addrinfo);
     return server_socket;
 }
