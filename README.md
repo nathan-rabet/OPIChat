@@ -14,13 +14,13 @@
 
 3. Build the project using the `make` command.
 
-4. Both of client and server are in the `build/` folder.
+4. Both of client and server are where in the root of the repository.
 
 ## Usage
 
 ### Server
 
-The server executable is called `opichat_server` and is located in the `build/` folder.
+The server executable is called `opichat_server`.
 
 To start the server, you must run the following command:
 
@@ -30,7 +30,7 @@ To start the server, you must run the following command:
 
 Where `<ip>` is the IP address of the server and <`port`> is the port where clients will connect to.
 
-> Note that you can use `localhost` as a loopback `<ip>` address to start the server.
+> Note that you can use `localhost` or `127.0.0.1` as a loopback `<ip>` address to start the server.
 
 #### Actions to perform
 
@@ -38,7 +38,7 @@ No action is required for the server
 
 ### Client
 
-The client executable is called `opichat_client` and is located in the `build/` folder.
+The client executable is called `opichat_client`.
 
 To start the client, you must run the following command:
 
@@ -61,7 +61,7 @@ At this step, you must enter a valid command name (as described in the [protocol
 If you enter a valid command, you will have one or both of these 2 following prompts:
 
 **Parameters**
-At this step, the client program valued that you entered a command which requires parameters.
+At this step, the client program estimated that you entered a command which requires parameters.
 
 ```text
 Parameters:
@@ -74,9 +74,9 @@ To enter a parameter as a key/value pair, you must type:
 ```
 
 Where `<key>` and `<value>` are respectively the key and the value of the parameter.
-Then press <kbd>Enter</kbd>.
+Then press <kbd>ENTER</kbd>.
 
-> The parameters prompt will always asks you key/value pairs forever until you press <kbd>Enter</kbd> and nothing else.
+> The parameters prompt will always asks you key/value pairs forever until you press <kbd>ENTER</kbd> and nothing else.
 
 **Payload**
 At this step, you must enter the content of the payload. Unless *Parameters*, no specific format is applied here.
