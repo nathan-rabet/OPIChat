@@ -15,7 +15,7 @@ struct send_pool *handle_delete_room(struct message *msg, struct client *client)
     switch (errno)
     {
     case ROOM_ERROR_NOT_FOUND:
-        return return_forged_error_message("DELETE-ROOM", "Room not \n",
+        return return_forged_error_message("DELETE-ROOM", "Room not found\n",
                                            client->client_socket);
     case ROOM_ERROR_UNAUTHORIZED:
         return return_forged_error_message("DELETE-ROOM", "Unauthorized\n",
